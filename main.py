@@ -13,7 +13,11 @@ def main():
     console.print("[green]Awaiting your command, Janon.[/green]\n")
 
     while True:
-        user_input = input("YOU: ").strip()
+        try:
+            user_input = input("YOU: ").strip()
+        except KeyboardInterrupt:
+            print("\nJARVIS shutting down safely.")
+            break
 
         if user_input.lower() in ["exit", "quit", "shutdown"]:
             console.print("[red]JARVIS SHUTTING DOWN. ALL MEMORY WILL BE SAVED AND SYSTEM WILL TERMINATE[/red]")

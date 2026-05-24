@@ -1,4 +1,20 @@
-from core.patch_applier import apply_proposal
+from tools.project_analyzers import (
+    summarize_project_structure,
+    analyze_laravel_project,
+    analyze_react_project,
+    analyze_python_project,
+    analyze_electron_project,
+)
+from tools.project_context_tools import (
+    register_project_shortcut,
+    list_project_shortcuts,
+    list_recent_projects,
+    set_current_project,
+    show_current_project_context,
+    auto_detect_active_project,
+    read_multiple_files_safely,
+)
+
 from core.patches.safe_writer import SafeWriter
 from core.file_writer import parse_write_command
 from core.patch_proposer import propose_patch
@@ -221,36 +237,56 @@ def route_command(user_input: str) -> str:
     # =========================
 
     # =========================
-    # PHASE 17: APPLY PROPOSAL ROLLBACK
+    # PHASES 26-30: PROJECT ANALYZERS
     # =========================
-    if text.startswith("rollback proposal "):
-        proposal_id = user_input.replace("rollback proposal ", "", 1).strip()
 
-        if not proposal_id:
-            return "Rollback failed. Provide a proposal ID."
+    if text in ["summarize project", "project structure", "summarize project structure"]:
+        return summarize_project_structure()
 
-        writer = SafeWriter(root=".")
-        return writer.rollback_proposal(proposal_id)
+    if text in ["analyze laravel", "laravel analyzer", "analyze laravel project"]:
+        return analyze_laravel_project()
 
-    if text in ["list proposals", "show proposals"]:
-        writer = SafeWriter(root=".")
-        proposals = writer.list_proposals()
+    if text in ["analyze react", "react analyzer", "analyze react project"]:
+        return analyze_react_project()
 
-        if not proposals:
-            return "No proposals found."
+    if text in ["analyze python", "python analyzer", "analyze python project"]:
+        return analyze_python_project()
 
-        lines = ["Stored proposals:"]
-        for p in proposals:
-            status = "rolled_back" if p.get("rolled_back") else "applied" if p.get("applied") else "pending"
-            lines.append(
-                f"- {p['id']} | {status} | {p['file_path']} | {p.get('reason', 'No reason')}"
-            )
+    if text in ["analyze electron", "electron analyzer", "analyze electron project"]:
+        return analyze_electron_project()
 
-        return "\n".join(lines)
+        # =========================
+    # PHASES 21-25: PROJECT CONTEXT SYSTEM
+    # =========================
 
-    if text.startswith("apply proposal "):
-        proposal_path = user_input.replace("apply proposal ", "", 1).strip()
-        return apply_proposal(proposal_path)
+    if text.startswith("register project "):
+        command = user_input.replace("register project ", "", 1).strip()
+
+        if ":::" not in command:
+            return "Invalid format. Use: register project name ::: /path/to/project"
+
+        name, path = command.split(":::", 1)
+        return register_project_shortcut(name.strip(), path.strip())
+
+    if text in ["project shortcuts", "list project shortcuts", "show project shortcuts"]:
+        return list_project_shortcuts()
+
+    if text.startswith("use project "):
+        project = user_input.replace("use project ", "", 1).strip()
+        return set_current_project(project)
+
+    if text in ["recent projects", "show recent projects", "list recent projects"]:
+        return list_recent_projects()
+
+    if text in ["current project", "show current project", "project context"]:
+        return show_current_project_context()
+
+    if text in ["auto project", "detect active project", "auto detect project"]:
+        return auto_detect_active_project()
+
+    if text.startswith("read files "):
+        files_text = user_input.replace("read files ", "", 1).strip()
+        return read_multiple_files_safely(files_text)
 
     if text.startswith("propose patch "):
         command = user_input.replace("propose patch ", "", 1).strip()
@@ -334,6 +370,9 @@ def route_command(user_input: str) -> str:
         proposal_id = user_input.replace("compare proposal ", "", 1).strip()
         writer = SafeWriter(root=".")
         comparison = writer.compare_proposal(proposal_id)
+
+        if isinstance(comparison, dict) and comparison.get("error"):
+            return comparison["message"]
 
         return (
             "PATCH COMPARISON MODE\n\n"
