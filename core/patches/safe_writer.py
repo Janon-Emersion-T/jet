@@ -4,7 +4,6 @@ from core.patches.proposal_manager import ProposalManager
 class SafeWriter:
     def __init__(self, root="."):
         self.manager = ProposalManager(root=root)
-        self.confirm_before_write = True
 
     def propose_write(self, file_path, new_content, reason="AI proposed file update"):
         proposal = self.manager.create_proposal(file_path, new_content, reason)
@@ -14,8 +13,14 @@ class SafeWriter:
             "status": "proposal_created",
             "proposal": proposal,
             "diff": diff,
-            "message": "No file was changed. Review diff, then approve apply."
+            "message": "No file was changed. Review diff, then confirm apply.",
         }
+
+    def diff_proposal(self, proposal_id):
+        return self.manager.diff(proposal_id)
+
+    def compare_proposal(self, proposal_id):
+        return self.manager.compare(proposal_id)
 
     def apply_proposal(self, proposal_id, confirm=False):
         return self.manager.apply(proposal_id, confirmed=confirm)

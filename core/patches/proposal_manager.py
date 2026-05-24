@@ -18,6 +18,12 @@ class ProposalManager:
             raise ValueError("Blocked unsafe path access.")
         return target
 
+    def _folder(self, proposal_id):
+        folder = self.store / proposal_id
+        if not folder.exists():
+            raise FileNotFoundError(f"Proposal not found: {proposal_id}")
+        return folder
+
     def create_proposal(self, file_path, new_content, reason="AI proposed change"):
         target = self._safe_path(file_path)
         proposal_id = str(uuid.uuid4())[:8]
@@ -35,14 +41,16 @@ class ProposalManager:
             "reason": reason,
             "created_at": datetime.now().isoformat(),
             "applied": False,
+            "rolled_back": False,
+            "confirm_before_write": True,
         }
 
         (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
         return meta
 
     def diff(self, proposal_id):
-        folder = self.store / proposal_id
-        meta = json.loads((folder / "meta.json").read_text())
+        folder = self._folder(proposal_id)
+        meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
 
         old = (folder / "old.txt").read_text(encoding="utf-8").splitlines()
         new = (folder / "new.txt").read_text(encoding="utf-8").splitlines()
@@ -55,47 +63,72 @@ class ProposalManager:
             lineterm=""
         ))
 
+    def compare(self, proposal_id):
+        folder = self._folder(proposal_id)
+        old = (folder / "old.txt").read_text(encoding="utf-8")
+        new = (folder / "new.txt").read_text(encoding="utf-8")
+
+        return {
+            "old": old,
+            "new": new,
+            "diff": self.diff(proposal_id),
+        }
+
     def apply(self, proposal_id, confirmed=False):
         if not confirmed:
-            return "Write blocked. Confirm-before-write mode requires confirmed=True."
+            return (
+                "Write blocked.\n"
+                "Confirm-before-write mode is active.\n"
+                f"Use: confirm apply proposal {proposal_id}"
+            )
 
-        folder = self.store / proposal_id
-        meta = json.loads((folder / "meta.json").read_text())
+        folder = self._folder(proposal_id)
+        meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
+
+        if meta.get("applied") and not meta.get("rolled_back"):
+            return f"Proposal {proposal_id} is already applied."
 
         target = self._safe_path(meta["file_path"])
         backup = folder / "backup.txt"
 
         if target.exists():
             shutil.copyfile(target, backup)
+        else:
+            backup.write_text("", encoding="utf-8")
 
         new_content = (folder / "new.txt").read_text(encoding="utf-8")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(new_content, encoding="utf-8")
 
         meta["applied"] = True
+        meta["rolled_back"] = False
         meta["applied_at"] = datetime.now().isoformat()
+
         (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
         return f"Applied proposal {proposal_id} to {meta['file_path']}"
 
     def rollback(self, proposal_id):
-        folder = self.store / proposal_id
-        meta = json.loads((folder / "meta.json").read_text())
+        folder = self._folder(proposal_id)
+        meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
 
         target = self._safe_path(meta["file_path"])
         backup = folder / "backup.txt"
+        old = folder / "old.txt"
 
-        if not backup.exists():
-            old = folder / "old.txt"
-            if not old.exists():
-                return "Rollback failed. No backup found."
-
-            target.write_text(old.read_text(encoding="utf-8"), encoding="utf-8")
+        if backup.exists():
+            restore_content = backup.read_text(encoding="utf-8")
+        elif old.exists():
+            restore_content = old.read_text(encoding="utf-8")
         else:
-            shutil.copyfile(backup, target)
+            return "Rollback failed. No backup or old content found."
+
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(restore_content, encoding="utf-8")
 
         meta["rolled_back"] = True
         meta["rolled_back_at"] = datetime.now().isoformat()
+
         (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
         return f"Rolled back proposal {proposal_id} on {meta['file_path']}"
@@ -106,6 +139,6 @@ class ProposalManager:
         for folder in self.store.iterdir():
             meta_file = folder / "meta.json"
             if meta_file.exists():
-                proposals.append(json.loads(meta_file.read_text()))
+                proposals.append(json.loads(meta_file.read_text(encoding="utf-8")))
 
-        return proposals
+        return sorted(proposals, key=lambda x: x.get("created_at", ""), reverse=True)

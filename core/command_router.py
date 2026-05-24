@@ -1,4 +1,5 @@
 from core.patch_applier import apply_proposal
+from core.patches.safe_writer import SafeWriter
 from core.file_writer import parse_write_command
 from core.patch_proposer import propose_patch
 from core.brain import ask_brain
@@ -219,6 +220,34 @@ def route_command(user_input: str) -> str:
     # AI FALLBACK
     # =========================
 
+    # =========================
+    # PHASE 17: APPLY PROPOSAL ROLLBACK
+    # =========================
+    if text.startswith("rollback proposal "):
+        proposal_id = user_input.replace("rollback proposal ", "", 1).strip()
+
+        if not proposal_id:
+            return "Rollback failed. Provide a proposal ID."
+
+        writer = SafeWriter(root=".")
+        return writer.rollback_proposal(proposal_id)
+
+    if text in ["list proposals", "show proposals"]:
+        writer = SafeWriter(root=".")
+        proposals = writer.list_proposals()
+
+        if not proposals:
+            return "No proposals found."
+
+        lines = ["Stored proposals:"]
+        for p in proposals:
+            status = "rolled_back" if p.get("rolled_back") else "applied" if p.get("applied") else "pending"
+            lines.append(
+                f"- {p['id']} | {status} | {p['file_path']} | {p.get('reason', 'No reason')}"
+            )
+
+        return "\n".join(lines)
+
     if text.startswith("apply proposal "):
         proposal_path = user_input.replace("apply proposal ", "", 1).strip()
         return apply_proposal(proposal_path)
@@ -275,6 +304,61 @@ def route_command(user_input: str) -> str:
     if text.startswith("scan project "):
         folder = user_input.replace("scan project ", "", 1).strip()
         return scan_project_files(folder)
+    
+        # =========================
+    # PHASES 17-20: SAFE PATCH WORKFLOW
+    # =========================
+
+    if text in ["list proposals", "show proposals"]:
+        writer = SafeWriter(root=".")
+        proposals = writer.list_proposals()
+
+        if not proposals:
+            return "No proposals found."
+
+        lines = ["Stored proposals:"]
+        for p in proposals:
+            status = "rolled_back" if p.get("rolled_back") else "applied" if p.get("applied") else "pending"
+            lines.append(
+                f"- {p['id']} | {status} | {p['file_path']} | {p.get('reason', 'No reason')}"
+            )
+
+        return "\n".join(lines)
+
+    if text.startswith("diff proposal "):
+        proposal_id = user_input.replace("diff proposal ", "", 1).strip()
+        writer = SafeWriter(root=".")
+        return writer.diff_proposal(proposal_id)
+
+    if text.startswith("compare proposal "):
+        proposal_id = user_input.replace("compare proposal ", "", 1).strip()
+        writer = SafeWriter(root=".")
+        comparison = writer.compare_proposal(proposal_id)
+
+        return (
+            "PATCH COMPARISON MODE\n\n"
+            "===== OLD FILE =====\n"
+            f"{comparison['old']}\n\n"
+            "===== NEW FILE =====\n"
+            f"{comparison['new']}\n\n"
+            "===== DIFF =====\n"
+            f"{comparison['diff']}"
+        )
+
+    if text.startswith("apply proposal "):
+        proposal_id = user_input.replace("apply proposal ", "", 1).strip()
+        writer = SafeWriter(root=".")
+        return writer.apply_proposal(proposal_id, confirm=False)
+
+    if text.startswith("confirm apply proposal "):
+        proposal_id = user_input.replace("confirm apply proposal ", "", 1).strip()
+        writer = SafeWriter(root=".")
+        return writer.apply_proposal(proposal_id, confirm=True)
+
+    if text.startswith("rollback proposal "):
+        proposal_id = user_input.replace("rollback proposal ", "", 1).strip()
+        writer = SafeWriter(root=".")
+        return writer.rollback_proposal(proposal_id)
 
     relevant_memory = get_relevant_memory(
         user_input
