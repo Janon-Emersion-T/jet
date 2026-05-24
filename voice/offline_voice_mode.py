@@ -12,29 +12,63 @@ STOP_PHRASES = [
     "go back to text mode",
 ]
 
+WAKE_PHRASES = [
+    "hey jarvis",
+    "hey jabbies",
+    "jarvis",
+    "jabbies",
+]
+
+
+def _is_blank(text: str) -> bool:
+    lowered = text.lower().strip()
+    return (
+        not lowered
+        or "[blank_audio]" in lowered
+        or "blank audio" in lowered
+        or lowered == "__interrupted__"
+    )
+
+
+def _is_wake_phrase(text: str) -> bool:
+    lowered = text.lower().strip()
+    return any(phrase in lowered for phrase in WAKE_PHRASES)
+
+
 def start_offline_voice_mode():
     speak("Voice mode activated.")
 
-    while True:
-        user_input = listen_offline(seconds=5).strip()
+    try:
+        while True:
+            user_input = listen_offline(seconds=5).strip()
 
-        if not user_input:
-            continue
+            if user_input == "__INTERRUPTED__":
+                speak("Voice mode interrupted.")
+                break
 
-        text = user_input.lower().strip()
+            if _is_blank(user_input):
+                continue
 
-        if "[blank_audio]" in text or "blank audio" in text:
-            continue
+            text = user_input.lower().strip()
+            print(f"YOU: {user_input}")
 
-        print(f"YOU: {user_input}")
+            if text in STOP_PHRASES:
+                speak("Voice mode deactivated.")
+                break
 
-        if text in STOP_PHRASES:
-            speak("Voice mode deactivated.")
-            break
+            if _is_wake_phrase(text):
+                response = "Master Janon. What can I assist you with?"
+                print(f"JARVIS: {response}")
+                speak(response)
+                continue
 
-        response = route_command(user_input)
+            response = route_command(user_input)
 
-        print(f"JARVIS: {response}")
-        speak(response[:700])
+            print(f"JARVIS: {response}")
+            speak(response[:700])
 
-        save_memory(user_input, response)
+            save_memory(user_input, response)
+
+    except KeyboardInterrupt:
+        print("\nVoice mode stopped safely.")
+        speak("Voice mode stopped safely.")
