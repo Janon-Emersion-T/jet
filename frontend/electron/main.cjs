@@ -1,23 +1,106 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu, Tray, Notification, ipcMain } = require("electron");
+const path = require("path");
+
+let mainWindow;
+let tray;
+
+const DEV_URL = "http://localhost:5173";
 
 function createWindow() {
-  const win = new BrowserWindow({
-    width: 1400,
-    height: 850,
+  mainWindow = new BrowserWindow({
+    width: 1450,
+    height: 900,
     minWidth: 1100,
-    minHeight: 700,
+    minHeight: 720,
+    show: false,
+    autoHideMenuBar: true,
     backgroundColor: "#050b14",
+    title: "JARVIS - Local AI Workstation",
     webPreferences: {
+      preload: path.join(__dirname, "preload.cjs"),
       nodeIntegration: false,
       contextIsolation: true,
     },
   });
 
-  win.loadURL("http://localhost:5173");
+  mainWindow.loadURL(DEV_URL);
+
+  mainWindow.maximize();
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
+
+  mainWindow.on("close", (event) => {
+    if (!app.isQuitting) {
+      event.preventDefault();
+      mainWindow.hide();
+    }
+  });
 }
 
-app.whenReady().then(createWindow);
+function createTray() {
+  tray = new Tray(path.join(__dirname, "../public/vite.svg"));
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
+  const menu = Menu.buildFromTemplate([
+    {
+      label: "Open JARVIS",
+      click: () => {
+        mainWindow.show();
+        mainWindow.focus();
+      },
+    },
+    {
+      label: "Hide JARVIS",
+      click: () => mainWindow.hide(),
+    },
+    { type: "separator" },
+    {
+      label: "Quit",
+      click: () => {
+        app.isQuitting = true;
+        app.quit();
+      },
+    },
+  ]);
+
+  tray.setToolTip("JARVIS Local AI Workstation");
+  tray.setContextMenu(menu);
+
+  tray.on("double-click", () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
+}
+
+ipcMain.handle("notify", async (_, payload) => {
+  const title = payload?.title || "JARVIS";
+  const body = payload?.body || "Notification";
+
+  if (Notification.isSupported()) {
+    new Notification({ title, body }).show();
+    return { ok: true };
+  }
+
+  return { ok: false, error: "Notifications are not supported on this system." };
+});
+
+app.whenReady().then(() => {
+  createWindow();
+  createTray();
+
+  new Notification({
+    title: "JARVIS Online",
+    body: "Desktop shell, tray, and dashboard are active.",
+  }).show();
+});
+
+app.on("window-all-closed", (event) => {
+  event.preventDefault();
+});
+
+app.on("activate", () => {
+  if (!mainWindow) createWindow();
+  mainWindow.show();
 });

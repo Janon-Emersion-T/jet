@@ -1,40 +1,92 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  Bot,
-  Send,
-  Brain,
-  Mic,
-  Folder,
-  Database,
-  Settings,
   Activity,
+  Bell,
+  Bot,
+  Brain,
+  Database,
+  Folder,
+  Hammer,
+  ListChecks,
+  Mic,
+  Send,
+  Terminal,
 } from "lucide-react";
 import "./index.css";
 
 const API_URL = "http://127.0.0.1:8000";
 
+const panels = [
+  { id: "dashboard", label: "Dashboard", icon: Activity },
+  { id: "chat", label: "Chat", icon: Brain },
+  { id: "voice", label: "Voice", icon: Mic },
+  { id: "projects", label: "Projects", icon: Folder },
+  { id: "memory", label: "Memory", icon: Database },
+  { id: "tools", label: "Tools", icon: Hammer },
+  { id: "logs", label: "Logs", icon: Terminal },
+];
+
 function App() {
-  const [activeSection, setActiveSection] = useState("chat");
-  const [messages, setMessages] = useState([
-    { role: "jarvis", text: "JARVIS interface online. Awaiting your command, Janon." },
-  ]);
+  const [activePanel, setActivePanel] = useState("dashboard");
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [apiOnline, setApiOnline] = useState(false);
+  const [facts, setFacts] = useState([]);
+  const [capabilities, setCapabilities] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      role: "jarvis",
+      text: "JARVIS desktop interface online. Awaiting your command, Janon.",
+    },
+  ]);
 
-  const sections = [
-    { id: "chat", label: "Chat", icon: Brain },
-    { id: "voice", label: "Voice", icon: Mic },
-    { id: "projects", label: "Projects", icon: Folder },
-    { id: "memory", label: "Memory", icon: Database },
-    { id: "diagnostics", label: "Diagnostics", icon: Activity },
-    { id: "settings", label: "Settings", icon: Settings },
-  ];
+  async function checkApi() {
+    try {
+      const res = await fetch(`${API_URL}/`);
+      const data = await res.json();
+      setApiOnline(data.status === "online");
+    } catch {
+      setApiOnline(false);
+    }
+  }
+
+  async function loadFacts() {
+    try {
+      const res = await fetch(`${API_URL}/facts`);
+      const data = await res.json();
+      setFacts(data.facts || []);
+    } catch {
+      setFacts([]);
+    }
+  }
+
+  async function loadCapabilities() {
+    try {
+      const res = await fetch(`${API_URL}/capabilities`);
+      const data = await res.json();
+      setCapabilities(data.capabilities || []);
+    } catch {
+      setCapabilities([]);
+    }
+  }
+
+  useEffect(() => {
+    checkApi();
+    loadFacts();
+    loadCapabilities();
+  }, []);
+
+  async function notify(title, body) {
+    if (window.jarvisDesktop?.notify) {
+      await window.jarvisDesktop.notify({ title, body });
+    }
+  }
 
   async function sendMessage(customMessage = null) {
-    const messageToSend = customMessage || input.trim();
-    if (!messageToSend || loading) return;
+    const message = customMessage || input.trim();
+    if (!message || loading) return;
 
-    setMessages((prev) => [...prev, { role: "user", text: messageToSend }]);
+    setMessages((prev) => [...prev, { role: "user", text: message }]);
     setInput("");
     setLoading(true);
 
@@ -42,23 +94,34 @@ function App() {
       const res = await fetch(`${API_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: messageToSend }),
+        body: JSON.stringify({ message }),
       });
 
       const data = await res.json();
+      const response = data.response || "No response received.";
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "jarvis", text: data.response || "No response received." },
-      ]);
+      setMessages((prev) => [...prev, { role: "jarvis", text: response }]);
+
+      if (
+        message.includes("deep check") ||
+        message.includes("error") ||
+        message.includes("logs")
+      ) {
+        notify("JARVIS Task Completed", message);
+      }
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { role: "jarvis", text: `Connection error: ${error.message}` },
+        { role: "jarvis", text: `Backend connection error: ${error.message}` },
       ]);
     }
 
     setLoading(false);
+  }
+
+  function runCommand(command) {
+    setActivePanel("chat");
+    sendMessage(command);
   }
 
   function handleKeyDown(e) {
@@ -68,157 +131,160 @@ function App() {
     }
   }
 
-  function runShortcut(command) {
-    setActiveSection("chat");
-    sendMessage(command);
-  }
-
   return (
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand">
-          <div className="brand-icon"><Bot size={26} /></div>
+          <Bot size={30} />
           <div>
             <h1>JARVIS</h1>
-            <p>Local AI Command System</p>
+            <p>Local AI Workstation</p>
           </div>
         </div>
 
-        <nav className="nav">
-          {sections.map((section) => {
-            const Icon = section.icon;
+        <nav>
+          {panels.map((panel) => {
+            const Icon = panel.icon;
             return (
               <button
-                key={section.id}
-                className={activeSection === section.id ? "active" : ""}
-                onClick={() => setActiveSection(section.id)}
+                key={panel.id}
+                className={activePanel === panel.id ? "active" : ""}
+                onClick={() => setActivePanel(panel.id)}
               >
-                <Icon size={18} /> {section.label}
+                <Icon size={18} />
+                {panel.label}
               </button>
             );
           })}
         </nav>
 
-        <div className="sidebar-footer">
-          <span className="status-dot"></span>
-          API Connected
+        <div className="status-pill">
+          <span className={apiOnline ? "dot online" : "dot offline"} />
+          {apiOnline ? "API Online" : "API Offline"}
         </div>
       </aside>
 
       <main className="main-panel">
-        <header className="topbar">
-          <div>
-            <h2>{sections.find((s) => s.id === activeSection)?.label}</h2>
-            <p>Private local AI assistant powered by Ollama + Python</p>
-          </div>
-          <div className="model-pill">llama3.1:8b</div>
-        </header>
+        {activePanel === "dashboard" && (
+          <section className="panel">
+            <h2>Command Center</h2>
+            <p>Desktop shell, tray system, notifications, and React dashboard are now aligned.</p>
 
-        {activeSection === "chat" && (
-          <>
-            <section className="chat-window">
+            <div className="cards">
+              <div className="card">
+                <strong>Backend</strong>
+                <span>{apiOnline ? "Connected" : "Not connected"}</span>
+              </div>
+              <div className="card">
+                <strong>Memory Facts</strong>
+                <span>{facts.length}</span>
+              </div>
+              <div className="card">
+                <strong>Capabilities</strong>
+                <span>{capabilities.length}</span>
+              </div>
+            </div>
+
+            <div className="quick-grid">
+              <button onClick={() => runCommand("what can you do?")}>Capability Scan</button>
+              <button onClick={() => runCommand("list projects")}>List Projects</button>
+              <button onClick={() => runCommand("deep check jarvis")}>Deep Check</button>
+              <button onClick={() => notify("JARVIS Test", "Desktop notifications are working.")}>
+                Test Notification
+              </button>
+            </div>
+          </section>
+        )}
+
+        {activePanel === "chat" && (
+          <section className="panel chat-panel">
+            <h2>Chat Panel</h2>
+
+            <div className="messages">
               {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`message-row ${message.role === "user" ? "user-row" : "jarvis-row"}`}
-                >
-                  <div className={`message ${message.role}`}>
-                    <pre>{message.text}</pre>
-                  </div>
+                <div key={index} className={`message ${message.role}`}>
+                  <pre>{message.text}</pre>
                 </div>
               ))}
+              {loading && <div className="message jarvis">Thinking...</div>}
+            </div>
 
-              {loading && (
-                <div className="message-row jarvis-row">
-                  <div className="message jarvis"><pre>Thinking...</pre></div>
-                </div>
-              )}
-            </section>
-
-            <section className="input-panel">
+            <div className="composer">
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Type a command: what can you do?"
+                placeholder="Type a JARVIS command..."
               />
               <button onClick={() => sendMessage()} disabled={loading}>
-                <Send size={20} />
+                <Send size={18} />
               </button>
-            </section>
-          </>
-        )}
-
-        {activeSection === "voice" && (
-          <section className="content-panel">
-            <h3>Voice Control</h3>
-            <p>Voice mode currently runs from the Python backend terminal.</p>
-            <button className="action-btn" onClick={() => runShortcut("activate voice mode")}>
-              Activate Voice Mode
-            </button>
-          </section>
-        )}
-
-        {activeSection === "projects" && (
-          <section className="content-panel">
-            <h3>Projects</h3>
-            <p>Inspect local projects and detect their stack.</p>
-            <div className="quick-grid">
-              <button onClick={() => runShortcut("list projects")}>List Projects</button>
-              <button onClick={() => runShortcut("detect stack ~/Projects/downloads/Jarvis")}>Detect JARVIS Stack</button>
-              <button onClick={() => runShortcut("scan project ~/Projects/downloads/Jarvis")}>Scan JARVIS Files</button>
             </div>
           </section>
         )}
 
-        {activeSection === "memory" && (
-          <section className="content-panel">
-            <h3>Memory</h3>
-            <p>View saved facts and search memory.</p>
-            <div className="quick-grid">
-              <button onClick={() => runShortcut("what do you remember")}>Show Facts</button>
-              <button onClick={() => runShortcut("search memory jarvis")}>Search JARVIS Memory</button>
-            </div>
-          </section>
+        {activePanel === "voice" && (
+          <Panel title="Voice Status UI" icon={<Mic />}>
+            <p>Voice is still backend-terminal driven. UI can trigger the route safely.</p>
+            <button onClick={() => runCommand("activate voice mode")}>Activate Voice Mode</button>
+          </Panel>
         )}
 
-        {activeSection === "diagnostics" && (
-          <section className="content-panel">
-            <h3>Diagnostics</h3>
-            <p>Run project health checks and AI interpretation.</p>
+        {activePanel === "projects" && (
+          <Panel title="Project Panel UI" icon={<Folder />}>
             <div className="quick-grid">
-              <button onClick={() => runShortcut("deep check jarvis")}>Deep Check JARVIS</button>
-              <button onClick={() => runShortcut("analyze project jarvis")}>Analyze JARVIS</button>
+              <button onClick={() => runCommand("list projects")}>List Projects</button>
+              <button onClick={() => runCommand("current project")}>Current Project</button>
+              <button onClick={() => runCommand("auto project")}>Auto Detect Project</button>
+              <button onClick={() => runCommand("analyze project jarvis")}>Analyze JARVIS</button>
             </div>
-          </section>
+          </Panel>
         )}
 
-        {activeSection === "settings" && (
-          <section className="content-panel">
-            <h3>Settings</h3>
-            <p>Current model: llama3.1:8b</p>
-            <p>Backend: http://127.0.0.1:8000</p>
-            <p>Mode: local-first, free models only</p>
-          </section>
+        {activePanel === "memory" && (
+          <Panel title="Memory Panel UI" icon={<Database />}>
+            <div className="quick-grid">
+              <button onClick={() => runCommand("what do you remember")}>Show Facts</button>
+              <button onClick={() => runCommand("search memory jarvis")}>Search JARVIS Memory</button>
+              <button onClick={loadFacts}>Refresh Facts</button>
+            </div>
+          </Panel>
+        )}
+
+        {activePanel === "tools" && (
+          <Panel title="Tools Panel UI" icon={<ListChecks />}>
+            <div className="quick-grid">
+              <button onClick={() => runCommand("git status")}>Git Status</button>
+              <button onClick={() => runCommand("git diff")}>Git Diff</button>
+              <button onClick={() => runCommand("inspect dependencies")}>Inspect Dependencies</button>
+              <button onClick={() => runCommand("project health score")}>Health Score</button>
+            </div>
+          </Panel>
+        )}
+
+        {activePanel === "logs" && (
+          <Panel title="Logs Panel UI" icon={<Bell />}>
+            <div className="quick-grid">
+              <button onClick={() => runCommand("read error logs")}>Read Error Logs</button>
+              <button onClick={() => runCommand("laravel logs")}>Analyze Laravel Logs</button>
+              <button onClick={() => runCommand("coding session summary")}>Session Summary</button>
+            </div>
+          </Panel>
         )}
       </main>
-
-      <aside className="system-panel">
-        <h3>System Status</h3>
-        <div className="status-card"><span>Backend API</span><strong>Online</strong></div>
-        <div className="status-card"><span>Memory</span><strong>Active</strong></div>
-        <div className="status-card"><span>Voice</span><strong>Offline</strong></div>
-        <div className="status-card"><span>Browser Tools</span><strong>Active</strong></div>
-
-        <div className="hint-box">
-          <strong>Command Ideas</strong>
-          <p>what can you do?</p>
-          <p>list projects</p>
-          <p>deep check jarvis</p>
-          <p>open google</p>
-        </div>
-      </aside>
     </div>
+  );
+}
+
+function Panel({ title, icon, children }) {
+  return (
+    <section className="panel">
+      <div className="panel-title">
+        {icon}
+        <h2>{title}</h2>
+      </div>
+      {children}
+    </section>
   );
 }
 
