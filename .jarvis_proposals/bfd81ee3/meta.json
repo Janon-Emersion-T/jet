@@ -1,0 +1,10 @@
+{
+  "id": "bfd81ee3",
+  "file_path": "demo_test.txt",
+  "reason": "Testing confirm-before-write mode",
+  "created_at": "2026-05-24T20:02:57.064008",
+  "applied": true,
+  "applied_at": "2026-05-24T20:02:57.064429",
+  "rolled_back": true,
+  "rolled_back_at": "2026-05-24T20:02:57.064703"
+}
