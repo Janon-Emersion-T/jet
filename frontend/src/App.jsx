@@ -11,6 +11,10 @@ import {
   Mic,
   Send,
   Terminal,
+  Settings,
+  Cpu,
+  Save,
+  RefreshCw,
 } from "lucide-react";
 import "./index.css";
 
@@ -24,6 +28,7 @@ const panels = [
   { id: "memory", label: "Memory", icon: Database },
   { id: "tools", label: "Tools", icon: Hammer },
   { id: "logs", label: "Logs", icon: Terminal },
+  { id: "settings", label: "Settings", icon: Settings },
 ];
 
 function App() {
@@ -39,6 +44,13 @@ function App() {
       text: "JARVIS desktop interface online. Awaiting your command, Janon.",
     },
   ]);
+  const [modelSettings, setModelSettings] = useState({});
+  const [ollamaModels, setOllamaModels] = useState([]);
+  const [modelTestResult, setModelTestResult] = useState("");
+  const [performanceData, setPerformanceData] = useState({});
+  const [promptTemplates, setPromptTemplates] = useState({});
+  const [routePreview, setRoutePreview] = useState(null);
+  const [routeInput, setRouteInput] = useState("");
 
   async function checkApi() {
     try {
@@ -70,10 +82,84 @@ function App() {
     }
   }
 
+  async function loadModelSettings() {
+    const res = await fetch(`${API_URL}/models/settings`);
+    const data = await res.json();
+    setModelSettings(data);
+  }
+
+  async function loadOllamaModels() {
+    const res = await fetch(`${API_URL}/models/ollama`);
+    const data = await res.json();
+    setOllamaModels(data.models || []);
+  }
+
+  async function saveModelSettings() {
+    const res = await fetch(`${API_URL}/models/settings`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(modelSettings),
+    });
+
+    const data = await res.json();
+    setModelSettings(data);
+    notify("JARVIS Settings Saved", "Model routing settings updated.");
+  }
+
+  async function testSelectedModel(model) {
+    setModelTestResult("Testing model...");
+
+    const res = await fetch(`${API_URL}/models/ollama/test`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model }),
+    });
+
+    const data = await res.json();
+    setModelTestResult(JSON.stringify(data, null, 2));
+  }
+
+  async function loadPerformanceData() {
+    const res = await fetch(`${API_URL}/models/performance`);
+    const data = await res.json();
+    setPerformanceData(data);
+  }
+
+  async function loadPromptTemplates() {
+    const res = await fetch(`${API_URL}/prompts/templates`);
+    const data = await res.json();
+    setPromptTemplates(data);
+  }
+
+  async function savePromptTemplates() {
+    await fetch(`${API_URL}/prompts/templates`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(promptTemplates),
+    });
+
+    notify("Prompt Templates Updated", "JARVIS templates saved.");
+  }
+
+  async function previewRoute(message) {
+    const res = await fetch(`${API_URL}/models/fallback`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message }),
+    });
+
+    const data = await res.json();
+    setRoutePreview(data);
+  }
+
   useEffect(() => {
     checkApi();
     loadFacts();
     loadCapabilities();
+    loadModelSettings();
+    loadOllamaModels();
+    loadPerformanceData();
+    loadPromptTemplates();
   }, []);
 
   async function notify(title, body) {
@@ -269,6 +355,147 @@ function App() {
               <button onClick={() => runCommand("laravel logs")}>Analyze Laravel Logs</button>
               <button onClick={() => runCommand("coding session summary")}>Session Summary</button>
             </div>
+          </Panel>
+        )}
+
+        {activePanel === "settings" && (
+          <Panel title="Settings & Model Routing" icon={<Settings />}>
+            <p>Control JARVIS model routing without touching terminal commands.</p>
+
+            <div className="settings-grid">
+              {[
+                ["general_model", "General Model"],
+                ["coding_model", "Coding Model"],
+                ["fast_model", "Fast Model"],
+                ["long_context_model", "Long Context Model"],
+                ["fallback_model", "Fallback Model"],
+              ].map(([key, label]) => (
+                <div className="setting-row" key={key}>
+                  <label>{label}</label>
+                  <select
+                    value={modelSettings[key] || ""}
+                    onChange={(e) =>
+                      setModelSettings({
+                        ...modelSettings,
+                        [key]: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="">Select model</option>
+                    {ollamaModels.map((model) => (
+                      <option key={model} value={model}>
+                        {model}
+                      </option>
+                    ))}
+                  </select>
+
+                  <button onClick={() => testSelectedModel(modelSettings[key])}>
+                    <Cpu size={16} />
+                    Test
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="quick-grid">
+              <button onClick={loadOllamaModels}>
+                <RefreshCw size={16} />
+                Refresh Models
+              </button>
+
+              <button onClick={saveModelSettings}>
+                <Save size={16} />
+                Save Settings
+              </button>
+            </div>
+
+            <hr className="separator" />
+
+            <h3>Model Performance Monitor</h3>
+
+            <div className="performance-grid">
+              {Object.values(performanceData).map((item) => (
+                <div className="performance-card" key={item.model}>
+                  <strong>{item.model}</strong>
+
+                  <span>
+                    Status: {item.ok ? "ONLINE" : "FAILED"}
+                  </span>
+
+                  <span>
+                    Latency: {item.latency_seconds}s
+                  </span>
+
+                  <button
+                    onClick={async () => {
+                      await fetch(`${API_URL}/models/performance/test`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ model: item.model }),
+                      });
+
+                      loadPerformanceData();
+                    }}
+                  >
+                    Retest
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <hr className="separator" />
+
+            <h3>Fallback Route Inspector</h3>
+
+            <div className="route-box">
+              <textarea
+                placeholder="Type a message to inspect model routing..."
+                value={routeInput}
+                onChange={(e) => setRouteInput(e.target.value)}
+              />
+
+              <button onClick={() => previewRoute(routeInput)}>
+                Preview Route
+              </button>
+
+              {routePreview && (
+                <pre className="route-preview">
+                  {JSON.stringify(routePreview, null, 2)}
+                </pre>
+              )}
+            </div>
+
+            <hr className="separator" />
+
+            <h3>Prompt Template Manager</h3>
+
+            <div className="template-grid">
+              {Object.entries(promptTemplates).map(([key, value]) => (
+                <div className="template-card" key={key}>
+                  <label>{key}</label>
+
+                  <textarea
+                    value={value}
+                    onChange={(e) =>
+                      setPromptTemplates({
+                        ...promptTemplates,
+                        [key]: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+
+            <button onClick={savePromptTemplates}>
+              Save Prompt Templates
+            </button>
+
+            {modelTestResult && (
+              <div className="log-box">
+                <pre>{modelTestResult}</pre>
+              </div>
+            )}
           </Panel>
         )}
       </main>
