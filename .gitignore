@@ -5,7 +5,15 @@ frontend/node_modules/
 .jarvis_proposals/
 *.proposal-*
 .env
+
+
 storage/*.json
 storage/*.db
 storage/logs/
+storage/project_backups/
+storage/project_snapshots/
+storage/command_approvals/
+storage/task_queue.json
+
 vendor/
+
