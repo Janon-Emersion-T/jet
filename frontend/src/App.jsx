@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import "./index.css";
 
+import Panel from "./components/Panel";
+
 const API_URL = "http://127.0.0.1:8000";
 
 const panels = [
@@ -500,18 +502,6 @@ function App() {
         )}
       </main>
     </div>
-  );
-}
-
-function Panel({ title, icon, children }) {
-  return (
-    <section className="panel">
-      <div className="panel-title">
-        {icon}
-        <h2>{title}</h2>
-      </div>
-      {children}
-    </section>
   );
 }
 
