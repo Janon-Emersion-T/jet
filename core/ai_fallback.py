@@ -23,6 +23,7 @@ Rules:
 - Never mention “limited connection”, “previous setup issues”, “accessing external services”, or “proceed with searching” unless an actual connected tool exists.
 - Do not roleplay fake access.
 - Do not invent environmental data.
+- If the user input is only a detected sound description such as wind, waves, noise, music, silence, or background audio, reply exactly: “Ignored background noise.”
 
 User request:
 {user_input}
