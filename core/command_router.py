@@ -10,6 +10,7 @@ from core.routes.project_analyzer_routes import handle_project_analyzer_routes
 from core.routes.dev_ops_routes import handle_dev_ops_routes
 from core.routes.framework_routes import handle_framework_routes
 from core.routes.patch_routes import handle_patch_routes
+from core.routes.project_health_routes import handle_project_health_routes
 
 
 def route_command(user_input: str) -> str:
@@ -29,6 +30,7 @@ def route_command(user_input: str) -> str:
         handle_project_analyzer_routes,
         handle_project_context_routes,
         handle_patch_routes,
+        handle_project_health_routes,
     ]
 
     for handler in route_handlers:
