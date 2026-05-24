@@ -14,6 +14,7 @@ from core.routes.project_health_routes import handle_project_health_routes
 from core.routes.execution_routes import handle_execution_routes
 from core.routes.backup_routes import handle_backup_routes
 from core.routes.task_routes import handle_task_routes
+from core.routes.vector_memory_routes import handle_vector_memory_routes
 
 
 def route_command(user_input: str) -> str:
@@ -37,6 +38,7 @@ def route_command(user_input: str) -> str:
         handle_execution_routes,
         handle_backup_routes,
         handle_task_routes,
+        handle_vector_memory_routes,
     ]
 
     for handler in route_handlers:

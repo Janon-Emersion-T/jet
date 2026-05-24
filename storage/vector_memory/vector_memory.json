@@ -1,0 +1,26 @@
+[
+    {
+        "id": "d1efa469f013d916",
+        "text": "JARVIS must keep command_router.py lightweight and modular.",
+        "tags": [
+            "semantic"
+        ],
+        "source": "manual",
+        "importance": 3,
+        "created_at": "2026-05-25T00:30:18",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "397f7b07e78c35bf",
+        "text": "Janon prefers modular code separated into linked files.",
+        "tags": [
+            "preference"
+        ],
+        "source": "preference",
+        "importance": 6,
+        "created_at": "2026-05-25T00:30:42",
+        "updated_at": null,
+        "active": true
+    }
+]
