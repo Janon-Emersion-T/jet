@@ -18,6 +18,7 @@ from core.routes.vector_memory_routes import handle_vector_memory_routes
 from core.routes.system_mode_routes import handle_system_mode_routes
 from core.routes.browser_routes import handle_browser_routes
 from core.routes.website_audit_routes import handle_website_audit_routes
+from core.routes.content_assistant_routes import handle_content_assistant_routes
 
 
 def route_command(user_input: str) -> str:
@@ -45,6 +46,8 @@ def route_command(user_input: str) -> str:
         handle_system_mode_routes,
         handle_browser_routes,
         handle_website_audit_routes,
+        handle_content_assistant_routes,
+        handle_email_routes,
     ]
 
     for handler in route_handlers:

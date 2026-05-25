@@ -17,3 +17,7 @@ storage/task_queue.json
 
 vendor/
 
+memory.db
+logs/
+temp/
+playwright/
