@@ -71,6 +71,9 @@ def handle_basic_routes(user_input: str, text: str, clean_text: str, intent: str
         return open_safe_site(site)
 
     if intent == "browser_control":
+        if text.startswith("browser ") or text.startswith("google results ") or text.startswith("serp check ") or text.startswith("confirm browser action "):
+            return None
+
         return (
             "Browser launcher is active. "
             "Say: open google, open youtube, open github, open gmail, "
