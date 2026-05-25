@@ -1,0 +1,16 @@
+[
+    {
+        "id": "20260526011511",
+        "type": "app_launcher",
+        "details": {
+            "app": "code",
+            "command": [
+                "code"
+            ]
+        },
+        "status": "pending",
+        "created_at": "2026-05-26T01:15:11",
+        "executed_at": null,
+        "result": null
+    }
+]

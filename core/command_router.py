@@ -19,6 +19,12 @@ from core.routes.system_mode_routes import handle_system_mode_routes
 from core.routes.browser_routes import handle_browser_routes
 from core.routes.website_audit_routes import handle_website_audit_routes
 from core.routes.content_assistant_routes import handle_content_assistant_routes
+from core.routes.social_planner_routes import handle_social_planner_routes
+from core.routes.crm_routes import handle_crm_routes
+from core.routes.integration_routes import handle_integration_routes
+from core.routes.document_reader_routes import handle_document_reader_routes
+from core.routes.vision_routes import handle_vision_routes
+from core.routes.desktop_control_routes import handle_desktop_control_routes
 
 
 def route_command(user_input: str) -> str:
@@ -47,7 +53,12 @@ def route_command(user_input: str) -> str:
         handle_browser_routes,
         handle_website_audit_routes,
         handle_content_assistant_routes,
-        handle_email_routes,
+        handle_social_planner_routes,
+        handle_crm_routes,
+        handle_integration_routes,
+        handle_document_reader_routes,
+        handle_vision_routes,
+        handle_desktop_control_routes,
     ]
 
     for handler in route_handlers:

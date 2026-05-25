@@ -1,0 +1,14 @@
+[
+    {
+        "id": "20260526011051",
+        "kind": "screenshot_capture",
+        "note": "Captured screenshot: screenshot_20260526_011049.png",
+        "created_at": "2026-05-26T01:10:51"
+    },
+    {
+        "id": "20260526011058",
+        "kind": "screen_reader_status",
+        "note": "Screen reader checked.",
+        "created_at": "2026-05-26T01:10:58"
+    }
+]
