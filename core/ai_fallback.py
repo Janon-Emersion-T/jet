@@ -1,9 +1,12 @@
 from core.brain import ask_brain
 from core.memory_search import get_relevant_memory
+from core.system_modes import build_mode_context
 
 
 def handle_ai_fallback(user_input: str) -> str:
     relevant_memory = get_relevant_memory(user_input)
+
+    mode_context = build_mode_context()
 
     prompt = f"""
 You are JARVIS, Janon's private local AI assistant.
@@ -27,6 +30,8 @@ Rules:
 
 User request:
 {user_input}
+Mode context:
+{mode_context}
 """
 
     return ask_brain(prompt)
