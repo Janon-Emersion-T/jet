@@ -3,6 +3,9 @@ from tools.browser_automation_tools import (
     browser_search,
     browser_extract_text,
     browser_screenshot,
+    browser_page_summary,
+    browser_audit_page,
+    browser_extract_links,
 )
 
 
@@ -30,5 +33,17 @@ def handle_browser_routes(user_input: str, text: str, clean_text: str):
     if text.startswith("browser screenshot "):
         url = user_input.replace("browser screenshot ", "", 1).strip()
         return browser_screenshot(url)
+    
+    if text.startswith("browser summarize "):
+        url = user_input.replace("browser summarize ", "", 1).strip()
+        return browser_page_summary(url)
+
+    if text.startswith("browser audit "):
+        url = user_input.replace("browser audit ", "", 1).strip()
+        return browser_audit_page(url)
+
+    if text.startswith("browser links "):
+        url = user_input.replace("browser links ", "", 1).strip()
+        return browser_extract_links(url)
 
     return None

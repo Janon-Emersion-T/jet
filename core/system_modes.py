@@ -14,13 +14,19 @@ DEFAULT_STATE = {
     "updated_at": None,
 }
 
+VALID_PROMPT_VERSIONS = {
+    "v1": "Stable baseline JARVIS prompt.",
+    "v2": "More structured, safety-aware, mode-sensitive prompt.",
+    "v3": "Advanced workstation assistant prompt with stricter tool honesty.",
+}
+
 VALID_MODES = {
     "default": "Balanced private workstation assistant.",
-    "business": "Business-focused, strategic, execution-oriented.",
-    "tutor": "Teaches clearly step-by-step with corrections.",
-    "research": "Careful, source-minded, analytical.",
-    "seo": "SEO-focused content, ranking, keyword and SERP thinking.",
-    "social": "Social media content and campaign-oriented.",
+    "business": "Business-focused, strategic, execution-oriented, ROI-aware.",
+    "tutor": "Teaches clearly, step by step, with correction and examples.",
+    "research": "Careful, source-minded, analytical, skeptical, and evidence-driven.",
+    "seo": "SEO-focused: keywords, search intent, topical authority, ranking, and conversion.",
+    "social": "Social-media-focused: hooks, platform fit, content calendars, captions, and campaigns.",
 }
 
 VALID_PERSONALITIES = {
@@ -28,6 +34,8 @@ VALID_PERSONALITIES = {
     "formal": "Corporate, structured, precise.",
     "friendly": "Warm, conversational, supportive.",
     "strict": "No-nonsense, corrective, high-discipline.",
+    "executive": "CEO-level, strategic, concise, decision-oriented.",
+    "teacher": "Patient, explanatory, example-heavy.",
 }
 
 
@@ -42,7 +50,7 @@ def _load_state():
         return DEFAULT_STATE.copy()
 
     try:
-        data = json.loads(SYSTEM_MODE_FILE.read_text())
+        data = json.loads(SYSTEM_MODE_FILE.read_text(encoding="utf-8"))
         state = DEFAULT_STATE.copy()
         state.update(data)
         return state
@@ -53,7 +61,11 @@ def _load_state():
 def _save_state(state):
     _ensure_storage()
     state["updated_at"] = datetime.now().isoformat(timespec="seconds")
-    SYSTEM_MODE_FILE.write_text(json.dumps(state, indent=4))
+    SYSTEM_MODE_FILE.write_text(json.dumps(state, indent=4), encoding="utf-8")
+
+
+def get_system_mode_state():
+    return _load_state()
 
 
 def show_system_mode():
@@ -70,11 +82,37 @@ def show_system_mode():
     )
 
 
-def set_prompt_version(version):
-    version = version.strip()
+def list_system_modes():
+    lines = ["AVAILABLE JARVIS MODES"]
+    for key, value in VALID_MODES.items():
+        lines.append(f"- {key}: {value}")
 
-    if not version:
-        return "Prompt version is required."
+    lines.append("\nAVAILABLE PERSONALITIES")
+    for key, value in VALID_PERSONALITIES.items():
+        lines.append(f"- {key}: {value}")
+
+    lines.append("\nAVAILABLE PROMPT VERSIONS")
+    for key, value in VALID_PROMPT_VERSIONS.items():
+        lines.append(f"- {key}: {value}")
+
+    return "\n".join(lines)
+
+
+def reset_system_mode():
+    state = DEFAULT_STATE.copy()
+    _save_state(state)
+    return "JARVIS system mode reset to default."
+
+
+def set_prompt_version(version):
+    version = version.lower().strip()
+
+    if version not in VALID_PROMPT_VERSIONS:
+        return (
+            "Unknown prompt version.\n"
+            "Available versions:\n"
+            + "\n".join(f"- {key}: {value}" for key, value in VALID_PROMPT_VERSIONS.items())
+        )
 
     state = _load_state()
     state["system_prompt_version"] = version
@@ -102,6 +140,17 @@ def set_personality_profile(profile):
 
 def set_active_mode(mode):
     mode = mode.lower().strip()
+
+    aliases = {
+        "social media": "social",
+        "social_media": "social",
+        "dev": "developer",
+    }
+
+    mode = aliases.get(mode, mode)
+
+    if mode == "developer":
+        return set_developer_mode(True)
 
     if mode not in VALID_MODES:
         return (
@@ -138,24 +187,36 @@ def build_mode_context():
 
     mode = state["active_mode"]
     personality = state["personality_profile"]
+    prompt_version = state["system_prompt_version"]
+
+    strict_rule = (
+        "Strict mode is ON. Be conservative. Do not suggest risky writes, shell commands, browser automation, "
+        "deployment, deletion, credential handling, or external actions without confirmation."
+        if state["strict_mode"]
+        else "Strict mode is OFF. Normal safety rules still apply."
+    )
+
+    developer_rule = (
+        "Developer mode is ON. Prioritize architecture, debugging, modular code, tests, and implementation details."
+        if state["developer_mode"]
+        else "Developer mode is OFF. Keep responses practical and balanced."
+    )
 
     return f"""
 JARVIS Runtime Configuration:
-- System prompt version: {state['system_prompt_version']}
+- System prompt version: {prompt_version}
+- Prompt version behavior: {VALID_PROMPT_VERSIONS.get(prompt_version, VALID_PROMPT_VERSIONS["v1"])}
 - Personality profile: {personality}
+- Personality behavior: {VALID_PERSONALITIES.get(personality, VALID_PERSONALITIES["default"])}
 - Active mode: {mode}
-- Strict mode: {state['strict_mode']}
-- Developer mode: {state['developer_mode']}
+- Mode behavior: {VALID_MODES.get(mode, VALID_MODES["default"])}
+- Strict mode: {state["strict_mode"]}
+- Developer mode: {state["developer_mode"]}
 
-Mode instruction:
-{VALID_MODES.get(mode, VALID_MODES['default'])}
-
-Personality instruction:
-{VALID_PERSONALITIES.get(personality, VALID_PERSONALITIES['default'])}
-
-Strict mode rule:
-{"Be extra cautious. Do not execute or suggest risky actions without confirmation." if state["strict_mode"] else "Normal safety mode."}
-
-Developer mode rule:
-{"Prioritize code architecture, debugging, implementation details, and developer-grade explanations." if state["developer_mode"] else "Normal assistant behavior."}
+Rules:
+- {strict_rule}
+- {developer_rule}
+- Never claim access to tools unless a real route/tool executed.
+- Prefer read-only inspection before write/execution.
+- Dangerous actions require confirmation.
 """.strip()
