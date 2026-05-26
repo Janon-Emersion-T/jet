@@ -1,59 +1,72 @@
 from tools.desktop_control_tools import (
-    desktop_control_status,
-    keyboard_automation_request,
-    mouse_automation_request,
-    app_launcher_request,
-    list_desktop_actions,
-    confirm_desktop_action,
-    desktop_control_help,
+    emergency_stop,
+    clear_emergency_stop,
+    request_keyboard_text,
+    request_mouse_click,
+    request_app_launch,
+    allow_app,
+    list_allowed_apps,
+    list_actions,
+    cancel_action,
+    execute_action,
 )
 
 
-def handle_desktop_control_routes(user_input: str, text: str, clean_text: str):
+def handle_desktop_control_routes(user_input: str, text: str = None, clean_text: str = None):
+    cmd = user_input.strip()
 
-    if text in ["desktop control help", "automation help"]:
-        return desktop_control_help()
+    if cmd == "desktop control help":
+        return (
+            "DESKTOP CONTROL COMMANDS\n"
+            "- desktop emergency stop\n"
+            "- desktop clear emergency stop\n"
+            "- keyboard automation request <text>\n"
+            "- mouse click request <x> <y>\n"
+            "- allow desktop app <app_name>\n"
+            "- list allowed desktop apps\n"
+            "- launch app request <app_name>\n"
+            "- list desktop actions\n"
+            "- cancel desktop action <action_id>\n"
+            "- confirm desktop action <action_id>\n\n"
+            "Safety: All actions require confirmation, expire, and cannot be replayed."
+        )
 
-    # ========================================================
-    # Phase 196
-    # ========================================================
+    if cmd == "desktop emergency stop":
+        return emergency_stop()
 
-    if text in ["desktop control status", "desktop mode status"]:
-        return desktop_control_status()
+    if cmd == "desktop clear emergency stop":
+        return clear_emergency_stop()
 
-    # ========================================================
-    # Phase 197
-    # ========================================================
+    if cmd.startswith("keyboard automation request "):
+        text = cmd.replace("keyboard automation request ", "", 1)
+        return request_keyboard_text(text)
 
-    if text.startswith("keyboard automation request "):
-        details = user_input.replace("keyboard automation request ", "", 1).strip()
-        return keyboard_automation_request(details)
+    if cmd.startswith("mouse click request "):
+        parts = cmd.replace("mouse click request ", "", 1).split()
+        if len(parts) != 2:
+            return {"success": False, "error": "Usage: mouse click request <x> <y>"}
+        return request_mouse_click(parts[0], parts[1])
 
-    # ========================================================
-    # Phase 198
-    # ========================================================
+    if cmd.startswith("allow desktop app "):
+        app = cmd.replace("allow desktop app ", "", 1).strip()
+        return allow_app(app)
 
-    if text.startswith("mouse automation request "):
-        details = user_input.replace("mouse automation request ", "", 1).strip()
-        return mouse_automation_request(details)
+    if cmd == "list allowed desktop apps":
+        return list_allowed_apps()
 
-    # ========================================================
-    # Phase 199
-    # ========================================================
+    if cmd.startswith("launch app request "):
+        app = cmd.replace("launch app request ", "", 1).strip()
+        return request_app_launch(app)
 
-    if text.startswith("app launcher request "):
-        app_name = user_input.replace("app launcher request ", "", 1).strip()
-        return app_launcher_request(app_name)
+    if cmd == "list desktop actions":
+        return list_actions()
 
-    # ========================================================
-    # Phase 200
-    # ========================================================
+    if cmd.startswith("cancel desktop action "):
+        action_id = cmd.replace("cancel desktop action ", "", 1).strip()
+        return cancel_action(action_id)
 
-    if text.startswith("confirm desktop action "):
-        action_id = user_input.replace("confirm desktop action ", "", 1).strip()
-        return confirm_desktop_action(action_id)
-
-    if text in ["list desktop actions", "desktop actions"]:
-        return list_desktop_actions()
+    if cmd.startswith("confirm desktop action "):
+        action_id = cmd.replace("confirm desktop action ", "", 1).strip()
+        return execute_action(action_id)
 
     return None

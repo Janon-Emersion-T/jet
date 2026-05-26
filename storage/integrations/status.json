@@ -1,0 +1,22 @@
+{
+  "gmail": {
+    "connected": false,
+    "mode": "draft-first",
+    "last_checked": "2026-05-26T16:48:23"
+  },
+  "calendar": {
+    "connected": false,
+    "mode": "proposal-first",
+    "last_checked": "2026-05-26T16:48:23"
+  },
+  "contacts": {
+    "connected": false,
+    "mode": "read-search-first",
+    "last_checked": "2026-05-26T16:48:23"
+  },
+  "whatsapp": {
+    "connected": false,
+    "mode": "draft-first",
+    "last_checked": "2026-05-26T16:48:23"
+  }
+}

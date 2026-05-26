@@ -1,375 +1,185 @@
 import json
-import subprocess
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 
-DESKTOP_DIR = Path("storage/desktop_control")
-ACTION_FILE = DESKTOP_DIR / "desktop_actions.json"
+BASE_DIR = Path("storage/desktop_control")
+BASE_DIR.mkdir(parents=True, exist_ok=True)
 
-ALLOWED_APPS = {
-    "code": ["code"],
-    "vscode": ["code"],
-    "terminal": ["gnome-terminal"],
-    "firefox": ["firefox"],
-    "chrome": ["google-chrome"],
-    "files": ["nautilus"],
-    "file manager": ["nautilus"],
-}
+QUEUE_FILE = BASE_DIR / "approval_queue.json"
+LOG_FILE = BASE_DIR / "execution_logs.json"
+ALLOWLIST_FILE = BASE_DIR / "app_allowlist.json"
+KILL_FILE = BASE_DIR / "emergency_stop.json"
 
-ALLOWED_ACTION_TYPES = ["keyboard", "mouse", "app_launcher"]
+ACTION_EXPIRY_MINUTES = 10
+MAX_TEXT_LENGTH = 300
 
 
-# ============================================================
-# Storage Helpers
-# ============================================================
-
-def _ensure():
-    DESKTOP_DIR.mkdir(parents=True, exist_ok=True)
-    if not ACTION_FILE.exists():
-        ACTION_FILE.write_text(json.dumps([], indent=4), encoding="utf-8")
+def _now():
+    return datetime.now()
 
 
-def _load():
-    _ensure()
+def _now_str():
+    return _now().isoformat(timespec="seconds")
+
+
+def _read(path, default):
+    if not path.exists():
+        return default
     try:
-        return json.loads(ACTION_FILE.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
-        return []
+        return default
 
 
-def _save(items):
-    _ensure()
-    ACTION_FILE.write_text(json.dumps(items, indent=4), encoding="utf-8")
+def _write(path, data):
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def _new_id():
-    return datetime.now().strftime("%Y%m%d%H%M%S")
+def _log(action_id, event, details=None):
+    logs = _read(LOG_FILE, [])
+    logs.append({
+        "action_id": action_id,
+        "event": event,
+        "details": details or {},
+        "time": _now_str(),
+    })
+    _write(LOG_FILE, logs)
 
 
-def _create_action(action_type: str, details: dict):
-    if action_type not in ALLOWED_ACTION_TYPES:
-        return None, "Unsupported desktop action type."
+def emergency_stop():
+    _write(KILL_FILE, {"active": True, "time": _now_str()})
+    _log("system", "emergency_stop_enabled")
+    return {"success": True, "message": "Emergency stop enabled. Desktop actions blocked."}
 
-    items = _load()
 
+def clear_emergency_stop():
+    _write(KILL_FILE, {"active": False, "time": _now_str()})
+    _log("system", "emergency_stop_cleared")
+    return {"success": True, "message": "Emergency stop cleared."}
+
+
+def is_emergency_stopped():
+    state = _read(KILL_FILE, {"active": False})
+    return bool(state.get("active"))
+
+
+def _new_action(action_type, payload):
+    queue = _read(QUEUE_FILE, [])
     action = {
-        "id": _new_id(),
+        "id": f"desktop_action_{len(queue)+1}",
         "type": action_type,
-        "details": details,
-        "status": "pending",
-        "created_at": datetime.now().isoformat(timespec="seconds"),
-        "executed_at": None,
-        "result": None,
+        "payload": payload,
+        "status": "pending_confirmation",
+        "created_at": _now_str(),
+        "expires_at": (_now() + timedelta(minutes=ACTION_EXPIRY_MINUTES)).isoformat(timespec="seconds"),
+        "executed": False,
     }
-
-    items.append(action)
-    _save(items)
-
-    return action, None
-
-
-def _find_action(action_id: str):
-    items = _load()
-
-    for index, action in enumerate(items):
-        if action.get("id") == action_id:
-            return items, index, action
-
-    return items, None, None
+    queue.append(action)
+    _write(QUEUE_FILE, queue)
+    _log(action["id"], "created", {"type": action_type})
+    return action
 
 
-# ============================================================
-# Phase 196 — Desktop Control Status
-# ============================================================
-
-def desktop_control_status() -> str:
-    return """DESKTOP CONTROL MODE — PHASE 196
-
-Status:
-Active with approval queue.
-
-Safety Rules:
-- JARVIS will not silently click.
-- JARVIS will not silently type.
-- JARVIS will not launch unrestricted apps.
-- Every desktop action must be requested first.
-- Execution requires: confirm desktop action <id>
-
-Available Actions:
-197. Keyboard automation
-198. Mouse automation
-199. App launcher
-200. Desktop action executor
-"""
+def request_keyboard_text(text):
+    if len(text) > MAX_TEXT_LENGTH:
+        return {"success": False, "error": f"Keyboard text too long. Max {MAX_TEXT_LENGTH} characters."}
+    return _new_action("keyboard_text", {"text": text})
 
 
-# ============================================================
-# Phase 197 — Keyboard Automation
-# ============================================================
-
-def keyboard_automation_request(text_to_type: str) -> str:
-    text_to_type = text_to_type.strip()
-
-    if not text_to_type:
-        return "Keyboard text is required."
-
-    if len(text_to_type) > 500:
-        return "Keyboard automation blocked. Maximum allowed text length is 500 characters."
-
-    action, error = _create_action("keyboard", {
-        "text": text_to_type,
-    })
-
-    if error:
-        return error
-
-    return f"""KEYBOARD AUTOMATION REQUEST CREATED — PHASE 197
-
-ID: {action['id']}
-Action: type text
-Text:
-{text_to_type}
-
-To execute:
-confirm desktop action {action['id']}
-"""
-
-
-# ============================================================
-# Phase 198 — Mouse Automation
-# ============================================================
-
-def mouse_automation_request(details: str) -> str:
-    details = details.strip()
-
-    if not details:
-        return "Mouse action details are required."
-
-    parts = details.split()
-
-    if len(parts) not in [2, 3]:
-        return """Invalid mouse format.
-
-Use:
-mouse automation request <x> <y>
-mouse automation request <x> <y> click
-
-Example:
-mouse automation request 500 300
-mouse automation request 500 300 click
-"""
-
+def request_mouse_click(x, y):
     try:
-        x = int(parts[0])
-        y = int(parts[1])
-    except ValueError:
-        return "Mouse coordinates must be numbers."
-
-    action_mode = "move"
-
-    if len(parts) == 3:
-        if parts[2].lower() != "click":
-            return "Only optional mouse action supported is: click"
-        action_mode = "click"
-
-    action, error = _create_action("mouse", {
-        "x": x,
-        "y": y,
-        "mode": action_mode,
-    })
-
-    if error:
-        return error
-
-    return f"""MOUSE AUTOMATION REQUEST CREATED — PHASE 198
-
-ID: {action['id']}
-Mode: {action_mode}
-Coordinates: {x}, {y}
-
-To execute:
-confirm desktop action {action['id']}
-"""
-
-
-# ============================================================
-# Phase 199 — App Launcher
-# ============================================================
-
-def app_launcher_request(app_name: str) -> str:
-    app_name = app_name.lower().strip()
-
-    if not app_name:
-        return "App name is required."
-
-    if app_name not in ALLOWED_APPS:
-        return (
-            "App launch blocked. App is not in allowlist.\n\n"
-            "Allowed apps:\n"
-            + "\n".join(f"- {name}" for name in sorted(ALLOWED_APPS.keys()))
-        )
-
-    action, error = _create_action("app_launcher", {
-        "app": app_name,
-        "command": ALLOWED_APPS[app_name],
-    })
-
-    if error:
-        return error
-
-    return f"""APP LAUNCHER REQUEST CREATED — PHASE 199
-
-ID: {action['id']}
-App: {app_name}
-Command: {' '.join(ALLOWED_APPS[app_name])}
-
-To execute:
-confirm desktop action {action['id']}
-"""
-
-
-# ============================================================
-# Phase 200 — Action Executor
-# ============================================================
-
-def confirm_desktop_action(action_id: str) -> str:
-    items, index, action = _find_action(action_id)
-
-    if action is None:
-        return "Desktop action not found."
-
-    if action.get("status") == "executed":
-        return f"Desktop action {action_id} was already executed."
-
-    try:
-        result = _execute_action(action)
-    except Exception as e:
-        result = f"Desktop action failed: {e}"
-
-    action["status"] = "executed" if not result.startswith("Desktop action failed") else "failed"
-    action["executed_at"] = datetime.now().isoformat(timespec="seconds")
-    action["result"] = result
-
-    items[index] = action
-    _save(items)
-
-    return f"""DESKTOP ACTION EXECUTED — PHASE 200
-
-ID: {action_id}
-Type: {action['type']}
-Status: {action['status']}
-
-Result:
-{result}
-"""
-
-
-def _execute_action(action: dict) -> str:
-    action_type = action.get("type")
-    details = action.get("details", {})
-
-    if action_type == "keyboard":
-        return _execute_keyboard(details)
-
-    if action_type == "mouse":
-        return _execute_mouse(details)
-
-    if action_type == "app_launcher":
-        return _execute_app_launcher(details)
-
-    return "Unsupported action type."
-
-
-def _execute_keyboard(details: dict) -> str:
-    try:
-        import pyautogui
+        x = int(x)
+        y = int(y)
     except Exception:
-        return "Desktop action failed: pyautogui is not installed."
+        return {"success": False, "error": "Mouse coordinates must be numbers."}
 
-    text = details.get("text", "")
+    if x < 0 or y < 0 or x > 10000 or y > 10000:
+        return {"success": False, "error": "Mouse coordinates outside safe bounds."}
 
-    if not text:
-        return "Desktop action failed: empty keyboard text."
-
-    pyautogui.write(text, interval=0.02)
-
-    return "Typed requested text."
+    return _new_action("mouse_click", {"x": x, "y": y})
 
 
-def _execute_mouse(details: dict) -> str:
-    try:
-        import pyautogui
-    except Exception:
-        return "Desktop action failed: pyautogui is not installed."
-
-    x = int(details.get("x"))
-    y = int(details.get("y"))
-    mode = details.get("mode", "move")
-
-    pyautogui.moveTo(x, y, duration=0.2)
-
-    if mode == "click":
-        pyautogui.click()
-        return f"Moved mouse to {x}, {y} and clicked."
-
-    return f"Moved mouse to {x}, {y}."
+def allow_app(app_name):
+    apps = _read(ALLOWLIST_FILE, [])
+    if app_name not in apps:
+        apps.append(app_name)
+    _write(ALLOWLIST_FILE, apps)
+    return {"success": True, "allowlist": apps}
 
 
-def _execute_app_launcher(details: dict) -> str:
-    app = details.get("app")
-    command = details.get("command")
-
-    if app not in ALLOWED_APPS:
-        return "Desktop action failed: app is not allowlisted."
-
-    if not command:
-        return "Desktop action failed: missing app command."
-
-    subprocess.Popen(
-        command,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
-
-    return f"Launched app: {app}"
+def list_allowed_apps():
+    return _read(ALLOWLIST_FILE, [])
 
 
-def list_desktop_actions() -> str:
-    items = _load()
-
-    if not items:
-        return "No desktop actions found."
-
-    lines = ["DESKTOP ACTION REQUESTS"]
-
-    for item in reversed(items[-30:]):
-        details = item.get("details", {})
-        lines.append(
-            f"- {item['id']} | {item['status']} | {item['type']} | {details}"
-        )
-
-    return "\n".join(lines)
+def request_app_launch(app_name):
+    allowed = list_allowed_apps()
+    if app_name not in allowed:
+        return {"success": False, "error": f"App not allowlisted: {app_name}"}
+    return _new_action("app_launch", {"app": app_name})
 
 
-def desktop_control_help() -> str:
-    return """DESKTOP CONTROL COMMANDS — PHASES 196–200
+def list_actions():
+    return _read(QUEUE_FILE, [])
 
-196. desktop control status
 
-197. keyboard automation request <text>
-     Example:
-     keyboard automation request Hello from JARVIS
+def cancel_action(action_id):
+    queue = _read(QUEUE_FILE, [])
+    for action in queue:
+        if action["id"] == action_id and action["status"] == "pending_confirmation":
+            action["status"] = "cancelled"
+            _write(QUEUE_FILE, queue)
+            _log(action_id, "cancelled")
+            return {"success": True, "action": action}
+    return {"success": False, "error": "Pending action not found."}
 
-198. mouse automation request <x> <y>
-     mouse automation request <x> <y> click
-     Example:
-     mouse automation request 500 300
-     mouse automation request 500 300 click
 
-199. app launcher request <app>
-     Allowed apps:
-     code, vscode, terminal, firefox, chrome, files, file manager
+def execute_action(action_id):
+    if is_emergency_stopped():
+        return {"success": False, "error": "Emergency stop is active."}
 
-200. list desktop actions
-     confirm desktop action <id>
-"""
+    queue = _read(QUEUE_FILE, [])
+
+    for action in queue:
+        if action["id"] != action_id:
+            continue
+
+        if action.get("executed"):
+            return {"success": False, "error": "Replay blocked. Action already executed."}
+
+        if action["status"] != "pending_confirmation":
+            return {"success": False, "error": f"Action is not pending. Current status: {action['status']}"}
+
+        if datetime.fromisoformat(action["expires_at"]) < _now():
+            action["status"] = "expired"
+            _write(QUEUE_FILE, queue)
+            _log(action_id, "expired")
+            return {"success": False, "error": "Action expired."}
+
+        try:
+            import pyautogui
+
+            if action["type"] == "keyboard_text":
+                pyautogui.write(action["payload"]["text"], interval=0.01)
+
+            elif action["type"] == "mouse_click":
+                pyautogui.click(action["payload"]["x"], action["payload"]["y"])
+
+            elif action["type"] == "app_launch":
+                import subprocess
+                subprocess.Popen([action["payload"]["app"]])
+
+            else:
+                return {"success": False, "error": "Unsupported action type."}
+
+            action["status"] = "executed"
+            action["executed"] = True
+            action["executed_at"] = _now_str()
+            _write(QUEUE_FILE, queue)
+            _log(action_id, "executed")
+            return {"success": True, "action": action}
+
+        except Exception as e:
+            _log(action_id, "failed", {"error": str(e)})
+            return {"success": False, "error": str(e)}
+
+    return {"success": False, "error": "Action not found."}

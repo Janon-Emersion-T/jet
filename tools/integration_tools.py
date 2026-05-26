@@ -1,119 +1,78 @@
 from pathlib import Path
-from datetime import datetime
-import json
-
-INTEGRATION_DIR = Path("storage/integrations")
-LOG_FILE = INTEGRATION_DIR / "integration_notes.json"
+        lines.append(f"- {item['id']} | {item['name']} | {item.get('email') or '-'} | {item.get('phone') or '-'}")
+    return "\n".join(lines)
 
 
-def _ensure():
-    INTEGRATION_DIR.mkdir(parents=True, exist_ok=True)
-    if not LOG_FILE.exists():
-        LOG_FILE.write_text(json.dumps([], indent=4), encoding="utf-8")
+def list_local_contacts() -> str:
+    contacts = _read_json(CONTACT_FILE, [])
+    if not contacts:
+        return "No local contacts found."
 
-
-def _load():
-    _ensure()
-    try:
-        return json.loads(LOG_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return []
-
-
-def _save(items):
-    _ensure()
-    LOG_FILE.write_text(json.dumps(items, indent=4), encoding="utf-8")
-
-
-def _record(kind: str, content: str):
-    items = _load()
-    item = {
-        "id": datetime.now().strftime("%Y%m%d%H%M%S"),
-        "kind": kind,
-        "content": content,
-        "created_at": datetime.now().isoformat(timespec="seconds"),
-    }
-    items.append(item)
-    _save(items)
-    return item
-
-
-def calendar_integration_help() -> str:
-    return """CALENDAR INTEGRATION — PHASE 182
-
-Current Mode:
-Local planning stub only. No external calendar is connected yet.
-
-Recommended Future Safe Flow:
-1. Connect Google Calendar API.
-2. Read events first.
-3. Draft event changes.
-4. Require confirmation before creating/updating/deleting events.
-
-Command:
-calendar integration status
-"""
-
-
-def gmail_integration_help() -> str:
-    return """GMAIL INTEGRATION — PHASE 183
-
-Current Mode:
-Draft-only safety stub. JARVIS must not send emails automatically.
-
-Recommended Future Safe Flow:
-1. Read inbox only after permission.
-2. Draft replies locally.
-3. Confirm before creating Gmail draft.
-4. Confirm again before sending.
-
-Command:
-gmail integration status
-"""
-
-
-def contact_integration_help() -> str:
-    return """CONTACT INTEGRATION — PHASE 184
-
-Current Mode:
-Local contact planning stub only.
-
-Recommended Future Safe Flow:
-1. Read-only contact search first.
-2. No automatic mass messaging.
-3. Require confirmation before outreach actions.
-
-Command:
-contact integration status
-"""
+    lines = ["LOCAL CONTACTS"]
+    for item in reversed(contacts[-50:]):
+        lines.append(f"- {item['id']} | {item['name']} | {item.get('email') or '-'} | {item.get('phone') or '-'}")
+    return "\n".join(lines)
 
 
 def whatsapp_draft_assistant(request: str) -> str:
     request = request.strip() or "general client follow-up"
-    _record("whatsapp_draft", request)
+
+    draft_text = (
+        "Hello, this is Janon from LKProfessionals (Pvt) Ltd.\n\n"
+        f"I wanted to follow up regarding {request}. Please let me know a convenient time to discuss the next steps.\n\n"
+        "Thank you."
+    )
+
+    draft = _save_draft("whatsapp", {
+        "request": request,
+        "message": draft_text,
+    })
 
     return f"""WHATSAPP DRAFT ASSISTANT — PHASE 185
 
+ID: {draft['id']}
 Request:
 {request}
 
 Draft:
-Hello, this is Janon from LKProfessionals (Pvt) Ltd.
-
-I wanted to follow up regarding {request}. Please let me know a convenient time to discuss the next steps.
-
-Thank you.
+{draft_text}
 
 Safety:
-This is only a draft. JARVIS will not send WhatsApp messages automatically.
+This is only a local draft. JARVIS will not send WhatsApp messages automatically.
 """
+
+
+def list_integration_drafts() -> str:
+    drafts = _read_json(DRAFT_FILE, [])
+    if not drafts:
+        return "No integration drafts found."
+
+    lines = ["INTEGRATION DRAFTS"]
+    for item in reversed(drafts[-50:]):
+        payload = item.get("payload", {})
+        label = payload.get("subject") or payload.get("request") or payload.get("to") or "draft"
+        lines.append(f"- {item['id']} | {item['kind']} | {item['status']} | {label}")
+    return "\n".join(lines)
 
 
 def integration_help() -> str:
     return """INTEGRATION COMMANDS — PHASES 182–185
 
 182. calendar integration status
+     calendar propose event <title> | <start> | <end> | <location optional> | <notes optional>
+     list calendar proposals
+
 183. gmail integration status
+     gmail draft to <email> | <subject> | <message>
+     list integration drafts
+
 184. contact integration status
+     add local contact <name> | <email optional> | <phone optional> | <notes optional>
+     search contacts <query>
+     list local contacts
+
 185. whatsapp draft for <request>
+
+Config:
+integration config status
 """
