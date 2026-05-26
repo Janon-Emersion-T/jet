@@ -57,17 +57,21 @@ Current repository:
 
 this is one of the most important part and teach me things clearly on how to implement this
 
+when we finish it successfully we can push it to git
+
+no need to add unwanted comments
+
 
 Next phases to implement:
-251-260
+261-270
 
-Swagger/OpenAPI generator
-README auto-generator
-Project onboarding assistant
-Developer environment checker
-Linux package dependency checker
-Docker awareness layer (optional only)
-Shared hosting compatibility checker
-CPanel deployment assistant
-Hostinger deployment assistant
-Nginx virtual host generator
+Apache config generator
+SSL setup assistant
+Certbot automation helper
+Domain DNS checker
+Email DNS checker
+SPF/DKIM/DMARC advisor
+Cloudflare integration assistant
+CDN optimization advisor
+Static asset optimizer
+Image compression assistant
