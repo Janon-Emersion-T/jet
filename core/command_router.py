@@ -56,7 +56,6 @@ from core.routes.attendance_assistant_routes import handle_attendance_assistant_
 from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
 from core.routes.ticket_prioritization_routes import handle_ticket_prioritization_routes
 from core.routes.bug_severity_routes import handle_bug_severity_routes
-from core.nlp_engine import analyze_command
 
 
 
@@ -67,6 +66,12 @@ def route_command(user_input: str) -> str:
     text = nlp.normalized_text
     clean_text = nlp.clean_text
     intent = nlp.intent
+
+    if clean_text.startswith("test nlp ") or clean_text.startswith("analyze command "):
+        from core.nlp_engine import format_nlp_report
+
+        query = clean_text.replace("test nlp", "", 1).replace("analyze command", "", 1).strip()
+        return format_nlp_report(query)
 
     route_handlers = [
         handle_live_environment_routes,
