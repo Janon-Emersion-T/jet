@@ -28,6 +28,7 @@ from core.routes.desktop_control_routes import handle_desktop_control_routes
 from core.routes.integration_routes import handle_integration_routes
 from core.routes.vision_routes import handle_vision_routes
 from core.routes.desktop_control_routes import handle_desktop_control_routes
+from core.routes.linux_admin_routes import handle_linux_admin_routes
 
 
 def route_command(user_input: str) -> str:
@@ -65,6 +66,7 @@ def route_command(user_input: str) -> str:
         handle_document_reader_routes,
         handle_vision_routes,
         handle_desktop_control_routes,
+        handle_linux_admin_routes,
         
     ]
 
