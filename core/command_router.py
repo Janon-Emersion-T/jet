@@ -52,6 +52,7 @@ from core.routes.invoice_ocr_routes import handle_invoice_ocr_routes
 from core.routes.receipt_parser_routes import handle_receipt_parser_routes
 from core.routes.tax_calculation_routes import handle_tax_calculation_routes
 from core.routes.payroll_assistant_routes import handle_payroll_assistant_routes
+from core.routes.hr_onboarding_routes import handle_hr_onboarding_routes
 
 
 
@@ -115,6 +116,7 @@ def route_command(user_input: str) -> str:
         handle_marketing_analytics_routes,
         handle_business_growth_routes,
         handle_knowledge_academic_routes,
+        handle_hr_onboarding_routes,
     ]
 
     for handler in route_handlers:
