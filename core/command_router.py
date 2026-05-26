@@ -57,6 +57,7 @@ from core.routes.employee_task_tracker_routes import handle_employee_task_tracke
 from core.routes.attendance_assistant_routes import handle_attendance_assistant_routes
 from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
 from core.routes.ticket_prioritization_routes import handle_ticket_prioritization_routes
+from core.routes.bug_severity_routes import handle_bug_severity_routes
 
 
 
@@ -86,7 +87,8 @@ def route_command(user_input: str) -> str:
         handle_attendance_assistant_routes,
         handle_internal_helpdesk_routes,
         handle_ticket_prioritization_routes,
-
+        handle_bug_severity_routes,
+        
         # Specific tool modules
         handle_email_routes,
         handle_integration_routes,
