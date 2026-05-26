@@ -36,6 +36,7 @@ from core.routes.database_intelligence_routes import handle_database_intelligenc
 from core.routes.deployment_docs_routes import handle_deployment_docs_routes
 from core.routes.hosting_dns_routes import handle_hosting_dns_routes
 from core.routes.frontend_quality_routes import handle_frontend_quality_routes
+from core.routes.frontend_platform_routes import handle_frontend_platform_routes
 
 
 
@@ -58,6 +59,7 @@ def route_command(user_input: str) -> str:
         handle_database_intelligence_routes,
         handle_dev_ops_routes,
         handle_project_analyzer_routes,
+        handle_frontend_platform_routes,
         handle_project_context_routes,
         handle_patch_routes,
         handle_project_health_routes,
