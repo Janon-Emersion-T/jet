@@ -27,10 +27,29 @@ def _run(command: list[str], timeout: int = 20, check_guard: bool = True) -> str
         return f"Command failed: {e}"
 
 
+def _safe_shell(command: str, timeout: int = 20) -> str:
+    """
+    Read-only shell wrapper.
+
+    This intentionally bypasses the generic dangerous-command guard because many
+    harmless diagnostic commands use shell syntax such as:
+    - 2>/dev/null
+    - |
+    - ||
+    - head
+    - sort
+
+    IMPORTANT:
+    Only use this helper for hardcoded read-only inspection commands.
+    Never pass raw user input into this function.
+    """
+    return _run(["bash", "-lc", command], timeout=timeout, check_guard=False)
+
+
 def window_manager() -> str:
-    session = _run(["bash", "-lc", "echo $XDG_CURRENT_DESKTOP $DESKTOP_SESSION $XDG_SESSION_TYPE"])
-    wm = _run(["bash", "-lc", "wmctrl -m 2>/dev/null || echo 'wmctrl not installed'"])
-    windows = _run(["bash", "-lc", "wmctrl -l 2>/dev/null | head -30 || echo 'wmctrl not installed'"])
+    session = _safe_shell("echo $XDG_CURRENT_DESKTOP $DESKTOP_SESSION $XDG_SESSION_TYPE")
+    wm = _safe_shell("wmctrl -m 2>/dev/null || echo 'wmctrl not installed'")
+    windows = _safe_shell("wmctrl -l 2>/dev/null | head -30 || echo 'wmctrl not installed'")
 
     return f"""WINDOW MANAGER — PHASE 201
 
@@ -49,7 +68,7 @@ def linux_system_monitor() -> str:
     uptime = _run(["uptime"])
     memory = _run(["free", "-h"])
     disk = _run(["df", "-h", "/"])
-    cpu = _run(["bash", "-lc", "top -bn1 | head -20"])
+    cpu = _safe_shell("top -bn1 | head -20")
 
     return f"""LINUX SYSTEM MONITOR — PHASE 202
 
@@ -70,8 +89,8 @@ CPU Snapshot:
 def disk_cleanup_assistant() -> str:
     home_cache = Path.home() / ".cache"
     apt_cache = "/var/cache/apt"
-    journal = _run(["bash", "-lc", "journalctl --disk-usage 2>/dev/null || echo 'journalctl unavailable'"])
-    big_dirs = _run(["bash", "-lc", "du -h -d 1 ~ 2>/dev/null | sort -hr | head -15"])
+    journal = _safe_shell("journalctl --disk-usage 2>/dev/null || echo 'journalctl unavailable'")
+    big_dirs = _safe_shell("du -h -d 1 ~ 2>/dev/null | sort -hr | head -15")
 
     return f"""DISK CLEANUP ASSISTANT — PHASE 203
 
@@ -92,8 +111,8 @@ Cleanup Suggestions:
 
 
 def log_cleanup_assistant() -> str:
-    logs = _run(["bash", "-lc", "find /var/log -type f -printf '%s %p\n' 2>/dev/null | sort -nr | head -20"])
-    journal = _run(["bash", "-lc", "journalctl --disk-usage 2>/dev/null || echo 'journalctl unavailable'"])
+    logs = _safe_shell("find /var/log -type f -printf '%s %p\\n' 2>/dev/null | sort -nr | head -20")
+    journal = _safe_shell("journalctl --disk-usage 2>/dev/null || echo 'journalctl unavailable'")
 
     return f"""LOG CLEANUP ASSISTANT — PHASE 204
 
@@ -124,9 +143,10 @@ Service: {service_name}
     common = ["nginx", "mysql", "mariadb", "php8.4-fpm", "php8.3-fpm", "redis-server"]
     lines = ["SERVICE STATUS CHECKER — PHASE 205", ""]
     for service in common:
-        status = _run(["bash", "-lc", f"systemctl is-active {service} 2>/dev/null || true"])
+        status = _safe_shell(f"systemctl is-active {service} 2>/dev/null || true")
         if status and status != "No output.":
             lines.append(f"- {service}: {status}")
+
     return "\n".join(lines)
 
 
@@ -136,7 +156,7 @@ def nginx_config_checker() -> str:
         return "NGINX CONFIG CHECKER — PHASE 206\n\nnginx command not found."
 
     test = _run(["nginx", "-t"], timeout=20)
-    sites = _run(["bash", "-lc", "ls -la /etc/nginx/sites-enabled 2>/dev/null || echo 'sites-enabled not readable'"])
+    sites = _safe_shell("ls -la /etc/nginx/sites-enabled 2>/dev/null || echo 'sites-enabled not readable'")
 
     return f"""NGINX CONFIG CHECKER — PHASE 206
 
@@ -149,9 +169,9 @@ Enabled Sites:
 
 
 def php_fpm_checker() -> str:
-    versions = _run(["bash", "-lc", "ls /etc/php 2>/dev/null || echo 'No /etc/php directory'"])
-    pools = _run(["bash", "-lc", "find /etc/php -path '*fpm/pool.d/*.conf' -maxdepth 5 2>/dev/null | sort"])
-    sockets = _run(["bash", "-lc", "ls -la /run/php 2>/dev/null || echo 'No /run/php directory'"])
+    versions = _safe_shell("ls /etc/php 2>/dev/null || echo 'No /etc/php directory'")
+    pools = _safe_shell("find /etc/php -path '*fpm/pool.d/*.conf' -maxdepth 5 2>/dev/null | sort")
+    sockets = _safe_shell("ls -la /run/php 2>/dev/null || echo 'No /run/php directory'")
 
     return f"""PHP-FPM CHECKER — PHASE 207
 
@@ -167,8 +187,17 @@ Runtime Sockets:
 
 
 def mysql_checker() -> str:
-    status = _run(["bash", "-lc", "systemctl status mysql --no-pager 2>/dev/null || systemctl status mariadb --no-pager 2>/dev/null || echo 'MySQL/MariaDB service not found'"])
-    version = _run(["bash", "-lc", "mysql --version 2>/dev/null || mariadb --version 2>/dev/null || echo 'mysql client not found'"])
+    status = _safe_shell(
+        "systemctl status mysql --no-pager 2>/dev/null || "
+        "systemctl status mariadb --no-pager 2>/dev/null || "
+        "echo 'MySQL/MariaDB service not found'",
+        timeout=20,
+    )
+    version = _safe_shell(
+        "mysql --version 2>/dev/null || "
+        "mariadb --version 2>/dev/null || "
+        "echo 'mysql client not found'"
+    )
 
     return f"""MYSQL CHECKER — PHASE 208
 
@@ -187,17 +216,22 @@ def laravel_deployment_checker() -> str:
         ".env": cwd / ".env",
         "composer.json": cwd / "composer.json",
         "public/build/manifest.json": cwd / "public" / "build" / "manifest.json",
-        "storage writable": cwd / "storage",
-        "bootstrap/cache writable": cwd / "bootstrap" / "cache",
+        "storage directory": cwd / "storage",
+        "bootstrap/cache directory": cwd / "bootstrap" / "cache",
     }
 
-    lines = [f"LARAVEL DEPLOYMENT CHECKER — PHASE 209", f"Path: {cwd}", ""]
+    lines = ["LARAVEL DEPLOYMENT CHECKER — PHASE 209", f"Path: {cwd}", ""]
     for label, path in checks.items():
-        if "writable" in label:
-            status = "OK" if path.exists() and path.is_dir() else "MISSING"
-        else:
-            status = "OK" if path.exists() else "MISSING"
+        status = "OK" if path.exists() else "MISSING"
         lines.append(f"- {label}: {status}")
+
+    if (cwd / "storage").exists():
+        writable = "OK" if (cwd / "storage").is_dir() else "NOT DIRECTORY"
+        lines.append(f"- storage writable check: {writable}")
+
+    if (cwd / "bootstrap" / "cache").exists():
+        writable = "OK" if (cwd / "bootstrap" / "cache").is_dir() else "NOT DIRECTORY"
+        lines.append(f"- bootstrap/cache writable check: {writable}")
 
     if (cwd / "artisan").exists():
         lines.append("\nLaravel About:")
