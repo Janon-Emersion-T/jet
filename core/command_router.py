@@ -50,6 +50,7 @@ from core.routes.financial_report_routes import handle_financial_report_routes
 from core.routes.accounting_anomaly_routes import handle_accounting_anomaly_routes
 from core.routes.invoice_ocr_routes import handle_invoice_ocr_routes
 from core.routes.receipt_parser_routes import handle_receipt_parser_routes
+from core.routes.tax_calculation_routes import handle_tax_calculation_routes
 
 
 
@@ -85,6 +86,7 @@ def route_command(user_input: str) -> str:
         handle_financial_report_routes,
         handle_accounting_anomaly_routes,
         handle_receipt_parser_routes,
+        handle_tax_calculation_routes,
         handle_invoice_ocr_routes,
         handle_architecture_quality_routes,
         handle_execution_routes,
