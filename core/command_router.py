@@ -40,6 +40,9 @@ from core.routes.frontend_platform_routes import handle_frontend_platform_routes
 from core.routes.packaging_analytics_routes import handle_packaging_analytics_routes
 from core.routes.marketing_analytics_routes import handle_marketing_analytics_routes
 from core.routes.business_growth_routes import handle_business_growth_routes
+from core.routes.email_routes import handle_email_routes
+from core.routes.knowledge_academic_routes import handle_knowledge_academic_routes
+
 
 
 
@@ -53,6 +56,7 @@ def route_command(user_input: str) -> str:
     intent = classify_intent(user_input)
 
     route_handlers = [
+        handle_email_routes,
         handle_integration_routes,
         handle_vision_routes,
         handle_desktop_control_routes,
@@ -90,8 +94,7 @@ def route_command(user_input: str) -> str:
         handle_packaging_analytics_routes,
         handle_marketing_analytics_routes,
         handle_business_growth_routes,
-        
-        
+        handle_knowledge_academic_routes,
     ]
 
     for handler in route_handlers:
