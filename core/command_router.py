@@ -40,6 +40,9 @@ def route_command(user_input: str) -> str:
     intent = classify_intent(user_input)
 
     route_handlers = [
+        handle_integration_routes,
+        handle_vision_routes,
+        handle_desktop_control_routes,
         handle_basic_routes,
         handle_memory_routes,
         handle_framework_routes,
@@ -62,9 +65,7 @@ def route_command(user_input: str) -> str:
         handle_document_reader_routes,
         handle_vision_routes,
         handle_desktop_control_routes,
-        handle_integration_routes,
-        handle_vision_routes,
-        handle_desktop_control_routes,
+        
     ]
 
     for handler in route_handlers:
