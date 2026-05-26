@@ -4,6 +4,7 @@ import json
 import shutil
 import difflib
 import uuid
+from tools.event_tools import emit_event
 
 
 class ProposalManager:
@@ -75,6 +76,7 @@ class ProposalManager:
         }
 
     def apply(self, proposal_id, confirmed=False):
+        (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
         if not confirmed:
             return (
                 "Write blocked.\n"
@@ -106,6 +108,12 @@ class ProposalManager:
 
         (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
+        emit_event(
+            "PATCH_APPLIED",
+            "Safe patch applied",
+            f"Proposal {proposal_id} applied to {meta['file_path']}",
+        )
+
         return f"Applied proposal {proposal_id} to {meta['file_path']}"
 
     def rollback(self, proposal_id):
@@ -130,6 +138,12 @@ class ProposalManager:
         meta["rolled_back_at"] = datetime.now().isoformat()
 
         (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
+
+        emit_event(
+            "PATCH_ROLLED_BACK",
+            "Patch rollback completed",
+            f"Proposal {proposal_id} rolled back on {meta['file_path']}",
+        )
 
         return f"Rolled back proposal {proposal_id} on {meta['file_path']}"
 

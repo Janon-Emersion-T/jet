@@ -44,7 +44,7 @@ from core.routes.email_routes import handle_email_routes
 from core.routes.knowledge_academic_routes import handle_knowledge_academic_routes
 from core.routes.live_environment_routes import handle_live_environment_routes
 from core.routes.report_export_routes import handle_report_export_routes
-
+from core.routes.powerpoint_export_routes import handle_powerpoint_export_routes
 
 
 
@@ -75,6 +75,7 @@ def route_command(user_input: str) -> str:
         handle_patch_routes,
         handle_project_health_routes,
         handle_report_export_routes,
+        handle_powerpoint_export_routes,
         handle_architecture_quality_routes,
         handle_execution_routes,
         handle_backup_routes,

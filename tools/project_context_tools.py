@@ -8,6 +8,8 @@ from tools.system_tools import (
     read_project_file,
 )
 
+from tools.event_tools import emit_event
+
 STORAGE_DIR = Path("storage")
 REGISTRY_FILE = STORAGE_DIR / "project_registry.json"
 RECENT_FILE = STORAGE_DIR / "recent_projects.json"
@@ -133,6 +135,12 @@ def set_current_project(project_name_or_path: str) -> str:
     })
 
     remember_recent_project(str(project))
+
+    emit_event(
+        "PROJECT_CONTEXT_SET",
+        "Project context set",
+        f"Current project context set to: {project}",
+    )
 
     return f"Current project context set to: {project}"
 
