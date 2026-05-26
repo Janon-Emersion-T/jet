@@ -69,57 +69,65 @@ def route_command(user_input: str) -> str:
 
     route_handlers = [
         handle_live_environment_routes,
+
+        # New/specific business + finance modules first
+        handle_hr_onboarding_routes,
+        handle_employee_task_tracker_routes,
+        handle_payroll_assistant_routes,
+        handle_invoice_ocr_routes,
+        handle_receipt_parser_routes,
+        handle_tax_calculation_routes,
+        handle_financial_report_routes,
+        handle_accounting_anomaly_routes,
+
+        # Specific tool modules
         handle_email_routes,
         handle_integration_routes,
         handle_vision_routes,
         handle_desktop_control_routes,
-        handle_hr_onboarding_routes,
-        handle_employee_task_tracker_routes,
-        handle_basic_routes,
-        handle_memory_routes,
-        handle_framework_routes,
-        handle_database_intelligence_routes,
-        handle_dev_ops_routes,
-        handle_project_analyzer_routes,
-        handle_frontend_platform_routes,
-        handle_project_context_routes,
-        handle_patch_routes,
-        handle_project_health_routes,
+        handle_document_reader_routes,
+        handle_spreadsheet_analysis_routes,
         handle_report_export_routes,
         handle_powerpoint_export_routes,
-        handle_spreadsheet_analysis_routes,
-        handle_financial_report_routes,
-        handle_accounting_anomaly_routes,
-        handle_receipt_parser_routes,
-        handle_tax_calculation_routes,
-        handle_invoice_ocr_routes,
-        handle_payroll_assistant_routes,
+
+        # Project/dev modules
+        handle_project_context_routes,
+        handle_project_health_routes,
+        handle_project_analyzer_routes,
+        handle_database_intelligence_routes,
+        handle_dev_ops_routes,
+        handle_framework_routes,
+        handle_frontend_platform_routes,
+        handle_frontend_quality_routes,
+        handle_advanced_laravel_routes,
         handle_architecture_quality_routes,
+        handle_hosting_dns_routes,
+        handle_deployment_docs_routes,
+        handle_linux_admin_routes,
+
+        # Safety/action modules
+        handle_patch_routes,
         handle_execution_routes,
         handle_backup_routes,
+
+        # General modules later
         handle_task_routes,
+        handle_memory_routes,
         handle_vector_memory_routes,
         handle_system_mode_routes,
         handle_browser_routes,
         handle_website_audit_routes,
-        handle_frontend_quality_routes,
         handle_content_assistant_routes,
         handle_social_planner_routes,
         handle_crm_routes,
-        handle_integration_routes,
-        handle_document_reader_routes,
-        handle_vision_routes,
-        handle_desktop_control_routes,
-        handle_linux_admin_routes,
-        handle_hosting_dns_routes,
-        handle_deployment_docs_routes,
         handle_operator_routes,
-        handle_advanced_laravel_routes,
         handle_packaging_analytics_routes,
         handle_marketing_analytics_routes,
         handle_business_growth_routes,
         handle_knowledge_academic_routes,
-        
+
+        # Keep basic near the end because it can catch broad/simple phrases
+        handle_basic_routes,
     ]
 
     for handler in route_handlers:
