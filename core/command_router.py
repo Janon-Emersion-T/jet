@@ -72,6 +72,7 @@ def route_command(user_input: str) -> str:
         handle_integration_routes,
         handle_vision_routes,
         handle_desktop_control_routes,
+        handle_hr_onboarding_routes,
         handle_basic_routes,
         handle_memory_routes,
         handle_framework_routes,
@@ -116,7 +117,7 @@ def route_command(user_input: str) -> str:
         handle_marketing_analytics_routes,
         handle_business_growth_routes,
         handle_knowledge_academic_routes,
-        handle_hr_onboarding_routes,
+        
     ]
 
     for handler in route_handlers:
