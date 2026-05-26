@@ -35,6 +35,8 @@ from core.routes.advanced_laravel_routes import handle_advanced_laravel_routes
 from core.routes.database_intelligence_routes import handle_database_intelligence_routes
 from core.routes.deployment_docs_routes import handle_deployment_docs_routes
 from core.routes.hosting_dns_routes import handle_hosting_dns_routes
+from core.routes.frontend_quality_routes import handle_frontend_quality_routes
+
 
 
 def route_command(user_input: str) -> str:
@@ -67,6 +69,7 @@ def route_command(user_input: str) -> str:
         handle_system_mode_routes,
         handle_browser_routes,
         handle_website_audit_routes,
+        handle_frontend_quality_routes,
         handle_content_assistant_routes,
         handle_social_planner_routes,
         handle_crm_routes,
