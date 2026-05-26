@@ -55,6 +55,7 @@ from core.routes.payroll_assistant_routes import handle_payroll_assistant_routes
 from core.routes.hr_onboarding_routes import handle_hr_onboarding_routes
 from core.routes.employee_task_tracker_routes import handle_employee_task_tracker_routes
 from core.routes.attendance_assistant_routes import handle_attendance_assistant_routes
+from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
 
 
 
@@ -82,6 +83,7 @@ def route_command(user_input: str) -> str:
         handle_financial_report_routes,
         handle_accounting_anomaly_routes,
         handle_attendance_assistant_routes,
+        handle_internal_helpdesk_routes,
 
         # Specific tool modules
         handle_email_routes,
