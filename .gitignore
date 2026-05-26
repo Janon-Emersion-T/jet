@@ -5,6 +5,8 @@ frontend/node_modules/
 .jarvis_proposals/
 *.proposal-*
 .env
+.idea/
+.vscode/
 
 
 storage/*.json
