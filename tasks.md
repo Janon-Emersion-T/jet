@@ -1,31 +1,4 @@
 
-311. A/B testing planner
-312. CRO recommendation engine
-313. Lead magnet generator
-314. Marketing automation planner
-315. Email campaign assistant
-316. Newsletter generation engine
-317. Bulk email workflow planner
-318. Cold outreach assistant
-319. Proposal personalization engine
-320. Client requirement extractor
-321. Meeting transcription engine
-322. Audio summarization assistant
-323. Voice note organizer
-324. Knowledge graph builder
-325. Company knowledge base
-326. Internal wiki generator
-327. SOP documentation assistant
-328. Staff training assistant
-329. Junior developer tutor mode
-330. AI learning loop system
-331. Autonomous research queue
-332. Research source validator
-333. Citation-aware summarizer
-334. Academic writing assistant
-335. Plagiarism-risk detector
-336. Assignment formatting assistant
-337. Report generation engine
 338. PDF report exporter
 339. PowerPoint generator
 340. Spreadsheet analysis engine

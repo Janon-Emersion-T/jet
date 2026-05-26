@@ -39,6 +39,7 @@ from core.routes.frontend_quality_routes import handle_frontend_quality_routes
 from core.routes.frontend_platform_routes import handle_frontend_platform_routes
 from core.routes.packaging_analytics_routes import handle_packaging_analytics_routes
 from core.routes.marketing_analytics_routes import handle_marketing_analytics_routes
+from core.routes.business_growth_routes import handle_business_growth_routes
 
 
 
@@ -88,6 +89,7 @@ def route_command(user_input: str) -> str:
         handle_advanced_laravel_routes,
         handle_packaging_analytics_routes,
         handle_marketing_analytics_routes,
+        handle_business_growth_routes,
         
         
     ]
