@@ -1,7 +1,5 @@
-import string
-
-from core.intent_classifier import classify_intent
 from core.ai_fallback import handle_ai_fallback
+from core.nlp_engine import analyze_command
 
 from core.routes.basic_routes import handle_basic_routes
 from core.routes.memory_routes import handle_memory_routes
@@ -58,19 +56,17 @@ from core.routes.attendance_assistant_routes import handle_attendance_assistant_
 from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
 from core.routes.ticket_prioritization_routes import handle_ticket_prioritization_routes
 from core.routes.bug_severity_routes import handle_bug_severity_routes
-
+from core.nlp_engine import analyze_command
 
 
 
 
 def route_command(user_input: str) -> str:
-    text = user_input.lower().strip()
+    nlp = analyze_command(user_input)
 
-    clean_text = text.translate(
-        str.maketrans("", "", string.punctuation)
-    )
-
-    intent = classify_intent(user_input)
+    text = nlp.normalized_text
+    clean_text = nlp.clean_text
+    intent = nlp.intent
 
     route_handlers = [
         handle_live_environment_routes,
@@ -88,7 +84,7 @@ def route_command(user_input: str) -> str:
         handle_internal_helpdesk_routes,
         handle_ticket_prioritization_routes,
         handle_bug_severity_routes,
-        
+
         # Specific tool modules
         handle_email_routes,
         handle_integration_routes,

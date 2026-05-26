@@ -1,3 +1,9 @@
+from core.nlp_engine import classify_intent_nlp
+
+
+def classify_intent(user_input: str) -> str:
+    return classify_intent_nlp(user_input)
+
 def classify_intent(user_input: str) -> str:
     text = user_input.lower().strip()
 

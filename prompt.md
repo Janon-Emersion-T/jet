@@ -61,9 +61,6 @@ when we finish it successfully we can push it to git
 
 no need to add unwanted comments
 
-name this chat as 351
-
 Next phases to implement:
-351
 
-351. Ticket prioritization engine
+352. Bug severity classifier
