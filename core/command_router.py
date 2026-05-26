@@ -32,6 +32,7 @@ from core.routes.linux_admin_routes import handle_linux_admin_routes
 from core.routes.operator_routes import handle_operator_routes
 from core.routes.architecture_quality_routes import handle_architecture_quality_routes
 from core.routes.advanced_laravel_routes import handle_advanced_laravel_routes
+from core.routes.database_intelligence_routes import handle_database_intelligence_routes
 
 
 def route_command(user_input: str) -> str:
@@ -50,6 +51,7 @@ def route_command(user_input: str) -> str:
         handle_basic_routes,
         handle_memory_routes,
         handle_framework_routes,
+        handle_database_intelligence_routes,
         handle_dev_ops_routes,
         handle_project_analyzer_routes,
         handle_project_context_routes,
