@@ -8,15 +8,6 @@ frontend/node_modules/
 .idea/
 .vscode/
 
-
-storage/*.json
-storage/*.db
-storage/logs/
-storage/project_backups/
-storage/project_snapshots/
-storage/command_approvals/
-storage/task_queue.json
-
 vendor/
 
 memory.db
@@ -29,3 +20,12 @@ storage/integrations/*.json
 storage/vision/*.jpg
 storage/vision/*.jpeg
 storage/vision/*.png
+storage/*.json
+storage/*.db
+storage/logs/
+storage/project_backups/
+storage/project_snapshots/
+storage/command_approvals/
+storage/task_queue.json
+storage/presentations/
+storage/events/
