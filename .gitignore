@@ -21,3 +21,9 @@ memory.db
 logs/
 temp/
 playwright/
+
+storage/desktop_control/*.json
+storage/integrations/*.json
+storage/vision/*.jpg
+storage/vision/*.jpeg
+storage/vision/*.png
