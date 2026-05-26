@@ -61,9 +61,9 @@ when we finish it successfully we can push it to git
 
 no need to add unwanted comments
 
-name this chat as 338-345
+name this chat as 351
 
 Next phases to implement:
-338-345
+351
 
-338. PDF report exporter
+351. Ticket prioritization engine

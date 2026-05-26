@@ -336,42 +336,42 @@
 336. Assignment formatting assistant
 337. Report generation engine
 338. PDF report exporter
-
 339. PowerPoint generator
-
 340. Spreadsheet analysis engine
-
 341. Financial report assistant
-
 342. Accounting anomaly detector
-
 343. Invoice OCR assistant
 344. Receipt parser
-
 345. Tax calculation helper
-
 346. Payroll assistant
-
 347. HR onboarding workflow
-
 348. Employee task tracker
-
 349. Attendance assistant
-
 350. Internal helpdesk system
 
 
 351. Ticket prioritization engine
+
 352. Bug severity classifier
+
 353. Incident response assistant
+
 354. Security vulnerability scanner
+
 355. OWASP analyzer
+
 356. XSS risk detector
+
 357. CSRF analyzer
+
 358. SQL injection risk detector
+
 359. Auth bypass analyzer
+
 360. File upload security checker
+
 361. API token leak detector
+
 362. Secret scanner
 
 363. SSH configuration checker

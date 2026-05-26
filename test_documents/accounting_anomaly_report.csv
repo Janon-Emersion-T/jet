@@ -1,0 +1,11 @@
+Date,Type,Description,Amount
+2026-05-01,Income,Website payment received,50000
+2026-05-02,Expense,Hosting payment,8000
+2026-05-03,Expense,Software purchase,12000
+2026-05-04,Income,SEO client payment,30000
+2026-05-04,Income,SEO client payment,30000
+2026-05-05,Expense,Unknown payment,0
+2026-05-06,,Missing category,15000
+2026-05-07,Expense,Large equipment purchase,950000
+2026-05-08,Expense,Refund correction,-5000
+2026-05-09,Income,Missing amount,
