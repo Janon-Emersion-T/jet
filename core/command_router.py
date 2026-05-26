@@ -30,6 +30,7 @@ from core.routes.vision_routes import handle_vision_routes
 from core.routes.desktop_control_routes import handle_desktop_control_routes
 from core.routes.linux_admin_routes import handle_linux_admin_routes
 from core.routes.operator_routes import handle_operator_routes
+from core.routes.architecture_quality_routes import handle_architecture_quality_routes
 
 
 def route_command(user_input: str) -> str:
@@ -53,6 +54,7 @@ def route_command(user_input: str) -> str:
         handle_project_context_routes,
         handle_patch_routes,
         handle_project_health_routes,
+        handle_architecture_quality_routes,
         handle_execution_routes,
         handle_backup_routes,
         handle_task_routes,
@@ -69,6 +71,7 @@ def route_command(user_input: str) -> str:
         handle_desktop_control_routes,
         handle_linux_admin_routes,
         handle_operator_routes,
+        
         
     ]
 
