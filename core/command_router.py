@@ -92,6 +92,12 @@ def route_command(user_input: str) -> str:
         query = raw_text.replace("test multi intent", "", 1).replace("analyze multi intent", "", 1).strip()
         return format_multi_intent_report(query)
 
+    if raw_text.startswith("test execution plan ") or raw_text.startswith("plan command "):
+        from core.nlp.command_execution_planner import format_execution_plan
+
+        query = raw_text.replace("test execution plan", "", 1).replace("plan command", "", 1).strip()
+        return format_execution_plan(query)
+
 
     if clean_text in ["nlp memory", "show nlp memory", "recent nlp"]:
         from core.nlp.conversation_memory_linker import format_conversation_links
