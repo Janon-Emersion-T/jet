@@ -1,5 +1,5 @@
 from core.ai_fallback import handle_ai_fallback
-from core.nlp_engine import analyze_command
+from core.nlp.unified_orchestrator import orchestrate_command
 
 from core.routes.basic_routes import handle_basic_routes
 from core.routes.memory_routes import handle_memory_routes
@@ -58,7 +58,7 @@ from core.routes.nlp_test_routes import handle_nlp_test_routes
 
 
 def route_command(user_input: str) -> str:
-    nlp = analyze_command(user_input)
+    nlp = orchestrate_command(user_input)
 
     text = nlp.normalized_text
     clean_text = nlp.canonical_command or nlp.clean_text
@@ -92,10 +92,18 @@ def route_command(user_input: str) -> str:
         query = raw_text.replace("test followup v2", "", 1).strip()
         return format_followup_v2_report(query)
 
+    diagnostic_response = handle_nlp_test_routes(user_input, text, clean_text)
+    if diagnostic_response is not None:
+        return diagnostic_response
 
     if clean_text in ["nlp memory", "show nlp memory", "recent nlp"]:
         from core.nlp.conversation_memory_linker import format_conversation_links
         return format_conversation_links()
+
+    if nlp.safety.safety_level == "dangerous" and not nlp.safety.allowed:
+        lines = ["COMMAND BLOCKED", *[f"- {reason}" for reason in nlp.safety.reasons]]
+        lines.extend(f"- Safe alternative: {alternative}" for alternative in nlp.safety.alternatives)
+        return "\n".join(lines)
 
     route_handlers = [
         handle_nlp_test_routes,
