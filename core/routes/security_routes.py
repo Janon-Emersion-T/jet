@@ -14,6 +14,7 @@ from tools.secret_scanner_tools import secret_scanner
 from tools.ssh_configuration_tools import ssh_configuration_checker
 from tools.firewall_assistant_tools import firewall_assistant
 from tools.fail2ban_analyzer_tools import fail2ban_analyzer
+from tools.server_hardening_tools import server_hardening_advisor
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -167,6 +168,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "fail2ban analyzer\n"
             "scan fail2ban configuration\n"
             "check fail2ban"
+        )
+
+    if text in ["server hardening advisor", "scan server hardening", "check server hardening", "server security review"]:
+        return server_hardening_advisor()
+
+    if text in ["366 help", "phase 366 help", "server hardening help"]:
+        return (
+            "SERVER HARDENING ADVISOR COMMANDS - PHASE 366\n\n"
+            "server hardening advisor\n"
+            "scan server hardening\n"
+            "check server hardening"
         )
 
     return None
