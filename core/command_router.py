@@ -58,6 +58,7 @@ from core.routes.ticket_prioritization_routes import handle_ticket_prioritizatio
 from core.routes.bug_severity_routes import handle_bug_severity_routes
 from core.routes.nlp_test_routes import handle_nlp_test_routes
 from core.routes.persona_routes import handle_persona_routes
+from core.routes.security_routes import handle_security_routes
 
 
 
@@ -139,6 +140,7 @@ def route_command(user_input: str) -> str:
         handle_internal_helpdesk_routes,
         handle_ticket_prioritization_routes,
         handle_bug_severity_routes,
+        handle_security_routes,
 
         # Specific tool modules
         handle_email_routes,
