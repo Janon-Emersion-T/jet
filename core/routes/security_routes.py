@@ -4,6 +4,7 @@ from tools.security_response_tools import (
 )
 from tools.security_scanner_tools import security_vulnerability_scanner
 from tools.owasp_analyzer_tools import owasp_analyzer
+from tools.xss_risk_tools import xss_risk_detector
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -47,6 +48,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "owasp analyzer\n"
             "owasp scan\n"
             "check owasp risks"
+        )
+
+    if text in ["xss risk detector", "scan xss risks", "check xss", "xss scan"]:
+        return xss_risk_detector()
+
+    if text in ["356 help", "phase 356 help", "xss help"]:
+        return (
+            "XSS RISK DETECTOR COMMANDS - PHASE 356\n\n"
+            "xss risk detector\n"
+            "scan xss risks\n"
+            "check xss"
         )
 
     return None
