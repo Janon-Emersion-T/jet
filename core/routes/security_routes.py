@@ -3,6 +3,7 @@ from tools.security_response_tools import (
     report_security_incident,
 )
 from tools.security_scanner_tools import security_vulnerability_scanner
+from tools.owasp_analyzer_tools import owasp_analyzer
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -35,6 +36,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "security vulnerability scanner\n"
             "scan security vulnerabilities\n"
             "find security vulnerabilities"
+        )
+
+    if text in ["owasp analyzer", "owasp scan", "check owasp risks", "analyze owasp"]:
+        return owasp_analyzer()
+
+    if text in ["355 help", "phase 355 help", "owasp help"]:
+        return (
+            "OWASP ANALYZER COMMANDS - PHASE 355\n\n"
+            "owasp analyzer\n"
+            "owasp scan\n"
+            "check owasp risks"
         )
 
     return None
