@@ -53,7 +53,7 @@ from core.routes.attendance_assistant_routes import handle_attendance_assistant_
 from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
 from core.routes.ticket_prioritization_routes import handle_ticket_prioritization_routes
 from core.routes.bug_severity_routes import handle_bug_severity_routes
-
+from core.routes.nlp_test_routes import handle_nlp_test_routes
 
 
 
@@ -86,24 +86,6 @@ def route_command(user_input: str) -> str:
         query = clean_text.replace("test nlp", "", 1).replace("analyze command", "", 1).strip()
         return format_nlp_report(query)
 
-    if raw_text.startswith("test multi intent ") or raw_text.startswith("analyze multi intent "):
-        from core.nlp.multi_intent_parser import format_multi_intent_report
-
-        query = raw_text.replace("test multi intent", "", 1).replace("analyze multi intent", "", 1).strip()
-        return format_multi_intent_report(query)
-
-    if raw_text.startswith("test execution plan ") or raw_text.startswith("plan command "):
-        from core.nlp.command_execution_planner import format_execution_plan
-
-        query = raw_text.replace("test execution plan", "", 1).replace("plan command", "", 1).strip()
-        return format_execution_plan(query)
-
-    if raw_text.startswith("test route batch ") or raw_text.startswith("prepare batch "):
-        from core.nlp.route_batch_processor import format_route_batch
-
-        query = raw_text.replace("test route batch", "", 1).replace("prepare batch", "", 1).strip()
-        return format_route_batch(query)
-
     if raw_text.startswith("test followup v2 "):
         from core.nlp.followup_context_resolver_v2 import format_followup_v2_report
 
@@ -116,6 +98,7 @@ def route_command(user_input: str) -> str:
         return format_conversation_links()
 
     route_handlers = [
+        handle_nlp_test_routes,
         handle_live_environment_routes,
 
         # New/specific business + finance modules first
