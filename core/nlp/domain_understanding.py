@@ -3,12 +3,26 @@ from typing import Dict, List, Optional
 
 
 DOMAIN_KEYWORDS: Dict[str, List[str]] = {
-    "business": ["revenue", "strategy", "crm", "sales", "customer", "growth"],
+    "business": ["revenue", "strategy", "crm", "customer", "growth"],
     "developer": ["code", "bug", "function", "class", "api", "test", "laravel", "python"],
     "devops": ["deploy", "server", "docker", "nginx", "git", "ci", "logs"],
-    "marketing": ["seo", "campaign", "keyword", "social", "conversion", "analytics"],
+    "marketing": ["campaign", "keyword", "conversion", "analytics"],
     "accounting": ["invoice", "expense", "tax", "payroll", "ledger", "financial"],
     "research": ["research", "source", "citation", "paper", "study", "evidence"],
+    "security": ["security", "vulnerability", "permission", "unsafe", "dangerous", "breach", "secret"],
+    "seo": ["seo", "ranking", "search intent", "backlink", "organic"],
+    "social": ["instagram", "linkedin", "tiktok", "social media", "engagement"],
+    "legal": ["legal", "policy", "compliance", "contract", "privacy", "regulation"],
+    "design": ["ui", "ux", "design", "layout", "accessibility", "prototype"],
+    "content": ["write", "story", "article", "copy", "script"],
+    "sales": ["sales", "lead", "close", "pitch", "outreach"],
+    "hr": ["hr", "employee", "hiring", "leave", "onboarding", "people"],
+    "medical": ["medical", "symptom", "medicine", "dose", "health safety"],
+    "fitness": ["fitness", "workout", "exercise", "gym", "training plan"],
+    "basketball": ["basketball", "shooting", "dribble", "defense", "court"],
+    "project": ["project plan", "milestone", "deadline", "roadmap", "sprint"],
+    "ai": ["artificial intelligence", "machine learning", "llm", "model"],
+    "nlp": ["nlp", "intent", "embedding", "language model"],
 }
 
 

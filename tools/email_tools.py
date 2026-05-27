@@ -123,6 +123,9 @@ def send_system_email(to_email: str, subject: str, body: str):
     if not config["email"] or not config["password"]:
         return "SMTP is not configured."
 
+    if config["dry_run"]:
+        return f"System email dry run recorded for {to_email}."
+
     msg = EmailMessage()
     msg["From"] = f'{config["from_name"]} <{config["email"]}>'
     msg["To"] = to_email

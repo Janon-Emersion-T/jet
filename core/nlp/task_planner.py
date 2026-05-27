@@ -33,15 +33,17 @@ def decompose_task(text: str) -> List[str]:
 def select_agent(instruction: str, route_hint: Optional[str] = None) -> str:
     text = instruction.lower()
     route = route_hint or ""
+    if any(word in text for word in ["unsafe", "security", "vulnerability", "rm -rf", "permission"]):
+        return "Grace (Security Expert)"
     if route in {"github", "devops"} or any(word in text for word in ["git", "deploy", "server"]):
-        return "devops_agent"
+        return "Linus (DevOps Engineer)"
     if route == "database" or any(word in text for word in ["sql", "database", "migration"]):
-        return "database_agent"
+        return "Edgar (Database Expert)"
     if route == "browser" or "http" in text:
-        return "browser_agent"
+        return "Alfred (Main Assistant)"
     if route == "file" or any(word in text for word in ["file", "code", "test"]):
-        return "developer_agent"
-    return "assistant_agent"
+        return "Ada (Programmer)"
+    return "Alfred (Main Assistant)"
 
 
 def select_tool(instruction: str, action_type: str, route_hint: Optional[str] = None) -> str:

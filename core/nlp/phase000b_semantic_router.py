@@ -5,6 +5,10 @@ from typing import Dict, List, Optional, Tuple
 
 from core.nlp.phase000a_foundation_router import INTENT_EXAMPLES
 
+# JARVIS NLP is designed to operate against locally cached models only.
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+
 try:
     import spacy
 except Exception:

@@ -1,15 +1,20 @@
 from core.brain import ask_brain
 from core.memory_search import get_relevant_memory
+from core.persona_registry import Persona, get_persona, persona_prompt_context
 from core.system_modes import build_mode_context
 
 
-def handle_ai_fallback(user_input: str) -> str:
+def handle_ai_fallback(user_input: str, persona: Persona | None = None) -> str:
     relevant_memory = get_relevant_memory(user_input)
 
     mode_context = build_mode_context()
+    persona_context = persona_prompt_context(persona or get_persona())
 
     prompt = f"""
-You are JARVIS, Janon's private local AI assistant.
+You are part of JARVIS, Janon's private local AI assistant.
+
+Active specialist:
+{persona_context}
 
 Relevant previous memory:
 {relevant_memory if relevant_memory else "No relevant memory found."}
