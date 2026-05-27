@@ -1,11 +1,3 @@
-from core.nlp.match_repair import repair_matched_phrase
-from core.nlp.priority_scorer import apply_priority_score
-from core.nlp.alias_expander import expand_alias
-from core.nlp.confidence_guard import guard_intent_confidence
-from core.nlp.command_rewriter import rewrite_command
-from core.nlp.route_resolver import resolve_route_hint
-from core.nlp.conversation_memory_linker import link_conversation_turn
-from core.nlp.context_engine import resolve_contextual_command, update_context
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
@@ -15,6 +7,15 @@ from core.nlp.phase000b_semantic_router import (
     semantic_entities,
     semantic_tokenize,
 )
+from core.nlp.context_engine import resolve_contextual_command, update_context
+from core.nlp.conversation_memory_linker import link_conversation_turn
+from core.nlp.route_resolver import resolve_route_hint
+from core.nlp.command_rewriter import rewrite_command
+from core.nlp.confidence_guard import guard_intent_confidence
+from core.nlp.alias_expander import expand_alias
+from core.nlp.priority_scorer import apply_priority_score
+from core.nlp.match_repair import repair_matched_phrase
+from core.nlp.route_command_mapper import map_route_command
 
 
 @dataclass
@@ -32,6 +33,7 @@ class NLPResult:
     engine: str = "phase000"
     route_hint: Optional[str] = None
 
+
 def analyze_command(user_input: str) -> NLPResult:
     foundation = analyze_foundation_command(user_input)
 
@@ -40,6 +42,7 @@ def analyze_command(user_input: str) -> NLPResult:
     )
 
     tokens = semantic_tokenize(foundation.normalized_text) or foundation.tokens
+
     entities = foundation.entities
     entities.update(semantic_entities(foundation.normalized_text))
 
@@ -53,21 +56,23 @@ def analyze_command(user_input: str) -> NLPResult:
         confidence = semantic_score
         matched_phrase = semantic_phrase
         engine = "nlp-000b-transformer-semantic"
-    intent = guard_intent_confidence(
-        intent,
-        confidence,
-        foundation.clean_text,
-    )
-    intent = apply_priority_score(
-        intent,
-        foundation.clean_text,
-    )
 
     if foundation.canonical_command:
         intent = "command"
         confidence = max(confidence, foundation.confidence)
         matched_phrase = foundation.matched_phrase
         engine = "nlp-000a-canonical-command"
+
+    intent = guard_intent_confidence(
+        intent,
+        confidence,
+        foundation.clean_text,
+    )
+
+    intent = apply_priority_score(
+        intent,
+        foundation.clean_text,
+    )
 
     contextual_clean_text = resolve_contextual_command(
         foundation.clean_text,
@@ -85,14 +90,6 @@ def analyze_command(user_input: str) -> NLPResult:
 
     update_context(intent, rewritten_clean_text, entities)
 
-    route_hint = resolve_route_hint(intent, contextual_clean_text, entities)
-
-    matched_phrase = repair_matched_phrase(
-        rewritten_clean_text,
-        intent,
-        matched_phrase,
-    )
-
     link_conversation_turn(
         user_input,
         intent,
@@ -100,10 +97,23 @@ def analyze_command(user_input: str) -> NLPResult:
         entities,
     )
 
+    route_hint = resolve_route_hint(intent, rewritten_clean_text, entities)
+
+    routed_clean_text = map_route_command(
+        rewritten_clean_text,
+        route_hint,
+    )
+
+    matched_phrase = repair_matched_phrase(
+        rewritten_clean_text,
+        intent,
+        matched_phrase,
+    )
+
     return NLPResult(
         original_text=foundation.original_text,
         normalized_text=foundation.normalized_text,
-        clean_text=rewritten_clean_text,
+        clean_text=routed_clean_text,
         tokens=tokens,
         intent=intent,
         confidence=round(float(confidence), 3),
