@@ -9,6 +9,7 @@ from tools.csrf_analyzer_tools import csrf_analyzer
 from tools.sql_injection_risk_tools import sql_injection_risk_detector
 from tools.auth_bypass_tools import auth_bypass_analyzer
 from tools.file_upload_security_tools import file_upload_security_checker
+from tools.api_token_leak_tools import api_token_leak_detector
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -107,6 +108,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "file upload security checker\n"
             "scan file upload risks\n"
             "check file uploads"
+        )
+
+    if text in ["api token leak detector", "scan api token leaks", "check token leaks", "token leak scan"]:
+        return api_token_leak_detector()
+
+    if text in ["361 help", "phase 361 help", "api token help"]:
+        return (
+            "API TOKEN LEAK DETECTOR COMMANDS - PHASE 361\n\n"
+            "api token leak detector\n"
+            "scan api token leaks\n"
+            "check token leaks"
         )
 
     return None
