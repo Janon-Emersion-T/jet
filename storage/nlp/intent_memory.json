@@ -1,0 +1,13 @@
+{
+  "turns": [
+    {
+      "text": "htop",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T00:38:06"
+    }
+  ],
+  "shortcuts": {},
+  "recoveries": []
+}

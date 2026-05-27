@@ -1,0 +1,1 @@
+{"decision": {"action_type": "read", "allowed": true, "alternatives": [], "reasons": [], "required_permission": "read", "requires_confirmation": false, "safety_level": "safe", "user_role": "operator"}, "intent": "google_search", "metadata": {"confidence": 0.621, "domain": "general"}, "route_hint": "browser", "text": "htop", "timestamp": "2026-05-28T00:38:06"}

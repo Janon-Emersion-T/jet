@@ -1,0 +1,11 @@
+{
+  "htop": {
+    "value": {
+      "intent": "google_search",
+      "route_hint": "browser",
+      "confidence": 0.621,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T00:38:06"
+  }
+}
