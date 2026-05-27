@@ -6,6 +6,90 @@
       "route_hint": "browser",
       "success": null,
       "at": "2026-05-28T00:38:06"
+    },
+    {
+      "text": "nlp health",
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "success": null,
+      "at": "2026-05-28T01:12:12"
+    },
+    {
+      "text": "nlp regression",
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "success": null,
+      "at": "2026-05-28T01:12:15"
+    },
+    {
+      "text": "nlp runtime",
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "success": null,
+      "at": "2026-05-28T01:12:24"
+    },
+    {
+      "text": "test unified analyze this Laravel project",
+      "intent": "general_chat",
+      "route_hint": "laravel",
+      "success": null,
+      "at": "2026-05-28T01:12:30"
+    },
+    {
+      "text": "analyze this laravel project",
+      "intent": "general_chat",
+      "route_hint": "laravel",
+      "success": null,
+      "at": "2026-05-28T01:12:30"
+    },
+    {
+      "text": "bug severity classifier",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-28T01:12:35"
+    },
+    {
+      "text": "ticket prioritization engine",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-28T01:12:42"
+    },
+    {
+      "text": "internal helpdesk system",
+      "intent": "database",
+      "route_hint": "database",
+      "success": null,
+      "at": "2026-05-28T01:12:47"
+    },
+    {
+      "text": "attendance assistant",
+      "intent": "calendar",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:12:50"
+    },
+    {
+      "text": "employee task tracker",
+      "intent": "task",
+      "route_hint": "task",
+      "success": null,
+      "at": "2026-05-28T01:12:53"
+    },
+    {
+      "text": "hr onboarding workflow",
+      "intent": "devops",
+      "route_hint": "devops",
+      "success": null,
+      "at": "2026-05-28T01:12:56"
+    },
+    {
+      "text": "payroll assistant",
+      "intent": "task",
+      "route_hint": "task",
+      "success": null,
+      "at": "2026-05-28T01:13:09"
     }
   ],
   "shortcuts": {},

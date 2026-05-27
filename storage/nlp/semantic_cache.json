@@ -7,5 +7,113 @@
       "domain": "general"
     },
     "updated_at": "2026-05-28T00:38:06"
+  },
+  "nlp health": {
+    "value": {
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "confidence": 0.96,
+      "domain": "nlp"
+    },
+    "updated_at": "2026-05-28T01:12:12"
+  },
+  "nlp regression": {
+    "value": {
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "confidence": 0.96,
+      "domain": "nlp"
+    },
+    "updated_at": "2026-05-28T01:12:15"
+  },
+  "nlp runtime": {
+    "value": {
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "confidence": 0.96,
+      "domain": "nlp"
+    },
+    "updated_at": "2026-05-28T01:12:24"
+  },
+  "test unified analyze this laravel project": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": "laravel",
+      "confidence": 0.96,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:12:30"
+  },
+  "analyze this laravel project": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": "laravel",
+      "confidence": 0.96,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:12:30"
+  },
+  "bug severity classifier": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.654,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:12:35"
+  },
+  "ticket prioritization engine": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.638,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:12:42"
+  },
+  "internal helpdesk system": {
+    "value": {
+      "intent": "database",
+      "route_hint": "database",
+      "confidence": 0.662,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:12:47"
+  },
+  "attendance assistant": {
+    "value": {
+      "intent": "calendar",
+      "route_hint": null,
+      "confidence": 0.638,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:12:50"
+  },
+  "employee task tracker": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.96,
+      "domain": "hr"
+    },
+    "updated_at": "2026-05-28T01:12:53"
+  },
+  "hr onboarding workflow": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.667,
+      "domain": "hr"
+    },
+    "updated_at": "2026-05-28T01:12:56"
+  },
+  "payroll assistant": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.622,
+      "domain": "accounting"
+    },
+    "updated_at": "2026-05-28T01:13:09"
   }
 }
