@@ -1,3 +1,9 @@
+from core.nlp.entity_extractor import extract_advanced_entities
+from core.nlp.intent_registry import (
+    INTENT_REGISTRY,
+    CANONICAL_COMMAND_REGISTRY,
+    TYPO_CORRECTION_REGISTRY,
+)
 import re
 import string
 import unicodedata
@@ -21,54 +27,9 @@ class FoundationNLPResult:
     engine: str = "nlp-000a-foundation"
 
 
-INTENT_EXAMPLES = {
-    "weather": ["weather", "rain", "temperature", "forecast"],
-    "location": ["where am i", "my location", "current location"],
-    "camera": ["camera", "see me", "scan room", "look around"],
-    "email": ["email", "inbox", "send mail", "gmail"],
-    "calendar": ["calendar", "schedule", "meeting", "appointment"],
-    "browser_control": ["open google", "open youtube", "open github", "visit website", "launch browser"],
-    "google_search": ["search google for", "google search", "search for", "look up"],
-    "project_analysis": ["analyze project", "scan project", "project health", "inspect project", "check project"],
-    "patch_workflow": ["apply patch", "file diff", "compare patch", "rollback proposal", "confirm before write"],
-    "devops": ["git status", "deploy", "deployment", "server", "nginx", "logs", "disk cleanup"],
-    "database": ["sql", "database", "migration", "schema", "n plus one", "n+1", "eloquent"],
-    "content": ["blog ideas", "seo brief", "social post", "case study", "proposal", "quote"],
-    "memory": ["remember", "save memory", "what do you remember", "forget"],
-    "task": ["task", "todo", "remind", "deadline"],
-    "nlp": ["nlp", "test nlp", "analyze command", "parse intent"],
-}
-
-
-CANONICAL_COMMANDS = {
-    "capabilities": ["capabilities", "list capabilities", "what can you do"],
-    "show current folder": ["show current folder", "where am i", "current directory", "pwd"],
-    "list files": ["list files", "show files", "ls"],
-    "show disk usage": ["show disk usage", "disk usage", "check disk"],
-    "show memory usage": ["show memory usage", "memory usage", "ram usage"],
-    "show date": ["show date", "date"],
-    "who am i": ["who am i", "current user"],
-    "python version": ["python version", "check python"],
-    "node version": ["node version", "check node"],
-    "npm version": ["npm version", "check npm"],
-    "activate voice mode": ["activate voice mode", "start voice mode", "voice mode"],
-}
-
-
-TYPO_CORRECTIONS = {
-    "jarwis": "jarvis",
-    "jervis": "jarvis",
-    "opne": "open",
-    "serach": "search",
-    "gogle": "google",
-    "googl": "google",
-    "yt": "youtube",
-    "capabilites": "capabilities",
-    "rember": "remember",
-    "anlyze": "analyze",
-    "analize": "analyze",
-    "deployement": "deployment",
-}
+INTENT_EXAMPLES = INTENT_REGISTRY
+CANONICAL_COMMANDS = CANONICAL_COMMAND_REGISTRY
+TYPO_CORRECTIONS = TYPO_CORRECTION_REGISTRY
 
 
 DANGEROUS_PATTERNS = [
@@ -123,26 +84,7 @@ def detect_safety_level(text: str) -> str:
 
 
 def extract_entities(text: str) -> Dict[str, str]:
-    entities = {}
-
-    url_match = re.search(r"https?://\S+", text)
-    if url_match:
-        entities["url"] = url_match.group(0).rstrip(".,)")
-
-    file_match = re.search(
-        r"([\w\-/]+\.(?:py|php|js|ts|jsx|tsx|md|txt|json|env|html|css|sql|blade\.php))",
-        text,
-    )
-    if file_match:
-        entities["file"] = file_match.group(1)
-
-    phase_match = re.search(r"\b(?:phase|phases)\s*(\d{1,4})(?:\s*[-–]\s*(\d{1,4}))?\b", text)
-    if phase_match:
-        entities["phase_start"] = phase_match.group(1)
-        if phase_match.group(2):
-            entities["phase_end"] = phase_match.group(2)
-
-    return entities
+    return extract_advanced_entities(text)
 
 
 def detect_canonical_command(clean_text: str) -> Tuple[Optional[str], float, Optional[str]]:

@@ -1,3 +1,9 @@
+from core.nlp.alias_expander import expand_alias
+from core.nlp.confidence_guard import guard_intent_confidence
+from core.nlp.command_rewriter import rewrite_command
+from core.nlp.route_resolver import resolve_route_hint
+from core.nlp.conversation_memory_linker import link_conversation_turn
+from core.nlp.context_engine import resolve_contextual_command, update_context
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
@@ -22,7 +28,7 @@ class NLPResult:
     matched_phrase: Optional[str] = None
     safety_level: str = "safe"
     engine: str = "phase000"
-
+    route_hint: Optional[str] = None
 
 def analyze_command(user_input: str) -> NLPResult:
     foundation = analyze_foundation_command(user_input)
@@ -45,6 +51,11 @@ def analyze_command(user_input: str) -> NLPResult:
         confidence = semantic_score
         matched_phrase = semantic_phrase
         engine = "nlp-000b-transformer-semantic"
+    intent = guard_intent_confidence(
+        intent,
+        confidence,
+        foundation.clean_text,
+    )
 
     if foundation.canonical_command:
         intent = "command"
@@ -52,10 +63,35 @@ def analyze_command(user_input: str) -> NLPResult:
         matched_phrase = foundation.matched_phrase
         engine = "nlp-000a-canonical-command"
 
+    contextual_clean_text = resolve_contextual_command(
+        foundation.clean_text,
+        intent,
+        entities,
+    )
+
+    expanded_clean_text = expand_alias(contextual_clean_text)
+
+    rewritten_clean_text = rewrite_command(
+        expanded_clean_text,
+        intent,
+        entities,
+    )
+
+    update_context(intent, rewritten_clean_text, entities)
+
+    route_hint = resolve_route_hint(intent, contextual_clean_text, entities)
+
+    link_conversation_turn(
+        user_input,
+        intent,
+        rewritten_clean_text,
+        entities,
+    )
+
     return NLPResult(
         original_text=foundation.original_text,
         normalized_text=foundation.normalized_text,
-        clean_text=foundation.clean_text,
+        clean_text=rewritten_clean_text,
         tokens=tokens,
         intent=intent,
         confidence=round(float(confidence), 3),
@@ -64,6 +100,7 @@ def analyze_command(user_input: str) -> NLPResult:
         matched_phrase=matched_phrase,
         safety_level=foundation.safety_level,
         engine=engine,
+        route_hint=route_hint,
     )
 
 
@@ -98,6 +135,7 @@ Canonical command: {result.canonical_command or 'None'}
 Matched phrase: {result.matched_phrase or 'None'}
 Safety level: {result.safety_level}
 Engine: {result.engine}
+Route hint: {result.route_hint or 'None'}
 
 Entities:
 {entities}

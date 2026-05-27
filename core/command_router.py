@@ -63,12 +63,17 @@ def route_command(user_input: str) -> str:
     text = nlp.normalized_text
     clean_text = nlp.canonical_command or nlp.clean_text
     intent = nlp.intent
+    confidence = nlp.confidence
 
     if clean_text.startswith("test nlp ") or clean_text.startswith("analyze command "):
         from core.nlp_engine import format_nlp_report
 
         query = clean_text.replace("test nlp", "", 1).replace("analyze command", "", 1).strip()
         return format_nlp_report(query)
+
+    if clean_text in ["nlp memory", "show nlp memory", "recent nlp"]:
+        from core.nlp.conversation_memory_linker import format_conversation_links
+        return format_conversation_links()
 
     route_handlers = [
         handle_live_environment_routes,
@@ -145,5 +150,21 @@ def route_command(user_input: str) -> str:
 
         if response is not None:
             return response
+
+    if confidence < 0.35:
+        return handle_ai_fallback(
+            f"""The user entered a low-confidence natural language command.
+
+Original command:
+{user_input}
+
+Detected intent:
+{intent}
+
+Clean routing text:
+{clean_text}
+
+Please respond naturally and ask a useful follow-up only if needed."""
+        )
 
     return handle_ai_fallback(user_input)
