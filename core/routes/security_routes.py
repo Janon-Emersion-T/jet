@@ -6,6 +6,7 @@ from tools.security_scanner_tools import security_vulnerability_scanner
 from tools.owasp_analyzer_tools import owasp_analyzer
 from tools.xss_risk_tools import xss_risk_detector
 from tools.csrf_analyzer_tools import csrf_analyzer
+from tools.sql_injection_risk_tools import sql_injection_risk_detector
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -71,6 +72,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "csrf analyzer\n"
             "scan csrf risks\n"
             "check csrf"
+        )
+
+    if text in ["sql injection risk detector", "scan sql injection risks", "check sql injection", "sql injection scan"]:
+        return sql_injection_risk_detector()
+
+    if text in ["358 help", "phase 358 help", "sql injection help"]:
+        return (
+            "SQL INJECTION RISK DETECTOR COMMANDS - PHASE 358\n\n"
+            "sql injection risk detector\n"
+            "scan sql injection risks\n"
+            "check sql injection"
         )
 
     return None
