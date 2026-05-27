@@ -3,8 +3,8 @@
 ## Completion Tracking
 
 - Phases 1-352: existing implemented inventory carried forward from the project; revalidation continues as each area is touched.
-- Phase 353: COMPLETED AND TESTED - Incident response assistant (`tools/security_response_tools.py`, `core/routes/security_routes.py`).
-- Next target: Phase 354 - Security vulnerability scanner.
+- Phases 353-354: COMPLETED AND TESTED - Incident response assistant and security vulnerability scanner (`tools/security_response_tools.py`, `tools/security_scanner_tools.py`, `core/routes/security_routes.py`).
+- Next target: Phase 355 - OWASP analyzer.
 
 ## Phase Inventory
 
@@ -365,7 +365,7 @@
 
 353. Incident response assistant [COMPLETED AND TESTED]
 
-354. Security vulnerability scanner
+354. Security vulnerability scanner [COMPLETED AND TESTED]
 
 355. OWASP analyzer
 
