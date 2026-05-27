@@ -12,6 +12,7 @@ from tools.file_upload_security_tools import file_upload_security_checker
 from tools.api_token_leak_tools import api_token_leak_detector
 from tools.secret_scanner_tools import secret_scanner
 from tools.ssh_configuration_tools import ssh_configuration_checker
+from tools.firewall_assistant_tools import firewall_assistant
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -143,6 +144,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "ssh configuration checker\n"
             "scan ssh configuration\n"
             "check ssh config"
+        )
+
+    if text in ["firewall assistant", "scan firewall configuration", "check firewall rules", "firewall security scan"]:
+        return firewall_assistant()
+
+    if text in ["364 help", "phase 364 help", "firewall help"]:
+        return (
+            "FIREWALL ASSISTANT COMMANDS - PHASE 364\n\n"
+            "firewall assistant\n"
+            "scan firewall configuration\n"
+            "check firewall rules"
         )
 
     return None
