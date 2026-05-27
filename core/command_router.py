@@ -23,9 +23,6 @@ from core.routes.integration_routes import handle_integration_routes
 from core.routes.document_reader_routes import handle_document_reader_routes
 from core.routes.vision_routes import handle_vision_routes
 from core.routes.desktop_control_routes import handle_desktop_control_routes
-from core.routes.integration_routes import handle_integration_routes
-from core.routes.vision_routes import handle_vision_routes
-from core.routes.desktop_control_routes import handle_desktop_control_routes
 from core.routes.linux_admin_routes import handle_linux_admin_routes
 from core.routes.operator_routes import handle_operator_routes
 from core.routes.architecture_quality_routes import handle_architecture_quality_routes
@@ -64,7 +61,7 @@ def route_command(user_input: str) -> str:
     nlp = analyze_command(user_input)
 
     text = nlp.normalized_text
-    clean_text = nlp.clean_text
+    clean_text = nlp.canonical_command or nlp.clean_text
     intent = nlp.intent
 
     if clean_text.startswith("test nlp ") or clean_text.startswith("analyze command "):
