@@ -104,6 +104,13 @@ def route_command(user_input: str) -> str:
         query = raw_text.replace("test route batch", "", 1).replace("prepare batch", "", 1).strip()
         return format_route_batch(query)
 
+    if raw_text.startswith("test followup v2 "):
+        from core.nlp.followup_context_resolver_v2 import format_followup_v2_report
+
+        query = raw_text.replace("test followup v2", "", 1).strip()
+        return format_followup_v2_report(query)
+
+
     if clean_text in ["nlp memory", "show nlp memory", "recent nlp"]:
         from core.nlp.conversation_memory_linker import format_conversation_links
         return format_conversation_links()
