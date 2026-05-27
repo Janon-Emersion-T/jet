@@ -8,6 +8,7 @@ from tools.xss_risk_tools import xss_risk_detector
 from tools.csrf_analyzer_tools import csrf_analyzer
 from tools.sql_injection_risk_tools import sql_injection_risk_detector
 from tools.auth_bypass_tools import auth_bypass_analyzer
+from tools.file_upload_security_tools import file_upload_security_checker
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -95,6 +96,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "auth bypass analyzer\n"
             "scan auth bypass risks\n"
             "check auth bypass"
+        )
+
+    if text in ["file upload security checker", "scan file upload risks", "check file uploads", "upload security scan"]:
+        return file_upload_security_checker()
+
+    if text in ["360 help", "phase 360 help", "file upload help"]:
+        return (
+            "FILE UPLOAD SECURITY CHECKER COMMANDS - PHASE 360\n\n"
+            "file upload security checker\n"
+            "scan file upload risks\n"
+            "check file uploads"
         )
 
     return None
