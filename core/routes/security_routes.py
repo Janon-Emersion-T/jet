@@ -11,6 +11,7 @@ from tools.auth_bypass_tools import auth_bypass_analyzer
 from tools.file_upload_security_tools import file_upload_security_checker
 from tools.api_token_leak_tools import api_token_leak_detector
 from tools.secret_scanner_tools import secret_scanner
+from tools.ssh_configuration_tools import ssh_configuration_checker
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -131,6 +132,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "secret scanner\n"
             "scan secrets\n"
             "check secret leaks"
+        )
+
+    if text in ["ssh configuration checker", "scan ssh configuration", "check ssh config", "ssh hardening scan"]:
+        return ssh_configuration_checker()
+
+    if text in ["363 help", "phase 363 help", "ssh config help"]:
+        return (
+            "SSH CONFIGURATION CHECKER COMMANDS - PHASE 363\n\n"
+            "ssh configuration checker\n"
+            "scan ssh configuration\n"
+            "check ssh config"
         )
 
     return None
