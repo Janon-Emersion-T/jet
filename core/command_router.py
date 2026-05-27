@@ -65,6 +65,21 @@ def route_command(user_input: str) -> str:
     intent = nlp.intent
     confidence = nlp.confidence
 
+    raw_text = user_input.lower().strip()
+
+    if not raw_text:
+        return "Please enter a command."
+
+    if raw_text.startswith("test nlp ") or raw_text.startswith("analyze command "):
+        from core.nlp_engine import format_nlp_report
+
+        query = raw_text.replace("test nlp", "", 1).replace("analyze command", "", 1).strip()
+        return format_nlp_report(query)
+
+    if raw_text in ["nlp memory", "show nlp memory", "recent nlp"]:
+        from core.nlp.conversation_memory_linker import format_conversation_links
+        return format_conversation_links()
+
     if clean_text.startswith("test nlp ") or clean_text.startswith("analyze command "):
         from core.nlp_engine import format_nlp_report
 

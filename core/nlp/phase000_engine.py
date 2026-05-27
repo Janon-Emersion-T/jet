@@ -1,3 +1,4 @@
+from core.nlp.priority_scorer import apply_priority_score
 from core.nlp.alias_expander import expand_alias
 from core.nlp.confidence_guard import guard_intent_confidence
 from core.nlp.command_rewriter import rewrite_command
@@ -54,6 +55,10 @@ def analyze_command(user_input: str) -> NLPResult:
     intent = guard_intent_confidence(
         intent,
         confidence,
+        foundation.clean_text,
+    )
+    intent = apply_priority_score(
+        intent,
         foundation.clean_text,
     )
 
