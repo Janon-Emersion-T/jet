@@ -11,6 +11,7 @@ from tools.linux_admin_tools import (
     github_actions_helper,
     linux_admin_help,
 )
+from tools.vps_monitoring_tools import vps_monitoring_engine
 
 
 def handle_linux_admin_routes(user_input: str, text: str, clean_text: str):
@@ -50,5 +51,16 @@ def handle_linux_admin_routes(user_input: str, text: str, clean_text: str):
 
     if text in ["github actions helper", "actions helper"]:
         return github_actions_helper()
+
+    if text in ["vps monitoring engine", "vps monitor", "check vps health", "monitor my server"]:
+        return vps_monitoring_engine()
+
+    if text in ["367 help", "phase 367 help", "vps monitoring help"]:
+        return (
+            "VPS MONITORING ENGINE COMMANDS - PHASE 367\n\n"
+            "vps monitoring engine\n"
+            "check vps health\n"
+            "monitor my server"
+        )
 
     return None
