@@ -5,6 +5,7 @@ from tools.security_response_tools import (
 from tools.security_scanner_tools import security_vulnerability_scanner
 from tools.owasp_analyzer_tools import owasp_analyzer
 from tools.xss_risk_tools import xss_risk_detector
+from tools.csrf_analyzer_tools import csrf_analyzer
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -59,6 +60,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "xss risk detector\n"
             "scan xss risks\n"
             "check xss"
+        )
+
+    if text in ["csrf analyzer", "scan csrf risks", "check csrf", "csrf scan"]:
+        return csrf_analyzer()
+
+    if text in ["357 help", "phase 357 help", "csrf help"]:
+        return (
+            "CSRF ANALYZER COMMANDS - PHASE 357\n\n"
+            "csrf analyzer\n"
+            "scan csrf risks\n"
+            "check csrf"
         )
 
     return None
