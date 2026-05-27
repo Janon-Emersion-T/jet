@@ -7,6 +7,7 @@ from tools.owasp_analyzer_tools import owasp_analyzer
 from tools.xss_risk_tools import xss_risk_detector
 from tools.csrf_analyzer_tools import csrf_analyzer
 from tools.sql_injection_risk_tools import sql_injection_risk_detector
+from tools.auth_bypass_tools import auth_bypass_analyzer
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -83,6 +84,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "sql injection risk detector\n"
             "scan sql injection risks\n"
             "check sql injection"
+        )
+
+    if text in ["auth bypass analyzer", "scan auth bypass risks", "check auth bypass", "auth bypass scan"]:
+        return auth_bypass_analyzer()
+
+    if text in ["359 help", "phase 359 help", "auth bypass help"]:
+        return (
+            "AUTH BYPASS ANALYZER COMMANDS - PHASE 359\n\n"
+            "auth bypass analyzer\n"
+            "scan auth bypass risks\n"
+            "check auth bypass"
         )
 
     return None
