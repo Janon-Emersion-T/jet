@@ -1,3 +1,4 @@
+from core.nlp.match_repair import repair_matched_phrase
 from core.nlp.priority_scorer import apply_priority_score
 from core.nlp.alias_expander import expand_alias
 from core.nlp.confidence_guard import guard_intent_confidence
@@ -85,6 +86,12 @@ def analyze_command(user_input: str) -> NLPResult:
     update_context(intent, rewritten_clean_text, entities)
 
     route_hint = resolve_route_hint(intent, contextual_clean_text, entities)
+
+    matched_phrase = repair_matched_phrase(
+        rewritten_clean_text,
+        intent,
+        matched_phrase,
+    )
 
     link_conversation_turn(
         user_input,
