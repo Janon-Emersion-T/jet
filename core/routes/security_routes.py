@@ -13,6 +13,7 @@ from tools.api_token_leak_tools import api_token_leak_detector
 from tools.secret_scanner_tools import secret_scanner
 from tools.ssh_configuration_tools import ssh_configuration_checker
 from tools.firewall_assistant_tools import firewall_assistant
+from tools.fail2ban_analyzer_tools import fail2ban_analyzer
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -155,6 +156,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "firewall assistant\n"
             "scan firewall configuration\n"
             "check firewall rules"
+        )
+
+    if text in ["fail2ban analyzer", "scan fail2ban configuration", "check fail2ban", "fail2ban security scan"]:
+        return fail2ban_analyzer()
+
+    if text in ["365 help", "phase 365 help", "fail2ban help"]:
+        return (
+            "FAIL2BAN ANALYZER COMMANDS - PHASE 365\n\n"
+            "fail2ban analyzer\n"
+            "scan fail2ban configuration\n"
+            "check fail2ban"
         )
 
     return None
