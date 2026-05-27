@@ -10,6 +10,7 @@ from tools.sql_injection_risk_tools import sql_injection_risk_detector
 from tools.auth_bypass_tools import auth_bypass_analyzer
 from tools.file_upload_security_tools import file_upload_security_checker
 from tools.api_token_leak_tools import api_token_leak_detector
+from tools.secret_scanner_tools import secret_scanner
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -119,6 +120,17 @@ def handle_security_routes(user_input: str, text: str, clean_text: str):
             "api token leak detector\n"
             "scan api token leaks\n"
             "check token leaks"
+        )
+
+    if text in ["secret scanner", "scan secrets", "check secret leaks", "secret scan"]:
+        return secret_scanner()
+
+    if text in ["362 help", "phase 362 help", "secret scanner help"]:
+        return (
+            "SECRET SCANNER COMMANDS - PHASE 362\n\n"
+            "secret scanner\n"
+            "scan secrets\n"
+            "check secret leaks"
         )
 
     return None

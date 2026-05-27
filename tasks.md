@@ -3,8 +3,8 @@
 ## Completion Tracking
 
 - Phases 1-352: existing implemented inventory carried forward from the project; revalidation continues as each area is touched.
-- Phases 353-361: COMPLETED AND TESTED - Modular security incident, vulnerability, OWASP, XSS, CSRF, SQL injection, auth bypass, file upload, and API token leak analysis services (`tools/security_response_tools.py`, `tools/security_scanner_tools.py`, `tools/owasp_analyzer_tools.py`, `tools/xss_risk_tools.py`, `tools/csrf_analyzer_tools.py`, `tools/sql_injection_risk_tools.py`, `tools/auth_bypass_tools.py`, `tools/file_upload_security_tools.py`, `tools/api_token_leak_tools.py`, `core/routes/security_routes.py`).
-- Next target: Phase 362 - Secret scanner.
+- Phases 353-362: COMPLETED AND TESTED - Modular security incident, vulnerability, OWASP, XSS, CSRF, SQL injection, auth bypass, file upload, API token leak, and secret analysis services (`tools/security_response_tools.py`, `tools/security_scanner_tools.py`, `tools/owasp_analyzer_tools.py`, `tools/xss_risk_tools.py`, `tools/csrf_analyzer_tools.py`, `tools/sql_injection_risk_tools.py`, `tools/auth_bypass_tools.py`, `tools/file_upload_security_tools.py`, `tools/api_token_leak_tools.py`, `tools/secret_scanner_tools.py`, `core/routes/security_routes.py`).
+- Next target: Phase 363 - SSH configuration checker.
 
 ## Phase Inventory
 
@@ -381,7 +381,7 @@
 
 361. API token leak detector [COMPLETED AND TESTED]
 
-362. Secret scanner
+362. Secret scanner [COMPLETED AND TESTED]
 
 363. SSH configuration checker
 364. Firewall assistant
