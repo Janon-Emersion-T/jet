@@ -188,6 +188,19 @@ from tools.routing_sync_tools import (
     offline_conflict_resolution,
     smart_routing_engine,
 )
+from tools.runtime_governance_tools import (
+    ai_driven_identity_governance,
+    ai_policy_enforcement_engine,
+    secure_execution_enclave,
+    semantic_permission_layers,
+)
+from tools.runtime_detection_tools import (
+    ai_intrusion_detection,
+    ai_malware_behavior_analyzer,
+    behavioral_firewall_system,
+    real_time_anomaly_detection,
+    runtime_threat_analysis,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -497,4 +510,22 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return federated_knowledge_exchange()
     if text in ["enterprise memory partitioning", "526 help"]:
         return enterprise_memory_partitioning()
+    if text in ["semantic permission layers", "527 help"]:
+        return semantic_permission_layers()
+    if text in ["ai-driven identity governance", "ai driven identity governance", "528 help"]:
+        return ai_driven_identity_governance()
+    if text in ["ai policy enforcement engine", "529 help"]:
+        return ai_policy_enforcement_engine()
+    if text in ["secure execution enclave", "530 help"]:
+        return secure_execution_enclave()
+    if text in ["runtime threat analysis", "531 help"]:
+        return runtime_threat_analysis()
+    if text in ["ai intrusion detection", "532 help"]:
+        return ai_intrusion_detection()
+    if text in ["real-time anomaly detection", "real time anomaly detection", "533 help"]:
+        return real_time_anomaly_detection()
+    if text in ["ai malware behavior analyzer", "534 help"]:
+        return ai_malware_behavior_analyzer()
+    if text in ["behavioral firewall system", "535 help"]:
+        return behavioral_firewall_system()
     return None
