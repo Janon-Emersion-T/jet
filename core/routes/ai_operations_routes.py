@@ -458,6 +458,66 @@ from tools.autonomous_learning_innovation_tools import (
     contextual_behavioral_evolution,
     autonomous_saas_builder,
 )
+from tools.strategic_governance_expansion_tools import (
+    ai_board_member_assistant,
+    ai_crisis_management_system,
+    ai_sales_ecosystem,
+    autonomous_diplomacy_engine,
+    autonomous_operational_restructuring,
+    enterprise_relationship_intelligence,
+    geopolitical_simulation_framework,
+    negotiation_intelligence_framework,
+    reputation_crisis_simulator,
+    strategic_resource_allocation_ai,
+)
+from tools.integrity_ethics_society_tools import (
+    ai_media_integrity_system,
+    ai_rights_governance_sandbox,
+    autonomous_ethics_review_board,
+    autonomous_intelligence_analysis,
+    deepfake_detection_framework,
+    human_ai_coexistence_framework,
+    information_authenticity_scoring,
+    multi_source_truth_validation,
+    propaganda_detection_engine,
+    trustworthy_ai_certification_layer,
+)
+from tools.planetary_humanitarian_tools import (
+    ai_assisted_civilization_planning,
+    ai_humanitarian_operations_layer,
+    biodiversity_prediction_system,
+    climate_intervention_simulation,
+    ecosystem_recovery_planner,
+    ocean_monitoring_intelligence,
+    planetary_scale_optimization_ai,
+    sustainable_resource_balancing_engine,
+    synthetic_society_simulation,
+    wildlife_preservation_ai,
+)
+from tools.global_development_tools import (
+    ai_driven_infrastructure_planning,
+    ai_epidemiology_engine,
+    autonomous_anti_poverty_framework,
+    autonomous_vaccine_research_framework,
+    education_equality_intelligence,
+    global_food_distribution_ai,
+    global_health_intelligence_network,
+    pandemic_simulation_assistant,
+    refugee_logistics_optimization,
+    smart_nutrition_optimization,
+)
+from tools.civic_collaboration_tools import (
+    ai_assisted_constitutional_drafting,
+    ai_cooperative_economy_layer,
+    autonomous_legal_harmonization,
+    autonomous_research_commons,
+    cross_border_collaboration_ai,
+    global_distributed_innovation_network,
+    open_source_civilization_framework,
+    rural_connectivity_optimization,
+    smart_governance_simulation,
+    universal_access_knowledge_engine,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -1215,4 +1275,104 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return ai_monetization_strategist()
     if text in ["autonomous revenue optimization", "750 help"]:
         return autonomous_revenue_optimization()
+    if text in ["ai sales ecosystem", "751 help"]:
+        return ai_sales_ecosystem()
+    if text in ["negotiation intelligence framework", "752 help"]:
+        return negotiation_intelligence_framework()
+    if text in ["enterprise relationship intelligence", "753 help"]:
+        return enterprise_relationship_intelligence()
+    if text in ["ai board member assistant", "754 help"]:
+        return ai_board_member_assistant()
+    if text in ["autonomous operational restructuring", "755 help"]:
+        return autonomous_operational_restructuring()
+    if text in ["ai crisis management system", "756 help"]:
+        return ai_crisis_management_system()
+    if text in ["reputation crisis simulator", "757 help"]:
+        return reputation_crisis_simulator()
+    if text in ["autonomous diplomacy engine", "758 help"]:
+        return autonomous_diplomacy_engine()
+    if text in ["geopolitical simulation framework", "759 help"]:
+        return geopolitical_simulation_framework()
+    if text in ["strategic resource allocation ai", "760 help"]:
+        return strategic_resource_allocation_ai()
+    if text in ["autonomous intelligence analysis", "761 help"]:
+        return autonomous_intelligence_analysis()
+    if text in ["multi-source truth validation", "multi source truth validation", "762 help"]:
+        return multi_source_truth_validation()
+    if text in ["propaganda detection engine", "763 help"]:
+        return propaganda_detection_engine()
+    if text in ["information authenticity scoring", "764 help"]:
+        return information_authenticity_scoring()
+    if text in ["deepfake detection framework", "765 help"]:
+        return deepfake_detection_framework()
+    if text in ["ai media integrity system", "766 help"]:
+        return ai_media_integrity_system()
+    if text in ["trustworthy ai certification layer", "767 help"]:
+        return trustworthy_ai_certification_layer()
+    if text in ["autonomous ethics review board", "768 help"]:
+        return autonomous_ethics_review_board()
+    if text in ["ai rights governance sandbox", "769 help"]:
+        return ai_rights_governance_sandbox()
+    if text in ["human-ai coexistence framework", "human ai coexistence framework", "770 help"]:
+        return human_ai_coexistence_framework()
+    if text in ["synthetic society simulation", "771 help"]:
+        return synthetic_society_simulation()
+    if text in ["ai-assisted civilization planning", "ai assisted civilization planning", "772 help"]:
+        return ai_assisted_civilization_planning()
+    if text in ["planetary-scale optimization ai", "planetary scale optimization ai", "773 help"]:
+        return planetary_scale_optimization_ai()
+    if text in ["sustainable resource balancing engine", "774 help"]:
+        return sustainable_resource_balancing_engine()
+    if text in ["climate intervention simulation", "775 help"]:
+        return climate_intervention_simulation()
+    if text in ["ocean monitoring intelligence", "776 help"]:
+        return ocean_monitoring_intelligence()
+    if text in ["wildlife preservation ai", "777 help"]:
+        return wildlife_preservation_ai()
+    if text in ["biodiversity prediction system", "778 help"]:
+        return biodiversity_prediction_system()
+    if text in ["ecosystem recovery planner", "779 help"]:
+        return ecosystem_recovery_planner()
+    if text in ["ai humanitarian operations layer", "780 help"]:
+        return ai_humanitarian_operations_layer()
+    if text in ["refugee logistics optimization", "781 help"]:
+        return refugee_logistics_optimization()
+    if text in ["global health intelligence network", "782 help"]:
+        return global_health_intelligence_network()
+    if text in ["pandemic simulation assistant", "783 help"]:
+        return pandemic_simulation_assistant()
+    if text in ["autonomous vaccine research framework", "784 help"]:
+        return autonomous_vaccine_research_framework()
+    if text in ["ai epidemiology engine", "785 help"]:
+        return ai_epidemiology_engine()
+    if text in ["smart nutrition optimization", "786 help"]:
+        return smart_nutrition_optimization()
+    if text in ["global food distribution ai", "787 help"]:
+        return global_food_distribution_ai()
+    if text in ["autonomous anti-poverty framework", "autonomous anti poverty framework", "788 help"]:
+        return autonomous_anti_poverty_framework()
+    if text in ["education equality intelligence", "789 help"]:
+        return education_equality_intelligence()
+    if text in ["ai-driven infrastructure planning", "ai driven infrastructure planning", "790 help"]:
+        return ai_driven_infrastructure_planning()
+    if text in ["rural connectivity optimization", "791 help"]:
+        return rural_connectivity_optimization()
+    if text in ["universal access knowledge engine", "792 help"]:
+        return universal_access_knowledge_engine()
+    if text in ["open-source civilization framework", "open source civilization framework", "793 help"]:
+        return open_source_civilization_framework()
+    if text in ["ai cooperative economy layer", "794 help"]:
+        return ai_cooperative_economy_layer()
+    if text in ["autonomous research commons", "795 help"]:
+        return autonomous_research_commons()
+    if text in ["global distributed innovation network", "796 help"]:
+        return global_distributed_innovation_network()
+    if text in ["ai-assisted constitutional drafting", "ai assisted constitutional drafting", "797 help"]:
+        return ai_assisted_constitutional_drafting()
+    if text in ["smart governance simulation", "798 help"]:
+        return smart_governance_simulation()
+    if text in ["autonomous legal harmonization", "799 help"]:
+        return autonomous_legal_harmonization()
+    if text in ["cross-border collaboration ai", "cross border collaboration ai", "800 help"]:
+        return cross_border_collaboration_ai()
     return None
