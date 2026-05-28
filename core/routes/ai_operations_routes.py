@@ -46,6 +46,25 @@ from tools.trust_controls_tools import (
     trusted_user_verification,
     voice_biometric_recognition,
 )
+from tools.secure_runtime_tools import (
+    encrypted_memory_storage,
+    local_secrets_manager,
+    mobile_companion_app,
+    offline_first_operation_mode,
+    push_notification_system,
+    secure_vault_integration,
+    smart_home_integration_layer,
+    sync_engine_between_devices,
+    wearable_device_integration,
+    zero_trust_agent_architecture,
+)
+from tools.embodied_runtime_tools import (
+    drone_command_interface,
+    iot_device_controller,
+    real_world_mapping_engine,
+    robotics_control_bridge,
+    vision_guided_automation,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -143,4 +162,34 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return face_recognition_integration()
     if text in ["trusted-user verification", "trusted user verification", "420 help"]:
         return trusted_user_verification()
+    if text in ["encrypted memory storage", "421 help"]:
+        return encrypted_memory_storage()
+    if text in ["secure vault integration", "422 help"]:
+        return secure_vault_integration()
+    if text in ["local secrets manager", "423 help"]:
+        return local_secrets_manager()
+    if text in ["zero-trust agent architecture", "zero trust agent architecture", "424 help"]:
+        return zero_trust_agent_architecture()
+    if text in ["offline-first operation mode", "offline first operation mode", "425 help"]:
+        return offline_first_operation_mode()
+    if text in ["sync engine between devices", "426 help"]:
+        return sync_engine_between_devices()
+    if text in ["mobile companion app", "427 help"]:
+        return mobile_companion_app()
+    if text in ["push notification system", "428 help"]:
+        return push_notification_system()
+    if text in ["wearable device integration", "429 help"]:
+        return wearable_device_integration()
+    if text in ["smart home integration layer", "430 help"]:
+        return smart_home_integration_layer()
+    if text in ["iot device controller", "iot controller", "431 help"]:
+        return iot_device_controller()
+    if text in ["drone command interface", "432 help"]:
+        return drone_command_interface()
+    if text in ["robotics control bridge", "433 help"]:
+        return robotics_control_bridge()
+    if text in ["vision-guided automation", "vision guided automation", "434 help"]:
+        return vision_guided_automation()
+    if text in ["real-world mapping engine", "real world mapping engine", "435 help"]:
+        return real_world_mapping_engine()
     return None
