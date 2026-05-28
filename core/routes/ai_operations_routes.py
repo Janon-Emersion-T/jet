@@ -182,6 +182,7 @@ from tools.network_governance_tools import (
 )
 from tools.routing_sync_tools import (
     ai_driven_replication_manager,
+    enterprise_memory_partitioning,
     multi_region_synchronization,
     offline_conflict_resolution,
     smart_routing_engine,
@@ -491,4 +492,6 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return offline_conflict_resolution()
     if text in ["ai-driven replication manager", "ai driven replication manager", "524 help"]:
         return ai_driven_replication_manager()
+    if text in ["enterprise memory partitioning", "526 help"]:
+        return enterprise_memory_partitioning()
     return None
