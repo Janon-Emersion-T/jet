@@ -152,6 +152,13 @@ from tools.workforce_architecture_tools import (
     ai_executive_assistant_framework,
     jarvis_prime_architecture_foundation,
 )
+from tools.collaborative_cognition_tools import (
+    cross_device_synchronized_cognition,
+    distributed_autonomous_agent_mesh,
+    multi_user_access_framework,
+    persistent_ai_identity_layer,
+    tenant_aware_ai_memory,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -409,4 +416,14 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return ai_company_workforce_ecosystem()
     if text in ["jarvis prime architecture foundation", "500 help"]:
         return jarvis_prime_architecture_foundation()
+    if text in ["distributed autonomous agent mesh", "501 help"]:
+        return distributed_autonomous_agent_mesh()
+    if text in ["cross-device synchronized cognition", "cross device synchronized cognition", "502 help"]:
+        return cross_device_synchronized_cognition()
+    if text in ["persistent ai identity layer", "503 help"]:
+        return persistent_ai_identity_layer()
+    if text in ["multi-user access framework", "multi user access framework", "504 help"]:
+        return multi_user_access_framework()
+    if text in ["tenant-aware ai memory", "tenant aware ai memory", "505 help"]:
+        return tenant_aware_ai_memory()
     return None
