@@ -84,6 +84,25 @@ from tools.personal_life_os_tools import (
     sleep_work_pattern_analyzer,
     stress_detection_assistant,
 )
+from tools.financial_strategy_tools import (
+    business_intelligence_dashboard,
+    company_operations_ai,
+    crypto_monitoring_assistant,
+    executive_decision_assistant,
+    investment_analysis_assistant,
+    market_data_analyzer,
+    multi_company_management_ai,
+    personal_finance_advisor,
+    trading_strategy_sandbox,
+)
+from tools.enterprise_ops_tools import (
+    contract_analyzer,
+    inventory_forecasting_engine,
+    legal_document_assistant,
+    pos_intelligence_engine,
+    procurement_assistant,
+    supply_chain_analyzer,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -241,4 +260,34 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return nutrition_planning_assistant()
     if text in ["stress detection assistant", "450 help"]:
         return stress_detection_assistant()
+    if text in ["personal finance advisor", "451 help"]:
+        return personal_finance_advisor()
+    if text in ["investment analysis assistant", "452 help"]:
+        return investment_analysis_assistant()
+    if text in ["trading strategy sandbox", "453 help"]:
+        return trading_strategy_sandbox()
+    if text in ["market data analyzer", "454 help"]:
+        return market_data_analyzer()
+    if text in ["crypto monitoring assistant", "455 help"]:
+        return crypto_monitoring_assistant()
+    if text in ["business intelligence dashboard", "456 help"]:
+        return business_intelligence_dashboard()
+    if text in ["executive decision assistant", "457 help"]:
+        return executive_decision_assistant()
+    if text in ["company operations ai", "458 help"]:
+        return company_operations_ai()
+    if text in ["multi-company management ai", "multi company management ai", "459 help"]:
+        return multi_company_management_ai()
+    if text in ["legal document assistant", "460 help"]:
+        return legal_document_assistant()
+    if text in ["contract analyzer", "461 help"]:
+        return contract_analyzer()
+    if text in ["procurement assistant", "462 help"]:
+        return procurement_assistant()
+    if text in ["inventory forecasting engine", "463 help"]:
+        return inventory_forecasting_engine()
+    if text in ["supply chain analyzer", "464 help"]:
+        return supply_chain_analyzer()
+    if text in ["pos intelligence engine", "465 help"]:
+        return pos_intelligence_engine()
     return None
