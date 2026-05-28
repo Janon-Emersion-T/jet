@@ -1,0 +1,61 @@
+import json
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+from core.routes.ai_operations_routes import handle_ai_operations_routes
+from tools.routing_sync_tools import (
+    multi_region_synchronization,
+    offline_conflict_resolution,
+    smart_routing_engine,
+)
+
+
+class RoutingSyncTests(unittest.TestCase):
+    def test_smart_routing_multi_region_and_conflict_render(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "smart_routing.json").write_text(
+                json.dumps({"routes": [{"adaptive": True, "policy_bound": True}, {"adaptive": False, "policy_bound": False}]}),
+                encoding="utf-8",
+            )
+            (root / "multi_region.json").write_text(
+                json.dumps(
+                    {
+                        "regions": [{"name": "us-east"}, {"name": "eu-west"}],
+                        "links": [{"status": "healthy"}, {"status": "degraded"}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (root / "offline_conflicts.json").write_text(
+                json.dumps(
+                    {
+                        "conflicts": [
+                            {"status": "resolved", "resolution": "auto_merge"},
+                            {"status": "open", "resolution": "manual_review"},
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with patch("tools.routing_sync_tools.ROUTING_DIR", root):
+                routing = smart_routing_engine()
+                sync = multi_region_synchronization()
+                conflict = offline_conflict_resolution()
+        self.assertIn("Routes tracked: 2", routing)
+        self.assertIn("Adaptive routes: 1", routing)
+        self.assertIn("Regions tracked: 2", sync)
+        self.assertIn("Healthy links: 1", sync)
+        self.assertIn("Conflicts tracked: 2", conflict)
+        self.assertIn("Manual-review conflicts: 1", conflict)
+
+    def test_routes_cover_521_to_523(self):
+        for phase in range(521, 524):
+            result = handle_ai_operations_routes(f"{phase} help", f"{phase} help", f"{phase} help")
+            self.assertIsNotNone(result, f"missing route for {phase}")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -180,6 +180,11 @@ from tools.network_governance_tools import (
     autonomous_vpn_management,
     live_topology_visualization,
 )
+from tools.routing_sync_tools import (
+    multi_region_synchronization,
+    offline_conflict_resolution,
+    smart_routing_engine,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -477,4 +482,10 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return ai_network_optimization()
     if text in ["autonomous vpn management", "520 help"]:
         return autonomous_vpn_management()
+    if text in ["smart routing engine", "521 help"]:
+        return smart_routing_engine()
+    if text in ["multi-region synchronization", "multi region synchronization", "522 help"]:
+        return multi_region_synchronization()
+    if text in ["offline conflict resolution", "523 help"]:
+        return offline_conflict_resolution()
     return None
