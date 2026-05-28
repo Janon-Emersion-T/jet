@@ -159,6 +159,7 @@ from tools.collaborative_cognition_tools import (
     persistent_ai_identity_layer,
     tenant_aware_ai_memory,
 )
+from tools.workspace_isolation_tools import ai_workspace_isolation
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -426,4 +427,6 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return multi_user_access_framework()
     if text in ["tenant-aware ai memory", "tenant aware ai memory", "505 help"]:
         return tenant_aware_ai_memory()
+    if text in ["ai workspace isolation", "workspace isolation", "506 help"]:
+        return ai_workspace_isolation()
     return None
