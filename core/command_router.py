@@ -1,9 +1,10 @@
+from core.routes.topic_learning_routes import handle_topic_learning_routes
 from core.ai_fallback import handle_ai_fallback
 from core.conversational_interface import interpret_conversation
 from core.nlp.unified_orchestrator import orchestrate_command
 from core.persona_registry import get_persona
 from tools.event_tools import emit_event
-
+from core.routes.website_learning_routes import handle_website_learning_routes
 from core.routes.basic_routes import handle_basic_routes
 from core.routes.memory_routes import handle_memory_routes
 from core.routes.project_context_routes import handle_project_context_routes
@@ -175,9 +176,11 @@ def route_command(user_input: str) -> str:
         # General modules later
         handle_task_routes,
         handle_memory_routes,
+        handle_topic_learning_routes,
         handle_vector_memory_routes,
         handle_system_mode_routes,
         handle_browser_routes,
+	handle_website_learning_routes,
         handle_website_audit_routes,
         handle_content_assistant_routes,
         handle_social_planner_routes,

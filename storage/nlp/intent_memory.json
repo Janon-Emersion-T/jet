@@ -90,6 +90,307 @@
       "route_hint": "task",
       "success": null,
       "at": "2026-05-28T01:13:09"
+    },
+    {
+      "text": "capability status",
+      "intent": "devops",
+      "route_hint": "devops",
+      "success": null,
+      "at": "2026-05-28T01:17:29"
+    },
+    {
+      "text": "nlp health",
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "success": null,
+      "at": "2026-05-28T01:17:41"
+    },
+    {
+      "text": "nlp runtime",
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "success": null,
+      "at": "2026-05-28T01:17:45"
+    },
+    {
+      "text": "nlp regression",
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "success": null,
+      "at": "2026-05-28T01:17:48"
+    },
+    {
+      "text": "test unified analyze this Laravel project",
+      "intent": "general_chat",
+      "route_hint": "laravel",
+      "success": null,
+      "at": "2026-05-28T01:17:51"
+    },
+    {
+      "text": "analyze this laravel project",
+      "intent": "general_chat",
+      "route_hint": "laravel",
+      "success": null,
+      "at": "2026-05-28T01:17:51"
+    },
+    {
+      "text": "test safety delete all files",
+      "intent": "memory",
+      "route_hint": "memory",
+      "success": null,
+      "at": "2026-05-28T01:17:54"
+    },
+    {
+      "text": "test targets check app/Http/Controllers",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-28T01:18:01"
+    },
+    {
+      "text": "test task plan fix Laravel route error",
+      "intent": "task",
+      "route_hint": "task",
+      "success": null,
+      "at": "2026-05-28T01:18:06"
+    },
+    {
+      "text": "remember fact Janon owns LKProfessionals",
+      "intent": "command",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:18:13"
+    },
+    {
+      "text": "list facts",
+      "intent": "task",
+      "route_hint": "task",
+      "success": null,
+      "at": "2026-05-28T01:18:17"
+    },
+    {
+      "text": "search memory LKProfessionals",
+      "intent": "command",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:18:41"
+    },
+    {
+      "text": "daily developer briefing",
+      "intent": "content",
+      "route_hint": "content",
+      "success": null,
+      "at": "2026-05-28T01:18:45"
+    },
+    {
+      "text": "coding session summary",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-28T01:18:48"
+    },
+    {
+      "text": "project roadmap memory",
+      "intent": "memory",
+      "route_hint": "memory",
+      "success": null,
+      "at": "2026-05-28T01:18:52"
+    },
+    {
+      "text": "open google",
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:22:01"
+    },
+    {
+      "text": "learn website https://www.gov.lk/",
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:24:53"
+    },
+    {
+      "text": "deep learn website https://www.gov.lk/",
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:25:29"
+    },
+    {
+      "text": "semantic search Sri Lanka government services",
+      "intent": "database",
+      "route_hint": "database",
+      "success": null,
+      "at": "2026-05-28T01:26:13"
+    },
+    {
+      "text": "What do you know about the Government of Sri Lanka?",
+      "intent": "general",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:26:39"
+    },
+    {
+      "text": "research and learn Sri Lanka",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:33:55"
+    },
+    {
+      "text": "Learn about Sri Lanka",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:34:08"
+    },
+    {
+      "text": "learn about Sri Lanka",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:36:29"
+    },
+    {
+      "text": "learn about Sri Lanka",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:37:41"
+    },
+    {
+      "text": "Tell em about Sri lanka",
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:38:16"
+    },
+    {
+      "text": "Learn about Bill Gates",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:38:40"
+    },
+    {
+      "text": "semantic search Sri lanka",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:39:17"
+    },
+    {
+      "text": "semantic search cricket",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:39:30"
+    },
+    {
+      "text": "What is the history of Cricket",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:40:23"
+    },
+    {
+      "text": "What is the current best cricket team",
+      "intent": "location",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:41:48"
+    },
+    {
+      "text": "who the best chess player in the world",
+      "intent": "database",
+      "route_hint": "database",
+      "success": null,
+      "at": "2026-05-28T01:42:52"
+    },
+    {
+      "text": "what about nakamura?",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:43:33"
+    },
+    {
+      "text": "learn about microsoft",
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:45:45"
+    },
+    {
+      "text": "tell me about microsoft",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T01:46:07"
+    },
+    {
+      "text": "who created microsoft",
+      "intent": "task",
+      "route_hint": "task",
+      "success": null,
+      "at": "2026-05-28T01:47:38"
+    },
+    {
+      "text": "yes deep learn about microsoft",
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T01:48:14"
+    },
+    {
+      "text": "what are the roles do you have in our Jarvis",
+      "intent": "task",
+      "route_hint": "task",
+      "success": null,
+      "at": "2026-05-28T06:54:05"
+    },
+    {
+      "text": "tell me more about you",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T06:54:47"
+    },
+    {
+      "text": "How old are you right now",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T06:55:58"
+    },
+    {
+      "text": "I live in Jaffna, What is the weather prediction for today",
+      "intent": "weather",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T06:59:11"
+    },
+    {
+      "text": "how to connect live weather?",
+      "intent": "weather",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T06:59:40"
+    },
+    {
+      "text": "learn about lkprofessionals at www.lkprofessionals.com",
+      "intent": "command",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-28T07:05:34"
+    },
+    {
+      "text": "take screenshot",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-28T07:06:44"
     }
   ],
   "shortcuts": {},
