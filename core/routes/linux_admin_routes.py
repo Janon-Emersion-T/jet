@@ -29,9 +29,14 @@ from tools.ai_infrastructure_tools import (
     cuda_setup_advisor,
     ollama_optimization_assistant,
 )
+from core.routes.ai_operations_routes import handle_ai_operations_routes
 
 
 def handle_linux_admin_routes(user_input: str, text: str, clean_text: str):
+    ai_response = handle_ai_operations_routes(user_input, text, clean_text)
+    if ai_response is not None:
+        return ai_response
+
     if text in ["linux admin help", "system admin help", "admin tools help"]:
         return linux_admin_help()
 
