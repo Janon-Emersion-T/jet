@@ -201,6 +201,85 @@ from tools.runtime_detection_tools import (
     real_time_anomaly_detection,
     runtime_threat_analysis,
 )
+from tools.security_operations_tools import (
+    ai_forensic_investigation_assistant,
+    ai_penetration_testing_sandbox,
+    ai_soc_dashboard,
+    autonomous_incident_containment,
+    blue_team_defense_assistant,
+    compliance_monitoring_framework,
+    predictive_infrastructure_maintenance,
+    red_team_simulation_engine,
+)
+from tools.compliance_governance_tools import (
+    ai_legal_reasoning_layer,
+    ai_policy_drafting_engine,
+    enterprise_governance_framework,
+    gdpr_readiness_analyzer,
+    hipaa_compliance_sandbox,
+    iso_compliance_assistant,
+    pci_dss_readiness_engine,
+)
+from tools.enterprise_planning_tools import (
+    ai_driven_budgeting_assistant,
+    autonomous_strategy_planner,
+    autonomous_vendor_comparison,
+    business_scenario_simulator,
+    competitive_intelligence_engine,
+    enterprise_kpi_intelligence,
+    executive_board_briefing_generator,
+    financial_forecasting_engine,
+    market_trend_prediction,
+    smart_procurement_ai,
+)
+from tools.strategic_operations_tools import (
+    ai_contract_negotiation_assistant,
+    ai_merger_acquisition_analyzer,
+    autonomous_logistics_planner,
+    autonomous_opportunity_detection,
+    delivery_route_optimization,
+    dynamic_pricing_engine,
+    fleet_management_ai,
+    smart_retail_analytics,
+    smart_warehouse_orchestration,
+    supply_demand_forecasting,
+)
+from tools.customer_communication_tools import (
+    accent_adaptation_system,
+    ai_churn_prediction,
+    ai_customer_support_brain,
+    ai_ticket_auto_resolution,
+    autonomous_escalation_engine,
+    customer_lifetime_value_predictor,
+    emotion_aware_voice_synthesis,
+    multi_channel_support_orchestration,
+    multi_language_conversational_layer,
+    real_time_translation_engine,
+    sentiment_adaptive_communication,
+    voice_call_ai_assistant,
+)
+from tools.workplace_intelligence_tools import (
+    adaptive_employee_learning_engine,
+    ai_certification_trainer,
+    ai_examination_proctor,
+    ai_interview_assistant,
+    ai_meeting_participation_agent,
+    ai_onboarding_mentor,
+    ai_presentation_assistant,
+    autonomous_curriculum_generation,
+    autonomous_note_taking_system,
+    candidate_ranking_engine,
+    enterprise_lms_intelligence_layer,
+    knowledge_retention_analyzer,
+    live_presentation_co_pilot,
+    resume_intelligence_system,
+    skill_gap_analysis_system,
+)
+from tools.research_intelligence_tools import (
+    ai_patent_research_assistant,
+    research_paper_intelligence_engine,
+    scientific_literature_summarizer,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -528,4 +607,134 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return ai_malware_behavior_analyzer()
     if text in ["behavioral firewall system", "535 help"]:
         return behavioral_firewall_system()
+    if text in ["ai forensic investigation assistant", "536 help"]:
+        return ai_forensic_investigation_assistant()
+    if text in ["autonomous incident containment", "537 help"]:
+        return autonomous_incident_containment()
+    if text in ["predictive infrastructure maintenance", "538 help"]:
+        return predictive_infrastructure_maintenance()
+    if text in ["ai soc dashboard", "539 help"]:
+        return ai_soc_dashboard()
+    if text in ["ai penetration testing sandbox", "540 help"]:
+        return ai_penetration_testing_sandbox()
+    if text in ["red-team simulation engine", "red team simulation engine", "541 help"]:
+        return red_team_simulation_engine()
+    if text in ["blue-team defense assistant", "blue team defense assistant", "542 help"]:
+        return blue_team_defense_assistant()
+    if text in ["compliance monitoring framework", "543 help"]:
+        return compliance_monitoring_framework()
+    if text in ["gdpr readiness analyzer", "544 help"]:
+        return gdpr_readiness_analyzer()
+    if text in ["iso compliance assistant", "545 help"]:
+        return iso_compliance_assistant()
+    if text in ["pci-dss readiness engine", "pci dss readiness engine", "546 help"]:
+        return pci_dss_readiness_engine()
+    if text in ["hipaa compliance sandbox", "547 help"]:
+        return hipaa_compliance_sandbox()
+    if text in ["enterprise governance framework", "548 help"]:
+        return enterprise_governance_framework()
+    if text in ["ai legal reasoning layer", "549 help"]:
+        return ai_legal_reasoning_layer()
+    if text in ["ai policy drafting engine", "550 help"]:
+        return ai_policy_drafting_engine()
+    if text in ["smart procurement ai", "551 help"]:
+        return smart_procurement_ai()
+    if text in ["autonomous vendor comparison", "552 help"]:
+        return autonomous_vendor_comparison()
+    if text in ["financial forecasting engine", "553 help"]:
+        return financial_forecasting_engine()
+    if text in ["ai-driven budgeting assistant", "ai driven budgeting assistant", "554 help"]:
+        return ai_driven_budgeting_assistant()
+    if text in ["enterprise kpi intelligence", "555 help"]:
+        return enterprise_kpi_intelligence()
+    if text in ["executive board briefing generator", "556 help"]:
+        return executive_board_briefing_generator()
+    if text in ["autonomous strategy planner", "557 help"]:
+        return autonomous_strategy_planner()
+    if text in ["business scenario simulator", "558 help"]:
+        return business_scenario_simulator()
+    if text in ["competitive intelligence engine", "559 help"]:
+        return competitive_intelligence_engine()
+    if text in ["market trend prediction", "560 help"]:
+        return market_trend_prediction()
+    if text in ["autonomous opportunity detection", "561 help"]:
+        return autonomous_opportunity_detection()
+    if text in ["ai merger/acquisition analyzer", "ai merger acquisition analyzer", "562 help"]:
+        return ai_merger_acquisition_analyzer()
+    if text in ["ai contract negotiation assistant", "563 help"]:
+        return ai_contract_negotiation_assistant()
+    if text in ["dynamic pricing engine", "564 help"]:
+        return dynamic_pricing_engine()
+    if text in ["supply-demand forecasting", "supply demand forecasting", "565 help"]:
+        return supply_demand_forecasting()
+    if text in ["autonomous logistics planner", "566 help"]:
+        return autonomous_logistics_planner()
+    if text in ["smart warehouse orchestration", "567 help"]:
+        return smart_warehouse_orchestration()
+    if text in ["delivery route optimization", "568 help"]:
+        return delivery_route_optimization()
+    if text in ["fleet management ai", "569 help"]:
+        return fleet_management_ai()
+    if text in ["smart retail analytics", "570 help"]:
+        return smart_retail_analytics()
+    if text in ["customer lifetime value predictor", "571 help"]:
+        return customer_lifetime_value_predictor()
+    if text in ["ai churn prediction", "572 help"]:
+        return ai_churn_prediction()
+    if text in ["ai customer support brain", "573 help"]:
+        return ai_customer_support_brain()
+    if text in ["multi-channel support orchestration", "multi channel support orchestration", "574 help"]:
+        return multi_channel_support_orchestration()
+    if text in ["ai ticket auto-resolution", "ai ticket auto resolution", "575 help"]:
+        return ai_ticket_auto_resolution()
+    if text in ["autonomous escalation engine", "576 help"]:
+        return autonomous_escalation_engine()
+    if text in ["voice call ai assistant", "577 help"]:
+        return voice_call_ai_assistant()
+    if text in ["real-time translation engine", "real time translation engine", "578 help"]:
+        return real_time_translation_engine()
+    if text in ["multi-language conversational layer", "multi language conversational layer", "579 help"]:
+        return multi_language_conversational_layer()
+    if text in ["accent adaptation system", "580 help"]:
+        return accent_adaptation_system()
+    if text in ["emotion-aware voice synthesis", "emotion aware voice synthesis", "581 help"]:
+        return emotion_aware_voice_synthesis()
+    if text in ["sentiment-adaptive communication", "sentiment adaptive communication", "582 help"]:
+        return sentiment_adaptive_communication()
+    if text in ["ai meeting participation agent", "583 help"]:
+        return ai_meeting_participation_agent()
+    if text in ["autonomous note-taking system", "autonomous note taking system", "584 help"]:
+        return autonomous_note_taking_system()
+    if text in ["ai presentation assistant", "585 help"]:
+        return ai_presentation_assistant()
+    if text in ["live presentation co-pilot", "live presentation co pilot", "586 help"]:
+        return live_presentation_co_pilot()
+    if text in ["ai interview assistant", "587 help"]:
+        return ai_interview_assistant()
+    if text in ["candidate ranking engine", "588 help"]:
+        return candidate_ranking_engine()
+    if text in ["resume intelligence system", "589 help"]:
+        return resume_intelligence_system()
+    if text in ["ai onboarding mentor", "590 help"]:
+        return ai_onboarding_mentor()
+    if text in ["adaptive employee learning engine", "591 help"]:
+        return adaptive_employee_learning_engine()
+    if text in ["skill-gap analysis system", "skill gap analysis system", "592 help"]:
+        return skill_gap_analysis_system()
+    if text in ["autonomous curriculum generation", "593 help"]:
+        return autonomous_curriculum_generation()
+    if text in ["ai certification trainer", "594 help"]:
+        return ai_certification_trainer()
+    if text in ["enterprise lms intelligence layer", "595 help"]:
+        return enterprise_lms_intelligence_layer()
+    if text in ["ai examination proctor", "596 help"]:
+        return ai_examination_proctor()
+    if text in ["knowledge retention analyzer", "597 help"]:
+        return knowledge_retention_analyzer()
+    if text in ["research paper intelligence engine", "598 help"]:
+        return research_paper_intelligence_engine()
+    if text in ["scientific literature summarizer", "599 help"]:
+        return scientific_literature_summarizer()
+    if text in ["ai patent research assistant", "600 help"]:
+        return ai_patent_research_assistant()
     return None
