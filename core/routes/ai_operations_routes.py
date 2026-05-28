@@ -173,6 +173,13 @@ from tools.resilience_architecture_tools import (
     failure_recovery_orchestration,
     immutable_operational_audit_log,
 )
+from tools.network_governance_tools import (
+    ai_accountability_tracker,
+    ai_network_optimization,
+    autonomous_infrastructure_diagnostics,
+    autonomous_vpn_management,
+    live_topology_visualization,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -460,4 +467,14 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return immutable_operational_audit_log()
     if text in ["ai decision replay engine", "515 help"]:
         return ai_decision_replay_engine()
+    if text in ["ai accountability tracker", "516 help"]:
+        return ai_accountability_tracker()
+    if text in ["autonomous infrastructure diagnostics", "517 help"]:
+        return autonomous_infrastructure_diagnostics()
+    if text in ["live topology visualization", "518 help"]:
+        return live_topology_visualization()
+    if text in ["ai network optimization", "519 help"]:
+        return ai_network_optimization()
+    if text in ["autonomous vpn management", "520 help"]:
+        return autonomous_vpn_management()
     return None
