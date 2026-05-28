@@ -280,6 +280,66 @@ from tools.research_intelligence_tools import (
     research_paper_intelligence_engine,
     scientific_literature_summarizer,
 )
+from tools.experimentation_ml_tools import (
+    ai_dataset_cleaner,
+    ai_drift_detection_system,
+    ai_hypothesis_generation,
+    ai_model_lifecycle_manager,
+    automated_ml_pipeline_manager,
+    autonomous_experimentation_planner,
+    continuous_model_evaluation,
+    data_science_orchestration_layer,
+    feature_engineering_assistant,
+    synthetic_data_generator,
+)
+from tools.industrial_ai_tools import (
+    ai_manufacturing_optimization,
+    ai_predictive_maintenance,
+    ai_simulation_environment,
+    autonomous_quality_assurance,
+    autonomous_robotics_planner,
+    industrial_iot_integration,
+    machine_vision_inspection_system,
+    predictive_factory_analytics,
+    reinforcement_learning_sandbox,
+    robot_fleet_coordination,
+)
+from tools.sustainability_agri_tools import (
+    agricultural_ai_orchestration,
+    autonomous_energy_optimization,
+    climate_simulation_assistant,
+    environmental_monitoring_intelligence,
+    livestock_monitoring_ai,
+    precision_farming_engine,
+    smart_grid_management_ai,
+    smart_irrigation_optimizer,
+)
+from tools.healthcare_ai_tools import (
+    ai_healthcare_assistant,
+    ai_pharmaceutical_simulation,
+    ai_triage_assistant,
+    autonomous_health_risk_scoring,
+    clinical_decision_support,
+    drug_interaction_analyzer,
+    genomics_research_assistant,
+    medical_imaging_analysis,
+    patient_monitoring_intelligence,
+)
+from tools.legal_public_sector_tools import (
+    ai_court_document_analyzer,
+    ai_defense_simulation_layer,
+    ai_law_research_engine,
+    autonomous_compliance_drafting,
+    autonomous_rescue_planning,
+    case_law_intelligence_assistant,
+    disaster_simulation_engine,
+    emergency_response_coordination,
+    government_operations_intelligence,
+    legal_risk_scoring_system,
+    public_service_ai_framework,
+    smart_city_orchestration,
+    urban_traffic_optimization,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -737,4 +797,104 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return scientific_literature_summarizer()
     if text in ["ai patent research assistant", "600 help"]:
         return ai_patent_research_assistant()
+    if text in ["autonomous experimentation planner", "601 help"]:
+        return autonomous_experimentation_planner()
+    if text in ["ai hypothesis generation", "602 help"]:
+        return ai_hypothesis_generation()
+    if text in ["data science orchestration layer", "603 help"]:
+        return data_science_orchestration_layer()
+    if text in ["automated ml pipeline manager", "604 help"]:
+        return automated_ml_pipeline_manager()
+    if text in ["ai dataset cleaner", "605 help"]:
+        return ai_dataset_cleaner()
+    if text in ["feature engineering assistant", "606 help"]:
+        return feature_engineering_assistant()
+    if text in ["ai model lifecycle manager", "607 help"]:
+        return ai_model_lifecycle_manager()
+    if text in ["continuous model evaluation", "608 help"]:
+        return continuous_model_evaluation()
+    if text in ["ai drift detection system", "609 help"]:
+        return ai_drift_detection_system()
+    if text in ["synthetic data generator", "610 help"]:
+        return synthetic_data_generator()
+    if text in ["ai simulation environment", "611 help"]:
+        return ai_simulation_environment()
+    if text in ["reinforcement learning sandbox", "612 help"]:
+        return reinforcement_learning_sandbox()
+    if text in ["autonomous robotics planner", "613 help"]:
+        return autonomous_robotics_planner()
+    if text in ["robot fleet coordination", "614 help"]:
+        return robot_fleet_coordination()
+    if text in ["ai manufacturing optimization", "615 help"]:
+        return ai_manufacturing_optimization()
+    if text in ["predictive factory analytics", "616 help"]:
+        return predictive_factory_analytics()
+    if text in ["autonomous quality assurance", "617 help"]:
+        return autonomous_quality_assurance()
+    if text in ["machine vision inspection system", "618 help"]:
+        return machine_vision_inspection_system()
+    if text in ["ai predictive maintenance", "619 help"]:
+        return ai_predictive_maintenance()
+    if text in ["industrial iot integration", "620 help"]:
+        return industrial_iot_integration()
+    if text in ["autonomous energy optimization", "621 help"]:
+        return autonomous_energy_optimization()
+    if text in ["smart grid management ai", "622 help"]:
+        return smart_grid_management_ai()
+    if text in ["environmental monitoring intelligence", "623 help"]:
+        return environmental_monitoring_intelligence()
+    if text in ["climate simulation assistant", "624 help"]:
+        return climate_simulation_assistant()
+    if text in ["agricultural ai orchestration", "625 help"]:
+        return agricultural_ai_orchestration()
+    if text in ["precision farming engine", "626 help"]:
+        return precision_farming_engine()
+    if text in ["smart irrigation optimizer", "627 help"]:
+        return smart_irrigation_optimizer()
+    if text in ["livestock monitoring ai", "628 help"]:
+        return livestock_monitoring_ai()
+    if text in ["ai healthcare assistant", "629 help"]:
+        return ai_healthcare_assistant()
+    if text in ["medical imaging analysis", "630 help"]:
+        return medical_imaging_analysis()
+    if text in ["ai triage assistant", "631 help"]:
+        return ai_triage_assistant()
+    if text in ["clinical decision support", "632 help"]:
+        return clinical_decision_support()
+    if text in ["patient monitoring intelligence", "633 help"]:
+        return patient_monitoring_intelligence()
+    if text in ["drug interaction analyzer", "634 help"]:
+        return drug_interaction_analyzer()
+    if text in ["autonomous health risk scoring", "635 help"]:
+        return autonomous_health_risk_scoring()
+    if text in ["genomics research assistant", "636 help"]:
+        return genomics_research_assistant()
+    if text in ["ai pharmaceutical simulation", "637 help"]:
+        return ai_pharmaceutical_simulation()
+    if text in ["ai law research engine", "638 help"]:
+        return ai_law_research_engine()
+    if text in ["case-law intelligence assistant", "case law intelligence assistant", "639 help"]:
+        return case_law_intelligence_assistant()
+    if text in ["legal risk scoring system", "640 help"]:
+        return legal_risk_scoring_system()
+    if text in ["ai court document analyzer", "641 help"]:
+        return ai_court_document_analyzer()
+    if text in ["autonomous compliance drafting", "642 help"]:
+        return autonomous_compliance_drafting()
+    if text in ["government operations intelligence", "643 help"]:
+        return government_operations_intelligence()
+    if text in ["public service ai framework", "644 help"]:
+        return public_service_ai_framework()
+    if text in ["smart city orchestration", "645 help"]:
+        return smart_city_orchestration()
+    if text in ["urban traffic optimization", "646 help"]:
+        return urban_traffic_optimization()
+    if text in ["emergency response coordination", "647 help"]:
+        return emergency_response_coordination()
+    if text in ["disaster simulation engine", "648 help"]:
+        return disaster_simulation_engine()
+    if text in ["autonomous rescue planning", "649 help"]:
+        return autonomous_rescue_planning()
+    if text in ["ai defense simulation layer", "650 help"]:
+        return ai_defense_simulation_layer()
     return None
