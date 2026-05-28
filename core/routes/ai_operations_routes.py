@@ -65,6 +65,25 @@ from tools.embodied_runtime_tools import (
     robotics_control_bridge,
     vision_guided_automation,
 )
+from tools.immersive_interface_tools import (
+    ar_overlay_assistant,
+    brain_computer_interface_research_layer,
+    digital_twin_system,
+    gesture_control_interface,
+    holographic_ui_prototype_mode,
+    indoor_navigation_assistant,
+    virtual_avatar_interface,
+)
+from tools.personal_life_os_tools import (
+    daily_optimization_engine,
+    fitness_assistant_integration,
+    goal_execution_planner,
+    habit_tracking_engine,
+    nutrition_planning_assistant,
+    personal_life_operating_system,
+    sleep_work_pattern_analyzer,
+    stress_detection_assistant,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -192,4 +211,34 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return vision_guided_automation()
     if text in ["real-world mapping engine", "real world mapping engine", "435 help"]:
         return real_world_mapping_engine()
+    if text in ["indoor navigation assistant", "436 help"]:
+        return indoor_navigation_assistant()
+    if text in ["ar overlay assistant", "437 help"]:
+        return ar_overlay_assistant()
+    if text in ["virtual avatar interface", "438 help"]:
+        return virtual_avatar_interface()
+    if text in ["holographic ui prototype mode", "439 help"]:
+        return holographic_ui_prototype_mode()
+    if text in ["gesture control interface", "440 help"]:
+        return gesture_control_interface()
+    if text in ["brain-computer interface research layer", "brain computer interface research layer", "441 help"]:
+        return brain_computer_interface_research_layer()
+    if text in ["digital twin system", "442 help"]:
+        return digital_twin_system()
+    if text in ["personal life operating system", "443 help"]:
+        return personal_life_operating_system()
+    if text in ["habit tracking engine", "444 help"]:
+        return habit_tracking_engine()
+    if text in ["goal execution planner", "445 help"]:
+        return goal_execution_planner()
+    if text in ["daily optimization engine", "446 help"]:
+        return daily_optimization_engine()
+    if text in ["sleep/work pattern analyzer", "sleep work pattern analyzer", "447 help"]:
+        return sleep_work_pattern_analyzer()
+    if text in ["fitness assistant integration", "448 help"]:
+        return fitness_assistant_integration()
+    if text in ["nutrition planning assistant", "449 help"]:
+        return nutrition_planning_assistant()
+    if text in ["stress detection assistant", "450 help"]:
+        return stress_detection_assistant()
     return None
