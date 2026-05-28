@@ -758,6 +758,30 @@ from tools.omega_architecture_tools import (
     recursive_ethical_intelligence_architecture,
     universal_adaptive_resilience_framework,
 )
+from tools.bootstrap_semantic_tools import (
+    autonomous_collective_reasoning_lattice,
+    autonomous_ontology_evolution_framework,
+    hyperdimensional_knowledge_indexing_engine,
+    infinite_agent_coordination_substrate,
+    planetary_scale_adaptive_cognition_fabric,
+    recursive_autonomous_civilization_bootstrap_engine,
+    recursive_ethics_simulation_runtime,
+    self_organizing_planetary_intelligence_grid,
+    universal_memory_harmonization_system,
+    universal_semantic_compression_layer,
+)
+from tools.diplomatic_resilience_tools import (
+    autonomous_meta_learning_substrate,
+    autonomous_policy_consequence_predictor,
+    cross_domain_cognitive_fusion_engine,
+    distributed_resilience_cognition_layer,
+    human_machine_consensus_governance_ai,
+    infinite_context_diplomatic_simulation_engine,
+    infinite_scale_recursive_planning_network,
+    planetary_adaptive_law_simulator,
+    recursive_social_stability_optimizer,
+    universal_trust_propagation_framework,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -2015,4 +2039,44 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return autonomous_universal_cognition_mesh()
     if text in ["jarvis omega architecture", "1000 help"]:
         return jarvis_omega_architecture()
+    if text in ["recursive autonomous civilization bootstrap engine", "1001 help"]:
+        return recursive_autonomous_civilization_bootstrap_engine()
+    if text in ["infinite-agent coordination substrate", "infinite agent coordination substrate", "1002 help"]:
+        return infinite_agent_coordination_substrate()
+    if text in ["universal semantic compression layer", "1003 help"]:
+        return universal_semantic_compression_layer()
+    if text in ["planetary-scale adaptive cognition fabric", "planetary scale adaptive cognition fabric", "1004 help"]:
+        return planetary_scale_adaptive_cognition_fabric()
+    if text in ["autonomous ontology evolution framework", "1005 help"]:
+        return autonomous_ontology_evolution_framework()
+    if text in ["hyperdimensional knowledge indexing engine", "1006 help"]:
+        return hyperdimensional_knowledge_indexing_engine()
+    if text in ["recursive ethics simulation runtime", "1007 help"]:
+        return recursive_ethics_simulation_runtime()
+    if text in ["universal memory harmonization system", "1008 help"]:
+        return universal_memory_harmonization_system()
+    if text in ["autonomous collective reasoning lattice", "1009 help"]:
+        return autonomous_collective_reasoning_lattice()
+    if text in ["self-organizing planetary intelligence grid", "self organizing planetary intelligence grid", "1010 help"]:
+        return self_organizing_planetary_intelligence_grid()
+    if text in ["infinite-context diplomatic simulation engine", "infinite context diplomatic simulation engine", "1011 help"]:
+        return infinite_context_diplomatic_simulation_engine()
+    if text in ["human-machine consensus governance ai", "human machine consensus governance ai", "1012 help"]:
+        return human_machine_consensus_governance_ai()
+    if text in ["autonomous policy consequence predictor", "1013 help"]:
+        return autonomous_policy_consequence_predictor()
+    if text in ["recursive social stability optimizer", "1014 help"]:
+        return recursive_social_stability_optimizer()
+    if text in ["universal trust propagation framework", "1015 help"]:
+        return universal_trust_propagation_framework()
+    if text in ["cross-domain cognitive fusion engine", "cross domain cognitive fusion engine", "1016 help"]:
+        return cross_domain_cognitive_fusion_engine()
+    if text in ["autonomous meta-learning substrate", "autonomous meta learning substrate", "1017 help"]:
+        return autonomous_meta_learning_substrate()
+    if text in ["infinite-scale recursive planning network", "infinite scale recursive planning network", "1018 help"]:
+        return infinite_scale_recursive_planning_network()
+    if text in ["planetary adaptive law simulator", "1019 help"]:
+        return planetary_adaptive_law_simulator()
+    if text in ["distributed resilience cognition layer", "1020 help"]:
+        return distributed_resilience_cognition_layer()
     return None
