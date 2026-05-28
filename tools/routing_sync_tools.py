@@ -71,3 +71,28 @@ def offline_conflict_resolution() -> str:
             "Rule: offline merges should prefer explicit provenance, deterministic conflict handling, and human review for high-risk changes.",
         ]
     )
+
+
+def ai_driven_replication_manager() -> str:
+    plan = _safe_json(ROUTING_DIR / "replication_manager.json", {})
+    replicas = plan.get("replicas", []) if isinstance(plan, dict) else []
+    policies = plan.get("policies", []) if isinstance(plan, dict) else []
+    lagging = [
+        item
+        for item in replicas
+        if isinstance(item, dict) and float(item.get("lag_seconds", 0) or 0) > 30
+    ]
+    write_protected = [
+        item for item in policies if isinstance(item, dict) and bool(item.get("write_protected", False))
+    ]
+    return "\n".join(
+        [
+            "AI-DRIVEN REPLICATION MANAGER - PHASE 524",
+            "Mode: replication-management overview.",
+            f"Replica targets tracked: {len(replicas)}",
+            f"Lagging replicas: {len(lagging)}",
+            f"Protection policies: {len(policies)}",
+            f"Write-protected policies: {len(write_protected)}",
+            "Guardrail: replication automation should balance freshness, failover readiness, and policy-safe write ownership before promoting changes.",
+        ]
+    )

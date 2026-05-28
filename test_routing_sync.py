@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 from core.routes.ai_operations_routes import handle_ai_operations_routes
 from tools.routing_sync_tools import (
+    ai_driven_replication_manager,
     multi_region_synchronization,
     offline_conflict_resolution,
     smart_routing_engine,
@@ -13,7 +14,7 @@ from tools.routing_sync_tools import (
 
 
 class RoutingSyncTests(unittest.TestCase):
-    def test_smart_routing_multi_region_and_conflict_render(self):
+    def test_routing_sync_and_replication_render(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "smart_routing.json").write_text(
@@ -40,19 +41,38 @@ class RoutingSyncTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
+            (root / "replication_manager.json").write_text(
+                json.dumps(
+                    {
+                        "replicas": [
+                            {"name": "primary-us", "lag_seconds": 3},
+                            {"name": "standby-eu", "lag_seconds": 95},
+                        ],
+                        "policies": [
+                            {"name": "finance-ledger", "write_protected": True},
+                            {"name": "analytics-cache", "write_protected": False},
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
             with patch("tools.routing_sync_tools.ROUTING_DIR", root):
                 routing = smart_routing_engine()
                 sync = multi_region_synchronization()
                 conflict = offline_conflict_resolution()
+                replication = ai_driven_replication_manager()
         self.assertIn("Routes tracked: 2", routing)
         self.assertIn("Adaptive routes: 1", routing)
         self.assertIn("Regions tracked: 2", sync)
         self.assertIn("Healthy links: 1", sync)
         self.assertIn("Conflicts tracked: 2", conflict)
         self.assertIn("Manual-review conflicts: 1", conflict)
+        self.assertIn("Replica targets tracked: 2", replication)
+        self.assertIn("Lagging replicas: 1", replication)
+        self.assertIn("Write-protected policies: 1", replication)
 
-    def test_routes_cover_521_to_523(self):
-        for phase in range(521, 524):
+    def test_routes_cover_521_to_524(self):
+        for phase in range(521, 525):
             result = handle_ai_operations_routes(f"{phase} help", f"{phase} help", f"{phase} help")
             self.assertIsNotNone(result, f"missing route for {phase}")
 

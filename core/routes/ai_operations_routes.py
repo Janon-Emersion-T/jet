@@ -181,6 +181,7 @@ from tools.network_governance_tools import (
     live_topology_visualization,
 )
 from tools.routing_sync_tools import (
+    ai_driven_replication_manager,
     multi_region_synchronization,
     offline_conflict_resolution,
     smart_routing_engine,
@@ -488,4 +489,6 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return multi_region_synchronization()
     if text in ["offline conflict resolution", "523 help"]:
         return offline_conflict_resolution()
+    if text in ["ai-driven replication manager", "ai driven replication manager", "524 help"]:
+        return ai_driven_replication_manager()
     return None
