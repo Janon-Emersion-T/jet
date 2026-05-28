@@ -22,6 +22,13 @@ from tools.infrastructure_monitoring_tools import (
     infrastructure_topology_mapper,
     network_scanner,
 )
+from tools.ai_infrastructure_tools import (
+    port_monitoring_assistant,
+    local_ai_cluster_planner,
+    gpu_utilization_assistant,
+    cuda_setup_advisor,
+    ollama_optimization_assistant,
+)
 
 
 def handle_linux_admin_routes(user_input: str, text: str, clean_text: str):
@@ -120,5 +127,35 @@ def handle_linux_admin_routes(user_input: str, text: str, clean_text: str):
 
     if text in ["375 help", "phase 375 help", "network scanner help"]:
         return "NETWORK SCANNER COMMANDS - PHASE 375\n\nnetwork scanner\ncheck listening ports"
+
+    if text in ["port monitoring assistant", "monitor ports", "check port monitoring"]:
+        return port_monitoring_assistant()
+
+    if text in ["local ai cluster planner", "plan local ai cluster", "ai cluster planner"]:
+        return local_ai_cluster_planner()
+
+    if text in ["gpu utilization assistant", "check gpu utilization", "gpu monitor"]:
+        return gpu_utilization_assistant()
+
+    if text in ["cuda setup advisor", "check cuda setup", "cuda advisor"]:
+        return cuda_setup_advisor()
+
+    if text in ["ollama optimization assistant", "optimize ollama", "ollama advisor"]:
+        return ollama_optimization_assistant()
+
+    if text in ["376 help", "phase 376 help", "port monitoring help"]:
+        return "PORT MONITORING ASSISTANT COMMANDS - PHASE 376\n\nport monitoring assistant\nmonitor ports"
+
+    if text in ["377 help", "phase 377 help", "ai cluster help"]:
+        return "LOCAL AI CLUSTER PLANNER COMMANDS - PHASE 377\n\nlocal ai cluster planner\nplan local ai cluster"
+
+    if text in ["378 help", "phase 378 help", "gpu help"]:
+        return "GPU UTILIZATION ASSISTANT COMMANDS - PHASE 378\n\ngpu utilization assistant\ncheck gpu utilization"
+
+    if text in ["379 help", "phase 379 help", "cuda help"]:
+        return "CUDA SETUP ADVISOR COMMANDS - PHASE 379\n\ncuda setup advisor\ncheck cuda setup"
+
+    if text in ["380 help", "phase 380 help", "ollama help"]:
+        return "OLLAMA OPTIMIZATION ASSISTANT COMMANDS - PHASE 380\n\nollama optimization assistant\noptimize ollama"
 
     return None
