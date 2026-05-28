@@ -698,6 +698,66 @@ from tools.civilization_kernel_tools import (
     hyper_resilient_planetary_operations_ai,
     universal_discovery_acceleration_engine,
 )
+from tools.planetary_omega_tools import (
+    ai_assisted_universal_diplomacy_layer,
+    ai_guided_interstellar_governance_sandbox,
+    ai_stewardship_of_planetary_ecosystems,
+    autonomous_existential_continuity_system,
+    civilization_continuity_archive_intelligence,
+    infinite_scale_cooperative_planning_framework,
+    planetary_consciousness_research_engine,
+    recursive_planetary_optimization_framework,
+    self_evolving_governance_cognition_engine,
+    universal_adaptive_learning_civilization,
+)
+from tools.cosmic_civilization_tools import (
+    ai_assisted_reality_interpretation_engine,
+    ai_guided_future_species_simulator,
+    autonomous_civilization_expansion_simulator,
+    autonomous_universal_research_orchestration,
+    cross_civilization_memory_federation,
+    human_machine_civilization_fusion_stack,
+    infinite_recursion_intelligence_sandbox,
+    planetary_semantic_synchronization_layer,
+    recursive_cosmic_exploration_intelligence,
+    universal_ethical_adaptation_framework,
+)
+from tools.universal_cognition_tools import (
+    ai_assisted_post_biological_transition_research,
+    ai_guided_existential_stewardship_engine,
+    autonomous_galactic_civilization_planner,
+    autonomous_wisdom_synthesis_engine,
+    civilization_scale_resilience_orchestration,
+    infinite_dimensional_reasoning_framework,
+    recursive_cooperative_intelligence_field,
+    self_organizing_universal_cognition_framework,
+    universal_flourishing_optimization_substrate,
+    universal_memory_continuity_architecture,
+)
+from tools.omega_governance_tools import (
+    autonomous_interstellar_continuity_framework,
+    autonomous_universal_systems_governance,
+    civilization_scale_intelligence_harmonizer,
+    cross_reality_cognition_research_layer,
+    human_ai_co_evolution_framework,
+    infinite_collaborative_reasoning_substrate,
+    infinite_scale_ethical_simulation_framework,
+    planetary_adaptive_governance_intelligence,
+    recursive_planetary_stewardship_ai,
+    universal_knowledge_emergence_engine,
+)
+from tools.omega_architecture_tools import (
+    ai_guided_civilization_transcendence_simulator,
+    autonomous_cosmic_continuity_engine,
+    autonomous_universal_cognition_mesh,
+    human_machine_universal_coordination_layer,
+    infinite_context_planetary_cognition,
+    infinite_cooperative_intelligence_network,
+    jarvis_omega_architecture,
+    planetary_flourishing_orchestration_system,
+    recursive_ethical_intelligence_architecture,
+    universal_adaptive_resilience_framework,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -1855,4 +1915,104 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return hyper_resilient_planetary_operations_ai()
     if text in ["human flourishing civilization kernel", "950 help"]:
         return human_flourishing_civilization_kernel()
+    if text in ["recursive planetary optimization framework", "951 help"]:
+        return recursive_planetary_optimization_framework()
+    if text in ["ai-guided interstellar governance sandbox", "ai guided interstellar governance sandbox", "952 help"]:
+        return ai_guided_interstellar_governance_sandbox()
+    if text in ["universal adaptive learning civilization", "953 help"]:
+        return universal_adaptive_learning_civilization()
+    if text in ["planetary consciousness research engine", "954 help"]:
+        return planetary_consciousness_research_engine()
+    if text in ["autonomous existential continuity system", "955 help"]:
+        return autonomous_existential_continuity_system()
+    if text in ["ai-assisted universal diplomacy layer", "ai assisted universal diplomacy layer", "956 help"]:
+        return ai_assisted_universal_diplomacy_layer()
+    if text in ["civilization continuity archive intelligence", "957 help"]:
+        return civilization_continuity_archive_intelligence()
+    if text in ["self-evolving governance cognition engine", "self evolving governance cognition engine", "958 help"]:
+        return self_evolving_governance_cognition_engine()
+    if text in ["infinite-scale cooperative planning framework", "infinite scale cooperative planning framework", "959 help"]:
+        return infinite_scale_cooperative_planning_framework()
+    if text in ["ai stewardship of planetary ecosystems", "960 help"]:
+        return ai_stewardship_of_planetary_ecosystems()
+    if text in ["recursive cosmic exploration intelligence", "961 help"]:
+        return recursive_cosmic_exploration_intelligence()
+    if text in ["autonomous civilization expansion simulator", "962 help"]:
+        return autonomous_civilization_expansion_simulator()
+    if text in ["universal ethical adaptation framework", "963 help"]:
+        return universal_ethical_adaptation_framework()
+    if text in ["ai-assisted reality interpretation engine", "ai assisted reality interpretation engine", "964 help"]:
+        return ai_assisted_reality_interpretation_engine()
+    if text in ["cross-civilization memory federation", "cross civilization memory federation", "965 help"]:
+        return cross_civilization_memory_federation()
+    if text in ["planetary semantic synchronization layer", "966 help"]:
+        return planetary_semantic_synchronization_layer()
+    if text in ["autonomous universal research orchestration", "967 help"]:
+        return autonomous_universal_research_orchestration()
+    if text in ["human-machine civilization fusion stack", "human machine civilization fusion stack", "968 help"]:
+        return human_machine_civilization_fusion_stack()
+    if text in ["ai-guided future species simulator", "ai guided future species simulator", "969 help"]:
+        return ai_guided_future_species_simulator()
+    if text in ["infinite recursion intelligence sandbox", "970 help"]:
+        return infinite_recursion_intelligence_sandbox()
+    if text in ["self-organizing universal cognition framework", "self organizing universal cognition framework", "971 help"]:
+        return self_organizing_universal_cognition_framework()
+    if text in ["autonomous wisdom synthesis engine", "972 help"]:
+        return autonomous_wisdom_synthesis_engine()
+    if text in ["civilization-scale resilience orchestration", "civilization scale resilience orchestration", "973 help"]:
+        return civilization_scale_resilience_orchestration()
+    if text in ["ai-assisted post-biological transition research", "ai assisted post biological transition research", "974 help"]:
+        return ai_assisted_post_biological_transition_research()
+    if text in ["universal memory continuity architecture", "975 help"]:
+        return universal_memory_continuity_architecture()
+    if text in ["infinite-dimensional reasoning framework", "infinite dimensional reasoning framework", "976 help"]:
+        return infinite_dimensional_reasoning_framework()
+    if text in ["recursive cooperative intelligence field", "977 help"]:
+        return recursive_cooperative_intelligence_field()
+    if text in ["autonomous galactic civilization planner", "978 help"]:
+        return autonomous_galactic_civilization_planner()
+    if text in ["universal flourishing optimization substrate", "979 help"]:
+        return universal_flourishing_optimization_substrate()
+    if text in ["ai-guided existential stewardship engine", "ai guided existential stewardship engine", "980 help"]:
+        return ai_guided_existential_stewardship_engine()
+    if text in ["planetary adaptive governance intelligence", "981 help"]:
+        return planetary_adaptive_governance_intelligence()
+    if text in ["infinite-scale ethical simulation framework", "infinite scale ethical simulation framework", "982 help"]:
+        return infinite_scale_ethical_simulation_framework()
+    if text in ["cross-reality cognition research layer", "cross reality cognition research layer", "983 help"]:
+        return cross_reality_cognition_research_layer()
+    if text in ["universal knowledge emergence engine", "984 help"]:
+        return universal_knowledge_emergence_engine()
+    if text in ["autonomous interstellar continuity framework", "985 help"]:
+        return autonomous_interstellar_continuity_framework()
+    if text in ["civilization-scale intelligence harmonizer", "civilization scale intelligence harmonizer", "986 help"]:
+        return civilization_scale_intelligence_harmonizer()
+    if text in ["recursive planetary stewardship ai", "987 help"]:
+        return recursive_planetary_stewardship_ai()
+    if text in ["infinite collaborative reasoning substrate", "988 help"]:
+        return infinite_collaborative_reasoning_substrate()
+    if text in ["human-ai co-evolution framework", "human ai co evolution framework", "989 help"]:
+        return human_ai_co_evolution_framework()
+    if text in ["autonomous universal systems governance", "990 help"]:
+        return autonomous_universal_systems_governance()
+    if text in ["ai-guided civilization transcendence simulator", "ai guided civilization transcendence simulator", "991 help"]:
+        return ai_guided_civilization_transcendence_simulator()
+    if text in ["infinite-context planetary cognition", "infinite context planetary cognition", "992 help"]:
+        return infinite_context_planetary_cognition()
+    if text in ["universal adaptive resilience framework", "993 help"]:
+        return universal_adaptive_resilience_framework()
+    if text in ["recursive ethical intelligence architecture", "994 help"]:
+        return recursive_ethical_intelligence_architecture()
+    if text in ["autonomous cosmic continuity engine", "995 help"]:
+        return autonomous_cosmic_continuity_engine()
+    if text in ["human-machine universal coordination layer", "human machine universal coordination layer", "996 help"]:
+        return human_machine_universal_coordination_layer()
+    if text in ["infinite cooperative intelligence network", "997 help"]:
+        return infinite_cooperative_intelligence_network()
+    if text in ["planetary flourishing orchestration system", "998 help"]:
+        return planetary_flourishing_orchestration_system()
+    if text in ["autonomous universal cognition mesh", "999 help"]:
+        return autonomous_universal_cognition_mesh()
+    if text in ["jarvis omega architecture", "1000 help"]:
+        return jarvis_omega_architecture()
     return None
