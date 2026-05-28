@@ -782,6 +782,13 @@ from tools.diplomatic_resilience_tools import (
     recursive_social_stability_optimizer,
     universal_trust_propagation_framework,
 )
+from tools.ecological_continuity_tools import (
+    autonomous_multi_species_cooperation_engine,
+    planetary_semantic_continuity_system,
+    recursive_planetary_logistics_optimizer,
+    self_healing_civilization_memory_archive,
+    universal_ecological_stewardship_intelligence,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -2079,4 +2086,14 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return planetary_adaptive_law_simulator()
     if text in ["distributed resilience cognition layer", "1020 help"]:
         return distributed_resilience_cognition_layer()
+    if text in ["autonomous multi-species cooperation engine", "autonomous multi species cooperation engine", "1021 help"]:
+        return autonomous_multi_species_cooperation_engine()
+    if text in ["universal ecological stewardship intelligence", "1022 help"]:
+        return universal_ecological_stewardship_intelligence()
+    if text in ["self-healing civilization memory archive", "self healing civilization memory archive", "1023 help"]:
+        return self_healing_civilization_memory_archive()
+    if text in ["planetary semantic continuity system", "1024 help"]:
+        return planetary_semantic_continuity_system()
+    if text in ["recursive planetary logistics optimizer", "1025 help"]:
+        return recursive_planetary_logistics_optimizer()
     return None
