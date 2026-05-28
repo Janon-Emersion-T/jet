@@ -98,6 +98,29 @@ def ai_driven_replication_manager() -> str:
     )
 
 
+def federated_knowledge_exchange() -> str:
+    plan = _safe_json(ROUTING_DIR / "federated_exchange.json", {})
+    peers = plan.get("peers", []) if isinstance(plan, dict) else []
+    exchanges = plan.get("exchanges", []) if isinstance(plan, dict) else []
+    approved = [
+        item for item in exchanges if isinstance(item, dict) and item.get("approval", "pending") == "approved"
+    ]
+    restricted = [
+        item for item in exchanges if isinstance(item, dict) and bool(item.get("policy_restricted", False))
+    ]
+    return "\n".join(
+        [
+            "FEDERATED KNOWLEDGE EXCHANGE - PHASE 525",
+            "Mode: federation-exchange overview.",
+            f"Federation peers: {len(peers)}",
+            f"Exchange channels: {len(exchanges)}",
+            f"Approved exchanges: {len(approved)}",
+            f"Policy-restricted exchanges: {len(restricted)}",
+            "Guardrail: cross-organization knowledge sharing should preserve provenance, approval state, and policy boundaries before any semantic merge is allowed.",
+        ]
+    )
+
+
 def enterprise_memory_partitioning() -> str:
     plan = _safe_json(ROUTING_DIR / "memory_partitions.json", {})
     partitions = plan.get("partitions", []) if isinstance(plan, dict) else []

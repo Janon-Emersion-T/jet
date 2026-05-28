@@ -8,6 +8,7 @@ from core.routes.ai_operations_routes import handle_ai_operations_routes
 from tools.routing_sync_tools import (
     ai_driven_replication_manager,
     enterprise_memory_partitioning,
+    federated_knowledge_exchange,
     multi_region_synchronization,
     offline_conflict_resolution,
     smart_routing_engine,
@@ -15,7 +16,7 @@ from tools.routing_sync_tools import (
 
 
 class RoutingSyncTests(unittest.TestCase):
-    def test_routing_sync_replication_and_partitioning_render(self):
+    def test_routing_sync_replication_federation_and_partitioning_render(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "smart_routing.json").write_text(
@@ -57,6 +58,18 @@ class RoutingSyncTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
+            (root / "federated_exchange.json").write_text(
+                json.dumps(
+                    {
+                        "peers": [{"name": "research-eu"}, {"name": "ops-us"}],
+                        "exchanges": [
+                            {"topic": "threat-intel", "approval": "approved", "policy_restricted": True},
+                            {"topic": "capacity-trends", "approval": "pending", "policy_restricted": False},
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
             (root / "memory_partitions.json").write_text(
                 json.dumps(
                     {
@@ -74,6 +87,7 @@ class RoutingSyncTests(unittest.TestCase):
                 sync = multi_region_synchronization()
                 conflict = offline_conflict_resolution()
                 replication = ai_driven_replication_manager()
+                federation = federated_knowledge_exchange()
                 partitioning = enterprise_memory_partitioning()
         self.assertIn("Routes tracked: 2", routing)
         self.assertIn("Adaptive routes: 1", routing)
@@ -84,13 +98,17 @@ class RoutingSyncTests(unittest.TestCase):
         self.assertIn("Replica targets tracked: 2", replication)
         self.assertIn("Lagging replicas: 1", replication)
         self.assertIn("Write-protected policies: 1", replication)
+        self.assertIn("Federation peers: 2", federation)
+        self.assertIn("Exchange channels: 2", federation)
+        self.assertIn("Approved exchanges: 1", federation)
+        self.assertIn("Policy-restricted exchanges: 1", federation)
         self.assertIn("Partitions tracked: 2", partitioning)
         self.assertIn("Encrypted partitions: 1", partitioning)
         self.assertIn("Shared partitions: 1", partitioning)
         self.assertIn("Tenants tracked: 2", partitioning)
 
-    def test_routes_cover_521_524_and_526(self):
-        for phase in [521, 522, 523, 524, 526]:
+    def test_routes_cover_521_to_526(self):
+        for phase in range(521, 527):
             result = handle_ai_operations_routes(f"{phase} help", f"{phase} help", f"{phase} help")
             self.assertIsNotNone(result, f"missing route for {phase}")
 
