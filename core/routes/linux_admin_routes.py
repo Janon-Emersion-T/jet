@@ -12,6 +12,16 @@ from tools.linux_admin_tools import (
     linux_admin_help,
 )
 from tools.vps_monitoring_tools import vps_monitoring_engine
+from tools.infrastructure_monitoring_tools import (
+    cpu_ram_monitoring_assistant,
+    disk_health_checker,
+    service_auto_recovery_planner,
+    uptime_monitoring_assistant,
+    backup_verification_engine,
+    disaster_recovery_planner,
+    infrastructure_topology_mapper,
+    network_scanner,
+)
 
 
 def handle_linux_admin_routes(user_input: str, text: str, clean_text: str):
@@ -62,5 +72,53 @@ def handle_linux_admin_routes(user_input: str, text: str, clean_text: str):
             "check vps health\n"
             "monitor my server"
         )
+
+    if text in ["cpu ram monitoring assistant", "cpu/ram monitoring assistant", "check cpu ram", "monitor cpu ram"]:
+        return cpu_ram_monitoring_assistant()
+
+    if text in ["disk health checker", "check disk health", "disk health"]:
+        return disk_health_checker()
+
+    if text in ["service auto-recovery planner", "service auto recovery planner", "plan service recovery"]:
+        return service_auto_recovery_planner()
+
+    if text in ["uptime monitoring assistant", "check uptime", "uptime monitor"]:
+        return uptime_monitoring_assistant()
+
+    if text in ["backup verification engine", "verify backups", "check backups"]:
+        return backup_verification_engine()
+
+    if text in ["disaster recovery planner", "plan disaster recovery", "check disaster recovery"]:
+        return disaster_recovery_planner()
+
+    if text in ["infrastructure topology mapper", "map infrastructure", "show infrastructure topology"]:
+        return infrastructure_topology_mapper()
+
+    if text in ["network scanner", "scan local network listeners", "check listening ports"]:
+        return network_scanner()
+
+    if text in ["368 help", "phase 368 help", "cpu ram help"]:
+        return "CPU/RAM MONITORING ASSISTANT COMMANDS - PHASE 368\n\ncpu ram monitoring assistant\ncheck cpu ram\nmonitor cpu ram"
+
+    if text in ["369 help", "phase 369 help", "disk health help"]:
+        return "DISK HEALTH CHECKER COMMANDS - PHASE 369\n\ndisk health checker\ncheck disk health"
+
+    if text in ["370 help", "phase 370 help", "service recovery help"]:
+        return "SERVICE AUTO-RECOVERY PLANNER COMMANDS - PHASE 370\n\nservice auto-recovery planner\nplan service recovery"
+
+    if text in ["371 help", "phase 371 help", "uptime help"]:
+        return "UPTIME MONITORING ASSISTANT COMMANDS - PHASE 371\n\nuptime monitoring assistant\ncheck uptime"
+
+    if text in ["372 help", "phase 372 help", "backup help"]:
+        return "BACKUP VERIFICATION ENGINE COMMANDS - PHASE 372\n\nbackup verification engine\nverify backups\ncheck backups"
+
+    if text in ["373 help", "phase 373 help", "disaster recovery help"]:
+        return "DISASTER RECOVERY PLANNER COMMANDS - PHASE 373\n\ndisaster recovery planner\nplan disaster recovery"
+
+    if text in ["374 help", "phase 374 help", "topology help"]:
+        return "INFRASTRUCTURE TOPOLOGY MAPPER COMMANDS - PHASE 374\n\ninfrastructure topology mapper\nmap infrastructure"
+
+    if text in ["375 help", "phase 375 help", "network scanner help"]:
+        return "NETWORK SCANNER COMMANDS - PHASE 375\n\nnetwork scanner\ncheck listening ports"
 
     return None
