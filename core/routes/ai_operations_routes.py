@@ -518,6 +518,66 @@ from tools.civic_collaboration_tools import (
     smart_governance_simulation,
     universal_access_knowledge_engine,
 )
+from tools.space_civilization_tools import (
+    ai_biosphere_management,
+    autonomous_habitat_simulation,
+    autonomous_terraforming_simulation,
+    cosmic_scale_data_analysis,
+    extraterrestrial_research_assistant,
+    interplanetary_logistics_engine,
+    long_duration_survival_intelligence,
+    planetary_coordination_framework,
+    space_colonization_planning_ai,
+    universal_scientific_archive_ai,
+)
+from tools.philosophy_future_tools import (
+    ai_macro_history_engine,
+    ai_philosophy_engine,
+    autonomous_civilization_continuity_planning,
+    cross_species_communication_research,
+    existential_risk_simulation,
+    human_destiny_modeling_framework,
+    long_horizon_future_forecasting,
+    metaphysical_reasoning_sandbox,
+    multiverse_simulation_sandbox,
+    temporal_scenario_generator,
+)
+from tools.cognitive_interop_tools import (
+    ai_driven_evolutionary_modeling,
+    ai_driven_ontology_framework,
+    autonomous_digital_twin_civilization,
+    hyper_personalized_intelligence_layer,
+    infinite_scale_memory_indexing,
+    planetary_cognitive_operating_system,
+    probabilistic_reality_modeling,
+    recursive_intelligence_scaling,
+    unified_human_machine_interface,
+    universal_semantic_graph,
+)
+from tools.interoperability_compute_tools import (
+    ai_assisted_abundance_modeling,
+    ai_protocol_governance,
+    autonomous_data_center_orchestration,
+    autonomous_infrastructure_self_healing,
+    autonomous_standards_generation,
+    cross_platform_autonomous_cognition,
+    distributed_cognition_economy,
+    open_intelligence_federation,
+    self_replicating_software_systems,
+    universal_interoperability_framework,
+)
+from tools.ai_sustainability_governance_tools import (
+    ai_democracy_participation_engine,
+    ai_ethics_telemetry,
+    autonomous_transparency_reporting,
+    carbon_neutral_ai_framework,
+    collective_reasoning_networks,
+    energy_aware_inference_scheduling,
+    explainable_planetary_ai,
+    shared_human_ai_memory_fabric,
+    sustainable_ai_compute_management,
+    swarm_cognition_framework,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -1375,4 +1435,104 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return autonomous_legal_harmonization()
     if text in ["cross-border collaboration ai", "cross border collaboration ai", "800 help"]:
         return cross_border_collaboration_ai()
+    if text in ["planetary coordination framework", "801 help"]:
+        return planetary_coordination_framework()
+    if text in ["space colonization planning ai", "802 help"]:
+        return space_colonization_planning_ai()
+    if text in ["autonomous habitat simulation", "803 help"]:
+        return autonomous_habitat_simulation()
+    if text in ["interplanetary logistics engine", "804 help"]:
+        return interplanetary_logistics_engine()
+    if text in ["extraterrestrial research assistant", "805 help"]:
+        return extraterrestrial_research_assistant()
+    if text in ["ai biosphere management", "806 help"]:
+        return ai_biosphere_management()
+    if text in ["long-duration survival intelligence", "long duration survival intelligence", "807 help"]:
+        return long_duration_survival_intelligence()
+    if text in ["autonomous terraforming simulation", "808 help"]:
+        return autonomous_terraforming_simulation()
+    if text in ["cosmic-scale data analysis", "cosmic scale data analysis", "809 help"]:
+        return cosmic_scale_data_analysis()
+    if text in ["universal scientific archive ai", "810 help"]:
+        return universal_scientific_archive_ai()
+    if text in ["cross-species communication research", "cross species communication research", "811 help"]:
+        return cross_species_communication_research()
+    if text in ["ai philosophy engine", "812 help"]:
+        return ai_philosophy_engine()
+    if text in ["metaphysical reasoning sandbox", "813 help"]:
+        return metaphysical_reasoning_sandbox()
+    if text in ["existential risk simulation", "814 help"]:
+        return existential_risk_simulation()
+    if text in ["human destiny modeling framework", "815 help"]:
+        return human_destiny_modeling_framework()
+    if text in ["autonomous civilization continuity planning", "816 help"]:
+        return autonomous_civilization_continuity_planning()
+    if text in ["long-horizon future forecasting", "long horizon future forecasting", "817 help"]:
+        return long_horizon_future_forecasting()
+    if text in ["ai macro-history engine", "ai macro history engine", "818 help"]:
+        return ai_macro_history_engine()
+    if text in ["temporal scenario generator", "819 help"]:
+        return temporal_scenario_generator()
+    if text in ["multiverse simulation sandbox", "820 help"]:
+        return multiverse_simulation_sandbox()
+    if text in ["probabilistic reality modeling", "821 help"]:
+        return probabilistic_reality_modeling()
+    if text in ["ai-driven ontology framework", "ai driven ontology framework", "822 help"]:
+        return ai_driven_ontology_framework()
+    if text in ["universal semantic graph", "823 help"]:
+        return universal_semantic_graph()
+    if text in ["infinite-scale memory indexing", "infinite scale memory indexing", "824 help"]:
+        return infinite_scale_memory_indexing()
+    if text in ["hyper-personalized intelligence layer", "hyper personalized intelligence layer", "825 help"]:
+        return hyper_personalized_intelligence_layer()
+    if text in ["autonomous digital twin civilization", "826 help"]:
+        return autonomous_digital_twin_civilization()
+    if text in ["ai-driven evolutionary modeling", "ai driven evolutionary modeling", "827 help"]:
+        return ai_driven_evolutionary_modeling()
+    if text in ["recursive intelligence scaling", "828 help"]:
+        return recursive_intelligence_scaling()
+    if text in ["planetary cognitive operating system", "829 help"]:
+        return planetary_cognitive_operating_system()
+    if text in ["unified human-machine interface", "unified human machine interface", "830 help"]:
+        return unified_human_machine_interface()
+    if text in ["universal interoperability framework", "831 help"]:
+        return universal_interoperability_framework()
+    if text in ["cross-platform autonomous cognition", "cross platform autonomous cognition", "832 help"]:
+        return cross_platform_autonomous_cognition()
+    if text in ["autonomous standards generation", "833 help"]:
+        return autonomous_standards_generation()
+    if text in ["ai protocol governance", "834 help"]:
+        return ai_protocol_governance()
+    if text in ["open intelligence federation", "835 help"]:
+        return open_intelligence_federation()
+    if text in ["distributed cognition economy", "836 help"]:
+        return distributed_cognition_economy()
+    if text in ["ai-assisted abundance modeling", "ai assisted abundance modeling", "837 help"]:
+        return ai_assisted_abundance_modeling()
+    if text in ["autonomous infrastructure self-healing", "autonomous infrastructure self healing", "838 help"]:
+        return autonomous_infrastructure_self_healing()
+    if text in ["self-replicating software systems", "self replicating software systems", "839 help"]:
+        return self_replicating_software_systems()
+    if text in ["autonomous data center orchestration", "840 help"]:
+        return autonomous_data_center_orchestration()
+    if text in ["sustainable ai compute management", "841 help"]:
+        return sustainable_ai_compute_management()
+    if text in ["energy-aware inference scheduling", "energy aware inference scheduling", "842 help"]:
+        return energy_aware_inference_scheduling()
+    if text in ["carbon-neutral ai framework", "carbon neutral ai framework", "843 help"]:
+        return carbon_neutral_ai_framework()
+    if text in ["ai ethics telemetry", "844 help"]:
+        return ai_ethics_telemetry()
+    if text in ["autonomous transparency reporting", "845 help"]:
+        return autonomous_transparency_reporting()
+    if text in ["explainable planetary ai", "846 help"]:
+        return explainable_planetary_ai()
+    if text in ["ai democracy participation engine", "847 help"]:
+        return ai_democracy_participation_engine()
+    if text in ["collective reasoning networks", "848 help"]:
+        return collective_reasoning_networks()
+    if text in ["swarm cognition framework", "849 help"]:
+        return swarm_cognition_framework()
+    if text in ["shared human-ai memory fabric", "shared human ai memory fabric", "850 help"]:
+        return shared_human_ai_memory_fabric()
     return None
