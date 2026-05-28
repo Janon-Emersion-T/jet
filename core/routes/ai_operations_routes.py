@@ -124,6 +124,34 @@ from tools.simulation_story_tools import (
     npc_personality_framework,
     simulation_environment_builder,
 )
+from tools.autonomy_evolution_tools import (
+    ai_civilization_sandbox,
+    autonomous_learning_curriculum,
+    recursive_self_improvement_framework,
+    self_diagnostic_evolution_engine,
+    self_healing_software_architecture,
+)
+from tools.distributed_ai_tools import (
+    autonomous_infrastructure_scaling,
+    distributed_agent_clusters,
+    distributed_memory_system,
+    edge_ai_deployment_engine,
+    federated_local_ai_network,
+    offline_enterprise_ai_appliance,
+    sovereign_ai_workstation,
+)
+from tools.jarvis_platform_tools import (
+    ai_native_desktop_environment,
+    enterprise_grade_jarvis_os,
+    general_purpose_autonomous_operator,
+    human_ai_collaborative_workspace,
+    unified_cognitive_dashboard,
+)
+from tools.workforce_architecture_tools import (
+    ai_company_workforce_ecosystem,
+    ai_executive_assistant_framework,
+    jarvis_prime_architecture_foundation,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -341,4 +369,44 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return npc_personality_framework()
     if text in ["simulation environment builder", "480 help"]:
         return simulation_environment_builder()
+    if text in ["ai civilization sandbox", "481 help"]:
+        return ai_civilization_sandbox()
+    if text in ["autonomous learning curriculum", "482 help"]:
+        return autonomous_learning_curriculum()
+    if text in ["recursive self-improvement framework", "recursive self improvement framework", "483 help"]:
+        return recursive_self_improvement_framework()
+    if text in ["self-diagnostic evolution engine", "self diagnostic evolution engine", "484 help"]:
+        return self_diagnostic_evolution_engine()
+    if text in ["self-healing software architecture", "self healing software architecture", "485 help"]:
+        return self_healing_software_architecture()
+    if text in ["autonomous infrastructure scaling", "486 help"]:
+        return autonomous_infrastructure_scaling()
+    if text in ["federated local ai network", "487 help"]:
+        return federated_local_ai_network()
+    if text in ["distributed memory system", "488 help"]:
+        return distributed_memory_system()
+    if text in ["distributed agent clusters", "489 help"]:
+        return distributed_agent_clusters()
+    if text in ["edge ai deployment engine", "490 help"]:
+        return edge_ai_deployment_engine()
+    if text in ["offline enterprise ai appliance", "491 help"]:
+        return offline_enterprise_ai_appliance()
+    if text in ["sovereign ai workstation", "492 help"]:
+        return sovereign_ai_workstation()
+    if text in ["enterprise-grade jarvis os", "enterprise grade jarvis os", "493 help"]:
+        return enterprise_grade_jarvis_os()
+    if text in ["ai-native desktop environment", "ai native desktop environment", "494 help"]:
+        return ai_native_desktop_environment()
+    if text in ["unified cognitive dashboard", "495 help"]:
+        return unified_cognitive_dashboard()
+    if text in ["general-purpose autonomous operator", "general purpose autonomous operator", "496 help"]:
+        return general_purpose_autonomous_operator()
+    if text in ["human-ai collaborative workspace", "human ai collaborative workspace", "497 help"]:
+        return human_ai_collaborative_workspace()
+    if text in ["ai executive assistant framework", "498 help"]:
+        return ai_executive_assistant_framework()
+    if text in ["ai company workforce ecosystem", "499 help"]:
+        return ai_company_workforce_ecosystem()
+    if text in ["jarvis prime architecture foundation", "500 help"]:
+        return jarvis_prime_architecture_foundation()
     return None
