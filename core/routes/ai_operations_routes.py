@@ -160,6 +160,19 @@ from tools.collaborative_cognition_tools import (
     tenant_aware_ai_memory,
 )
 from tools.workspace_isolation_tools import ai_workspace_isolation
+from tools.ops_center_tools import (
+    ai_operations_center_dashboard,
+    ai_task_dependency_graph,
+    department_specific_ai_agents,
+    global_event_stream_processor,
+)
+from tools.resilience_architecture_tools import (
+    ai_decision_replay_engine,
+    autonomous_retry_engine,
+    event_sourcing_architecture,
+    failure_recovery_orchestration,
+    immutable_operational_audit_log,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -429,4 +442,22 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return tenant_aware_ai_memory()
     if text in ["ai workspace isolation", "workspace isolation", "506 help"]:
         return ai_workspace_isolation()
+    if text in ["department-specific ai agents", "department specific ai agents", "507 help"]:
+        return department_specific_ai_agents()
+    if text in ["ai operations center dashboard", "508 help"]:
+        return ai_operations_center_dashboard()
+    if text in ["global event stream processor", "509 help"]:
+        return global_event_stream_processor()
+    if text in ["ai task dependency graph", "510 help"]:
+        return ai_task_dependency_graph()
+    if text in ["autonomous retry engine", "511 help"]:
+        return autonomous_retry_engine()
+    if text in ["failure recovery orchestration", "512 help"]:
+        return failure_recovery_orchestration()
+    if text in ["event sourcing architecture", "513 help"]:
+        return event_sourcing_architecture()
+    if text in ["immutable operational audit log", "514 help"]:
+        return immutable_operational_audit_log()
+    if text in ["ai decision replay engine", "515 help"]:
+        return ai_decision_replay_engine()
     return None
