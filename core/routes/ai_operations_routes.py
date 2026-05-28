@@ -103,6 +103,27 @@ from tools.enterprise_ops_tools import (
     procurement_assistant,
     supply_chain_analyzer,
 )
+from tools.customer_experience_tools import (
+    customer_sentiment_analyzer,
+    e_commerce_optimization_engine,
+    public_relations_assistant,
+    reputation_management_engine,
+    review_monitoring_assistant,
+)
+from tools.creative_media_tools import (
+    ai_video_generation_pipeline,
+    cinematic_storyboard_assistant,
+    media_generation_assistant,
+    music_generation_sandbox,
+    podcast_assistant,
+    voice_cloning_sandbox,
+)
+from tools.simulation_story_tools import (
+    creative_writing_engine,
+    game_ai_engine,
+    npc_personality_framework,
+    simulation_environment_builder,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -290,4 +311,34 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return supply_chain_analyzer()
     if text in ["pos intelligence engine", "465 help"]:
         return pos_intelligence_engine()
+    if text in ["e-commerce optimization engine", "e commerce optimization engine", "466 help"]:
+        return e_commerce_optimization_engine()
+    if text in ["customer sentiment analyzer", "467 help"]:
+        return customer_sentiment_analyzer()
+    if text in ["review monitoring assistant", "468 help"]:
+        return review_monitoring_assistant()
+    if text in ["reputation management engine", "469 help"]:
+        return reputation_management_engine()
+    if text in ["public relations assistant", "470 help"]:
+        return public_relations_assistant()
+    if text in ["media generation assistant", "471 help"]:
+        return media_generation_assistant()
+    if text in ["ai video generation pipeline", "472 help"]:
+        return ai_video_generation_pipeline()
+    if text in ["voice cloning sandbox", "473 help"]:
+        return voice_cloning_sandbox()
+    if text in ["podcast assistant", "474 help"]:
+        return podcast_assistant()
+    if text in ["music generation sandbox", "475 help"]:
+        return music_generation_sandbox()
+    if text in ["cinematic storyboard assistant", "476 help"]:
+        return cinematic_storyboard_assistant()
+    if text in ["creative writing engine", "477 help"]:
+        return creative_writing_engine()
+    if text in ["game ai engine", "478 help"]:
+        return game_ai_engine()
+    if text in ["npc personality framework", "479 help"]:
+        return npc_personality_framework()
+    if text in ["simulation environment builder", "480 help"]:
+        return simulation_environment_builder()
     return None
