@@ -340,6 +340,66 @@ from tools.legal_public_sector_tools import (
     smart_city_orchestration,
     urban_traffic_optimization,
 )
+from tools.strategic_frontier_tools import (
+    ai_aerospace_assistant,
+    ai_astronomy_research_assistant,
+    autonomous_mission_planning,
+    autonomous_observatory_manager,
+    multi_domain_simulation_engine,
+    quantum_algorithm_assistant,
+    quantum_computing_interface_layer,
+    satellite_data_interpretation,
+    space_systems_simulation,
+    strategic_operations_planner,
+)
+from tools.systems_frontier_tools import (
+    advanced_cryptography_framework,
+    ai_driven_filesystem_optimizer,
+    ai_hardware_diagnostics,
+    ai_kernel_assistant,
+    autonomous_chip_optimization,
+    autonomous_compiler_optimizer,
+    neural_architecture_search_engine,
+    operating_system_intelligence_layer,
+    post_quantum_security_advisor,
+    smart_memory_allocation_system,
+)
+from tools.cognitive_reasoning_tools import (
+    ai_abstraction_layer,
+    ai_scientific_discovery_assistant,
+    autonomous_theorem_proving,
+    brain_inspired_memory_architecture,
+    causal_reasoning_engine,
+    cognitive_reasoning_framework,
+    edge_inference_orchestration,
+    mathematical_reasoning_engine,
+    neuromorphic_computing_research_layer,
+    symbolic_neural_hybrid_ai,
+)
+from tools.creative_simulation_frontier_tools import (
+    ai_cinematic_director,
+    ai_social_behavior_simulator,
+    autonomous_creativity_engine,
+    dynamic_storytelling_engine,
+    human_psychology_modeling,
+    interactive_simulation_universe,
+    narrative_intelligence_framework,
+    persistent_virtual_ecosystems,
+    procedural_world_generation,
+    real_time_character_dialogue_ai,
+)
+from tools.alignment_governance_frontier_tools import (
+    ai_alignment_monitoring,
+    ai_civilization_governance_sandbox,
+    autonomous_architecture_evolution,
+    autonomous_digital_nation_model,
+    autonomous_negotiation_ai,
+    ethical_reasoning_framework,
+    human_values_adaptation_layer,
+    moral_dilemma_simulator,
+    safe_recursive_self_improvement,
+    synthetic_economy_simulator,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -897,4 +957,104 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return autonomous_rescue_planning()
     if text in ["ai defense simulation layer", "650 help"]:
         return ai_defense_simulation_layer()
+    if text in ["strategic operations planner", "651 help"]:
+        return strategic_operations_planner()
+    if text in ["multi-domain simulation engine", "multi domain simulation engine", "652 help"]:
+        return multi_domain_simulation_engine()
+    if text in ["ai aerospace assistant", "653 help"]:
+        return ai_aerospace_assistant()
+    if text in ["satellite data interpretation", "654 help"]:
+        return satellite_data_interpretation()
+    if text in ["autonomous mission planning", "655 help"]:
+        return autonomous_mission_planning()
+    if text in ["space systems simulation", "656 help"]:
+        return space_systems_simulation()
+    if text in ["ai astronomy research assistant", "657 help"]:
+        return ai_astronomy_research_assistant()
+    if text in ["autonomous observatory manager", "658 help"]:
+        return autonomous_observatory_manager()
+    if text in ["quantum computing interface layer", "659 help"]:
+        return quantum_computing_interface_layer()
+    if text in ["quantum algorithm assistant", "660 help"]:
+        return quantum_algorithm_assistant()
+    if text in ["advanced cryptography framework", "661 help"]:
+        return advanced_cryptography_framework()
+    if text in ["post-quantum security advisor", "post quantum security advisor", "662 help"]:
+        return post_quantum_security_advisor()
+    if text in ["neural architecture search engine", "663 help"]:
+        return neural_architecture_search_engine()
+    if text in ["autonomous compiler optimizer", "664 help"]:
+        return autonomous_compiler_optimizer()
+    if text in ["operating system intelligence layer", "665 help"]:
+        return operating_system_intelligence_layer()
+    if text in ["ai kernel assistant", "666 help"]:
+        return ai_kernel_assistant()
+    if text in ["ai-driven filesystem optimizer", "ai driven filesystem optimizer", "667 help"]:
+        return ai_driven_filesystem_optimizer()
+    if text in ["smart memory allocation system", "668 help"]:
+        return smart_memory_allocation_system()
+    if text in ["ai hardware diagnostics", "669 help"]:
+        return ai_hardware_diagnostics()
+    if text in ["autonomous chip optimization", "670 help"]:
+        return autonomous_chip_optimization()
+    if text in ["edge inference orchestration", "671 help"]:
+        return edge_inference_orchestration()
+    if text in ["neuromorphic computing research layer", "672 help"]:
+        return neuromorphic_computing_research_layer()
+    if text in ["brain-inspired memory architecture", "brain inspired memory architecture", "673 help"]:
+        return brain_inspired_memory_architecture()
+    if text in ["cognitive reasoning framework", "674 help"]:
+        return cognitive_reasoning_framework()
+    if text in ["symbolic + neural hybrid ai", "symbolic neural hybrid ai", "675 help"]:
+        return symbolic_neural_hybrid_ai()
+    if text in ["causal reasoning engine", "676 help"]:
+        return causal_reasoning_engine()
+    if text in ["ai abstraction layer", "677 help"]:
+        return ai_abstraction_layer()
+    if text in ["autonomous theorem proving", "678 help"]:
+        return autonomous_theorem_proving()
+    if text in ["mathematical reasoning engine", "679 help"]:
+        return mathematical_reasoning_engine()
+    if text in ["ai scientific discovery assistant", "680 help"]:
+        return ai_scientific_discovery_assistant()
+    if text in ["autonomous creativity engine", "681 help"]:
+        return autonomous_creativity_engine()
+    if text in ["narrative intelligence framework", "682 help"]:
+        return narrative_intelligence_framework()
+    if text in ["dynamic storytelling engine", "683 help"]:
+        return dynamic_storytelling_engine()
+    if text in ["procedural world generation", "684 help"]:
+        return procedural_world_generation()
+    if text in ["ai cinematic director", "685 help"]:
+        return ai_cinematic_director()
+    if text in ["real-time character dialogue ai", "real time character dialogue ai", "686 help"]:
+        return real_time_character_dialogue_ai()
+    if text in ["interactive simulation universe", "687 help"]:
+        return interactive_simulation_universe()
+    if text in ["persistent virtual ecosystems", "688 help"]:
+        return persistent_virtual_ecosystems()
+    if text in ["ai social behavior simulator", "689 help"]:
+        return ai_social_behavior_simulator()
+    if text in ["human psychology modeling", "690 help"]:
+        return human_psychology_modeling()
+    if text in ["autonomous negotiation ai", "691 help"]:
+        return autonomous_negotiation_ai()
+    if text in ["ethical reasoning framework", "692 help"]:
+        return ethical_reasoning_framework()
+    if text in ["moral dilemma simulator", "693 help"]:
+        return moral_dilemma_simulator()
+    if text in ["ai alignment monitoring", "694 help"]:
+        return ai_alignment_monitoring()
+    if text in ["human values adaptation layer", "695 help"]:
+        return human_values_adaptation_layer()
+    if text in ["safe recursive self-improvement", "safe recursive self improvement", "696 help"]:
+        return safe_recursive_self_improvement()
+    if text in ["autonomous architecture evolution", "697 help"]:
+        return autonomous_architecture_evolution()
+    if text in ["ai civilization governance sandbox", "698 help"]:
+        return ai_civilization_governance_sandbox()
+    if text in ["synthetic economy simulator", "699 help"]:
+        return synthetic_economy_simulator()
+    if text in ["autonomous digital nation model", "700 help"]:
+        return autonomous_digital_nation_model()
     return None
