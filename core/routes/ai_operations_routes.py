@@ -789,6 +789,11 @@ from tools.ecological_continuity_tools import (
     self_healing_civilization_memory_archive,
     universal_ecological_stewardship_intelligence,
 )
+from tools.scientific_creativity_tools import (
+    autonomous_innovation_acceleration_matrix,
+    infinite_scale_creativity_orchestration_layer,
+    universal_scientific_synthesis_engine,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -2096,4 +2101,10 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return planetary_semantic_continuity_system()
     if text in ["recursive planetary logistics optimizer", "1025 help"]:
         return recursive_planetary_logistics_optimizer()
+    if text in ["universal scientific synthesis engine", "1026 help"]:
+        return universal_scientific_synthesis_engine()
+    if text in ["autonomous innovation acceleration matrix", "1027 help"]:
+        return autonomous_innovation_acceleration_matrix()
+    if text in ["infinite-scale creativity orchestration layer", "infinite scale creativity orchestration layer", "1028 help"]:
+        return infinite_scale_creativity_orchestration_layer()
     return None
