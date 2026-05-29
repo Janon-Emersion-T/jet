@@ -1722,6 +1722,41 @@ from tools.equality_potential_tools import PHASE_ROUTES as EQUALITY_POTENTIAL_PH
 from tools.excellence_insight_tools import PHASE_ROUTES as EXCELLENCE_INSIGHT_PHASE_ROUTES
 from tools.artistic_storytelling_tools import PHASE_ROUTES as ARTISTIC_STORYTELLING_PHASE_ROUTES
 from tools.metacognition_transcendence_tools import PHASE_ROUTES as METACOGNITION_TRANSCENDENCE_PHASE_ROUTES
+from tools.existential_continuity_tools import PHASE_ROUTES as EXISTENTIAL_CONTINUITY_PHASE_ROUTES
+from tools.stewardship_intelligence_tools import PHASE_ROUTES as STEWARDSHIP_INTELLIGENCE_PHASE_ROUTES
+from tools.galactic_consciousness_tools import PHASE_ROUTES as GALACTIC_CONSCIOUSNESS_PHASE_ROUTES
+from tools.destiny_flourishing_tools import PHASE_ROUTES as DESTINY_FLOURISHING_PHASE_ROUTES
+from tools.cosmic_architecture_tools import PHASE_ROUTES as COSMIC_ARCHITECTURE_PHASE_ROUTES
+from tools.reality_harmony_tools import PHASE_ROUTES as REALITY_HARMONY_PHASE_ROUTES
+from tools.omniversal_resilience_tools import PHASE_ROUTES as OMNIVERSAL_RESILIENCE_PHASE_ROUTES
+from tools.wisdom_prosperity_tools import PHASE_ROUTES as WISDOM_PROSPERITY_PHASE_ROUTES
+from tools.transcendence_synchronization_tools import PHASE_ROUTES as TRANSCENDENCE_SYNCHRONIZATION_PHASE_ROUTES
+from tools.continuity_coordination_tools import PHASE_ROUTES as CONTINUITY_COORDINATION_PHASE_ROUTES
+from tools.omniversal_orchestration_tools import PHASE_ROUTES as OMNIVERSAL_ORCHESTRATION_PHASE_ROUTES
+from tools.awareness_stewardship_tools import PHASE_ROUTES as AWARENESS_STEWARDSHIP_PHASE_ROUTES
+from tools.destiny_enlightenment_tools import PHASE_ROUTES as DESTINY_ENLIGHTENMENT_PHASE_ROUTES
+from tools.coexistence_ethics_tools import PHASE_ROUTES as COEXISTENCE_ETHICS_PHASE_ROUTES
+from tools.infinite_harmony_tools import PHASE_ROUTES as INFINITE_HARMONY_PHASE_ROUTES
+from tools.continuity_flourishing_tools import PHASE_ROUTES as CONTINUITY_FLOURISHING_PHASE_ROUTES
+from tools.resilience_wisdom_tools import PHASE_ROUTES as RESILIENCE_WISDOM_PHASE_ROUTES
+from tools.stewardship_continuity_tools import PHASE_ROUTES as STEWARDSHIP_CONTINUITY_PHASE_ROUTES
+from tools.prosperity_transcendence_tools import PHASE_ROUTES as PROSPERITY_TRANSCENDENCE_PHASE_ROUTES
+from tools.omniversal_flourishing_tools import PHASE_ROUTES as OMNIVERSAL_FLOURISHING_PHASE_ROUTES
+from tools.awareness_resilience_tools import PHASE_ROUTES as AWARENESS_RESILIENCE_PHASE_ROUTES
+from tools.ethical_continuity_tools import PHASE_ROUTES as ETHICAL_CONTINUITY_PHASE_ROUTES
+from tools.harmony_governance_tools import PHASE_ROUTES as HARMONY_GOVERNANCE_PHASE_ROUTES
+from tools.prosperity_synchronization_tools import PHASE_ROUTES as PROSPERITY_SYNCHRONIZATION_PHASE_ROUTES
+from tools.stewardship_transcendence_tools import PHASE_ROUTES as STEWARDSHIP_TRANSCENDENCE_PHASE_ROUTES
+from tools.destiny_resilience_tools import PHASE_ROUTES as DESTINY_RESILIENCE_PHASE_ROUTES
+from tools.coexistence_flourishing_tools import PHASE_ROUTES as COEXISTENCE_FLOURISHING_PHASE_ROUTES
+from tools.wisdom_continuity_tools import PHASE_ROUTES as WISDOM_CONTINUITY_PHASE_ROUTES
+from tools.ethical_stewardship_tools import PHASE_ROUTES as ETHICAL_STEWARDSHIP_PHASE_ROUTES
+from tools.prosperity_harmony_tools import PHASE_ROUTES as PROSPERITY_HARMONY_PHASE_ROUTES
+from tools.infinite_awareness_tools import PHASE_ROUTES as INFINITE_AWARENESS_PHASE_ROUTES
+from tools.resilience_flourishing_tools import PHASE_ROUTES as RESILIENCE_FLOURISHING_PHASE_ROUTES
+from tools.wisdom_transcendence_tools import PHASE_ROUTES as WISDOM_TRANSCENDENCE_PHASE_ROUTES
+from tools.stewardship_harmony_continuity_tools import PHASE_ROUTES as STEWARDSHIP_HARMONY_CONTINUITY_PHASE_ROUTES
+from tools.infinite_awareness_harmony_tools import PHASE_ROUTES as INFINITE_AWARENESS_HARMONY_PHASE_ROUTES
 
 
 PHASE_1751_2050_ROUTES = [
@@ -1788,6 +1823,44 @@ PHASE_2051_2350_ROUTES = [
     *EXCELLENCE_INSIGHT_PHASE_ROUTES,
     *ARTISTIC_STORYTELLING_PHASE_ROUTES,
     *METACOGNITION_TRANSCENDENCE_PHASE_ROUTES,
+]
+
+PHASE_2351_2700_ROUTES = [
+    *EXISTENTIAL_CONTINUITY_PHASE_ROUTES,
+    *STEWARDSHIP_INTELLIGENCE_PHASE_ROUTES,
+    *GALACTIC_CONSCIOUSNESS_PHASE_ROUTES,
+    *DESTINY_FLOURISHING_PHASE_ROUTES,
+    *COSMIC_ARCHITECTURE_PHASE_ROUTES,
+    *REALITY_HARMONY_PHASE_ROUTES,
+    *OMNIVERSAL_RESILIENCE_PHASE_ROUTES,
+    *WISDOM_PROSPERITY_PHASE_ROUTES,
+    *TRANSCENDENCE_SYNCHRONIZATION_PHASE_ROUTES,
+    *CONTINUITY_COORDINATION_PHASE_ROUTES,
+    *OMNIVERSAL_ORCHESTRATION_PHASE_ROUTES,
+    *AWARENESS_STEWARDSHIP_PHASE_ROUTES,
+    *DESTINY_ENLIGHTENMENT_PHASE_ROUTES,
+    *COEXISTENCE_ETHICS_PHASE_ROUTES,
+    *INFINITE_HARMONY_PHASE_ROUTES,
+    *CONTINUITY_FLOURISHING_PHASE_ROUTES,
+    *RESILIENCE_WISDOM_PHASE_ROUTES,
+    *STEWARDSHIP_CONTINUITY_PHASE_ROUTES,
+    *PROSPERITY_TRANSCENDENCE_PHASE_ROUTES,
+    *OMNIVERSAL_FLOURISHING_PHASE_ROUTES,
+    *AWARENESS_RESILIENCE_PHASE_ROUTES,
+    *ETHICAL_CONTINUITY_PHASE_ROUTES,
+    *HARMONY_GOVERNANCE_PHASE_ROUTES,
+    *PROSPERITY_SYNCHRONIZATION_PHASE_ROUTES,
+    *STEWARDSHIP_TRANSCENDENCE_PHASE_ROUTES,
+    *DESTINY_RESILIENCE_PHASE_ROUTES,
+    *COEXISTENCE_FLOURISHING_PHASE_ROUTES,
+    *WISDOM_CONTINUITY_PHASE_ROUTES,
+    *ETHICAL_STEWARDSHIP_PHASE_ROUTES,
+    *PROSPERITY_HARMONY_PHASE_ROUTES,
+    *INFINITE_AWARENESS_PHASE_ROUTES,
+    *RESILIENCE_FLOURISHING_PHASE_ROUTES,
+    *WISDOM_TRANSCENDENCE_PHASE_ROUTES,
+    *STEWARDSHIP_HARMONY_CONTINUITY_PHASE_ROUTES,
+    *INFINITE_AWARENESS_HARMONY_PHASE_ROUTES,
 ]
 
 
@@ -4550,6 +4623,9 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         if text in aliases:
             return handler()
     for aliases, handler in PHASE_2051_2350_ROUTES:
+        if text in aliases:
+            return handler()
+    for aliases, handler in PHASE_2351_2700_ROUTES:
         if text in aliases:
             return handler()
     return None
