@@ -1662,6 +1662,70 @@ from tools.policy_training_tools import (
     teach_back_evaluator,
     training_module_generator,
 )
+from tools.voice_interaction_tools import PHASE_ROUTES as VOICE_INTERACTION_PHASE_ROUTES
+from tools.multilingual_voice_workflow_tools import PHASE_ROUTES as MULTILINGUAL_VOICE_WORKFLOW_PHASE_ROUTES
+from tools.desktop_interface_tools import PHASE_ROUTES as DESKTOP_INTERFACE_PHASE_ROUTES
+from tools.access_remote_control_tools import PHASE_ROUTES as ACCESS_REMOTE_CONTROL_PHASE_ROUTES
+from tools.sync_control_network_tools import PHASE_ROUTES as SYNC_CONTROL_NETWORK_PHASE_ROUTES
+from tools.screen_automation_tools import PHASE_ROUTES as SCREEN_AUTOMATION_PHASE_ROUTES
+from tools.github_productivity_tools import PHASE_ROUTES as GITHUB_PRODUCTIVITY_PHASE_ROUTES
+from tools.release_migration_tools import PHASE_ROUTES as RELEASE_MIGRATION_PHASE_ROUTES
+from tools.design_system_tools import PHASE_ROUTES as DESIGN_SYSTEM_PHASE_ROUTES
+from tools.ux_product_strategy_tools import PHASE_ROUTES as UX_PRODUCT_STRATEGY_PHASE_ROUTES
+from tools.document_intelligence_tools import PHASE_ROUTES as DOCUMENT_INTELLIGENCE_PHASE_ROUTES
+from tools.academic_support_tools import PHASE_ROUTES as ACADEMIC_SUPPORT_PHASE_ROUTES
+from tools.business_document_tools import PHASE_ROUTES as BUSINESS_DOCUMENT_PHASE_ROUTES
+from tools.personal_wellness_tools import PHASE_ROUTES as PERSONAL_WELLNESS_PHASE_ROUTES
+from tools.personal_life_management_tools import PHASE_ROUTES as PERSONAL_LIFE_MANAGEMENT_PHASE_ROUTES
+from tools.ai_workforce_roles_tools import PHASE_ROUTES as AI_WORKFORCE_ROLES_PHASE_ROUTES
+from tools.ai_workforce_operations_tools import PHASE_ROUTES as AI_WORKFORCE_OPERATIONS_PHASE_ROUTES
+from tools.agent_governance_expansion_tools import PHASE_ROUTES as AGENT_GOVERNANCE_EXPANSION_PHASE_ROUTES
+from tools.agent_platform_productization_tools import PHASE_ROUTES as AGENT_PLATFORM_PRODUCTIZATION_PHASE_ROUTES
+from tools.saas_commercialization_tools import PHASE_ROUTES as SAAS_COMMERCIALIZATION_PHASE_ROUTES
+from tools.workflow_connector_foundation_tools import PHASE_ROUTES as WORKFLOW_CONNECTOR_FOUNDATION_PHASE_ROUTES
+from tools.business_connector_tools import PHASE_ROUTES as BUSINESS_CONNECTOR_PHASE_ROUTES
+from tools.platform_connector_tools import PHASE_ROUTES as PLATFORM_CONNECTOR_PHASE_ROUTES
+from tools.productivity_connector_tools import PHASE_ROUTES as PRODUCTIVITY_CONNECTOR_PHASE_ROUTES
+from tools.connector_governance_platform_tools import PHASE_ROUTES as CONNECTOR_GOVERNANCE_PLATFORM_PHASE_ROUTES
+from tools.sovereign_coordination_tools import PHASE_ROUTES as SOVEREIGN_COORDINATION_PHASE_ROUTES
+from tools.enterprise_intelligence_tools import PHASE_ROUTES as ENTERPRISE_INTELLIGENCE_PHASE_ROUTES
+from tools.enterprise_continuity_intelligence_tools import PHASE_ROUTES as ENTERPRISE_CONTINUITY_INTELLIGENCE_PHASE_ROUTES
+from tools.commerce_production_intelligence_tools import PHASE_ROUTES as COMMERCE_PRODUCTION_INTELLIGENCE_PHASE_ROUTES
+from tools.mobility_public_services_tools import PHASE_ROUTES as MOBILITY_PUBLIC_SERVICES_PHASE_ROUTES
+
+
+PHASE_1751_2050_ROUTES = [
+    *VOICE_INTERACTION_PHASE_ROUTES,
+    *MULTILINGUAL_VOICE_WORKFLOW_PHASE_ROUTES,
+    *DESKTOP_INTERFACE_PHASE_ROUTES,
+    *ACCESS_REMOTE_CONTROL_PHASE_ROUTES,
+    *SYNC_CONTROL_NETWORK_PHASE_ROUTES,
+    *SCREEN_AUTOMATION_PHASE_ROUTES,
+    *GITHUB_PRODUCTIVITY_PHASE_ROUTES,
+    *RELEASE_MIGRATION_PHASE_ROUTES,
+    *DESIGN_SYSTEM_PHASE_ROUTES,
+    *UX_PRODUCT_STRATEGY_PHASE_ROUTES,
+    *DOCUMENT_INTELLIGENCE_PHASE_ROUTES,
+    *ACADEMIC_SUPPORT_PHASE_ROUTES,
+    *BUSINESS_DOCUMENT_PHASE_ROUTES,
+    *PERSONAL_WELLNESS_PHASE_ROUTES,
+    *PERSONAL_LIFE_MANAGEMENT_PHASE_ROUTES,
+    *AI_WORKFORCE_ROLES_PHASE_ROUTES,
+    *AI_WORKFORCE_OPERATIONS_PHASE_ROUTES,
+    *AGENT_GOVERNANCE_EXPANSION_PHASE_ROUTES,
+    *AGENT_PLATFORM_PRODUCTIZATION_PHASE_ROUTES,
+    *SAAS_COMMERCIALIZATION_PHASE_ROUTES,
+    *WORKFLOW_CONNECTOR_FOUNDATION_PHASE_ROUTES,
+    *BUSINESS_CONNECTOR_PHASE_ROUTES,
+    *PLATFORM_CONNECTOR_PHASE_ROUTES,
+    *PRODUCTIVITY_CONNECTOR_PHASE_ROUTES,
+    *CONNECTOR_GOVERNANCE_PLATFORM_PHASE_ROUTES,
+    *SOVEREIGN_COORDINATION_PHASE_ROUTES,
+    *ENTERPRISE_INTELLIGENCE_PHASE_ROUTES,
+    *ENTERPRISE_CONTINUITY_INTELLIGENCE_PHASE_ROUTES,
+    *COMMERCE_PRODUCTION_INTELLIGENCE_PHASE_ROUTES,
+    *MOBILITY_PUBLIC_SERVICES_PHASE_ROUTES,
+]
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -4419,4 +4483,7 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return learning_retention_engine()
     if text in ["company knowledge academy", "1750 help"]:
         return company_knowledge_academy()
+    for aliases, handler in PHASE_1751_2050_ROUTES:
+        if text in aliases:
+            return handler()
     return None
