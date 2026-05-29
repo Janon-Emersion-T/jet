@@ -1757,6 +1757,36 @@ from tools.resilience_flourishing_tools import PHASE_ROUTES as RESILIENCE_FLOURI
 from tools.wisdom_transcendence_tools import PHASE_ROUTES as WISDOM_TRANSCENDENCE_PHASE_ROUTES
 from tools.stewardship_harmony_continuity_tools import PHASE_ROUTES as STEWARDSHIP_HARMONY_CONTINUITY_PHASE_ROUTES
 from tools.infinite_awareness_harmony_tools import PHASE_ROUTES as INFINITE_AWARENESS_HARMONY_PHASE_ROUTES
+from tools.prosperity_resilience_cycle_tools import PHASE_ROUTES as PROSPERITY_RESILIENCE_CYCLE_PHASE_ROUTES
+from tools.stewardship_enlightenment_cycle_tools import PHASE_ROUTES as STEWARDSHIP_ENLIGHTENMENT_CYCLE_PHASE_ROUTES
+from tools.flourishing_harmony_cycle_tools import PHASE_ROUTES as FLOURISHING_HARMONY_CYCLE_PHASE_ROUTES
+from tools.prosperity_wisdom_cycle_tools import PHASE_ROUTES as PROSPERITY_WISDOM_CYCLE_PHASE_ROUTES
+from tools.transcendence_resilience_cycle_tools import PHASE_ROUTES as TRANSCENDENCE_RESILIENCE_CYCLE_PHASE_ROUTES
+from tools.continuity_prosperity_cycle_tools import PHASE_ROUTES as CONTINUITY_PROSPERITY_CYCLE_PHASE_ROUTES
+from tools.enlightenment_flourishing_cycle_tools import PHASE_ROUTES as ENLIGHTENMENT_FLOURISHING_CYCLE_PHASE_ROUTES
+from tools.wisdom_stewardship_cycle_tools import PHASE_ROUTES as WISDOM_STEWARDSHIP_CYCLE_PHASE_ROUTES
+from tools.resilience_prosperity_cycle_tools import PHASE_ROUTES as RESILIENCE_PROSPERITY_CYCLE_PHASE_ROUTES
+from tools.continuity_enlightenment_cycle_tools import PHASE_ROUTES as CONTINUITY_ENLIGHTENMENT_CYCLE_PHASE_ROUTES
+from tools.flourishing_resilience_cycle_tools import PHASE_ROUTES as FLOURISHING_RESILIENCE_CYCLE_PHASE_ROUTES
+from tools.wisdom_transcendence_cycle_tools_two import PHASE_ROUTES as WISDOM_TRANSCENDENCE_CYCLE_TWO_PHASE_ROUTES
+from tools.prosperity_enlightenment_cycle_tools import PHASE_ROUTES as PROSPERITY_ENLIGHTENMENT_CYCLE_PHASE_ROUTES
+from tools.coexistence_resilience_cycle_tools import PHASE_ROUTES as COEXISTENCE_RESILIENCE_CYCLE_PHASE_ROUTES
+from tools.stewardship_flourishing_cycle_tools import PHASE_ROUTES as STEWARDSHIP_FLOURISHING_CYCLE_PHASE_ROUTES
+from tools.prosperity_transcendence_cycle_tools_two import PHASE_ROUTES as PROSPERITY_TRANSCENDENCE_CYCLE_TWO_PHASE_ROUTES
+from tools.wisdom_resilience_cycle_tools import PHASE_ROUTES as WISDOM_RESILIENCE_CYCLE_PHASE_ROUTES
+from tools.continuity_stewardship_cycle_tools import PHASE_ROUTES as CONTINUITY_STEWARDSHIP_CYCLE_PHASE_ROUTES
+from tools.flourishing_prosperity_cycle_tools_two import PHASE_ROUTES as FLOURISHING_PROSPERITY_CYCLE_TWO_PHASE_ROUTES
+from tools.transcendence_enlightenment_cycle_tools import PHASE_ROUTES as TRANSCENDENCE_ENLIGHTENMENT_CYCLE_PHASE_ROUTES
+from tools.resilience_stewardship_cycle_tools_two import PHASE_ROUTES as RESILIENCE_STEWARDSHIP_CYCLE_TWO_PHASE_ROUTES
+from tools.wisdom_flourishing_cycle_tools import PHASE_ROUTES as WISDOM_FLOURISHING_CYCLE_PHASE_ROUTES
+from tools.prosperity_resilience_cycle_tools_two import PHASE_ROUTES as PROSPERITY_RESILIENCE_CYCLE_TWO_PHASE_ROUTES
+from tools.continuity_transcendence_cycle_tools import PHASE_ROUTES as CONTINUITY_TRANSCENDENCE_CYCLE_PHASE_ROUTES
+from tools.enlightenment_resilience_cycle_tools import PHASE_ROUTES as ENLIGHTENMENT_RESILIENCE_CYCLE_PHASE_ROUTES
+from tools.stewardship_prosperity_cycle_tools_two import PHASE_ROUTES as STEWARDSHIP_PROSPERITY_CYCLE_TWO_PHASE_ROUTES
+from tools.flourishing_transcendence_cycle_tools import PHASE_ROUTES as FLOURISHING_TRANSCENDENCE_CYCLE_PHASE_ROUTES
+from tools.wisdom_resilience_cycle_tools_two import PHASE_ROUTES as WISDOM_RESILIENCE_CYCLE_TWO_PHASE_ROUTES
+from tools.continuity_flourishing_cycle_tools_two import PHASE_ROUTES as CONTINUITY_FLOURISHING_CYCLE_TWO_PHASE_ROUTES
+from tools.infinite_omniversal_core_tools import PHASE_ROUTES as INFINITE_OMNIVERSAL_CORE_PHASE_ROUTES
 
 
 PHASE_1751_2050_ROUTES = [
@@ -1861,6 +1891,39 @@ PHASE_2351_2700_ROUTES = [
     *WISDOM_TRANSCENDENCE_PHASE_ROUTES,
     *STEWARDSHIP_HARMONY_CONTINUITY_PHASE_ROUTES,
     *INFINITE_AWARENESS_HARMONY_PHASE_ROUTES,
+]
+
+PHASE_2701_3000_ROUTES = [
+    *PROSPERITY_RESILIENCE_CYCLE_PHASE_ROUTES,
+    *STEWARDSHIP_ENLIGHTENMENT_CYCLE_PHASE_ROUTES,
+    *FLOURISHING_HARMONY_CYCLE_PHASE_ROUTES,
+    *PROSPERITY_WISDOM_CYCLE_PHASE_ROUTES,
+    *TRANSCENDENCE_RESILIENCE_CYCLE_PHASE_ROUTES,
+    *CONTINUITY_PROSPERITY_CYCLE_PHASE_ROUTES,
+    *ENLIGHTENMENT_FLOURISHING_CYCLE_PHASE_ROUTES,
+    *WISDOM_STEWARDSHIP_CYCLE_PHASE_ROUTES,
+    *RESILIENCE_PROSPERITY_CYCLE_PHASE_ROUTES,
+    *CONTINUITY_ENLIGHTENMENT_CYCLE_PHASE_ROUTES,
+    *FLOURISHING_RESILIENCE_CYCLE_PHASE_ROUTES,
+    *WISDOM_TRANSCENDENCE_CYCLE_TWO_PHASE_ROUTES,
+    *PROSPERITY_ENLIGHTENMENT_CYCLE_PHASE_ROUTES,
+    *COEXISTENCE_RESILIENCE_CYCLE_PHASE_ROUTES,
+    *STEWARDSHIP_FLOURISHING_CYCLE_PHASE_ROUTES,
+    *PROSPERITY_TRANSCENDENCE_CYCLE_TWO_PHASE_ROUTES,
+    *WISDOM_RESILIENCE_CYCLE_PHASE_ROUTES,
+    *CONTINUITY_STEWARDSHIP_CYCLE_PHASE_ROUTES,
+    *FLOURISHING_PROSPERITY_CYCLE_TWO_PHASE_ROUTES,
+    *TRANSCENDENCE_ENLIGHTENMENT_CYCLE_PHASE_ROUTES,
+    *RESILIENCE_STEWARDSHIP_CYCLE_TWO_PHASE_ROUTES,
+    *WISDOM_FLOURISHING_CYCLE_PHASE_ROUTES,
+    *PROSPERITY_RESILIENCE_CYCLE_TWO_PHASE_ROUTES,
+    *CONTINUITY_TRANSCENDENCE_CYCLE_PHASE_ROUTES,
+    *ENLIGHTENMENT_RESILIENCE_CYCLE_PHASE_ROUTES,
+    *STEWARDSHIP_PROSPERITY_CYCLE_TWO_PHASE_ROUTES,
+    *FLOURISHING_TRANSCENDENCE_CYCLE_PHASE_ROUTES,
+    *WISDOM_RESILIENCE_CYCLE_TWO_PHASE_ROUTES,
+    *CONTINUITY_FLOURISHING_CYCLE_TWO_PHASE_ROUTES,
+    *INFINITE_OMNIVERSAL_CORE_PHASE_ROUTES,
 ]
 
 
@@ -4626,6 +4689,9 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         if text in aliases:
             return handler()
     for aliases, handler in PHASE_2351_2700_ROUTES:
+        if text in aliases:
+            return handler()
+    for aliases, handler in PHASE_2701_3000_ROUTES:
         if text in aliases:
             return handler()
     return None
