@@ -1692,6 +1692,36 @@ from tools.enterprise_intelligence_tools import PHASE_ROUTES as ENTERPRISE_INTEL
 from tools.enterprise_continuity_intelligence_tools import PHASE_ROUTES as ENTERPRISE_CONTINUITY_INTELLIGENCE_PHASE_ROUTES
 from tools.commerce_production_intelligence_tools import PHASE_ROUTES as COMMERCE_PRODUCTION_INTELLIGENCE_PHASE_ROUTES
 from tools.mobility_public_services_tools import PHASE_ROUTES as MOBILITY_PUBLIC_SERVICES_PHASE_ROUTES
+from tools.governance_justice_tools import PHASE_ROUTES as GOVERNANCE_JUSTICE_PHASE_ROUTES
+from tools.transparency_resilience_tools import PHASE_ROUTES as TRANSPARENCY_RESILIENCE_PHASE_ROUTES
+from tools.peace_diplomacy_tools import PHASE_ROUTES as PEACE_DIPLOMACY_PHASE_ROUTES
+from tools.continuity_defense_tools import PHASE_ROUTES as CONTINUITY_DEFENSE_PHASE_ROUTES
+from tools.planetary_sustainability_tools import PHASE_ROUTES as PLANETARY_SUSTAINABILITY_PHASE_ROUTES
+from tools.health_longevity_tools import PHASE_ROUTES as HEALTH_LONGEVITY_PHASE_ROUTES
+from tools.biomedical_mental_health_tools import PHASE_ROUTES as BIOMEDICAL_MENTAL_HEALTH_PHASE_ROUTES
+from tools.empathy_education_tools import PHASE_ROUTES as EMPATHY_EDUCATION_PHASE_ROUTES
+from tools.creativity_entertainment_tools import PHASE_ROUTES as CREATIVITY_ENTERTAINMENT_PHASE_ROUTES
+from tools.immersive_social_cognition_tools import PHASE_ROUTES as IMMERSIVE_SOCIAL_COGNITION_PHASE_ROUTES
+from tools.prosperity_abundance_tools import PHASE_ROUTES as PROSPERITY_ABUNDANCE_PHASE_ROUTES
+from tools.innovation_entrepreneurship_tools import PHASE_ROUTES as INNOVATION_ENTREPRENEURSHIP_PHASE_ROUTES
+from tools.reasoning_foresight_tools import PHASE_ROUTES as REASONING_FORESIGHT_PHASE_ROUTES
+from tools.civilization_memory_tools import PHASE_ROUTES as CIVILIZATION_MEMORY_PHASE_ROUTES
+from tools.archival_truth_tools import PHASE_ROUTES as ARCHIVAL_TRUTH_PHASE_ROUTES
+from tools.communication_cognition_tools import PHASE_ROUTES as COMMUNICATION_COGNITION_PHASE_ROUTES
+from tools.imagination_existential_tools import PHASE_ROUTES as IMAGINATION_EXISTENTIAL_PHASE_ROUTES
+from tools.fulfillment_cosmic_tools import PHASE_ROUTES as FULFILLMENT_COSMIC_PHASE_ROUTES
+from tools.interstellar_identity_tools import PHASE_ROUTES as INTERSTELLAR_IDENTITY_PHASE_ROUTES
+from tools.multiversal_sentience_tools import PHASE_ROUTES as MULTIVERSAL_SENTIENCE_PHASE_ROUTES
+from tools.self_evolution_reliability_tools import PHASE_ROUTES as SELF_EVOLUTION_RELIABILITY_PHASE_ROUTES
+from tools.execution_optimization_tools import PHASE_ROUTES as EXECUTION_OPTIMIZATION_PHASE_ROUTES
+from tools.systems_wisdom_tools import PHASE_ROUTES as SYSTEMS_WISDOM_PHASE_ROUTES
+from tools.flourishing_future_tools import PHASE_ROUTES as FLOURISHING_FUTURE_PHASE_ROUTES
+from tools.abundance_civilization_tools import PHASE_ROUTES as ABUNDANCE_CIVILIZATION_PHASE_ROUTES
+from tools.discovery_market_tools import PHASE_ROUTES as DISCOVERY_MARKET_PHASE_ROUTES
+from tools.equality_potential_tools import PHASE_ROUTES as EQUALITY_POTENTIAL_PHASE_ROUTES
+from tools.excellence_insight_tools import PHASE_ROUTES as EXCELLENCE_INSIGHT_PHASE_ROUTES
+from tools.artistic_storytelling_tools import PHASE_ROUTES as ARTISTIC_STORYTELLING_PHASE_ROUTES
+from tools.metacognition_transcendence_tools import PHASE_ROUTES as METACOGNITION_TRANSCENDENCE_PHASE_ROUTES
 
 
 PHASE_1751_2050_ROUTES = [
@@ -1725,6 +1755,39 @@ PHASE_1751_2050_ROUTES = [
     *ENTERPRISE_CONTINUITY_INTELLIGENCE_PHASE_ROUTES,
     *COMMERCE_PRODUCTION_INTELLIGENCE_PHASE_ROUTES,
     *MOBILITY_PUBLIC_SERVICES_PHASE_ROUTES,
+]
+
+PHASE_2051_2350_ROUTES = [
+    *GOVERNANCE_JUSTICE_PHASE_ROUTES,
+    *TRANSPARENCY_RESILIENCE_PHASE_ROUTES,
+    *PEACE_DIPLOMACY_PHASE_ROUTES,
+    *CONTINUITY_DEFENSE_PHASE_ROUTES,
+    *PLANETARY_SUSTAINABILITY_PHASE_ROUTES,
+    *HEALTH_LONGEVITY_PHASE_ROUTES,
+    *BIOMEDICAL_MENTAL_HEALTH_PHASE_ROUTES,
+    *EMPATHY_EDUCATION_PHASE_ROUTES,
+    *CREATIVITY_ENTERTAINMENT_PHASE_ROUTES,
+    *IMMERSIVE_SOCIAL_COGNITION_PHASE_ROUTES,
+    *PROSPERITY_ABUNDANCE_PHASE_ROUTES,
+    *INNOVATION_ENTREPRENEURSHIP_PHASE_ROUTES,
+    *REASONING_FORESIGHT_PHASE_ROUTES,
+    *CIVILIZATION_MEMORY_PHASE_ROUTES,
+    *ARCHIVAL_TRUTH_PHASE_ROUTES,
+    *COMMUNICATION_COGNITION_PHASE_ROUTES,
+    *IMAGINATION_EXISTENTIAL_PHASE_ROUTES,
+    *FULFILLMENT_COSMIC_PHASE_ROUTES,
+    *INTERSTELLAR_IDENTITY_PHASE_ROUTES,
+    *MULTIVERSAL_SENTIENCE_PHASE_ROUTES,
+    *SELF_EVOLUTION_RELIABILITY_PHASE_ROUTES,
+    *EXECUTION_OPTIMIZATION_PHASE_ROUTES,
+    *SYSTEMS_WISDOM_PHASE_ROUTES,
+    *FLOURISHING_FUTURE_PHASE_ROUTES,
+    *ABUNDANCE_CIVILIZATION_PHASE_ROUTES,
+    *DISCOVERY_MARKET_PHASE_ROUTES,
+    *EQUALITY_POTENTIAL_PHASE_ROUTES,
+    *EXCELLENCE_INSIGHT_PHASE_ROUTES,
+    *ARTISTIC_STORYTELLING_PHASE_ROUTES,
+    *METACOGNITION_TRANSCENDENCE_PHASE_ROUTES,
 ]
 
 
@@ -4484,6 +4547,9 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
     if text in ["company knowledge academy", "1750 help"]:
         return company_knowledge_academy()
     for aliases, handler in PHASE_1751_2050_ROUTES:
+        if text in aliases:
+            return handler()
+    for aliases, handler in PHASE_2051_2350_ROUTES:
         if text in aliases:
             return handler()
     return None
