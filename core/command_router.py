@@ -1,6 +1,10 @@
+from core.routes.topic_learning_routes import handle_topic_learning_routes
 from core.ai_fallback import handle_ai_fallback
+from core.conversational_interface import interpret_conversation
 from core.nlp.unified_orchestrator import orchestrate_command
-
+from core.persona_registry import get_persona
+from tools.event_tools import emit_event
+from core.routes.website_learning_routes import handle_website_learning_routes
 from core.routes.basic_routes import handle_basic_routes
 from core.routes.memory_routes import handle_memory_routes
 from core.routes.project_context_routes import handle_project_context_routes
@@ -54,21 +58,30 @@ from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
 from core.routes.ticket_prioritization_routes import handle_ticket_prioritization_routes
 from core.routes.bug_severity_routes import handle_bug_severity_routes
 from core.routes.nlp_test_routes import handle_nlp_test_routes
+from core.routes.persona_routes import handle_persona_routes
+from core.routes.security_routes import handle_security_routes
 
 
 
 def route_command(user_input: str) -> str:
-    nlp = orchestrate_command(user_input)
+    if not user_input.strip():
+        return "Please enter a command."
+
+    persona_response = handle_persona_routes(user_input, user_input.lower().strip(), user_input.lower().strip())
+    if persona_response is not None:
+        return persona_response
+
+    conversation = interpret_conversation(user_input)
+    command_input = conversation.routed_text
+    nlp = orchestrate_command(command_input)
+    persona = conversation.persona if conversation.explicitly_addressed else get_persona(domain=nlp.domain.domain)
 
     text = nlp.normalized_text
     clean_text = nlp.canonical_command or nlp.clean_text
     intent = nlp.intent
     confidence = nlp.confidence
 
-    raw_text = user_input.lower().strip()
-
-    if not raw_text:
-        return "Please enter a command."
+    raw_text = command_input.lower().strip()
 
     if raw_text.startswith("test nlp ") or raw_text.startswith("analyze command "):
         from core.nlp_engine import format_nlp_report
@@ -101,6 +114,12 @@ def route_command(user_input: str) -> str:
         return format_conversation_links()
 
     if nlp.safety.safety_level == "dangerous" and not nlp.safety.allowed:
+        emit_event(
+            "SECURITY_COMMAND_BLOCKED",
+            "Dangerous command blocked",
+            f"Blocked request: {command_input}",
+            requires_attention=True,
+        )
         lines = ["COMMAND BLOCKED", *[f"- {reason}" for reason in nlp.safety.reasons]]
         lines.extend(f"- Safe alternative: {alternative}" for alternative in nlp.safety.alternatives)
         return "\n".join(lines)
@@ -122,6 +141,7 @@ def route_command(user_input: str) -> str:
         handle_internal_helpdesk_routes,
         handle_ticket_prioritization_routes,
         handle_bug_severity_routes,
+        handle_security_routes,
 
         # Specific tool modules
         handle_email_routes,
@@ -156,9 +176,11 @@ def route_command(user_input: str) -> str:
         # General modules later
         handle_task_routes,
         handle_memory_routes,
+        handle_topic_learning_routes,
         handle_vector_memory_routes,
         handle_system_mode_routes,
         handle_browser_routes,
+	handle_website_learning_routes,
         handle_website_audit_routes,
         handle_content_assistant_routes,
         handle_social_planner_routes,
@@ -175,9 +197,9 @@ def route_command(user_input: str) -> str:
 
     for handler in route_handlers:
         if handler == handle_basic_routes:
-            response = handler(user_input, text, clean_text, intent)
+            response = handler(command_input, text, clean_text, intent)
         else:
-            response = handler(user_input, text, clean_text)
+            response = handler(command_input, text, clean_text)
 
         if response is not None:
             return response
@@ -187,7 +209,7 @@ def route_command(user_input: str) -> str:
             f"""The user entered a low-confidence natural language command.
 
 Original command:
-{user_input}
+{command_input}
 
 Detected intent:
 {intent}
@@ -195,7 +217,8 @@ Detected intent:
 Clean routing text:
 {clean_text}
 
-Please respond naturally and ask a useful follow-up only if needed."""
+Please respond naturally and ask a useful follow-up only if needed.""",
+            persona=persona,
         )
 
-    return handle_ai_fallback(user_input)
+    return handle_ai_fallback(command_input, persona=persona)

@@ -3,6 +3,8 @@ import urllib.parse
 import urllib.request
 from datetime import datetime
 
+from tools.environment_config import load_environment_settings, save_environment_settings
+
 
 def _get_json(url: str, timeout: int = 10):
     try:
@@ -17,6 +19,19 @@ def _get_json(url: str, timeout: int = 10):
 
 
 def get_live_location():
+    settings = load_environment_settings()
+    if not settings["use_ip_location"]:
+        if settings["saved_location_label"]:
+            return f"""SAVED LOCATION
+
+Location: {settings['saved_location_label']}
+Latitude: {settings['saved_latitude']}
+Longitude: {settings['saved_longitude']}
+
+Privacy:
+IP-based location lookup is OFF. This is your configured saved location."""
+        return "IP-based location lookup is OFF and no saved location is configured."
+
     data = _get_json("https://ipapi.co/json/")
 
     if data.get("error"):
@@ -52,7 +67,20 @@ Read-only lookup. No location was stored."""
 
 
 def get_live_weather(city: str = ""):
-    location = _geocode_city(city) if city.strip() else _detect_location_for_weather()
+    settings = load_environment_settings()
+    requested_city = city.strip() or settings["default_weather_city"].strip()
+    if requested_city:
+        location = _geocode_city(requested_city)
+    elif settings["saved_latitude"] is not None and settings["saved_longitude"] is not None:
+        location = {
+            "latitude": settings["saved_latitude"],
+            "longitude": settings["saved_longitude"],
+            "place": settings["saved_location_label"] or "Saved location",
+        }
+    elif settings["use_ip_location"]:
+        location = _detect_location_for_weather()
+    else:
+        location = {"error": "Configure a weather city or saved location; IP location lookup is disabled."}
 
     if location.get("error"):
         return f"""LIVE WEATHER
@@ -177,6 +205,18 @@ def _geocode_city(city: str):
     }
 
 
+def set_saved_location(city: str) -> str:
+    location = _geocode_city(city)
+    if location.get("error"):
+        return f"Unable to save location: {location['error']}"
+    save_environment_settings({
+        "saved_location_label": location["place"],
+        "saved_latitude": location["latitude"],
+        "saved_longitude": location["longitude"],
+    })
+    return f"Saved location set to: {location['place']}"
+
+
 def _weather_code_description(code):
     codes = {
         0: "Clear sky",
@@ -222,6 +262,11 @@ live weather in <city>
 weather in <city>
 current weather in <city>
 forecast in <city>
+set weather city <city>
+set saved location <city>
+use ip location
+disable ip location
+environment status
 
 Examples:
 live weather in Jaffna

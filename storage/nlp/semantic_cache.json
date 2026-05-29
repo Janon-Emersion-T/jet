@@ -1,0 +1,443 @@
+{
+  "htop": {
+    "value": {
+      "intent": "google_search",
+      "route_hint": "browser",
+      "confidence": 0.621,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T00:38:06"
+  },
+  "nlp health": {
+    "value": {
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "confidence": 0.96,
+      "domain": "nlp"
+    },
+    "updated_at": "2026-05-28T01:17:41"
+  },
+  "nlp regression": {
+    "value": {
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "confidence": 0.96,
+      "domain": "nlp"
+    },
+    "updated_at": "2026-05-28T01:17:48"
+  },
+  "nlp runtime": {
+    "value": {
+      "intent": "nlp",
+      "route_hint": "nlp",
+      "confidence": 0.96,
+      "domain": "nlp"
+    },
+    "updated_at": "2026-05-28T01:17:45"
+  },
+  "test unified analyze this laravel project": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": "laravel",
+      "confidence": 0.96,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:17:51"
+  },
+  "analyze this laravel project": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": "laravel",
+      "confidence": 0.96,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:17:51"
+  },
+  "bug severity classifier": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.654,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:12:35"
+  },
+  "ticket prioritization engine": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.638,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:12:42"
+  },
+  "internal helpdesk system": {
+    "value": {
+      "intent": "database",
+      "route_hint": "database",
+      "confidence": 0.662,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:12:47"
+  },
+  "attendance assistant": {
+    "value": {
+      "intent": "calendar",
+      "route_hint": null,
+      "confidence": 0.638,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:12:50"
+  },
+  "employee task tracker": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.96,
+      "domain": "hr"
+    },
+    "updated_at": "2026-05-28T01:12:53"
+  },
+  "hr onboarding workflow": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.667,
+      "domain": "hr"
+    },
+    "updated_at": "2026-05-28T01:12:56"
+  },
+  "payroll assistant": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.622,
+      "domain": "accounting"
+    },
+    "updated_at": "2026-05-28T01:13:09"
+  },
+  "capability status": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.74,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:17:29"
+  },
+  "test safety delete all files": {
+    "value": {
+      "intent": "memory",
+      "route_hint": "memory",
+      "confidence": 0.593,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:17:54"
+  },
+  "test targets check app/http/controllers": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.675,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:18:01"
+  },
+  "test task plan fix laravel route error": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.96,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-28T01:18:06"
+  },
+  "remember fact janon owns lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:18:13"
+  },
+  "list facts": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.745,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:18:17"
+  },
+  "search memory lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:18:41"
+  },
+  "daily developer briefing": {
+    "value": {
+      "intent": "content",
+      "route_hint": "content",
+      "confidence": 0.666,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:18:45"
+  },
+  "coding session summary": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.722,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:18:48"
+  },
+  "project roadmap memory": {
+    "value": {
+      "intent": "memory",
+      "route_hint": "memory",
+      "confidence": 0.748,
+      "domain": "project"
+    },
+    "updated_at": "2026-05-28T01:18:52"
+  },
+  "open google": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 1.0,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:22:01"
+  },
+  "learn website https://www.gov.lk/": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 0.681,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:24:53"
+  },
+  "deep learn website https://www.gov.lk/": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 0.646,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:25:29"
+  },
+  "semantic search sri lanka government services": {
+    "value": {
+      "intent": "database",
+      "route_hint": "database",
+      "confidence": 0.653,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:26:13"
+  },
+  "what do you know about the government of sri lanka?": {
+    "value": {
+      "intent": "general",
+      "route_hint": null,
+      "confidence": 0.507,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:26:39"
+  },
+  "research and learn sri lanka": {
+    "value": {
+      "intent": "google_search",
+      "route_hint": "browser",
+      "confidence": 0.593,
+      "domain": "research"
+    },
+    "updated_at": "2026-05-28T01:33:55"
+  },
+  "learn about sri lanka": {
+    "value": {
+      "intent": "google_search",
+      "route_hint": "browser",
+      "confidence": 0.563,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:37:41"
+  },
+  "tell em about sri lanka": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 0.581,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:38:16"
+  },
+  "learn about bill gates": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.564,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:38:40"
+  },
+  "semantic search sri lanka": {
+    "value": {
+      "intent": "google_search",
+      "route_hint": "browser",
+      "confidence": 0.681,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:39:17"
+  },
+  "semantic search cricket": {
+    "value": {
+      "intent": "google_search",
+      "route_hint": "browser",
+      "confidence": 0.726,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:39:30"
+  },
+  "what is the history of cricket": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "content"
+    },
+    "updated_at": "2026-05-28T01:40:23"
+  },
+  "what is the current best cricket team": {
+    "value": {
+      "intent": "location",
+      "route_hint": null,
+      "confidence": 0.544,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:41:48"
+  },
+  "who the best chess player in the world": {
+    "value": {
+      "intent": "database",
+      "route_hint": "database",
+      "confidence": 0.485,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:42:52"
+  },
+  "what about nakamura?": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.578,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:43:33"
+  },
+  "learn about microsoft": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 0.612,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:45:45"
+  },
+  "tell me about microsoft": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.666,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:46:07"
+  },
+  "who created microsoft": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.619,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:47:38"
+  },
+  "yes deep learn about microsoft": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 0.646,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T01:48:14"
+  },
+  "what are the roles do you have in our jarvis": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.561,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T06:54:05"
+  },
+  "tell me more about you": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.786,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T06:54:47"
+  },
+  "how old are you right now": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.9,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T06:55:58"
+  },
+  "i live in jaffna, what is the weather prediction for today": {
+    "value": {
+      "intent": "weather",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T06:59:11"
+  },
+  "how to connect live weather?": {
+    "value": {
+      "intent": "weather",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T06:59:40"
+  },
+  "learn about lkprofessionals at www.lkprofessionals.com": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T07:05:34"
+  },
+  "take screenshot": {
+    "value": {
+      "intent": "google_search",
+      "route_hint": "browser",
+      "confidence": 0.669,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-28T07:06:44"
+  }
+}

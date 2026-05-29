@@ -16,12 +16,12 @@ CAPABILITIES = {
         "description": "Can listen and speak using offline voice mode."
     },
     "weather": {
-        "status": "not_connected",
-        "description": "Cannot check live weather yet."
+        "status": "active",
+        "description": "Can retrieve read-only current weather through Open-Meteo."
     },
     "location": {
-        "status": "not_connected",
-        "description": "Cannot detect live GPS or exact current location yet."
+        "status": "active",
+        "description": "Can retrieve optional approximate IP location or use a saved location; not GPS."
     },
     "camera": {
         "status": "not_connected",
@@ -32,8 +32,8 @@ CAPABILITIES = {
         "description": "Can open websites and perform Google searches using Playwright."
     },
     "email": {
-        "status": "not_connected",
-        "description": "Cannot read or send email yet."
+        "status": "active",
+        "description": "Can send configured SMTP mail and attention-event alerts, subject to dry-run setting."
     },
     "calendar": {
         "status": "not_connected",
