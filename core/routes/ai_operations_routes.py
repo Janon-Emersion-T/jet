@@ -1422,6 +1422,126 @@ from tools.lkprofessionals_growth_tools import (
     retainer_management_assistant,
     sales_pipeline_forecaster,
 )
+from tools.marketing_performance_tools import (
+    ad_creative_testing_engine,
+    campaign_budget_optimizer,
+    content_to_lead_intelligence,
+    conversion_friction_detector,
+    landing_page_psychology_analyzer,
+    marketing_roi_brain,
+    seo_revenue_attribution,
+    social_media_performance_predictor,
+    trust_signal_optimizer,
+    user_journey_simulator,
+)
+from tools.brand_content_growth_tools import (
+    automated_case_study_miner,
+    brand_voice_consistency_engine,
+    founder_personal_brand_engine,
+    linkedin_authority_system,
+    multi_brand_content_governor,
+    reputation_moat_builder,
+    short_form_video_factory,
+    testimonial_extraction_assistant,
+    thought_leadership_planner,
+    youtube_strategy_assistant,
+)
+from tools.partnership_sales_tools import (
+    community_building_assistant,
+    competitive_positioning_engine,
+    dynamic_service_packaging_engine,
+    enterprise_sales_enablement_brain,
+    government_proposal_assistant,
+    newsletter_intelligence_engine,
+    partnership_discovery_ai,
+    podcast_workflow_assistant,
+    pricing_psychology_analyzer,
+    tender_opportunity_detector,
+)
+from tools.client_delivery_finance_tools import (
+    affiliate_program_brain,
+    client_onboarding_autopilot,
+    client_requirement_workshop_assistant,
+    marketplace_listing_optimizer,
+    meeting_to_sow_generator,
+    milestone_planner,
+    productized_service_builder,
+    referral_intelligence_system,
+    saas_pricing_simulator,
+    white_label_product_manager,
+)
+from tools.finance_command_tools import (
+    board_report_generator,
+    cash_flow_prediction_engine,
+    company_valuation_estimator,
+    executive_war_room_mode,
+    expense_anomaly_detector,
+    financial_runway_simulator,
+    investor_pitch_intelligence,
+    invoice_dispute_assistant,
+    payment_milestone_tracker,
+    tax_planning_assistant,
+)
+from tools.laravel_deployment_tools import (
+    blade_ui_refactor_engine,
+    filament_resource_architect,
+    laravel_architecture_autopilot,
+    livewire_component_strategist,
+    nginx_deployment_brain,
+    php_fpm_diagnostic_assistant,
+    shared_hosting_compatibility_autopilot,
+    tailwind_design_system_generator,
+    vite_build_intelligence,
+    vps_migration_planner,
+)
+from tools.server_ops_governance_tools import (
+    cache_invalidation_advisor,
+    cron_job_governor,
+    dns_propagation_monitor,
+    domain_to_server_mapping_brain,
+    laravel_route_health_monitor,
+    mail_deliverability_command_center,
+    multi_app_server_inventory,
+    queue_failure_analyst,
+    ssl_renewal_intelligence,
+    storage_permission_fixer,
+)
+from tools.saas_governance_tools import (
+    audit_log_intelligence,
+    data_seeding_strategist,
+    database_migration_planner,
+    immutable_ledger_checker,
+    permission_matrix_visualizer,
+    saas_module_marketplace_engine,
+    subscription_enforcement_auditor,
+    tenant_isolation_auditor,
+    trial_period_automation,
+    user_role_drift_detector,
+)
+from tools.accounting_retail_ops_tools import (
+    accounting_rule_validator,
+    barcode_workflow_assistant,
+    cart_abandonment_intelligence,
+    e_commerce_checkout_analyzer,
+    inventory_leakage_detector,
+    pos_transaction_intelligence,
+    purchase_order_optimizer,
+    receipt_printing_diagnostics,
+    supplier_reliability_scorer,
+    warehouse_movement_predictor,
+)
+from tools.retail_command_tools import (
+    customer_segmentation_engine,
+    demand_seasonality_analyzer,
+    discount_abuse_detector,
+    fraud_risk_scoring,
+    loyalty_program_intelligence,
+    product_recommendation_engine,
+    retail_command_intelligence,
+    returns_pattern_analyzer,
+    sales_margin_optimizer,
+    stock_reorder_predictor,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -3779,4 +3899,204 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return client_satisfaction_predictor()
     if text in ["churn prevention engine", "1550 help"]:
         return churn_prevention_engine()
+    if text in ["marketing roi brain", "1551 help"]:
+        return marketing_roi_brain()
+    if text in ["seo revenue attribution", "1552 help"]:
+        return seo_revenue_attribution()
+    if text in ["content-to-lead intelligence", "content to lead intelligence", "1553 help"]:
+        return content_to_lead_intelligence()
+    if text in ["social media performance predictor", "1554 help"]:
+        return social_media_performance_predictor()
+    if text in ["campaign budget optimizer", "1555 help"]:
+        return campaign_budget_optimizer()
+    if text in ["ad creative testing engine", "1556 help"]:
+        return ad_creative_testing_engine()
+    if text in ["landing page psychology analyzer", "1557 help"]:
+        return landing_page_psychology_analyzer()
+    if text in ["conversion friction detector", "1558 help"]:
+        return conversion_friction_detector()
+    if text in ["user journey simulator", "1559 help"]:
+        return user_journey_simulator()
+    if text in ["trust signal optimizer", "1560 help"]:
+        return trust_signal_optimizer()
+    if text in ["brand voice consistency engine", "1561 help"]:
+        return brand_voice_consistency_engine()
+    if text in ["multi-brand content governor", "multi brand content governor", "1562 help"]:
+        return multi_brand_content_governor()
+    if text in ["automated case-study miner", "automated case study miner", "1563 help"]:
+        return automated_case_study_miner()
+    if text in ["testimonial extraction assistant", "1564 help"]:
+        return testimonial_extraction_assistant()
+    if text in ["reputation moat builder", "1565 help"]:
+        return reputation_moat_builder()
+    if text in ["thought-leadership planner", "thought leadership planner", "1566 help"]:
+        return thought_leadership_planner()
+    if text in ["founder personal brand engine", "1567 help"]:
+        return founder_personal_brand_engine()
+    if text in ["linkedin authority system", "1568 help"]:
+        return linkedin_authority_system()
+    if text in ["youtube strategy assistant", "1569 help"]:
+        return youtube_strategy_assistant()
+    if text in ["short-form video factory", "short form video factory", "1570 help"]:
+        return short_form_video_factory()
+    if text in ["podcast workflow assistant", "1571 help"]:
+        return podcast_workflow_assistant()
+    if text in ["newsletter intelligence engine", "1572 help"]:
+        return newsletter_intelligence_engine()
+    if text in ["community-building assistant", "community building assistant", "1573 help"]:
+        return community_building_assistant()
+    if text in ["partnership discovery ai", "1574 help"]:
+        return partnership_discovery_ai()
+    if text in ["tender opportunity detector", "1575 help"]:
+        return tender_opportunity_detector()
+    if text in ["government proposal assistant", "1576 help"]:
+        return government_proposal_assistant()
+    if text in ["enterprise sales enablement brain", "1577 help"]:
+        return enterprise_sales_enablement_brain()
+    if text in ["competitive positioning engine", "1578 help"]:
+        return competitive_positioning_engine()
+    if text in ["pricing psychology analyzer", "1579 help"]:
+        return pricing_psychology_analyzer()
+    if text in ["dynamic service packaging engine", "1580 help"]:
+        return dynamic_service_packaging_engine()
+    if text in ["saas pricing simulator", "1581 help"]:
+        return saas_pricing_simulator()
+    if text in ["productized-service builder", "productized service builder", "1582 help"]:
+        return productized_service_builder()
+    if text in ["white-label product manager", "white label product manager", "1583 help"]:
+        return white_label_product_manager()
+    if text in ["marketplace listing optimizer", "1584 help"]:
+        return marketplace_listing_optimizer()
+    if text in ["affiliate program brain", "1585 help"]:
+        return affiliate_program_brain()
+    if text in ["referral intelligence system", "1586 help"]:
+        return referral_intelligence_system()
+    if text in ["client onboarding autopilot", "1587 help"]:
+        return client_onboarding_autopilot()
+    if text in ["client requirement workshop assistant", "1588 help"]:
+        return client_requirement_workshop_assistant()
+    if text in ["meeting-to-sow generator", "meeting to sow generator", "1589 help"]:
+        return meeting_to_sow_generator()
+    if text in ["milestone planner", "1590 help"]:
+        return milestone_planner()
+    if text in ["payment milestone tracker", "1591 help"]:
+        return payment_milestone_tracker()
+    if text in ["invoice dispute assistant", "1592 help"]:
+        return invoice_dispute_assistant()
+    if text in ["cash-flow prediction engine", "cash flow prediction engine", "1593 help"]:
+        return cash_flow_prediction_engine()
+    if text in ["expense anomaly detector", "1594 help"]:
+        return expense_anomaly_detector()
+    if text in ["tax planning assistant", "1595 help"]:
+        return tax_planning_assistant()
+    if text in ["financial runway simulator", "1596 help"]:
+        return financial_runway_simulator()
+    if text in ["company valuation estimator", "1597 help"]:
+        return company_valuation_estimator()
+    if text in ["investor pitch intelligence", "1598 help"]:
+        return investor_pitch_intelligence()
+    if text in ["board-report generator", "board report generator", "1599 help"]:
+        return board_report_generator()
+    if text in ["executive war-room mode", "executive war room mode", "1600 help"]:
+        return executive_war_room_mode()
+    if text in ["laravel architecture autopilot", "1601 help"]:
+        return laravel_architecture_autopilot()
+    if text in ["filament resource architect", "1602 help"]:
+        return filament_resource_architect()
+    if text in ["livewire component strategist", "1603 help"]:
+        return livewire_component_strategist()
+    if text in ["blade ui refactor engine", "1604 help"]:
+        return blade_ui_refactor_engine()
+    if text in ["tailwind design-system generator", "tailwind design system generator", "1605 help"]:
+        return tailwind_design_system_generator()
+    if text in ["vite build intelligence", "1606 help"]:
+        return vite_build_intelligence()
+    if text in ["php-fpm diagnostic assistant", "php fpm diagnostic assistant", "1607 help"]:
+        return php_fpm_diagnostic_assistant()
+    if text in ["nginx deployment brain", "1608 help"]:
+        return nginx_deployment_brain()
+    if text in ["shared-hosting compatibility autopilot", "shared hosting compatibility autopilot", "1609 help"]:
+        return shared_hosting_compatibility_autopilot()
+    if text in ["vps migration planner", "1610 help"]:
+        return vps_migration_planner()
+    if text in ["multi-app server inventory", "multi app server inventory", "1611 help"]:
+        return multi_app_server_inventory()
+    if text in ["domain-to-server mapping brain", "domain to server mapping brain", "1612 help"]:
+        return domain_to_server_mapping_brain()
+    if text in ["ssl renewal intelligence", "1613 help"]:
+        return ssl_renewal_intelligence()
+    if text in ["dns propagation monitor", "1614 help"]:
+        return dns_propagation_monitor()
+    if text in ["mail deliverability command center", "1615 help"]:
+        return mail_deliverability_command_center()
+    if text in ["queue failure analyst", "1616 help"]:
+        return queue_failure_analyst()
+    if text in ["cron job governor", "1617 help"]:
+        return cron_job_governor()
+    if text in ["storage permission fixer", "1618 help"]:
+        return storage_permission_fixer()
+    if text in ["laravel route-health monitor", "laravel route health monitor", "1619 help"]:
+        return laravel_route_health_monitor()
+    if text in ["cache invalidation advisor", "1620 help"]:
+        return cache_invalidation_advisor()
+    if text in ["database migration planner", "1621 help"]:
+        return database_migration_planner()
+    if text in ["data seeding strategist", "1622 help"]:
+        return data_seeding_strategist()
+    if text in ["tenant isolation auditor", "1623 help"]:
+        return tenant_isolation_auditor()
+    if text in ["saas module marketplace engine", "1624 help"]:
+        return saas_module_marketplace_engine()
+    if text in ["subscription enforcement auditor", "1625 help"]:
+        return subscription_enforcement_auditor()
+    if text in ["trial-period automation", "trial period automation", "1626 help"]:
+        return trial_period_automation()
+    if text in ["user-role drift detector", "user role drift detector", "1627 help"]:
+        return user_role_drift_detector()
+    if text in ["permission matrix visualizer", "1628 help"]:
+        return permission_matrix_visualizer()
+    if text in ["audit-log intelligence", "audit log intelligence", "1629 help"]:
+        return audit_log_intelligence()
+    if text in ["immutable ledger checker", "1630 help"]:
+        return immutable_ledger_checker()
+    if text in ["accounting rule validator", "1631 help"]:
+        return accounting_rule_validator()
+    if text in ["pos transaction intelligence", "1632 help"]:
+        return pos_transaction_intelligence()
+    if text in ["inventory leakage detector", "1633 help"]:
+        return inventory_leakage_detector()
+    if text in ["warehouse movement predictor", "1634 help"]:
+        return warehouse_movement_predictor()
+    if text in ["supplier reliability scorer", "1635 help"]:
+        return supplier_reliability_scorer()
+    if text in ["purchase-order optimizer", "purchase order optimizer", "1636 help"]:
+        return purchase_order_optimizer()
+    if text in ["barcode workflow assistant", "1637 help"]:
+        return barcode_workflow_assistant()
+    if text in ["receipt-printing diagnostics", "receipt printing diagnostics", "1638 help"]:
+        return receipt_printing_diagnostics()
+    if text in ["e-commerce checkout analyzer", "e commerce checkout analyzer", "1639 help"]:
+        return e_commerce_checkout_analyzer()
+    if text in ["cart abandonment intelligence", "1640 help"]:
+        return cart_abandonment_intelligence()
+    if text in ["product recommendation engine", "1641 help"]:
+        return product_recommendation_engine()
+    if text in ["stock reorder predictor", "1642 help"]:
+        return stock_reorder_predictor()
+    if text in ["demand seasonality analyzer", "1643 help"]:
+        return demand_seasonality_analyzer()
+    if text in ["sales margin optimizer", "1644 help"]:
+        return sales_margin_optimizer()
+    if text in ["customer segmentation engine", "1645 help"]:
+        return customer_segmentation_engine()
+    if text in ["loyalty program intelligence", "1646 help"]:
+        return loyalty_program_intelligence()
+    if text in ["discount abuse detector", "1647 help"]:
+        return discount_abuse_detector()
+    if text in ["fraud-risk scoring", "fraud risk scoring", "1648 help"]:
+        return fraud_risk_scoring()
+    if text in ["returns pattern analyzer", "1649 help"]:
+        return returns_pattern_analyzer()
+    if text in ["retail command intelligence", "1650 help"]:
+        return retail_command_intelligence()
     return None
