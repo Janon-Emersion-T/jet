@@ -1542,6 +1542,126 @@ from tools.retail_command_tools import (
     sales_margin_optimizer,
     stock_reorder_predictor,
 )
+from tools.qa_automation_tools import (
+    accessibility_regression_checker,
+    api_contract_tester,
+    auth_flow_tester,
+    autonomous_qa_test_designer,
+    browser_regression_tester,
+    form_validation_tester,
+    mobile_viewport_auditor,
+    payment_flow_sandbox_tester,
+    screenshot_based_bug_detector,
+    visual_ui_diff_engine,
+)
+from tools.system_test_reliability_tools import (
+    database_integrity_tester,
+    frontend_bundle_regression_watcher,
+    load_test_planner,
+    memory_leak_detector,
+    multi_tenant_leak_tester,
+    performance_baseline_tester,
+    permission_boundary_tester,
+    queue_worker_tester,
+    slow_query_monitor,
+    webhook_retry_tester,
+)
+from tools.release_incident_tools import (
+    client_status_page_generator,
+    deployment_checklist_autopilot,
+    error_budget_tracker,
+    incident_postmortem_generator,
+    production_hotfix_planner,
+    release_readiness_gatekeeper,
+    rollback_drill_assistant,
+    safe_maintenance_window_scheduler,
+    sla_breach_predictor,
+    uptime_communication_assistant,
+)
+from tools.security_governance_batch_tools import (
+    ai_security_review_board,
+    credential_hygiene_assistant,
+    cve_impact_mapper,
+    dependency_license_auditor,
+    firewall_policy_analyzer,
+    open_source_risk_scorer,
+    package_update_strategy_engine,
+    secret_rotation_planner,
+    server_exposure_mapper,
+    ssh_key_inventory_manager,
+)
+from tools.resilience_privacy_tools import (
+    backup_integrity_tester,
+    compliance_evidence_collector,
+    data_retention_governor,
+    disaster_recovery_simulator,
+    fail2ban_intelligence,
+    login_anomaly_detector,
+    malware_scan_orchestrator,
+    privacy_impact_assessor,
+    ransomware_resilience_planner,
+    security_command_authority_layer,
+)
+from tools.local_model_runtime_tools import (
+    answer_confidence_scorer,
+    context_window_budgeter,
+    cpu_gpu_load_balancer,
+    critic_verifier_architecture,
+    hardware_aware_inference_planner,
+    local_model_benchmark_lab,
+    model_quantization_advisor,
+    multi_model_debate_mode,
+    ollama_model_router,
+    prompt_compression_engine,
+)
+from tools.memory_knowledge_runtime_tools import (
+    active_project_memory_injection,
+    episodic_memory_timeline,
+    hallucination_suppression_layer,
+    long_term_knowledge_curator,
+    memory_contradiction_resolver,
+    personal_ontology_builder,
+    procedural_memory_engine,
+    semantic_memory_graph,
+    tool_call_validation_engine,
+    work_context_summarizer,
+)
+from tools.research_evidence_tools import (
+    autonomous_documentation_crawler,
+    citation_aware_offline_notes,
+    evidence_first_answer_mode,
+    knowledge_decay_detector,
+    local_research_cache,
+    self_updating_knowledge_queues,
+    skill_library_manager,
+    stale_information_warning_system,
+    tool_learning_framework,
+    trusted_source_ranking_system,
+)
+from tools.research_synthesis_web_tools import (
+    academic_paper_ingestion,
+    browser_reading_comprehension,
+    contract_clause_risk_scorer,
+    fact_dispute_resolver,
+    legal_document_comparison,
+    misinformation_risk_flagger,
+    research_synthesis_dashboard,
+    source_comparison_engine,
+    technical_standard_parser,
+    web_research_task_planner,
+)
+from tools.policy_training_tools import (
+    ai_tutor_personality_modes,
+    company_knowledge_academy,
+    learning_retention_engine,
+    policy_to_action_mapper,
+    quiz_and_exam_generator,
+    skill_progression_tracker,
+    sop_compliance_checker,
+    staff_handbook_assistant,
+    teach_back_evaluator,
+    training_module_generator,
+)
 
 
 def _after(user_input: str, prefix: str) -> str:
@@ -4099,4 +4219,204 @@ def handle_ai_operations_routes(user_input: str, text: str, clean_text: str):
         return returns_pattern_analyzer()
     if text in ["retail command intelligence", "1650 help"]:
         return retail_command_intelligence()
+    if text in ["autonomous qa test designer", "1651 help"]:
+        return autonomous_qa_test_designer()
+    if text in ["browser regression tester", "1652 help"]:
+        return browser_regression_tester()
+    if text in ["visual ui diff engine", "1653 help"]:
+        return visual_ui_diff_engine()
+    if text in ["screenshot-based bug detector", "screenshot based bug detector", "1654 help"]:
+        return screenshot_based_bug_detector()
+    if text in ["accessibility regression checker", "1655 help"]:
+        return accessibility_regression_checker()
+    if text in ["mobile viewport auditor", "1656 help"]:
+        return mobile_viewport_auditor()
+    if text in ["form validation tester", "1657 help"]:
+        return form_validation_tester()
+    if text in ["auth-flow tester", "auth flow tester", "1658 help"]:
+        return auth_flow_tester()
+    if text in ["payment-flow sandbox tester", "payment flow sandbox tester", "1659 help"]:
+        return payment_flow_sandbox_tester()
+    if text in ["api contract tester", "1660 help"]:
+        return api_contract_tester()
+    if text in ["webhook retry tester", "1661 help"]:
+        return webhook_retry_tester()
+    if text in ["queue worker tester", "1662 help"]:
+        return queue_worker_tester()
+    if text in ["permission boundary tester", "1663 help"]:
+        return permission_boundary_tester()
+    if text in ["multi-tenant leak tester", "multi tenant leak tester", "1664 help"]:
+        return multi_tenant_leak_tester()
+    if text in ["database integrity tester", "1665 help"]:
+        return database_integrity_tester()
+    if text in ["performance baseline tester", "1666 help"]:
+        return performance_baseline_tester()
+    if text in ["load-test planner", "load test planner", "1667 help"]:
+        return load_test_planner()
+    if text in ["slow-query monitor", "slow query monitor", "1668 help"]:
+        return slow_query_monitor()
+    if text in ["memory leak detector", "1669 help"]:
+        return memory_leak_detector()
+    if text in ["frontend bundle regression watcher", "1670 help"]:
+        return frontend_bundle_regression_watcher()
+    if text in ["release-readiness gatekeeper", "release readiness gatekeeper", "1671 help"]:
+        return release_readiness_gatekeeper()
+    if text in ["deployment checklist autopilot", "1672 help"]:
+        return deployment_checklist_autopilot()
+    if text in ["rollback drill assistant", "1673 help"]:
+        return rollback_drill_assistant()
+    if text in ["incident postmortem generator", "1674 help"]:
+        return incident_postmortem_generator()
+    if text in ["sla breach predictor", "1675 help"]:
+        return sla_breach_predictor()
+    if text in ["error-budget tracker", "error budget tracker", "1676 help"]:
+        return error_budget_tracker()
+    if text in ["uptime communication assistant", "1677 help"]:
+        return uptime_communication_assistant()
+    if text in ["client status-page generator", "client status page generator", "1678 help"]:
+        return client_status_page_generator()
+    if text in ["production hotfix planner", "1679 help"]:
+        return production_hotfix_planner()
+    if text in ["safe maintenance window scheduler", "1680 help"]:
+        return safe_maintenance_window_scheduler()
+    if text in ["ai security review board", "1681 help"]:
+        return ai_security_review_board()
+    if text in ["dependency license auditor", "1682 help"]:
+        return dependency_license_auditor()
+    if text in ["open-source risk scorer", "open source risk scorer", "1683 help"]:
+        return open_source_risk_scorer()
+    if text in ["package update strategy engine", "1684 help"]:
+        return package_update_strategy_engine()
+    if text in ["cve impact mapper", "1685 help"]:
+        return cve_impact_mapper()
+    if text in ["secret rotation planner", "1686 help"]:
+        return secret_rotation_planner()
+    if text in ["credential hygiene assistant", "1687 help"]:
+        return credential_hygiene_assistant()
+    if text in ["ssh-key inventory manager", "ssh key inventory manager", "1688 help"]:
+        return ssh_key_inventory_manager()
+    if text in ["firewall policy analyzer", "1689 help"]:
+        return firewall_policy_analyzer()
+    if text in ["server exposure mapper", "1690 help"]:
+        return server_exposure_mapper()
+    if text in ["login anomaly detector", "1691 help"]:
+        return login_anomaly_detector()
+    if text in ["fail2ban intelligence", "1692 help"]:
+        return fail2ban_intelligence()
+    if text in ["malware scan orchestrator", "1693 help"]:
+        return malware_scan_orchestrator()
+    if text in ["backup integrity tester", "1694 help"]:
+        return backup_integrity_tester()
+    if text in ["disaster recovery simulator", "1695 help"]:
+        return disaster_recovery_simulator()
+    if text in ["ransomware resilience planner", "1696 help"]:
+        return ransomware_resilience_planner()
+    if text in ["privacy-impact assessor", "privacy impact assessor", "1697 help"]:
+        return privacy_impact_assessor()
+    if text in ["data retention governor", "1698 help"]:
+        return data_retention_governor()
+    if text in ["compliance evidence collector", "1699 help"]:
+        return compliance_evidence_collector()
+    if text in ["security command authority layer", "1700 help"]:
+        return security_command_authority_layer()
+    if text in ["local model benchmark lab", "1701 help"]:
+        return local_model_benchmark_lab()
+    if text in ["model quantization advisor", "1702 help"]:
+        return model_quantization_advisor()
+    if text in ["ollama model router", "1703 help"]:
+        return ollama_model_router()
+    if text in ["hardware-aware inference planner", "hardware aware inference planner", "1704 help"]:
+        return hardware_aware_inference_planner()
+    if text in ["cpu/gpu load balancer", "cpu gpu load balancer", "1705 help"]:
+        return cpu_gpu_load_balancer()
+    if text in ["context-window budgeter", "context window budgeter", "1706 help"]:
+        return context_window_budgeter()
+    if text in ["prompt compression engine", "1707 help"]:
+        return prompt_compression_engine()
+    if text in ["multi-model debate mode", "multi model debate mode", "1708 help"]:
+        return multi_model_debate_mode()
+    if text in ["critic-verifier architecture", "critic verifier architecture", "1709 help"]:
+        return critic_verifier_architecture()
+    if text in ["answer confidence scorer", "1710 help"]:
+        return answer_confidence_scorer()
+    if text in ["hallucination suppression layer", "1711 help"]:
+        return hallucination_suppression_layer()
+    if text in ["tool-call validation engine", "tool call validation engine", "1712 help"]:
+        return tool_call_validation_engine()
+    if text in ["memory contradiction resolver", "1713 help"]:
+        return memory_contradiction_resolver()
+    if text in ["long-term knowledge curator", "long term knowledge curator", "1714 help"]:
+        return long_term_knowledge_curator()
+    if text in ["personal ontology builder", "1715 help"]:
+        return personal_ontology_builder()
+    if text in ["work context summarizer", "1716 help"]:
+        return work_context_summarizer()
+    if text in ["active project memory injection", "1717 help"]:
+        return active_project_memory_injection()
+    if text in ["episodic memory timeline", "1718 help"]:
+        return episodic_memory_timeline()
+    if text in ["semantic memory graph", "1719 help"]:
+        return semantic_memory_graph()
+    if text in ["procedural memory engine", "1720 help"]:
+        return procedural_memory_engine()
+    if text in ["skill library manager", "1721 help"]:
+        return skill_library_manager()
+    if text in ["tool learning framework", "1722 help"]:
+        return tool_learning_framework()
+    if text in ["autonomous documentation crawler", "1723 help"]:
+        return autonomous_documentation_crawler()
+    if text in ["trusted-source ranking system", "trusted source ranking system", "1724 help"]:
+        return trusted_source_ranking_system()
+    if text in ["local research cache", "1725 help"]:
+        return local_research_cache()
+    if text in ["evidence-first answer mode", "evidence first answer mode", "1726 help"]:
+        return evidence_first_answer_mode()
+    if text in ["citation-aware offline notes", "citation aware offline notes", "1727 help"]:
+        return citation_aware_offline_notes()
+    if text in ["knowledge decay detector", "1728 help"]:
+        return knowledge_decay_detector()
+    if text in ["stale information warning system", "1729 help"]:
+        return stale_information_warning_system()
+    if text in ["self-updating knowledge queues", "self updating knowledge queues", "1730 help"]:
+        return self_updating_knowledge_queues()
+    if text in ["web research task planner", "1731 help"]:
+        return web_research_task_planner()
+    if text in ["browser reading comprehension", "1732 help"]:
+        return browser_reading_comprehension()
+    if text in ["source comparison engine", "1733 help"]:
+        return source_comparison_engine()
+    if text in ["fact dispute resolver", "1734 help"]:
+        return fact_dispute_resolver()
+    if text in ["misinformation risk flagger", "1735 help"]:
+        return misinformation_risk_flagger()
+    if text in ["research synthesis dashboard", "1736 help"]:
+        return research_synthesis_dashboard()
+    if text in ["academic paper ingestion", "1737 help"]:
+        return academic_paper_ingestion()
+    if text in ["technical standard parser", "1738 help"]:
+        return technical_standard_parser()
+    if text in ["legal document comparison", "1739 help"]:
+        return legal_document_comparison()
+    if text in ["contract clause risk scorer", "1740 help"]:
+        return contract_clause_risk_scorer()
+    if text in ["policy-to-action mapper", "policy to action mapper", "1741 help"]:
+        return policy_to_action_mapper()
+    if text in ["sop compliance checker", "1742 help"]:
+        return sop_compliance_checker()
+    if text in ["staff handbook assistant", "1743 help"]:
+        return staff_handbook_assistant()
+    if text in ["training module generator", "1744 help"]:
+        return training_module_generator()
+    if text in ["quiz and exam generator", "1745 help"]:
+        return quiz_and_exam_generator()
+    if text in ["teach-back evaluator", "teach back evaluator", "1746 help"]:
+        return teach_back_evaluator()
+    if text in ["ai tutor personality modes", "1747 help"]:
+        return ai_tutor_personality_modes()
+    if text in ["skill progression tracker", "1748 help"]:
+        return skill_progression_tracker()
+    if text in ["learning retention engine", "1749 help"]:
+        return learning_retention_engine()
+    if text in ["company knowledge academy", "1750 help"]:
+        return company_knowledge_academy()
     return None
