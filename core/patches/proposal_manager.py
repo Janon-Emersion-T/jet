@@ -76,7 +76,6 @@ class ProposalManager:
         }
 
     def apply(self, proposal_id, confirmed=False):
-        (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
         if not confirmed:
             return (
                 "Write blocked.\n"
