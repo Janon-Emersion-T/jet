@@ -286,5 +286,95 @@
       "domain": "general"
     },
     "updated_at": "2026-05-31T01:19:21"
+  },
+  "html knowledge status": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.716,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:37:13"
+  },
+  "update html knowledge": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:35:36"
+  },
+  "explain html element section": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:37:19"
+  },
+  "html blueprint create a landing page for lkprofessionals with services, portfolio, contact form and seo": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "marketing"
+    },
+    "updated_at": "2026-05-31T02:35:54"
+  },
+  "create html starter lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:36:47"
+  },
+  "audit html file resources/views/pages/about.blade.php": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "file",
+      "confidence": 0.69,
+      "domain": "research"
+    },
+    "updated_at": "2026-05-31T02:27:43"
+  },
+  "audit html file index.html": {
+    "value": {
+      "intent": "patch_workflow",
+      "route_hint": "file",
+      "confidence": 0.681,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:27:47"
+  },
+  "force update html knowledge": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:27:03"
+  },
+  "html practical blueprint": {
+    "value": {
+      "intent": "database",
+      "route_hint": "database",
+      "confidence": 0.701,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:36:06"
+  },
+  "audit html file test_documents/sample.html": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "file",
+      "confidence": 0.7,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T02:37:02"
   }
 }

@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "topic": "html",
+  "sources": [
+    {
+      "name": "WHATWG HTML Living Standard",
+      "url": "https://html.spec.whatwg.org/multipage/",
+      "type": "official-standard",
+      "priority": 10
+    },
+    {
+      "name": "MDN HTML Elements Reference",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements",
+      "type": "developer-reference",
+      "priority": 9
+    },
+    {
+      "name": "MDN HTML Attributes Reference",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes",
+      "type": "developer-reference",
+      "priority": 8
+    },
+    {
+      "name": "MDN HTML Forms Guide",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms",
+      "type": "practical-guide",
+      "priority": 8
+    },
+    {
+      "name": "MDN HTML Accessibility",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML",
+      "type": "accessibility-guide",
+      "priority": 9
+    }
+  ]
+}

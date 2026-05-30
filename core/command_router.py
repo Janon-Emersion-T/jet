@@ -1,3 +1,4 @@
+from core.routes.html_knowledge_routes import handle_html_knowledge_routes
 from core.routes.image_generation_routes import handle_image_generation_routes
 from core.ai_fallback import handle_ai_fallback
 from core.nlp.unified_orchestrator import orchestrate_command
@@ -108,8 +109,12 @@ def route_command(user_input: str) -> str:
 
     route_handlers = [
         handle_nlp_test_routes,
-	# Creative generation modules
-	handle_image_generation_routes,
+
+        #Programming Handlers
+	    handle_html_knowledge_routes,
+
+	    # Creative generation modules
+	    handle_image_generation_routes,
 
         handle_live_environment_routes,
 
@@ -158,6 +163,7 @@ def route_command(user_input: str) -> str:
         handle_backup_routes,
 
         # General modules later
+        
         handle_task_routes,
         handle_memory_routes,
         handle_vector_memory_routes,
