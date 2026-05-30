@@ -1,4 +1,13 @@
-const { app, BrowserWindow, Menu, Tray, Notification, ipcMain } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  Menu,
+  Tray,
+  Notification,
+  ipcMain,
+  session,
+} = require("electron");
+
 const path = require("path");
 
 let mainWindow;
@@ -26,7 +35,7 @@ function createWindow() {
 
   mainWindow.loadURL(DEV_URL);
 
-  //mainWindow.maximize();
+  // mainWindow.maximize();
 
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
@@ -101,6 +110,17 @@ ipcMain.handle("quit-app", async () => {
 });
 
 app.whenReady().then(() => {
+  session.defaultSession.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      if (permission === "geolocation") {
+        callback(true);
+        return;
+      }
+
+      callback(false);
+    }
+  );
+
   createWindow();
   // createTray();
 

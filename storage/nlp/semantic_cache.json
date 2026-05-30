@@ -609,7 +609,7 @@
       "confidence": 1.0,
       "domain": "general"
     },
-    "updated_at": "2026-05-31T03:44:57"
+    "updated_at": "2026-05-31T03:52:19"
   },
   "how is your day?": {
     "value": {
@@ -627,7 +627,7 @@
       "confidence": 1.0,
       "domain": "general"
     },
-    "updated_at": "2026-05-31T03:40:24"
+    "updated_at": "2026-05-31T03:52:24"
   },
   "i am fine thank you": {
     "value": {
@@ -646,5 +646,86 @@
       "domain": "general"
     },
     "updated_at": "2026-05-31T03:45:06"
+  },
+  "hello, how are you": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:52:15"
+  },
+  "hey how are you": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.971,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T04:00:18"
+  },
+  "hello, how are you?": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T04:02:51"
+  },
+  "hey jarvis, what are you doing?": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.597,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T04:02:57"
+  },
+  "i feel tired today": {
+    "value": {
+      "intent": "camera",
+      "route_hint": "vision",
+      "confidence": 0.63,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T04:03:03"
+  },
+  "can you talk with me?": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.996,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T04:03:21"
+  },
+  "weather": {
+    "value": {
+      "intent": "weather",
+      "route_hint": null,
+      "confidence": 1.0,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T04:03:38"
+  },
+  "weather in jaffna": {
+    "value": {
+      "intent": "weather",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T04:11:30"
+  },
+  "weather in colombo": {
+    "value": {
+      "intent": "weather",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T04:11:35"
   }
 }

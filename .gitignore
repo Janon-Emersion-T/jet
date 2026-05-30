@@ -29,6 +29,28 @@ storage/command_approvals/
 storage/task_queue.json
 storage/presentations/
 storage/events/
+storage/current_location.json
+storage/nlp/*
+storage/vector_memory/*
+
+# Jarvis generated image runtime files
+storage/generated_images/
+storage/generated_images/jobs/
+storage/generated_images/metadata/
+storage/generated_images/outputs/
+storage/generated_images/prompts/
+storage/generated_images/**/*.png
+storage/generated_images/**/*.jpg
+storage/generated_images/**/*.jpeg
+storage/generated_images/**/*.webp
+storage/generated_images/**/*.json
+storage/generated_images/**/*.log
+storage/generated_images/**/*.txt
+
+# Jarvis local NLP runtime memory/cache
+storage/nlp/audit_trail.jsonl
+storage/nlp/intent_memory.json
+storage/nlp/semantic_cache.json
 
 
 # =========================================================
@@ -112,21 +134,4 @@ engines/ComfyUI/temp/
 *.gguf
 models/image/checkpoints/
 
-# Jarvis generated image runtime files
-storage/generated_images/
-storage/generated_images/jobs/
-storage/generated_images/metadata/
-storage/generated_images/outputs/
-storage/generated_images/prompts/
-storage/generated_images/**/*.png
-storage/generated_images/**/*.jpg
-storage/generated_images/**/*.jpeg
-storage/generated_images/**/*.webp
-storage/generated_images/**/*.json
-storage/generated_images/**/*.log
-storage/generated_images/**/*.txt
 
-# Jarvis local NLP runtime memory/cache
-storage/nlp/audit_trail.jsonl
-storage/nlp/intent_memory.json
-storage/nlp/semantic_cache.json

@@ -10,12 +10,15 @@ from core.project_diagnostics import interpret_project_diagnostics
 from core.code_reviewer import review_code_file
 from tools.system_tools import read_project_file
 
+from tools.weather_location_tools import save_current_location, get_saved_location
+
 from core.models.model_config import load_model_settings, save_model_settings
 from core.models.ollama_manager import list_ollama_models, pull_ollama_model, test_ollama_model
 from core.models.model_router import detect_model_route, explain_model_route
 from core.models.prompt_templates import load_prompt_templates, save_prompt_templates
 from core.models.model_performance import load_model_performance, benchmark_model
 from core.models.model_router import get_model_with_fallback
+
 
 app = FastAPI(title="JARVIS Local API")
 
@@ -44,6 +47,13 @@ class ProjectRequest(BaseModel):
 
 class FileRequest(BaseModel):
     path: str
+
+
+class LocationRequest(BaseModel):
+    latitude: float
+    longitude: float
+    accuracy: float | None = None
+    source: str = "browser"
 
 
 @app.get("/")
@@ -106,6 +116,33 @@ def file_review(request: FileRequest):
         "review": review_code_file(request.path)
     }
 
+
+@app.post("/location/save")
+def location_save(request: LocationRequest):
+    return save_current_location(
+        latitude=request.latitude,
+        longitude=request.longitude,
+        accuracy=request.accuracy,
+        source=request.source,
+    )
+
+
+@app.get("/location/current")
+def location_current():
+    location = get_saved_location()
+
+    if not location:
+        return {
+            "ok": False,
+            "message": "No location saved yet."
+        }
+
+    return {
+        "ok": True,
+        "location": location
+    }
+
+
 @app.get("/models/settings")
 async def get_model_settings():
     return load_model_settings()
@@ -161,6 +198,7 @@ async def get_prompt_templates():
 @app.post("/prompts/templates")
 async def update_prompt_templates(payload: dict):
     return save_prompt_templates(payload)
+
 
 @app.get("/models/performance")
 async def get_model_performance():

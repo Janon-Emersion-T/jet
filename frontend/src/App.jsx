@@ -1,8 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 
+import {
+  getBrowserLocation,
+  saveLocationToJarvis,
+  shouldCaptureLocation,
+} from "./services/locationService";
+
 import ChatContextPanel from "./components/ChatContextPanel";
 
 import { useSystemPolling } from "./hooks/useSystemPolling";
+
 import {
   Activity,
   Bell,
@@ -20,6 +27,7 @@ import {
   Save,
   RefreshCw,
 } from "lucide-react";
+
 import {
   getModelSettings,
   saveModelSettingsRequest,
@@ -184,6 +192,25 @@ function App() {
     setLoading(true);
 
     try {
+      if (shouldCaptureLocation(message)) {
+        try {
+          const location = await getBrowserLocation();
+          await saveLocationToJarvis(location);
+        } catch (locationError) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "jarvis",
+              text:
+                "Location permission is required for current-location weather. " +
+                "You can still ask weather by city, for example: weather in Jaffna.",
+            },
+          ]);
+          setLoading(false);
+          return;
+        }
+      }
+
       const data = await sendChatMessage(message);
       const response = data.response || "No response received.";
 

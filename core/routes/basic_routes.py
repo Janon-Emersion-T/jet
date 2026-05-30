@@ -1,38 +1,17 @@
-import string
-
+from core.basic_conversation import handle_basic_conversation
 from core.capabilities import list_capabilities, capability_status
+
 from tools.system_tools import run_safe_command
 from tools.browser_automation import open_and_read, google_search
 from tools.browser_tools import open_safe_site
 
-def handle_greeting(clean_text: str):
-    greetings = {
-        "hi",
-        "hello",
-        "hey",
-        "hai",
-        "yo",
-        "good morning",
-        "good afternoon",
-        "good evening",
-    }
+from tools.weather_location_tools import (
+    extract_weather_city,
+    format_saved_location,
+    get_weather_for_city,
+    get_weather_for_saved_location,
+)
 
-    if clean_text in greetings:
-        return (
-            "Hello Janon. I am online and ready. "
-            "You can ask me to build, check, fix, analyze, or plan something."
-        )
-
-    if clean_text in ["how are you", "how are you doing", "how is your day"]:
-        return (
-            "I am functioning properly, Janon. "
-            "Systems are ready, routing is active, and I am waiting for your next instruction."
-        )
-
-    if clean_text in ["thanks", "thank you", "ok", "okay"]:
-        return "Understood, Janon."
-
-    return None
 
 def handle_unconnected_integrations(clean_text: str, intent: str):
     calendar_terms = {
@@ -49,6 +28,10 @@ def handle_unconnected_integrations(clean_text: str, intent: str):
         "schedule",
         "my schedule",
         "today schedule",
+        "show my schedule",
+        "what is my schedule",
+        "what is on my calendar",
+        "what is on my calender",
     }
 
     email_terms = {
@@ -60,6 +43,22 @@ def handle_unconnected_integrations(clean_text: str, intent: str):
         "my mail",
         "open email",
         "open gmail",
+        "show email",
+        "show gmail",
+        "read email",
+        "read gmail",
+        "check email",
+        "check gmail",
+        "check my email",
+        "check my gmail",
+    }
+
+    camera_terms = {
+        "camera",
+        "open camera",
+        "see camera",
+        "scan camera",
+        "look through camera",
     }
 
     if intent == "calendar" or clean_text in calendar_terms:
@@ -76,58 +75,71 @@ def handle_unconnected_integrations(clean_text: str, intent: str):
             "I will not invent email content."
         )
 
+    if intent == "camera" or clean_text in camera_terms:
+        return (
+            "Camera access is not connected yet. "
+            "I cannot see or scan the environment until a camera module is added."
+        )
+
     return None
 
+
 def handle_basic_routes(user_input: str, text: str, clean_text: str, intent: str):
-    greeting_response = handle_greeting(clean_text)
-    if greeting_response:
-        return greeting_response
-    
+    """
+    Basic route handler.
+
+    Order matters:
+    1. Block fake external-tool access.
+    2. Handle real location/weather.
+    3. Handle deterministic local commands.
+    4. Handle browser launcher commands.
+    5. Use dynamic local conversation as the final basic fallback.
+    """
+
     integration_response = handle_unconnected_integrations(clean_text, intent)
     if integration_response:
         return integration_response
-        
+
+    if clean_text in [
+        "location",
+        "my location",
+        "current location",
+        "where am i",
+        "where am i located",
+    ]:
+        return format_saved_location()
+
+    weather_city = extract_weather_city(clean_text)
+    if weather_city:
+        return get_weather_for_city(weather_city)
+
+    if clean_text in [
+        "weather",
+        "today weather",
+        "current weather",
+        "weather today",
+        "check weather",
+        "check the weather",
+        "what is the weather",
+        "what's the weather",
+        "weather here",
+        "weather near me",
+        "weather for my location",
+    ] or intent == "weather":
+        return get_weather_for_saved_location()
+
     if clean_text in [
         "capabilities",
         "list capabilities",
-        "what can you do"
+        "what can you do",
+        "what are your capabilities",
+        "show capabilities",
     ]:
         return list_capabilities()
 
     if clean_text.startswith("capability "):
         capability = clean_text.replace("capability ", "", 1).strip()
         return capability_status(capability)
-
-    if intent == "weather":
-        return (
-            "Live weather is not connected yet. "
-            "I cannot check real-time weather until a weather tool or API is added."
-        )
-
-    if intent == "location":
-        return (
-            "Live location detection is not connected yet. "
-            "I can remember your saved country if you told me, "
-            "but I cannot detect your current GPS/location automatically."
-        )
-
-    if intent == "camera":
-        return (
-            "Camera access is not connected yet. "
-            "I cannot see or scan the environment until a camera module is added."
-        )
-
-    if intent == "email":
-        return (
-            "Email access is not connected yet. "
-            "I cannot read or send emails until an email connector is added."
-        )
-
-    if intent == "calendar":
-        return (
-            "Calendar access is not connected yet. "
-            "I cannot manage schedules until a calendar connector is added."
-        )
 
     if clean_text.startswith("search google for "):
         query = user_input.lower().replace("search google for ", "", 1).strip()
@@ -142,7 +154,7 @@ def handle_basic_routes(user_input: str, text: str, clean_text: str, intent: str
             "github": "https://github.com",
             "chatgpt": "https://chatgpt.com",
             "gmail": "https://gmail.com",
-            "lkprofessionals": "https://lkprofessionals.com"
+            "lkprofessionals": "https://lkprofessionals.com",
         }
 
         if site in known_sites:
@@ -151,7 +163,12 @@ def handle_basic_routes(user_input: str, text: str, clean_text: str, intent: str
         return open_safe_site(site)
 
     if intent == "browser_control":
-        if text.startswith("browser ") or text.startswith("google results ") or text.startswith("serp check ") or text.startswith("confirm browser action "):
+        if (
+            text.startswith("browser ")
+            or text.startswith("google results ")
+            or text.startswith("serp check ")
+            or text.startswith("confirm browser action ")
+        ):
             return None
 
         return (
@@ -178,4 +195,4 @@ def handle_basic_routes(user_input: str, text: str, clean_text: str, intent: str
     if clean_text in command_map:
         return run_safe_command(command_map[clean_text])
 
-    return None
+    return handle_basic_conversation(user_input)
