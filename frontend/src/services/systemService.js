@@ -1,11 +1,9 @@
-import { API_URL } from "../config/api";
+import { apiGet } from "./apiClient";
 
 export async function checkApiStatus() {
-  const res = await fetch(`${API_URL}/`);
-  return await res.json();
+  return await apiGet("/");
 }
 
 export async function getCapabilities() {
-  const res = await fetch(`${API_URL}/capabilities`);
-  return await res.json();
+  return await apiGet("/capabilities");
 }

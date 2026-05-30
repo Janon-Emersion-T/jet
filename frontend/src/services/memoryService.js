@@ -1,6 +1,5 @@
-import { API_URL } from "../config/api";
+import { apiGet } from "./apiClient";
 
 export async function getFacts() {
-  const res = await fetch(`${API_URL}/facts`);
-  return await res.json();
+  return await apiGet("/facts");
 }

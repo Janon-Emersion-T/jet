@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import ChatContextPanel from "./components/ChatContextPanel";
+
+import { useSystemPolling } from "./hooks/useSystemPolling";
 import {
   Activity,
   Bell,
@@ -71,32 +74,32 @@ function App() {
   const [routePreview, setRoutePreview] = useState(null);
   const [routeInput, setRouteInput] = useState("");
 
-  async function checkApi() {
+  const checkApi = useCallback(async () => {
     try {
       const data = await checkApiStatus();
       setApiOnline(data.status === "online");
     } catch {
       setApiOnline(false);
     }
-  }
+  }, []);
 
-  async function loadFacts() {
+  const loadFacts = useCallback(async () => {
     try {
       const data = await getFacts();
       setFacts(data.facts || []);
     } catch {
       setFacts([]);
     }
-  }
+  }, []);
 
-  async function loadCapabilities() {
+  const loadCapabilities = useCallback(async () => {
     try {
       const data = await getCapabilities();
       setCapabilities(data.capabilities || []);
     } catch {
       setCapabilities([]);
     }
-  }
+  }, []);
 
   async function loadModelSettings() {
     const data = await getModelSettings();
@@ -148,22 +151,18 @@ function App() {
 
 
   useEffect(() => {
-    checkApi();
-    loadFacts();
-    loadCapabilities();
     loadModelSettings();
     loadOllamaModels();
     loadPerformanceData();
     loadPromptTemplates();
-
-    const interval = setInterval(() => {
-      checkApi();
-      loadFacts();
-      loadCapabilities();
-    }, 3000);
-
-    return () => clearInterval(interval);
   }, []);
+
+  useSystemPolling({
+    checkApi,
+    loadFacts,
+    loadCapabilities,
+    intervalMs: 30000,
+  });
 
   async function notify(title, body) {
     if (window.jarvisDesktop?.notify) {
@@ -172,9 +171,13 @@ function App() {
   }
 
   async function sendMessage(customMessage = null) {
-    const message = customMessage || input.trim();
+    const message = (customMessage || input).trim();
 
     if (!message || loading) return;
+
+    if (message.length < 2) {
+      return;
+    }
 
     setMessages((prev) => [...prev, { role: "user", text: message }]);
     setInput("");
@@ -210,8 +213,12 @@ function App() {
   }
 
   function runCommand(command) {
+    const safeCommand = String(command || "").trim();
+
+    if (!safeCommand) return;
+
     setActivePanel("chat");
-    sendMessage(command);
+    sendMessage(safeCommand);
   }
 
   function handleKeyDown(e) {

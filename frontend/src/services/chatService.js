@@ -1,11 +1,5 @@
-import { API_URL } from "../config/api";
+import { apiPost } from "./apiClient";
 
 export async function sendChatMessage(message) {
-  const res = await fetch(`${API_URL}/chat`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message }),
-  });
-
-  return await res.json();
+  return await apiPost("/chat", { message });
 }

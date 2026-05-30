@@ -474,7 +474,7 @@
       "confidence": 0.729,
       "domain": "general"
     },
-    "updated_at": "2026-05-31T03:06:55"
+    "updated_at": "2026-05-31T03:15:25"
   },
   "debug route create a landing page structure for lkprofessionals": {
     "value": {
@@ -519,6 +519,132 @@
       "confidence": 0.686,
       "domain": "general"
     },
-    "updated_at": "2026-05-31T03:06:06"
+    "updated_at": "2026-05-31T03:15:18"
+  },
+  "debug route check whether you already know html": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.67,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T03:15:18"
+  },
+  "debug route audit my sample html file and tell me if it is production ready": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.736,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T03:15:25"
+  },
+  "update css knowledge": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:24:50"
+  },
+  "css knowledge status": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.712,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:25:40"
+  },
+  "explain css cascade": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:25:49"
+  },
+  "explain container queries": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:25:59"
+  },
+  "create css starter for lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:26:11"
+  },
+  "audit css file test_documents/sample.css": {
+    "value": {
+      "intent": "patch_workflow",
+      "route_hint": "file",
+      "confidence": 0.642,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T03:26:17"
+  },
+  "translate css architecture to tailwind": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:26:27"
+  },
+  "hi": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 1.0,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:44:57"
+  },
+  "how is your day?": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.897,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:40:11"
+  },
+  "hello": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 1.0,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:40:24"
+  },
+  "i am fine thank you": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.728,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:41:47"
+  },
+  "calender": {
+    "value": {
+      "intent": "calendar",
+      "route_hint": null,
+      "confidence": 0.875,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:45:06"
   }
 }

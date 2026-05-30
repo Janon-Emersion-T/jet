@@ -1,0 +1,142 @@
+{
+  "updated_at": "2026-05-30T21:55:35Z",
+  "sources": {
+    "https://www.w3.org/Style/CSS/current-work": {
+      "name": "W3C CSS Current Work",
+      "type": "official-standard-index",
+      "priority": 10,
+      "hash": "ab477fc5134352a62f2fbdd8c8735fec215b66c57f40d9e1384565bdeafae7d6",
+      "last_learned_at": "2026-05-30T21:54:52Z",
+      "chunks_saved": 4,
+      "title": "CSS current work & how to participate"
+    },
+    "https://www.w3.org/TR/css-2026/": {
+      "name": "W3C CSS Snapshot 2026",
+      "type": "official-snapshot",
+      "priority": 10,
+      "hash": "c9e87e00c0ee5139044d2f989a8774643354ea01797741453097caf0990a338c",
+      "last_learned_at": "2026-05-30T21:55:01Z",
+      "chunks_saved": 48,
+      "title": "CSS Snapshot 2026"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference": {
+      "name": "MDN CSS Reference",
+      "type": "developer-reference",
+      "priority": 9,
+      "hash": "9f351be6bf4a945e6689b7ee4d77a5b03e296db21135058297db3c1f5f657603",
+      "last_learned_at": "2026-05-30T21:55:04Z",
+      "chunks_saved": 7,
+      "title": "CSS reference - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors": {
+      "name": "MDN CSS Selectors",
+      "type": "developer-reference",
+      "priority": 9,
+      "hash": "c177f3c58b1412838d876feead345d2942cdb77da4380939bd40abb19dcb5297",
+      "last_learned_at": "2026-05-30T21:55:07Z",
+      "chunks_saved": 7,
+      "title": "CSS selectors - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade": {
+      "name": "MDN CSS Cascade",
+      "type": "core-concept",
+      "priority": 10,
+      "hash": "f958a6c617c6fdb3e13029096f4fb2f53d8469174742e12fe1be3428421759a8",
+      "last_learned_at": "2026-05-30T21:55:09Z",
+      "chunks_saved": 5,
+      "title": "CSS cascading and inheritance - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model": {
+      "name": "MDN CSS Box Model",
+      "type": "core-concept",
+      "priority": 10,
+      "hash": "9171b8adc39c2141c087512aff2b8a7ae6229f7b4ea48d35af39fc6c93d84d30",
+      "last_learned_at": "2026-05-30T21:55:11Z",
+      "chunks_saved": 5,
+      "title": "CSS box model - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout": {
+      "name": "MDN CSS Flexbox",
+      "type": "layout-system",
+      "priority": 9,
+      "hash": "5e06e264f859e2a77dcfc10523a60f37c2b2a55b9193d522c70d943bb8c852fc",
+      "last_learned_at": "2026-05-30T21:55:14Z",
+      "chunks_saved": 5,
+      "title": "CSS flexible box layout - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout": {
+      "name": "MDN CSS Grid Layout",
+      "type": "layout-system",
+      "priority": 9,
+      "hash": "ccdc74847cfc0fc99da3e86a79826766afd02a120c6dca6ace4f00f2e1dad72c",
+      "last_learned_at": "2026-05-30T21:55:16Z",
+      "chunks_saved": 6,
+      "title": "CSS grid layout - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries": {
+      "name": "MDN CSS Media Queries",
+      "type": "responsive-design",
+      "priority": 9,
+      "hash": "d1f4e7827a1c7265bb9bd14c8a1ff2f04828ae1869b948c6dcd0af29b3e9234c",
+      "last_learned_at": "2026-05-30T21:55:19Z",
+      "chunks_saved": 6,
+      "title": "CSS media queries - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries": {
+      "name": "MDN CSS Container Queries",
+      "type": "responsive-design",
+      "priority": 9,
+      "hash": "48bcabbb1fbe802a4b49e181f05cb168cb3cc4547d9abb1135a6e2d147930646",
+      "last_learned_at": "2026-05-30T21:55:21Z",
+      "chunks_saved": 7,
+      "title": "CSS container queries - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/--*": {
+      "name": "MDN CSS Custom Properties",
+      "type": "design-system",
+      "priority": 8,
+      "hash": "7283af87ab8c65aa119990bebe470a56edc60932bedebd9896f9f42053ad45c2",
+      "last_learned_at": "2026-05-30T21:55:24Z",
+      "chunks_saved": 6,
+      "title": "Custom properties (--*): CSS variables - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors": {
+      "name": "MDN CSS Colors",
+      "type": "visual-design",
+      "priority": 8,
+      "hash": "fd8935c8f5a1825175ca4d34e1377dc712302bd9eeb5e739c81097b2ba6041fb",
+      "last_learned_at": "2026-05-30T21:55:26Z",
+      "chunks_saved": 6,
+      "title": "CSS colors - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations": {
+      "name": "MDN CSS Animations",
+      "type": "motion",
+      "priority": 7,
+      "hash": "2c4c8faa205addc554fea4be1ff9e4efb6afbe639864576b39cdfbc362d68e1f",
+      "last_learned_at": "2026-05-30T21:55:29Z",
+      "chunks_saved": 7,
+      "title": "CSS animations - CSS | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions": {
+      "name": "MDN CSS Transitions",
+      "type": "motion",
+      "priority": 7,
+      "hash": "f996ace426fe9a184cf7be7f9a2d299e18f961719759dcfc763f4cceaa7fcb38",
+      "last_learned_at": "2026-05-30T21:55:31Z",
+      "chunks_saved": 5,
+      "title": "CSS transitions - CSS | MDN"
+    },
+    "https://web.dev/learn/css": {
+      "name": "web.dev Learn CSS",
+      "type": "practical-course",
+      "priority": 8,
+      "hash": "9d9193243c538a640ab5cd1095c08b63b681364c148f5dc6ab68ed7dbed369fc",
+      "last_learned_at": "2026-05-30T21:55:34Z",
+      "chunks_saved": 7,
+      "title": "Learn CSS  |  web.dev"
+    }
+  },
+  "topic": "css",
+  "version": "1.0.0"
+}

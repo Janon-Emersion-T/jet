@@ -40,12 +40,50 @@ Clean routing text:
 
 Please respond naturally and ask a useful follow-up only if needed."""
 
+def _guard_unconnected_external_tools(raw_text: str) -> str | None:
+    text = " ".join((raw_text or "").lower().strip().split())
+
+    blocked_terms = {
+        "calendar",
+        "calender",
+        "my calendar",
+        "my calender",
+        "schedule",
+        "my schedule",
+        "today schedule",
+        "email",
+        "gmail",
+        "inbox",
+        "my email",
+        "my mail",
+    }
+
+    if text in blocked_terms:
+        if "calendar" in text or "calender" in text or "schedule" in text:
+            return (
+                "Calendar access is not connected yet. "
+                "I cannot read your real calendar until a calendar connector is added. "
+                "I will not invent events."
+            )
+
+        if "email" in text or "gmail" in text or "mail" in text or "inbox" in text:
+            return (
+                "Email access is not connected yet. "
+                "I cannot read your real email until an email connector is added. "
+                "I will not invent email content."
+            )
+
+    return None
 
 def route_command(user_input: str) -> str:
     raw_text = (user_input or "").strip()
 
     if not raw_text:
         return "Please enter a command."
+    
+    external_guard_response = _guard_unconnected_external_tools(raw_text)
+    if external_guard_response:
+        return external_guard_response
 
     # Everything passes through NLP first.
     nlp = orchestrate_command(user_input)

@@ -5,8 +5,88 @@ from tools.system_tools import run_safe_command
 from tools.browser_automation import open_and_read, google_search
 from tools.browser_tools import open_safe_site
 
+def handle_greeting(clean_text: str):
+    greetings = {
+        "hi",
+        "hello",
+        "hey",
+        "hai",
+        "yo",
+        "good morning",
+        "good afternoon",
+        "good evening",
+    }
+
+    if clean_text in greetings:
+        return (
+            "Hello Janon. I am online and ready. "
+            "You can ask me to build, check, fix, analyze, or plan something."
+        )
+
+    if clean_text in ["how are you", "how are you doing", "how is your day"]:
+        return (
+            "I am functioning properly, Janon. "
+            "Systems are ready, routing is active, and I am waiting for your next instruction."
+        )
+
+    if clean_text in ["thanks", "thank you", "ok", "okay"]:
+        return "Understood, Janon."
+
+    return None
+
+def handle_unconnected_integrations(clean_text: str, intent: str):
+    calendar_terms = {
+        "calendar",
+        "calender",
+        "my calendar",
+        "my calender",
+        "open calendar",
+        "open calender",
+        "show calendar",
+        "show calender",
+        "today calendar",
+        "today calender",
+        "schedule",
+        "my schedule",
+        "today schedule",
+    }
+
+    email_terms = {
+        "email",
+        "mail",
+        "gmail",
+        "inbox",
+        "my email",
+        "my mail",
+        "open email",
+        "open gmail",
+    }
+
+    if intent == "calendar" or clean_text in calendar_terms:
+        return (
+            "Calendar access is not connected yet. "
+            "I cannot read, view, create, or manage real calendar events until a calendar connector is added. "
+            "I will not invent calendar events."
+        )
+
+    if intent == "email" or clean_text in email_terms:
+        return (
+            "Email access is not connected yet. "
+            "I cannot read, send, or manage real emails until an email connector is added. "
+            "I will not invent email content."
+        )
+
+    return None
 
 def handle_basic_routes(user_input: str, text: str, clean_text: str, intent: str):
+    greeting_response = handle_greeting(clean_text)
+    if greeting_response:
+        return greeting_response
+    
+    integration_response = handle_unconnected_integrations(clean_text, intent)
+    if integration_response:
+        return integration_response
+        
     if clean_text in [
         "capabilities",
         "list capabilities",
