@@ -1,0 +1,96 @@
+{
+  "version": "1.0.0",
+  "topic": "css",
+  "sources": [
+    {
+      "name": "W3C CSS Current Work",
+      "url": "https://www.w3.org/Style/CSS/current-work",
+      "type": "official-standard-index",
+      "priority": 10
+    },
+    {
+      "name": "W3C CSS Snapshot 2026",
+      "url": "https://www.w3.org/TR/css-2026/",
+      "type": "official-snapshot",
+      "priority": 10
+    },
+    {
+      "name": "MDN CSS Reference",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference",
+      "type": "developer-reference",
+      "priority": 9
+    },
+    {
+      "name": "MDN CSS Selectors",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors",
+      "type": "developer-reference",
+      "priority": 9
+    },
+    {
+      "name": "MDN CSS Cascade",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade",
+      "type": "core-concept",
+      "priority": 10
+    },
+    {
+      "name": "MDN CSS Box Model",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model",
+      "type": "core-concept",
+      "priority": 10
+    },
+    {
+      "name": "MDN CSS Flexbox",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout",
+      "type": "layout-system",
+      "priority": 9
+    },
+    {
+      "name": "MDN CSS Grid Layout",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout",
+      "type": "layout-system",
+      "priority": 9
+    },
+    {
+      "name": "MDN CSS Media Queries",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries",
+      "type": "responsive-design",
+      "priority": 9
+    },
+    {
+      "name": "MDN CSS Container Queries",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries",
+      "type": "responsive-design",
+      "priority": 9
+    },
+    {
+      "name": "MDN CSS Custom Properties",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/--*",
+      "type": "design-system",
+      "priority": 8
+    },
+    {
+      "name": "MDN CSS Colors",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors",
+      "type": "visual-design",
+      "priority": 8
+    },
+    {
+      "name": "MDN CSS Animations",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations",
+      "type": "motion",
+      "priority": 7
+    },
+    {
+      "name": "MDN CSS Transitions",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions",
+      "type": "motion",
+      "priority": 7
+    },
+    {
+      "name": "web.dev Learn CSS",
+      "url": "https://web.dev/learn/css",
+      "type": "practical-course",
+      "priority": 8
+    }
+  ]
+}

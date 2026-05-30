@@ -128,6 +128,41 @@ def _specialist_boost(user_input: str, module: RouteModule) -> float:
 
         if any(signal in text for signal in html_signals):
             return 0.35
+    
+    if module.name == "css_knowledge":
+        css_signals = [
+            "css",
+            "stylesheet",
+            "style sheet",
+            "css file",
+            "sample css",
+            "css knowledge",
+            "latest css",
+            "official css",
+            "w3c css",
+            "mdn css",
+            "css snapshot",
+            "cascade",
+            "specificity",
+            "box model",
+            "flexbox",
+            "css grid",
+            "grid layout",
+            "media query",
+            "media queries",
+            "container query",
+            "container queries",
+            "custom properties",
+            "css variables",
+            "cascade layers",
+            "css nesting",
+            "responsive css",
+            "design tokens",
+            "production ready css",
+        ]
+
+        if any(signal in text for signal in css_signals):
+            return 0.35
 
     return 0.0
 
