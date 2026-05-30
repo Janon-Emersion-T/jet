@@ -102,6 +102,34 @@ def _build_text_candidates(user_input: str, nlp) -> List[str]:
 
     return [_normalize(candidate) for candidate in candidates if candidate]
 
+def _specialist_boost(user_input: str, module: RouteModule) -> float:
+    text = _normalize(user_input)
+
+    if module.name == "html_knowledge":
+        html_signals = [
+            "html",
+            "doctype",
+            "section tag",
+            "article tag",
+            "html file",
+            "sample html",
+            "html knowledge",
+            "latest html",
+            "official sources",
+            "living standard",
+            "whatwg",
+            "mdn",
+            "web page structure",
+            "landing page structure",
+            "clean html foundation",
+            "production ready",
+            "written properly",
+        ]
+
+        if any(signal in text for signal in html_signals):
+            return 0.35
+
+    return 0.0
 
 def select_route(user_input: str, nlp, modules: List[RouteModule]) -> RouteDecision:
     candidates = _build_text_candidates(user_input, nlp)
@@ -140,10 +168,16 @@ def select_route(user_input: str, nlp, modules: List[RouteModule]) -> RouteDecis
 
             module_score = max(module_score, local_score)
 
+
         intent = _intent_score(nlp, module)
         if intent:
             module_score += intent
             reasons.append(f"intent={intent:.2f}")
+
+        boost = _specialist_boost(user_input, module)
+        if boost:
+            module_score += boost
+            reasons.append(f"specialist_boost={boost:.2f}")
 
         module_score = min(module_score, 1.0)
         scores[module.name] = module_score

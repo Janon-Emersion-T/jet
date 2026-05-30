@@ -630,9 +630,12 @@ def infer_html_action(user_input: str) -> dict:
         "do you know html",
         "already know html",
         "check whether you already know html",
+        "check if you already know html",
         "html status",
         "html knowledge status",
         "what html do you know",
+        "what do you know about html",
+        "show html knowledge",
     ]
 
     audit_words = [
@@ -645,6 +648,8 @@ def infer_html_action(user_input: str) -> dict:
         "review",
         "is correct",
         "is proper",
+        "sample html file",
+        "sample html",
     ]
 
     explain_words = [
