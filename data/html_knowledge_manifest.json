@@ -1,0 +1,50 @@
+{
+  "updated_at": "2026-05-30T21:36:04Z",
+  "sources": {
+    "https://html.spec.whatwg.org/multipage/": {
+      "name": "WHATWG HTML Living Standard",
+      "type": "official-standard",
+      "priority": 10,
+      "hash": "c846597734d57d89528219ae978b33f492da39189a5673d3ac5c22251c17219d",
+      "last_learned_at": "2026-05-30T21:21:32Z",
+      "chunks_saved": 3,
+      "title": "HTML Standard"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements": {
+      "name": "MDN HTML Elements Reference",
+      "type": "developer-reference",
+      "priority": 9,
+      "hash": "81b596ee709ab0e6179c6a6ace441bc923c527947f05a3a3611191e59b15111e",
+      "last_learned_at": "2026-05-30T21:21:37Z",
+      "chunks_saved": 20,
+      "title": "HTML elements reference - HTML | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes": {
+      "name": "MDN HTML Attributes Reference",
+      "type": "developer-reference",
+      "priority": 8,
+      "hash": "9f058ab26928b1bd10438958b38667baec2828e1c591d3fd89f4f0fe866fbcf6",
+      "last_learned_at": "2026-05-30T21:21:40Z",
+      "chunks_saved": 15,
+      "title": "HTML attribute reference - HTML | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms": {
+      "name": "MDN HTML Forms Guide",
+      "type": "practical-guide",
+      "priority": 8,
+      "hash": "86b114f4de8517146010048d64c4ef61349827fce8f3ef3ed9fe605c23314409",
+      "last_learned_at": "2026-05-30T21:21:44Z",
+      "chunks_saved": 10,
+      "title": "Web forms - Learn web development | MDN"
+    },
+    "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML": {
+      "name": "MDN HTML Accessibility",
+      "type": "accessibility-guide",
+      "priority": 9,
+      "hash": "fc1e6275ebc6d77635ef3a38f9d53b500974c676f08976cb679fe91c71499969",
+      "last_learned_at": "2026-05-30T21:21:49Z",
+      "chunks_saved": 24,
+      "title": "HTML: A good basis for accessibility - Learn web development | MDN"
+    }
+  }
+}

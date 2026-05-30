@@ -5,6 +5,7 @@ from tools.html_knowledge_tools import (
     create_html_starter_page,
     audit_html_file,
     explain_html_element,
+    infer_html_action,
 )
 
 
@@ -12,190 +13,115 @@ def _normalize(value: str) -> str:
     return " ".join((value or "").lower().strip().split())
 
 
-def _matches_any(candidates, exact_phrases):
-    return any(candidate in exact_phrases for candidate in candidates)
-
-
-def _starts_with_any(candidates, prefixes):
-    for candidate in candidates:
-        for prefix in prefixes:
-            if candidate.startswith(prefix):
-                return candidate, prefix
-    return None, None
-
-
-def _extract_after_original(user_input: str, trigger: str) -> str:
-    if user_input.lower().strip().startswith(trigger):
-        return user_input.strip()[len(trigger):].strip()
+def _first_non_empty(*values):
+    for value in values:
+        if value:
+            return value
     return ""
 
 
 def handle_html_knowledge_routes(user_input: str, text: str, clean_text: str):
-    """
-    HTML Knowledge Engine route handler.
-
-    Important:
-    We check user_input, text, and clean_text because JARVIS NLP may rewrite
-    commands such as "update html knowledge" into another canonical action.
-    For knowledge commands, the original user_input must always win.
-    """
-
     raw = _normalize(user_input)
     normalized = _normalize(text)
     clean = _normalize(clean_text)
 
     candidates = [raw, normalized, clean]
 
-    # -------------------------
-    # HTML knowledge update
-    # -------------------------
-    if _matches_any(
-        candidates,
-        {
-            "update html knowledge",
-            "learn html",
-            "refresh html knowledge",
-            "update the html knowledge",
-            "learn html knowledge",
-            "html knowledge update",
-        },
-    ):
+    joined = " | ".join(candidates)
+
+    # Exact command support still remains.
+    if raw in {
+        "update html knowledge",
+        "learn html",
+        "refresh html knowledge",
+        "update the html knowledge",
+        "html knowledge update",
+    }:
         return update_html_knowledge(force=False)
 
-    if _matches_any(
-        candidates,
-        {
-            "force update html knowledge",
-            "relearn html knowledge",
-            "force relearn html knowledge",
-            "refresh all html knowledge",
-            "force refresh html knowledge",
-        },
-    ):
+    if raw in {
+        "force update html knowledge",
+        "relearn html knowledge",
+        "force relearn html knowledge",
+        "refresh all html knowledge",
+    }:
         return update_html_knowledge(force=True)
 
-    # -------------------------
-    # HTML knowledge status
-    # -------------------------
-    if _matches_any(
-        candidates,
-        {
-            "html knowledge status",
-            "html status",
-            "show html knowledge status",
-            "check html knowledge",
-        },
-    ):
+    if raw in {
+        "html knowledge status",
+        "html status",
+        "show html knowledge status",
+        "check html knowledge",
+    }:
         return html_knowledge_status()
 
-    # -------------------------
-    # HTML blueprint
-    # -------------------------
-    matched, prefix = _starts_with_any(
-        candidates,
-        {
-            "html blueprint ",
-            "create html blueprint ",
-            "plan html ",
-            "html plan ",
-        },
-    )
-
-    if matched:
-        # Use original text to preserve capitalization and full request.
-        for trigger in [
-            "html blueprint ",
-            "create html blueprint ",
-            "plan html ",
-            "html plan ",
-        ]:
-            request = _extract_after_original(user_input, trigger)
-            if request:
-                return generate_html_blueprint(request)
-
-        # Fallback if NLP changed casing/wording
-        request = matched.replace(prefix, "", 1).strip()
+    if raw.startswith("html blueprint "):
+        request = user_input[len("html blueprint "):].strip()
         return generate_html_blueprint(request)
 
-    # -------------------------
-    # HTML starter page
-    # -------------------------
-    matched, prefix = _starts_with_any(
-        candidates,
-        {
-            "create html starter ",
-            "generate html starter ",
-            "html starter ",
-            "create starter html ",
-        },
-    )
-
-    if matched:
-        for trigger in [
-            "create html starter ",
-            "generate html starter ",
-            "html starter ",
-            "create starter html ",
-        ]:
-            title = _extract_after_original(user_input, trigger)
-            if title:
-                return create_html_starter_page(title)
-
-        title = matched.replace(prefix, "", 1).strip()
+    if raw.startswith("create html starter "):
+        title = user_input[len("create html starter "):].strip()
         return create_html_starter_page(title)
 
-    # -------------------------
-    # HTML file audit
-    # -------------------------
-    matched, prefix = _starts_with_any(
-        candidates,
-        {
-            "audit html file ",
-            "check html file ",
-            "validate html file ",
-            "review html file ",
-        },
-    )
-
-    if matched:
-        for trigger in [
-            "audit html file ",
-            "check html file ",
-            "validate html file ",
-            "review html file ",
-        ]:
-            path = _extract_after_original(user_input, trigger)
-            if path:
-                return audit_html_file(path)
-
-        path = matched.replace(prefix, "", 1).strip()
+    if raw.startswith("audit html file "):
+        path = user_input[len("audit html file "):].strip()
         return audit_html_file(path)
 
-    # -------------------------
-    # HTML element explanation
-    # -------------------------
-    matched, prefix = _starts_with_any(
-        candidates,
-        {
-            "explain html element ",
-            "html element ",
-            "explain tag ",
-            "explain html tag ",
-        },
-    )
-
-    if matched:
-        for trigger in [
-            "explain html element ",
-            "html element ",
-            "explain tag ",
-            "explain html tag ",
-        ]:
-            element = _extract_after_original(user_input, trigger)
-            if element:
-                return explain_html_element(element)
-
-        element = matched.replace(prefix, "", 1).strip()
+    if raw.startswith("explain html element "):
+        element = user_input[len("explain html element "):].strip()
         return explain_html_element(element)
+
+    # Natural language support.
+    action = infer_html_action(user_input)
+
+    if action["action"] == "update":
+        return update_html_knowledge(force=action.get("force", False))
+
+    if action["action"] == "status":
+        return html_knowledge_status()
+
+    if action["action"] == "audit":
+        path = action.get("path", "")
+
+        if not path:
+            return (
+                "HTML AUDIT NEEDS A FILE\n"
+                "I understood that you want an HTML audit, but I could not identify the file path.\n"
+                "Example: Check whether test_documents/sample.html is written properly"
+            )
+
+        return audit_html_file(path)
+
+    if action["action"] == "explain":
+        element = action.get("element", "")
+
+        if not element:
+            return (
+                "HTML ELEMENT EXPLANATION NEEDS AN ELEMENT\n"
+                "I understood that you want an HTML explanation, but I could not identify the element.\n"
+                "Example: What is the correct use of the section tag?"
+            )
+
+        return explain_html_element(element)
+
+    if action["action"] == "starter":
+        title = action.get("title", "Professional Website")
+        return create_html_starter_page(title)
+
+    if action["action"] == "blueprint":
+        request = action.get("request", user_input)
+        return generate_html_blueprint(request)
+
+    # Guard: if this route was selected but the action is unclear, do not hallucinate.
+    if "html" in joined or "website" in joined or "web page" in joined or "landing page" in joined:
+        return (
+            "HTML REQUEST UNDERSTOOD, ACTION UNCLEAR\n"
+            "I understood this is related to HTML or website structure, but I need a clearer action.\n\n"
+            "You can say things like:\n"
+            "- Teach yourself the latest HTML properly from official sources\n"
+            "- Create the basic structure for a professional website\n"
+            "- Check whether test_documents/sample.html is written properly\n"
+            "- Explain when I should use article instead of section"
+        )
 
     return None

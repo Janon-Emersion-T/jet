@@ -1,200 +1,32 @@
-from core.routes.html_knowledge_routes import handle_html_knowledge_routes
-from core.routes.image_generation_routes import handle_image_generation_routes
 from core.ai_fallback import handle_ai_fallback
 from core.nlp.unified_orchestrator import orchestrate_command
-
-from core.routes.basic_routes import handle_basic_routes
-from core.routes.memory_routes import handle_memory_routes
-from core.routes.project_context_routes import handle_project_context_routes
-from core.routes.project_analyzer_routes import handle_project_analyzer_routes
-from core.routes.dev_ops_routes import handle_dev_ops_routes
-from core.routes.framework_routes import handle_framework_routes
-from core.routes.patch_routes import handle_patch_routes
-from core.routes.project_health_routes import handle_project_health_routes
-from core.routes.execution_routes import handle_execution_routes
-from core.routes.backup_routes import handle_backup_routes
-from core.routes.task_routes import handle_task_routes
-from core.routes.vector_memory_routes import handle_vector_memory_routes
-from core.routes.system_mode_routes import handle_system_mode_routes
-from core.routes.browser_routes import handle_browser_routes
-from core.routes.website_audit_routes import handle_website_audit_routes
-from core.routes.content_assistant_routes import handle_content_assistant_routes
-from core.routes.social_planner_routes import handle_social_planner_routes
-from core.routes.crm_routes import handle_crm_routes
-from core.routes.integration_routes import handle_integration_routes
-from core.routes.document_reader_routes import handle_document_reader_routes
-from core.routes.vision_routes import handle_vision_routes
-from core.routes.desktop_control_routes import handle_desktop_control_routes
-from core.routes.linux_admin_routes import handle_linux_admin_routes
-from core.routes.operator_routes import handle_operator_routes
-from core.routes.architecture_quality_routes import handle_architecture_quality_routes
-from core.routes.advanced_laravel_routes import handle_advanced_laravel_routes
-from core.routes.database_intelligence_routes import handle_database_intelligence_routes
-from core.routes.deployment_docs_routes import handle_deployment_docs_routes
-from core.routes.hosting_dns_routes import handle_hosting_dns_routes
-from core.routes.frontend_quality_routes import handle_frontend_quality_routes
-from core.routes.frontend_platform_routes import handle_frontend_platform_routes
-from core.routes.packaging_analytics_routes import handle_packaging_analytics_routes
-from core.routes.marketing_analytics_routes import handle_marketing_analytics_routes
-from core.routes.business_growth_routes import handle_business_growth_routes
-from core.routes.email_routes import handle_email_routes
-from core.routes.knowledge_academic_routes import handle_knowledge_academic_routes
-from core.routes.live_environment_routes import handle_live_environment_routes
-from core.routes.report_export_routes import handle_report_export_routes
-from core.routes.powerpoint_export_routes import handle_powerpoint_export_routes
-from core.routes.spreadsheet_analysis_routes import handle_spreadsheet_analysis_routes
-from core.routes.financial_report_routes import handle_financial_report_routes
-from core.routes.accounting_anomaly_routes import handle_accounting_anomaly_routes
-from core.routes.invoice_ocr_routes import handle_invoice_ocr_routes
-from core.routes.receipt_parser_routes import handle_receipt_parser_routes
-from core.routes.tax_calculation_routes import handle_tax_calculation_routes
-from core.routes.payroll_assistant_routes import handle_payroll_assistant_routes
-from core.routes.hr_onboarding_routes import handle_hr_onboarding_routes
-from core.routes.employee_task_tracker_routes import handle_employee_task_tracker_routes
-from core.routes.attendance_assistant_routes import handle_attendance_assistant_routes
-from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
-from core.routes.ticket_prioritization_routes import handle_ticket_prioritization_routes
-from core.routes.bug_severity_routes import handle_bug_severity_routes
+from core.routing.dispatcher import dispatch_to_module
 from core.routes.nlp_test_routes import handle_nlp_test_routes
 
 
+def _format_blocked_response(nlp) -> str:
+    lines = ["COMMAND BLOCKED"]
+    lines.extend(f"- {reason}" for reason in nlp.safety.reasons)
+    lines.extend(f"- Safe alternative: {alternative}" for alternative in nlp.safety.alternatives)
+    return "\n".join(lines)
 
-def route_command(user_input: str) -> str:
-    nlp = orchestrate_command(user_input)
 
-    text = nlp.normalized_text
-    clean_text = nlp.canonical_command or nlp.clean_text
-    intent = nlp.intent
-    confidence = nlp.confidence
+def _format_low_confidence_fallback(user_input: str, nlp, decision=None) -> str:
+    intent = getattr(nlp, "intent", "")
+    clean_text = getattr(nlp, "canonical_command", None) or getattr(nlp, "clean_text", "")
 
-    raw_text = user_input.lower().strip()
+    routing_note = ""
+    if decision is not None:
+        routing_note = f"""
 
-    if not raw_text:
-        return "Please enter a command."
+Routing confidence:
+{decision.confidence}
 
-    if raw_text.startswith("test nlp ") or raw_text.startswith("analyze command "):
-        from core.nlp_engine import format_nlp_report
+Routing reason:
+{decision.reason}
+"""
 
-        query = raw_text.replace("test nlp", "", 1).replace("analyze command", "", 1).strip()
-        return format_nlp_report(query)
-
-    if raw_text in ["nlp memory", "show nlp memory", "recent nlp"]:
-        from core.nlp.conversation_memory_linker import format_conversation_links
-        return format_conversation_links()
-
-    if clean_text.startswith("test nlp ") or clean_text.startswith("analyze command "):
-        from core.nlp_engine import format_nlp_report
-
-        query = clean_text.replace("test nlp", "", 1).replace("analyze command", "", 1).strip()
-        return format_nlp_report(query)
-
-    if raw_text.startswith("test followup v2 "):
-        from core.nlp.followup_context_resolver_v2 import format_followup_v2_report
-
-        query = raw_text.replace("test followup v2", "", 1).strip()
-        return format_followup_v2_report(query)
-
-    diagnostic_response = handle_nlp_test_routes(user_input, text, clean_text)
-    if diagnostic_response is not None:
-        return diagnostic_response
-
-    if clean_text in ["nlp memory", "show nlp memory", "recent nlp"]:
-        from core.nlp.conversation_memory_linker import format_conversation_links
-        return format_conversation_links()
-
-    if nlp.safety.safety_level == "dangerous" and not nlp.safety.allowed:
-        lines = ["COMMAND BLOCKED", *[f"- {reason}" for reason in nlp.safety.reasons]]
-        lines.extend(f"- Safe alternative: {alternative}" for alternative in nlp.safety.alternatives)
-        return "\n".join(lines)
-
-    route_handlers = [
-        handle_nlp_test_routes,
-
-        #Programming Handlers
-	    handle_html_knowledge_routes,
-
-	    # Creative generation modules
-	    handle_image_generation_routes,
-
-        handle_live_environment_routes,
-
-        # New/specific business + finance modules first
-        handle_hr_onboarding_routes,
-        handle_employee_task_tracker_routes,
-        handle_payroll_assistant_routes,
-        handle_invoice_ocr_routes,
-        handle_receipt_parser_routes,
-        handle_tax_calculation_routes,
-        handle_financial_report_routes,
-        handle_accounting_anomaly_routes,
-        handle_attendance_assistant_routes,
-        handle_internal_helpdesk_routes,
-        handle_ticket_prioritization_routes,
-        handle_bug_severity_routes,
-
-        # Specific tool modules
-        handle_email_routes,
-        handle_integration_routes,
-        handle_vision_routes,
-        handle_desktop_control_routes,
-        handle_document_reader_routes,
-        handle_spreadsheet_analysis_routes,
-        handle_report_export_routes,
-        handle_powerpoint_export_routes,
-
-        # Project/dev modules
-        handle_project_context_routes,
-        handle_project_health_routes,
-        handle_project_analyzer_routes,
-        handle_database_intelligence_routes,
-        handle_dev_ops_routes,
-        handle_framework_routes,
-        handle_frontend_platform_routes,
-        handle_frontend_quality_routes,
-        handle_advanced_laravel_routes,
-        handle_architecture_quality_routes,
-        handle_hosting_dns_routes,
-        handle_deployment_docs_routes,
-        handle_linux_admin_routes,
-
-        # Safety/action modules
-        handle_patch_routes,
-        handle_execution_routes,
-        handle_backup_routes,
-
-        # General modules later
-        
-        handle_task_routes,
-        handle_memory_routes,
-        handle_vector_memory_routes,
-        handle_system_mode_routes,
-        handle_browser_routes,
-        handle_website_audit_routes,
-        handle_content_assistant_routes,
-        handle_social_planner_routes,
-        handle_crm_routes,
-        handle_operator_routes,
-        handle_packaging_analytics_routes,
-        handle_marketing_analytics_routes,
-        handle_business_growth_routes,
-        handle_knowledge_academic_routes,
-
-        # Keep basic near the end because it can catch broad/simple phrases
-        handle_basic_routes,
-    ]
-
-    for handler in route_handlers:
-        if handler == handle_basic_routes:
-            response = handler(user_input, text, clean_text, intent)
-        else:
-            response = handler(user_input, text, clean_text)
-
-        if response is not None:
-            return response
-
-    if confidence < 0.35:
-        return handle_ai_fallback(
-            f"""The user entered a low-confidence natural language command.
+    return f"""The user entered a low-confidence natural language command.
 
 Original command:
 {user_input}
@@ -204,8 +36,51 @@ Detected intent:
 
 Clean routing text:
 {clean_text}
+{routing_note}
 
 Please respond naturally and ask a useful follow-up only if needed."""
+
+
+def route_command(user_input: str) -> str:
+    raw_text = (user_input or "").strip()
+
+    if not raw_text:
+        return "Please enter a command."
+
+    # Everything passes through NLP first.
+    nlp = orchestrate_command(user_input)
+
+    # Safety must run before any module action.
+    if nlp.safety.safety_level == "dangerous" and not nlp.safety.allowed:
+        return _format_blocked_response(nlp)
+
+    # Diagnostics can still be handled, but after NLP has processed the input.
+    diagnostic_response = handle_nlp_test_routes(
+        user_input,
+        getattr(nlp, "normalized_text", user_input),
+        getattr(nlp, "canonical_command", None) or getattr(nlp, "clean_text", user_input),
+    )
+
+    if diagnostic_response is not None:
+        return diagnostic_response
+    
+    if raw_text.lower().startswith("debug route "):
+        from core.routes.route_debug_routes import debug_route_command
+        query = raw_text[12:].strip()
+        return debug_route_command(query)
+
+    # NLP-driven modular dispatcher.
+    response, decision = dispatch_to_module(user_input, nlp)
+
+    if response is not None:
+        return response
+
+    nlp_confidence = getattr(nlp, "confidence", 0.0)
+    route_confidence = decision.confidence if decision else 0.0
+
+    if nlp_confidence < 0.35 and route_confidence < 0.35:
+        return handle_ai_fallback(
+            _format_low_confidence_fallback(user_input, nlp, decision)
         )
 
     return handle_ai_fallback(user_input)

@@ -607,3 +607,159 @@ Before using <{tag}>, check:
 For deeper updated knowledge, run:
 update html knowledge
 """
+
+def infer_html_action(user_input: str) -> dict:
+    text = " ".join((user_input or "").lower().strip().split())
+
+    update_words = [
+        "teach yourself",
+        "learn html",
+        "latest html",
+        "update html",
+        "refresh html",
+        "official sources",
+        "html standard",
+        "html living standard",
+        "whatwg",
+        "mdn",
+        "professional web developer",
+        "not just theory",
+    ]
+
+    status_words = [
+        "do you know html",
+        "already know html",
+        "check whether you already know html",
+        "html status",
+        "html knowledge status",
+        "what html do you know",
+    ]
+
+    audit_words = [
+        "audit",
+        "check whether",
+        "check if",
+        "written properly",
+        "production ready",
+        "validate",
+        "review",
+        "is correct",
+        "is proper",
+    ]
+
+    explain_words = [
+        "what is",
+        "correct use",
+        "when should i use",
+        "explain",
+        "difference between",
+        "instead of",
+    ]
+
+    blueprint_words = [
+        "plan",
+        "structure",
+        "blueprint",
+        "website structure",
+        "landing page structure",
+        "service business website",
+    ]
+
+    starter_words = [
+        "basic structure",
+        "clean html foundation",
+        "html foundation",
+        "starter",
+        "base html",
+        "boilerplate",
+        "create html",
+        "professional website",
+        "company landing page",
+    ]
+
+    if any(word in text for word in update_words):
+        return {"action": "update", "force": False}
+
+    if any(word in text for word in status_words):
+        return {"action": "status"}
+
+    if any(word in text for word in audit_words):
+        path = extract_html_file_path(user_input)
+        return {"action": "audit", "path": path}
+
+    if any(word in text for word in explain_words):
+        element = extract_html_element_name(user_input)
+        return {"action": "explain", "element": element}
+
+    if any(word in text for word in starter_words):
+        title = extract_site_title(user_input)
+        return {"action": "starter", "title": title}
+
+    if any(word in text for word in blueprint_words):
+        return {"action": "blueprint", "request": user_input.strip()}
+
+    return {"action": "unknown"}
+
+
+def extract_html_file_path(user_input: str) -> str:
+    text = user_input.strip()
+
+    file_match = re.search(r"([\w./\\-]+\.(?:html|htm|blade\.php|php))", text, re.I)
+    if file_match:
+        return file_match.group(1)
+
+    # Human alias fallback
+    lowered = text.lower()
+    if "sample html" in lowered or "sample file" in lowered:
+        if Path("test_documents/sample.html").exists():
+            return "test_documents/sample.html"
+
+    return ""
+
+
+def extract_html_element_name(user_input: str) -> str:
+    text = user_input.lower()
+
+    known_elements = [
+        "html", "head", "body", "main", "section", "article", "aside",
+        "header", "footer", "nav", "form", "input", "button", "label",
+        "meta", "title", "img", "picture", "figure", "figcaption",
+        "ul", "ol", "li", "a", "p", "div", "span", "table"
+    ]
+
+    tag_match = re.search(r"<\s*([a-z0-9-]+)\s*>", text)
+    if tag_match:
+        return tag_match.group(1)
+
+    for element in known_elements:
+        if f" {element} " in f" {text} ":
+            return element
+
+    if "section tag" in text:
+        return "section"
+
+    if "article instead of section" in text:
+        return "article"
+
+    return ""
+
+
+def extract_site_title(user_input: str) -> str:
+    original = user_input.strip()
+
+    if "lkprofessionals" in original.lower():
+        return "LKProfessionals"
+
+    for phrase in [
+        "for ",
+        "website for ",
+        "landing page for ",
+        "company landing page for ",
+    ]:
+        if phrase in original.lower():
+            index = original.lower().rfind(phrase)
+            title = original[index + len(phrase):].strip()
+            if title:
+                return title
+
+    return "Professional Website"

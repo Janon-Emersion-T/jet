@@ -303,7 +303,7 @@
       "confidence": 0.88,
       "domain": "general"
     },
-    "updated_at": "2026-05-31T02:35:36"
+    "updated_at": "2026-05-31T02:51:29"
   },
   "explain html element section": {
     "value": {
@@ -376,5 +376,149 @@
       "domain": "developer"
     },
     "updated_at": "2026-05-31T02:37:02"
+  },
+  "teach yourself latest html": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 0.712,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T02:52:26"
+  },
+  "teach yourself the latest html properly from official sources": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 0.679,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T03:06:01"
+  },
+  "learn html like a professional web developer, not just theory": {
+    "value": {
+      "intent": "browser_control",
+      "route_hint": "browser",
+      "confidence": 0.632,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:53:42"
+  },
+  "yes": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.673,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:54:09"
+  },
+  "create the basic structure for a professional website for lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:06:14"
+  },
+  "give me a clean html foundation for a company landing page": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.669,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:54:50"
+  },
+  "plan the html structure for a service business website with seo and contact form": {
+    "value": {
+      "intent": "content",
+      "route_hint": "content",
+      "confidence": 0.692,
+      "domain": "marketing"
+    },
+    "updated_at": "2026-05-31T02:55:13"
+  },
+  "what is the correct use of the section tag?": {
+    "value": {
+      "intent": "task",
+      "route_hint": "task",
+      "confidence": 0.626,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:06:44"
+  },
+  "explain when i should use article instead of section": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:56:57"
+  },
+  "check whether test_documents/sample.html is written properly": {
+    "value": {
+      "intent": "nlp",
+      "route_hint": "file",
+      "confidence": 0.684,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T03:06:48"
+  },
+  "audit my sample html file and tell me if it is production ready": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.729,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:06:55"
+  },
+  "debug route create a landing page structure for lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T02:58:57"
+  },
+  "create a landing page structure for lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T02:58:57"
+  },
+  "debug route make me a facebook post for lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "developer"
+    },
+    "updated_at": "2026-05-31T03:07:02"
+  },
+  "make me a facebook post for lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:07:02"
+  },
+  "check whether you already know html": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.686,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T03:06:06"
   }
 }
