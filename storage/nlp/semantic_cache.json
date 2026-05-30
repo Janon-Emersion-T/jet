@@ -178,5 +178,14 @@
       "domain": "general"
     },
     "updated_at": "2026-05-30T23:44:58"
+  },
+  "create image of a wedding cake": {
+    "value": {
+      "intent": "camera",
+      "route_hint": "vision",
+      "confidence": 0.605,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T00:00:15"
   }
 }

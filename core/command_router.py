@@ -108,10 +108,10 @@ def route_command(user_input: str) -> str:
 
     route_handlers = [
         handle_nlp_test_routes,
+	# Creative generation modules
 	handle_image_generation_routes,
 
         handle_live_environment_routes,
-	handle_image_generation_routes,
 
         # New/specific business + finance modules first
         handle_hr_onboarding_routes,

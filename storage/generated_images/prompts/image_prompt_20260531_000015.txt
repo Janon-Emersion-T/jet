@@ -1,0 +1,20 @@
+Ultra high-quality professional image generation prompt:
+
+Subject:
+of a wedding cake
+
+Style:
+Premium, cinematic, realistic, high-end commercial quality.
+
+Details:
+Sharp focus, rich lighting, clean composition, elegant depth of field,
+professional color grading, visually striking, modern, polished,
+advertising-grade output.
+
+Camera / Render:
+4K quality, ultra-detailed, realistic textures, balanced lighting,
+premium composition, no distortion, no extra text, no watermark.
+
+Negative prompt:
+low quality, blurry, distorted, deformed, bad anatomy, messy background,
+extra fingers, duplicate objects, watermark, text, logo errors.
