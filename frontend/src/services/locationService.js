@@ -42,6 +42,44 @@ export async function saveLocationToJarvis(location) {
   return await res.json();
 }
 
+export async function detectLocationByIp() {
+  const res = await fetch(`${API_URL}/location/detect-ip`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (!res.ok) {
+    throw new Error(`IP location detection failed with status ${res.status}`);
+  }
+
+  return await res.json();
+}
+
+export async function captureLocationForJarvis() {
+  try {
+    const browserLocation = await getBrowserLocation();
+    await saveLocationToJarvis(browserLocation);
+
+    return {
+      ok: true,
+      source: "browser",
+      message: "Precise browser location saved.",
+    };
+  } catch (browserError) {
+    const ipLocation = await detectLocationByIp();
+
+    if (!ipLocation.ok) {
+      throw new Error(ipLocation.message || "Location detection failed.");
+    }
+
+    return {
+      ok: true,
+      source: "ip",
+      message: "Approximate IP-based location saved.",
+    };
+  }
+}
+
 export function shouldCaptureLocation(message) {
   const text = String(message || "").toLowerCase().trim();
 

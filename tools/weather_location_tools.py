@@ -90,23 +90,40 @@ def format_saved_location():
     if not location:
         return (
             "Location is not connected yet. "
-            "Please allow location access from the Jarvis desktop app first."
+            "Please allow location access from the Jarvis desktop app first, "
+            "or use approximate IP-based location detection."
         )
 
     latitude = location.get("latitude")
     longitude = location.get("longitude")
     accuracy = location.get("accuracy")
+    source = location.get("source", "unknown")
+
+    city = location.get("city")
+    region = location.get("region")
+    country = location.get("country")
+
+    place_parts = [city, region, country]
+    place = ", ".join([part for part in place_parts if part])
+
+    place_text = ""
+    if place:
+        place_text = f"\nApproximate place: {place}"
 
     accuracy_text = ""
     if accuracy is not None:
         accuracy_text = f"\nAccuracy: approximately {round(float(accuracy))} meters"
 
+    if source == "ip":
+        accuracy_text = "\nAccuracy: approximate only, based on public IP address"
+
     return (
-        "Your saved location coordinates are:\n"
+        "Your saved location is:\n"
         f"Latitude: {latitude}\n"
         f"Longitude: {longitude}"
-        f"{accuracy_text}\n\n"
-        "This is based on browser/Electron location permission."
+        f"{place_text}"
+        f"{accuracy_text}\n"
+        f"Source: {source}"
     )
 
 
@@ -295,3 +312,65 @@ def extract_weather_city(clean_text: str):
             return match.group(1).strip()
 
     return None
+def detect_location_by_ip():
+    """
+    Free approximate location fallback using public IP.
+
+    This is less accurate than browser GPS/location permission,
+    but it works when Electron/browser geolocation is blocked.
+    """
+
+    try:
+        response = requests.get(
+            "http://ip-api.com/json/",
+            params={
+                "fields": "status,message,country,regionName,city,lat,lon,query,timezone"
+            },
+            timeout=20,
+        )
+        response.raise_for_status()
+        data = response.json()
+    except Exception as error:
+        return {
+            "ok": False,
+            "message": f"IP location detection failed: {error}",
+        }
+
+    if data.get("status") != "success":
+        return {
+            "ok": False,
+            "message": data.get("message", "IP location detection failed."),
+        }
+
+    latitude = data.get("lat")
+    longitude = data.get("lon")
+
+    if latitude is None or longitude is None:
+        return {
+            "ok": False,
+            "message": "IP location service did not return coordinates.",
+        }
+
+    saved = save_current_location(
+        latitude=latitude,
+        longitude=longitude,
+        accuracy=None,
+        source="ip",
+    )
+
+    saved["location"]["city"] = data.get("city")
+    saved["location"]["region"] = data.get("regionName")
+    saved["location"]["country"] = data.get("country")
+    saved["location"]["ip"] = data.get("query")
+    saved["location"]["timezone"] = data.get("timezone")
+
+    LOCATION_FILE.write_text(
+        json.dumps(saved["location"], indent=2),
+        encoding="utf-8",
+    )
+
+    return {
+        "ok": True,
+        "message": "Approximate location detected using IP address.",
+        "location": saved["location"],
+    }

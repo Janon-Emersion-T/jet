@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import {
-  getBrowserLocation,
-  saveLocationToJarvis,
+  captureLocationForJarvis,
   shouldCaptureLocation,
 } from "./services/locationService";
 
@@ -194,15 +193,15 @@ function App() {
     try {
       if (shouldCaptureLocation(message)) {
         try {
-          const location = await getBrowserLocation();
-          await saveLocationToJarvis(location);
+          await captureLocationForJarvis();
         } catch (locationError) {
           setMessages((prev) => [
             ...prev,
             {
               role: "jarvis",
               text:
-                "Location permission is required for current-location weather. " +
+                "Location detection failed. " +
+                "Browser location and IP-based fallback both failed. " +
                 "You can still ask weather by city, for example: weather in Jaffna.",
             },
           ]);

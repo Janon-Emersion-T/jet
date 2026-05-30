@@ -10,7 +10,11 @@ from core.project_diagnostics import interpret_project_diagnostics
 from core.code_reviewer import review_code_file
 from tools.system_tools import read_project_file
 
-from tools.weather_location_tools import save_current_location, get_saved_location
+from tools.weather_location_tools import (
+    save_current_location,
+    get_saved_location,
+    detect_location_by_ip,
+)
 
 from core.models.model_config import load_model_settings, save_model_settings
 from core.models.ollama_manager import list_ollama_models, pull_ollama_model, test_ollama_model
@@ -141,6 +145,10 @@ def location_current():
         "ok": True,
         "location": location
     }
+
+@app.post("/location/detect-ip")
+def location_detect_ip():
+    return detect_location_by_ip()
 
 
 @app.get("/models/settings")
