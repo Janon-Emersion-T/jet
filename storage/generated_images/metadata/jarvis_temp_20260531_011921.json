@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "engine": "comfyui",
+  "prompt_id": "7db32645-9787-4e1b-a58a-909b82599b7e",
+  "checkpoint": "jarvis_checkpoints/sd_xl_base_1.0.safetensors",
+  "sampler": "dpmpp_2m",
+  "scheduler": "karras",
+  "prompt": "luxury three tier white wedding cake with gold ribbon on elegant cake stand, premium studio photography, soft warm lighting, black luxury background,\n\nPremium photorealistic image, high-end studio photography, professional product photography,\nluxury editorial composition, natural realistic lighting, soft shadows, elegant depth of field,\nsharp subject focus, realistic materials, refined details, balanced exposure, clean background,\ncommercial-grade quality, realistic proportions, modern premium visual style.\n\nStrict visual rules:\nno text, no letters, no words, no captions, no watermark, no logo text, no fake typography,\nno poster layout, no magazine cover, no banner, no collage, no split panels, no duplicated subject,\nno distorted objects, no messy background.\n\nCamera direction:\nprofessional DSLR photography, 85mm lens look, realistic bokeh, high dynamic range,\ncrisp details, natural color grading, luxury brand campaign quality.",
+  "negative_prompt": "text, letters, words, typography, watermark, signature, logo text, fake text, poster, banner, collage, split screen, duplicate cake, multiple panels, low quality, blurry, pixelated, distorted, deformed, bad anatomy, bad hands, extra fingers, missing fingers, duplicate objects, ugly, amateur, messy background, poor composition, overexposed, underexposed, plastic, unrealistic proportions, mutated, noise, artifacts, jpeg artifacts, cropped subject",
+  "width": 1024,
+  "height": 1024,
+  "steps": 35,
+  "cfg": 6.5,
+  "seed": 335801083913995,
+  "source_path": "/var/www/jarvis/storage/generated_images/outputs/jarvis_temp_20260531_011921_00001_.png",
+  "image_path": "/home/janon-emersion-t/Pictures/Jarvis/luxury-three-tier-white-wedding-cake-gold-ribbon-678931.png",
+  "prompt_path": "/var/www/jarvis/storage/generated_images/prompts/jarvis_temp_20260531_011921_prompt.txt",
+  "created_at": "2026-05-31T01:19:57.960264"
+}

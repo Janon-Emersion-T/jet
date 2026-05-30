@@ -187,5 +187,104 @@
       "domain": "general"
     },
     "updated_at": "2026-05-31T00:00:15"
+  },
+  "local image engine status": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.725,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T01:10:14"
+  },
+  "generate image luxury handmade gift cake setup on an elegant table, royal blue and silver packaging, premium bakery advertisement, cinematic lighting, 1024x1024": {
+    "value": {
+      "intent": "content",
+      "route_hint": "content",
+      "confidence": 0.669,
+      "domain": "devops"
+    },
+    "updated_at": "2026-05-31T00:28:47"
+  },
+  "generate image portrait futuristic ai assistant logo concept, premium metallic symbol, dark background, elegant glow, cinematic lighting": {
+    "value": {
+      "intent": "devops",
+      "route_hint": "devops",
+      "confidence": 0.651,
+      "domain": "devops"
+    },
+    "updated_at": "2026-05-31T00:23:48"
+  },
+  "generate image landscape advanced software company ai command center, premium blue lighting, realistic, high-end, cinematic": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "devops"
+    },
+    "updated_at": "2026-05-31T00:23:56"
+  },
+  "generate image logo for lkprofessionals": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T00:42:46"
+  },
+  "create an image of a wedding cake": {
+    "value": {
+      "intent": "camera",
+      "route_hint": "vision",
+      "confidence": 0.599,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T00:45:45"
+  },
+  "generate an image of a wedding cake": {
+    "value": {
+      "intent": "content",
+      "route_hint": "content",
+      "confidence": 0.668,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T00:45:27"
+  },
+  "generate image wedding cake": {
+    "value": {
+      "intent": "content",
+      "route_hint": "content",
+      "confidence": 0.679,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T00:45:53"
+  },
+  "generate image wedding cake 512x512": {
+    "value": {
+      "intent": "content",
+      "route_hint": "content",
+      "confidence": 0.661,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T01:10:23"
+  },
+  "image job status": {
+    "value": {
+      "intent": "camera",
+      "route_hint": "vision",
+      "confidence": 0.729,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T01:19:26"
+  },
+  "generate image luxury three tier white wedding cake with gold ribbon on elegant cake stand, premium studio photography, soft warm lighting, black luxury background, 1024x1024": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-31T01:19:21"
   }
 }

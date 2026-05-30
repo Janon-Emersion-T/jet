@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "engine": "comfyui",
+  "host": "127.0.0.1",
+  "port": 8188,
+  "checkpoint": "jarvis_checkpoints/sd_xl_base_1.0.safetensors",
+  "output_dir": "/home/janon-emersion-t/Pictures/Jarvis",
+  "default_width": 1024,
+  "default_height": 1024,
+  "default_steps": 35,
+  "default_cfg": 6.5,
+  "default_sampler": "dpmpp_2m",
+  "default_scheduler": "karras",
+  "generation_timeout_seconds": 600
+}

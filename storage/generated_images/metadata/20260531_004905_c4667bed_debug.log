@@ -1,0 +1,35 @@
+[2026-05-31T00:49:05.268344] Job loaded.
+[2026-05-31T00:49:05.268527] Simple prompt: wedding cake 512x512
+[2026-05-31T00:49:05.268546] Image size: 512x512
+[2026-05-31T00:49:05.268561] Calling local image engine.
+[2026-05-31T00:49:05.286998] Exception: HTTP Error 400: Bad Request
+
+Traceback (most recent call last):
+  File "/var/www/jarvis/tools/image_generation_tools.py", line 141, in _run_image_job
+    result = generate_local_image(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/jarvis/tools/local_image_engine.py", line 323, in generate_local_image
+    prompt_id = queue_prompt(workflow)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/jarvis/tools/local_image_engine.py", line 221, in queue_prompt
+    with urllib.request.urlopen(request, timeout=30) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+

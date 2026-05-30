@@ -1,0 +1,6 @@
+[2026-05-31T01:19:21.917017] Job loaded.
+[2026-05-31T01:19:21.917169] Simple prompt: luxury three tier white wedding cake with gold ribbon on elegant cake stand, premium studio photography, soft warm lighting, black luxury background, 1024x1024
+[2026-05-31T01:19:21.917188] Image size: 1024x1024
+[2026-05-31T01:19:21.917320] Calling local image engine.
+[2026-05-31T01:19:57.960412] Local image engine result: {'ok': True, 'image_path': '/home/janon-emersion-t/Pictures/Jarvis/luxury-three-tier-white-wedding-cake-gold-ribbon-678931.png', 'prompt_path': '/var/www/jarvis/storage/generated_images/prompts/jarvis_temp_20260531_011921_prompt.txt', 'metadata_path': '/var/www/jarvis/storage/generated_images/metadata/jarvis_temp_20260531_011921.json', 'seed': 335801083913995, 'width': 1024, 'height': 1024, 'steps': 35, 'checkpoint': 'jarvis_checkpoints/sd_xl_base_1.0.safetensors'}
+[2026-05-31T01:19:57.960672] Job completed successfully.

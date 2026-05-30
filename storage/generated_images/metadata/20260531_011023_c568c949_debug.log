@@ -1,0 +1,6 @@
+[2026-05-31T01:10:23.231232] Job loaded.
+[2026-05-31T01:10:23.232594] Simple prompt: wedding cake 512x512
+[2026-05-31T01:10:23.232619] Image size: 512x512
+[2026-05-31T01:10:23.232639] Calling local image engine.
+[2026-05-31T01:10:37.262658] Local image engine result: {'ok': False, 'error': 'Generated image was reported but not found at: /home/janon-emersion-t/Pictures/Jarvis/jarvis_temp_20260531_011023_00001_.png'}
+[2026-05-31T01:10:37.262842] Job failed: Generated image was reported but not found at: /home/janon-emersion-t/Pictures/Jarvis/jarvis_temp_20260531_011023_00001_.png

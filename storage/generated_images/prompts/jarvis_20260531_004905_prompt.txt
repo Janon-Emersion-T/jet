@@ -1,0 +1,23 @@
+wedding cake 512x512
+
+Ultra high-quality professional image generation direction:
+
+Create a premium, cinematic, realistic, high-end commercial image.
+The output must look like professional advertising photography or premium
+digital art, depending on the subject.
+
+Composition:
+clean subject focus, balanced framing, strong focal point, elegant background,
+no clutter, no random objects, no accidental text, no watermark.
+
+Lighting:
+cinematic lighting, soft highlights, natural shadows, rich contrast,
+premium studio-grade or editorial-grade lighting.
+
+Details:
+sharp focus, realistic textures, refined color grading, polished finish,
+high detail, natural proportions, modern luxury visual quality.
+
+Quality:
+best quality, masterpiece, ultra detailed, professional, commercial-ready,
+premium brand campaign quality.

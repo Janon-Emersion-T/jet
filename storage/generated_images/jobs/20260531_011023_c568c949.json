@@ -1,0 +1,11 @@
+{
+  "job_id": "20260531_011023_c568c949",
+  "status": "failed",
+  "prompt": "wedding cake 512x512",
+  "created_at": "2026-05-31T01:10:23.229876",
+  "started_at": "2026-05-31T01:10:23.231259",
+  "finished_at": "2026-05-31T01:10:37.262687",
+  "result": null,
+  "error": "Generated image was reported but not found at: /home/janon-emersion-t/Pictures/Jarvis/jarvis_temp_20260531_011023_00001_.png",
+  "debug_log": "storage/generated_images/metadata/20260531_011023_c568c949_debug.log"
+}

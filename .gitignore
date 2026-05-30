@@ -29,3 +29,85 @@ storage/command_approvals/
 storage/task_queue.json
 storage/presentations/
 storage/events/
+
+
+# =========================================================
+# ComfyUI - Ignore heavy/generated/local files
+# =========================================================
+
+# ComfyUI internal git repo if it ever comes back
+engines/ComfyUI/.git/
+
+# Python cache
+engines/ComfyUI/__pycache__/
+engines/ComfyUI/**/__pycache__/
+engines/ComfyUI/*.pyc
+engines/ComfyUI/**/*.pyc
+
+# Virtual environments
+engines/ComfyUI/venv/
+engines/ComfyUI/.venv/
+engines/ComfyUI/env/
+
+# Output/generated images/videos
+engines/ComfyUI/output/
+engines/ComfyUI/input/
+engines/ComfyUI/temp/
+engines/ComfyUI/user/default/workflows/
+engines/ComfyUI/user/default/comfy.settings.json
+
+# Logs
+engines/ComfyUI/*.log
+engines/ComfyUI/logs/
+
+# Model folders - VERY IMPORTANT
+engines/ComfyUI/models/checkpoints/
+engines/ComfyUI/models/clip/
+engines/ComfyUI/models/clip_vision/
+engines/ComfyUI/models/configs/
+engines/ComfyUI/models/controlnet/
+engines/ComfyUI/models/diffusers/
+engines/ComfyUI/models/embeddings/
+engines/ComfyUI/models/gligen/
+engines/ComfyUI/models/hypernetworks/
+engines/ComfyUI/models/loras/
+engines/ComfyUI/models/photomaker/
+engines/ComfyUI/models/style_models/
+engines/ComfyUI/models/unet/
+engines/ComfyUI/models/upscale_models/
+engines/ComfyUI/models/vae/
+engines/ComfyUI/models/vae_approx/
+
+# Custom nodes dependencies/caches
+engines/ComfyUI/custom_nodes/**/__pycache__/
+engines/ComfyUI/custom_nodes/**/*.pyc
+engines/ComfyUI/custom_nodes/**/.git/
+engines/ComfyUI/custom_nodes/**/venv/
+engines/ComfyUI/custom_nodes/**/.venv/
+
+# HuggingFace / Torch / model cache
+engines/ComfyUI/.cache/
+engines/ComfyUI/cache/
+engines/ComfyUI/huggingface/
+engines/ComfyUI/torch_extensions/
+
+# OS/editor files
+engines/ComfyUI/.DS_Store
+engines/ComfyUI/Thumbs.db
+engines/ComfyUI/.idea/
+engines/ComfyUI/.vscode/
+
+# ComfyUI heavy files
+engines/ComfyUI/models/
+engines/ComfyUI/output/
+engines/ComfyUI/input/
+engines/ComfyUI/temp/
+
+# AI model file formats
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.gguf
+models/image/checkpoints/

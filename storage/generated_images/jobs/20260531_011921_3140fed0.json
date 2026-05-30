@@ -1,0 +1,21 @@
+{
+  "job_id": "20260531_011921_3140fed0",
+  "status": "completed",
+  "prompt": "luxury three tier white wedding cake with gold ribbon on elegant cake stand, premium studio photography, soft warm lighting, black luxury background, 1024x1024",
+  "created_at": "2026-05-31T01:19:21.916407",
+  "started_at": "2026-05-31T01:19:21.917044",
+  "finished_at": "2026-05-31T01:19:57.960507",
+  "result": {
+    "ok": true,
+    "image_path": "/home/janon-emersion-t/Pictures/Jarvis/luxury-three-tier-white-wedding-cake-gold-ribbon-678931.png",
+    "prompt_path": "/var/www/jarvis/storage/generated_images/prompts/jarvis_temp_20260531_011921_prompt.txt",
+    "metadata_path": "/var/www/jarvis/storage/generated_images/metadata/jarvis_temp_20260531_011921.json",
+    "seed": 335801083913995,
+    "width": 1024,
+    "height": 1024,
+    "steps": 35,
+    "checkpoint": "jarvis_checkpoints/sd_xl_base_1.0.safetensors"
+  },
+  "error": null,
+  "debug_log": "storage/generated_images/metadata/20260531_011921_3140fed0_debug.log"
+}
