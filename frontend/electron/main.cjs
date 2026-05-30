@@ -13,6 +13,7 @@ function createWindow() {
     minWidth: 1100,
     minHeight: 720,
     show: false,
+    fullscreen: true,
     autoHideMenuBar: true,
     backgroundColor: "#050b14",
     title: "JARVIS - Local AI Workstation",
@@ -25,7 +26,7 @@ function createWindow() {
 
   mainWindow.loadURL(DEV_URL);
 
-  mainWindow.maximize();
+  //mainWindow.maximize();
 
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
@@ -41,7 +42,14 @@ function createWindow() {
 }
 
 function createTray() {
-  tray = new Tray(path.join(__dirname, "../public/vite.svg"));
+  const iconPath = path.join(__dirname, "../public/favicon.svg");
+
+  try {
+    tray = new Tray(iconPath);
+  } catch (error) {
+    console.warn("Tray icon failed to load:", iconPath);
+    return;
+  }
 
   const menu = Menu.buildFromTemplate([
     {
@@ -88,7 +96,7 @@ ipcMain.handle("notify", async (_, payload) => {
 
 app.whenReady().then(() => {
   createWindow();
-  createTray();
+  // createTray();
 
   new Notification({
     title: "JARVIS Online",

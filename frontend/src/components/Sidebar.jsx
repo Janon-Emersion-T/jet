@@ -6,7 +6,7 @@ export default function Sidebar({ activePanel, setActivePanel, apiOnline }) {
   return (
     <aside className="sidebar">
       <div className="brand">
-        <Bot size={30} />
+        <img src="/icon.png" className="brand-icon" alt="JARVIS" />
         <div>
           <h1>JARVIS</h1>
           <p>Local AI Workstation</p>

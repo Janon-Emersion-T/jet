@@ -1,48 +1,68 @@
 import os
+import subprocess
+import sys
+import time
+from pathlib import Path
 
 os.environ["HF_HUB_OFFLINE"] = "1"
 os.environ["TRANSFORMERS_OFFLINE"] = "1"
 
-from rich.console import Console
-from core.memory import init_memory, save_memory
-from core.command_router import route_command
-from voice.offline_voice_mode import start_offline_voice_mode
+BASE_DIR = Path(__file__).resolve().parent
+FRONTEND_DIR = BASE_DIR / "frontend"
 
-console = Console()
+
+def terminate_process(process, name):
+    if process and process.poll() is None:
+        print(f"Stopping {name}...")
+        process.terminate()
+        try:
+            process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            print(f"Force killing {name}...")
+            process.kill()
+
 
 def main():
-    init_memory()
+    api_process = None
+    frontend_process = None
 
-    console.print("[bold cyan]JARVIS SYSTEM ONLINE AND READY FOR USE[/bold cyan]")
-    console.print("[green]Awaiting your command, Janon.[/green]\n")
+    try:
+        print("JARVIS STARTING...")
+        print("Starting existing API server...")
 
-    while True:
-        try:
-            user_input = input("YOU: ").strip()
-        except KeyboardInterrupt:
-            print("\nJARVIS shutting down safely.")
-            break
+        api_process = subprocess.Popen(
+            [
+                sys.executable,
+                "-m",
+                "uvicorn",
+                "api_server:app",
+                "--host",
+                "127.0.0.1",
+                "--port",
+                "8000",
+            ],
+            cwd=BASE_DIR,
+        )
 
-        if user_input.lower() in ["exit", "quit", "shutdown"]:
-            console.print("[red]JARVIS SHUTTING DOWN. ALL MEMORY WILL BE SAVED AND SYSTEM WILL TERMINATE[/red]")
-            save_memory()
-            break
+        time.sleep(3)
 
-        if user_input.lower() in [
-            "activate voice mode",
-            "start voice mode",
-            "voice mode"
-        ]:
-            start_offline_voice_mode()
-            continue
+        print("Launching Electron frontend...")
 
-        response = route_command(user_input)
+        frontend_process = subprocess.Popen(
+            ["npm", "run", "app"],
+            cwd=FRONTEND_DIR,
+        )
 
-        console.print("\n[bold blue]JARVIS:[/bold blue]")
-        console.print(response)
-        console.print()
+        frontend_process.wait()
 
-        save_memory(user_input, response)
+    except KeyboardInterrupt:
+        print("\nJARVIS shutting down safely...")
+
+    finally:
+        terminate_process(frontend_process, "Electron frontend")
+        terminate_process(api_process, "JARVIS API")
+        print("JARVIS shutdown complete.")
+
 
 if __name__ == "__main__":
     main()

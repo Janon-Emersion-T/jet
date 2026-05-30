@@ -1,0 +1,139 @@
+{
+  "turns": [
+    {
+      "text": "Hi how are you",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T20:08:30"
+    },
+    {
+      "text": "Can you tell me all the models do you have in your system?",
+      "intent": "command",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T20:08:54"
+    },
+    {
+      "text": "project health score",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-30T20:09:13"
+    },
+    {
+      "text": "",
+      "intent": "calendar",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T20:09:13"
+    },
+    {
+      "text": "project health score",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-30T20:09:16"
+    },
+    {
+      "text": "list files",
+      "intent": "command",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T20:09:22"
+    },
+    {
+      "text": "memory stats",
+      "intent": "memory",
+      "route_hint": "memory",
+      "success": null,
+      "at": "2026-05-30T20:09:25"
+    },
+    {
+      "text": "system info",
+      "intent": "database",
+      "route_hint": "database",
+      "success": null,
+      "at": "2026-05-30T20:09:33"
+    },
+    {
+      "text": "project context",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-30T20:09:40"
+    },
+    {
+      "text": "i've got it. i need to see everything.",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T22:02:23"
+    },
+    {
+      "text": "the only thing about the computer i have",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T22:02:52"
+    },
+    {
+      "text": "oh.",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T22:04:08"
+    },
+    {
+      "text": "analyze project jarvis",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-30T22:51:07"
+    },
+    {
+      "text": "project health score",
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "success": null,
+      "at": "2026-05-30T22:51:39"
+    },
+    {
+      "text": "hey Jarvis \nHow is everything",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T22:55:23"
+    },
+    {
+      "text": "whats up",
+      "intent": "google_search",
+      "route_hint": "browser",
+      "success": null,
+      "at": "2026-05-30T22:55:52"
+    },
+    {
+      "text": "Can you do some programming",
+      "intent": "content",
+      "route_hint": "content",
+      "success": null,
+      "at": "2026-05-30T22:56:10"
+    },
+    {
+      "text": "Ask me all your doubts and i'll answer you",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T22:56:43"
+    },
+    {
+      "text": "Tell me everything you can do right now",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-05-30T23:26:10"
+    }
+  ],
+  "shortcuts": {},
+  "recoveries": []
+}

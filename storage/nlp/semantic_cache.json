@@ -1,0 +1,155 @@
+{
+  "hi how are you": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.969,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T20:08:30"
+  },
+  "can you tell me all the models do you have in your system?": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 0.88,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T20:08:54"
+  },
+  "project health score": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:51:39"
+  },
+  "": {
+    "value": {
+      "intent": "calendar",
+      "route_hint": null,
+      "confidence": 0.684,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T20:09:13"
+  },
+  "list files": {
+    "value": {
+      "intent": "command",
+      "route_hint": null,
+      "confidence": 1.0,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T20:09:22"
+  },
+  "memory stats": {
+    "value": {
+      "intent": "memory",
+      "route_hint": "memory",
+      "confidence": 0.72,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T20:09:25"
+  },
+  "system info": {
+    "value": {
+      "intent": "database",
+      "route_hint": "database",
+      "confidence": 0.663,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T20:09:33"
+  },
+  "project context": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.756,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T20:09:40"
+  },
+  "i've got it. i need to see everything.": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:02:23"
+  },
+  "the only thing about the computer i have": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:02:52"
+  },
+  "oh.": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.669,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:04:08"
+  },
+  "analyze project jarvis": {
+    "value": {
+      "intent": "project_analysis",
+      "route_hint": "project",
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:51:07"
+  },
+  "hey jarvis \nhow is everything": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:55:23"
+  },
+  "whats up": {
+    "value": {
+      "intent": "google_search",
+      "route_hint": "browser",
+      "confidence": 0.765,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:55:52"
+  },
+  "can you do some programming": {
+    "value": {
+      "intent": "content",
+      "route_hint": "content",
+      "confidence": 0.698,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:56:10"
+  },
+  "ask me all your doubts and i'll answer you": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.718,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T22:56:43"
+  },
+  "tell me everything you can do right now": {
+    "value": {
+      "intent": "general_chat",
+      "route_hint": null,
+      "confidence": 0.96,
+      "domain": "general"
+    },
+    "updated_at": "2026-05-30T23:26:10"
+  }
+}

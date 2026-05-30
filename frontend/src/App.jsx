@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ChatContextPanel from "./components/ChatContextPanel";
 import {
   Activity,
   Bell,
@@ -154,6 +155,14 @@ function App() {
     loadOllamaModels();
     loadPerformanceData();
     loadPromptTemplates();
+
+    const interval = setInterval(() => {
+      checkApi();
+      loadFacts();
+      loadCapabilities();
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, []);
 
   async function notify(title, body) {
@@ -214,13 +223,13 @@ function App() {
 
   return (
     <div className="app-shell">
-      <Sidebar
-        activePanel={activePanel}
-        setActivePanel={setActivePanel}
+      <ChatContextPanel
+        messages={messages}
         apiOnline={apiOnline}
+        activePanel={activePanel}
       />
 
-      <main className="main-panel">
+      <main className="main-panel jarvis-main">
         {activePanel === "dashboard" && (
           <DashboardPanel
             apiOnline={apiOnline}
@@ -277,6 +286,11 @@ function App() {
           />
         )}
       </main>
+      <Sidebar
+        activePanel={activePanel}
+        setActivePanel={setActivePanel}
+        apiOnline={apiOnline}
+      />
     </div>
   );
 }
