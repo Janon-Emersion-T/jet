@@ -1,8 +1,14 @@
-import { Bot } from "lucide-react";
+import { Bot, Power } from "lucide-react";
 import StatusPill from "./StatusPill";
 import { panels } from "../data/panels";
 
 export default function Sidebar({ activePanel, setActivePanel, apiOnline }) {
+  async function closeJarvis() {
+    if (window.jarvisDesktop?.quitApp) {
+      await window.jarvisDesktop.quitApp();
+    }
+  }
+
   return (
     <aside className="sidebar">
       <div className="brand">
@@ -28,6 +34,11 @@ export default function Sidebar({ activePanel, setActivePanel, apiOnline }) {
             </button>
           );
         })}
+
+        <button className="danger-nav" onClick={closeJarvis}>
+          <Power size={18} />
+          Close JARVIS
+        </button>
       </nav>
 
       <StatusPill online={apiOnline} />

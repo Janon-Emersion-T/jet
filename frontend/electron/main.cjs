@@ -94,6 +94,12 @@ ipcMain.handle("notify", async (_, payload) => {
   return { ok: false, error: "Notifications are not supported on this system." };
 });
 
+ipcMain.handle("quit-app", async () => {
+  app.isQuitting = true;
+  app.quit();
+  return { ok: true };
+});
+
 app.whenReady().then(() => {
   createWindow();
   // createTray();

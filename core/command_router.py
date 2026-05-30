@@ -1,3 +1,4 @@
+from core.routes.image_generation_routes import handle_image_generation_routes
 from core.ai_fallback import handle_ai_fallback
 from core.nlp.unified_orchestrator import orchestrate_command
 
@@ -107,7 +108,10 @@ def route_command(user_input: str) -> str:
 
     route_handlers = [
         handle_nlp_test_routes,
+	handle_image_generation_routes,
+
         handle_live_environment_routes,
+	handle_image_generation_routes,
 
         # New/specific business + finance modules first
         handle_hr_onboarding_routes,
