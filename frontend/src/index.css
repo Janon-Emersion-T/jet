@@ -647,3 +647,143 @@ nav button:hover,
 @keyframes spinReverse {
   to { transform: rotate(-360deg); }
 }
+
+
+.chat-history-panel {
+  background: rgba(4, 13, 26, 0.92);
+  border-right: 1px solid rgba(110, 220, 255, 0.14);
+  backdrop-filter: blur(18px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100vh;
+}
+
+.history-brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.history-brand h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.history-brand p {
+  margin: 4px 0 0;
+  color: #88a7b8;
+  font-size: 13px;
+}
+
+.new-chat-button {
+  border: 1px solid rgba(110, 220, 255, 0.18);
+  border-radius: 14px;
+  background: #12365a;
+  color: #e8f7ff;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-chat-button:hover {
+  background: #174a7d;
+}
+
+.chat-history-list {
+  display: grid;
+  gap: 8px;
+  overflow: auto;
+  max-height: 42vh;
+  padding-right: 4px;
+}
+
+.empty-history {
+  color: #88a7b8;
+  font-size: 13px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(9, 28, 48, 0.7);
+}
+
+.chat-history-item {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  background: rgba(9, 28, 48, 0.85);
+  color: #e8f7ff;
+  padding: 12px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 18px 1fr 18px;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+}
+
+.chat-history-item:hover,
+.chat-history-item.active {
+  background: #12365a;
+}
+
+.chat-history-item span {
+  min-width: 0;
+}
+
+.chat-history-item strong {
+  display: block;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-history-item small {
+  display: block;
+  margin-top: 3px;
+  color: #8ee7ff;
+  font-size: 11px;
+}
+
+.chat-delete-icon {
+  color: #88a7b8;
+  opacity: 0.7;
+}
+
+.chat-delete-icon:hover {
+  color: #ff7b7b;
+  opacity: 1;
+}
+
+.history-context {
+  margin-top: auto;
+  background: linear-gradient(135deg, rgba(10, 35, 60, 0.9), rgba(5, 14, 30, 0.95));
+  border: 1px solid rgba(110, 220, 255, 0.12);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.history-context h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #8ee7ff;
+}
+
+.history-context-feed {
+  display: grid;
+  gap: 8px;
+  max-height: 180px;
+  overflow: auto;
+}
+
+.history-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b8d7e8;
+  font-size: 12px;
+}

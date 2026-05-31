@@ -5,7 +5,9 @@ import {
   shouldCaptureLocation,
 } from "./services/locationService";
 
-import ChatContextPanel from "./components/ChatContextPanel";
+import { getStartupGreeting } from "./utils/greeting";
+
+import ChatHistoryPanel from "./components/ChatHistoryPanel";
 
 import { useSystemPolling } from "./hooks/useSystemPolling";
 
@@ -44,7 +46,14 @@ import Panel from "./components/Panel";
 import SettingsPanel from "./panels/SettingsPanel";
 import Sidebar from "./components/Sidebar";
 
-import { sendChatMessage } from "./services/chatService";
+import {
+  sendChatMessage,
+  getChatSessions,
+  createChatSession,
+  getChatSession,
+  deleteChatSession,
+} from "./services/chatService";
+
 import { checkApiStatus, getCapabilities } from "./services/systemService";
 import { getFacts } from "./services/memoryService";
 
@@ -67,10 +76,10 @@ function App() {
   const [apiOnline, setApiOnline] = useState(false);
   const [facts, setFacts] = useState([]);
   const [capabilities, setCapabilities] = useState([]);
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState(() => [
     {
       role: "jarvis",
-      text: "JARVIS desktop interface online. Awaiting your command, Janon.",
+      text: getStartupGreeting("Janon"),
     },
   ]);
   const [modelSettings, setModelSettings] = useState({});
@@ -80,6 +89,8 @@ function App() {
   const [promptTemplates, setPromptTemplates] = useState({});
   const [routePreview, setRoutePreview] = useState(null);
   const [routeInput, setRouteInput] = useState("");
+  const [chatSessions, setChatSessions] = useState([]);
+  const [activeChatId, setActiveChatId] = useState(null);
 
   const checkApi = useCallback(async () => {
     try {
@@ -156,12 +167,76 @@ function App() {
     setRoutePreview(data);
   }
 
+  async function loadChatSessions() {
+    try {
+      const data = await getChatSessions();
+      setChatSessions(data.sessions || []);
+
+      if (!activeChatId && data.sessions?.length > 0) {
+        await selectChat(data.sessions[0].id);
+      }
+
+      if (!activeChatId && (!data.sessions || data.sessions.length === 0)) {
+        await createNewChat();
+      }
+    } catch {
+      setChatSessions([]);
+    }
+  }
+
+  async function createNewChat() {
+    const data = await createChatSession();
+    const session = data.session;
+
+    setActivePanel("chat");
+    setActiveChatId(session.id);
+    setMessages(session.messages || []);
+    await refreshChatListOnly();
+  }
+
+  async function refreshChatListOnly() {
+    try {
+      const data = await getChatSessions();
+      setChatSessions(data.sessions || []);
+    } catch {
+      setChatSessions([]);
+    }
+  }
+
+  async function selectChat(chatId) {
+    const data = await getChatSession(chatId);
+    const session = data.session;
+
+    setActivePanel("chat");
+    setActiveChatId(session.id);
+    setMessages(session.messages || []);
+    await refreshChatListOnly();
+  }
+
+  async function deleteChat(chatId) {
+    await deleteChatSession(chatId);
+
+    const data = await getChatSessions();
+    const sessions = data.sessions || [];
+
+    setChatSessions(sessions);
+
+    if (activeChatId === chatId) {
+      if (sessions.length > 0) {
+        await selectChat(sessions[0].id);
+      } else {
+        await createNewChat();
+      }
+    }
+  }
+
 
   useEffect(() => {
     loadModelSettings();
     loadOllamaModels();
     loadPerformanceData();
     loadPromptTemplates();
+    loadChatSessions();
   }, []);
 
   useSystemPolling({
@@ -210,13 +285,32 @@ function App() {
         }
       }
 
-      const data = await sendChatMessage(message);
+      let chatId = activeChatId;
+
+      if (!chatId) {
+        const newChat = await createChatSession();
+        chatId = newChat.session.id;
+        setActiveChatId(chatId);
+      }
+
+      const data = await sendChatMessage(message, chatId);
+
+      if (data.session?.messages) {
+        setMessages(data.session.messages);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "jarvis",
+            text: data.response || "No response received.",
+          },
+        ]);
+      }
+
+      await refreshChatListOnly();
       const response = data.response || "No response received.";
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "jarvis", text: response },
-      ]);
+      
 
       if (
         message.includes("deep check") ||
@@ -256,10 +350,14 @@ function App() {
 
   return (
     <div className="app-shell">
-      <ChatContextPanel
+      <ChatHistoryPanel
+        chatSessions={chatSessions}
+        activeChatId={activeChatId}
+        createNewChat={createNewChat}
+        selectChat={selectChat}
+        deleteChat={deleteChat}
         messages={messages}
         apiOnline={apiOnline}
-        activePanel={activePanel}
       />
 
       <main className="main-panel jarvis-main">

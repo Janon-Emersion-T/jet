@@ -2,6 +2,19 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
+from typing import Optional
+
+from core.chat_sessions import (
+    list_chat_sessions,
+    create_chat_session,
+    get_chat_session,
+    append_message,
+    delete_chat_session,
+    rename_chat_session,
+    ensure_chat_session,
+    build_recent_context,
+)
+
 from core.memory import init_memory, save_memory
 from core.command_router import route_command
 from core.capabilities import list_capabilities
@@ -39,6 +52,10 @@ init_memory()
 
 class ChatRequest(BaseModel):
     message: str
+    chat_id: Optional[str] = None
+
+class RenameChatRequest(BaseModel):
+    title: str
 
 
 class SearchMemoryRequest(BaseModel):
@@ -70,12 +87,27 @@ def root():
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    response = route_command(request.message)
+    session = ensure_chat_session(request.chat_id)
+
+    append_message(session["id"], "user", request.message)
+
+    chat_context = build_recent_context(session["id"], limit=8)
+
+    response = route_command(
+        request.message,
+        chat_context=chat_context,
+    )
+
+    append_message(session["id"], "jarvis", response)
     save_memory(request.message, response)
 
+    updated_session = get_chat_session(session["id"])
+
     return {
+        "chat_id": session["id"],
         "user": request.message,
-        "response": response
+        "response": response,
+        "session": updated_session,
     }
 
 
@@ -227,3 +259,55 @@ async def test_model_performance(payload: dict):
 async def model_fallback(payload: dict):
     message = payload.get("message", "")
     return get_model_with_fallback(message)
+
+@app.get("/chats")
+def chats():
+    return {
+        "sessions": list_chat_sessions()
+    }
+
+
+@app.post("/chats")
+def create_chat():
+    session = create_chat_session()
+
+    return {
+        "session": session
+    }
+
+
+@app.get("/chats/{chat_id}")
+def read_chat(chat_id: str):
+    session = get_chat_session(chat_id)
+
+    if not session:
+        session = create_chat_session()
+
+    return {
+        "session": session
+    }
+
+
+@app.post("/chats/{chat_id}/rename")
+def rename_chat(chat_id: str, request: RenameChatRequest):
+    session = rename_chat_session(chat_id, request.title)
+
+    if not session:
+        return {
+            "ok": False,
+            "error": "Chat session not found."
+        }
+
+    return {
+        "ok": True,
+        "session": session
+    }
+
+
+@app.delete("/chats/{chat_id}")
+def delete_chat(chat_id: str):
+    deleted = delete_chat_session(chat_id)
+
+    return {
+        "ok": deleted
+    }

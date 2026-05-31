@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "topic": "javascript",
+  "sources": [
+    {
+      "name": "ECMAScript Latest Draft",
+      "url": "https://tc39.es/ecma262/",
+      "type": "official-standard",
+      "priority": 10
+    },
+    {
+      "name": "TC39 Proposals",
+      "url": "https://github.com/tc39/proposals",
+      "type": "official-proposals",
+      "priority": 9
+    },
+    {
+      "name": "MDN JavaScript Reference",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference",
+      "type": "developer-reference",
+      "priority": 10
+    },
+    {
+      "name": "MDN JavaScript Guide",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+      "type": "practical-guide",
+      "priority": 9
+    },
+    {
+      "name": "MDN DOM API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model",
+      "type": "browser-api",
+      "priority": 9
+    },
+    {
+      "name": "MDN Fetch API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+      "type": "browser-api",
+      "priority": 8
+    },
+    {
+      "name": "MDN Web APIs",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API",
+      "type": "browser-platform",
+      "priority": 8
+    },
+    {
+      "name": "Node.js Documentation",
+      "url": "https://nodejs.org/api/",
+      "type": "runtime-reference",
+      "priority": 9
+    },
+    {
+      "name": "web.dev JavaScript",
+      "url": "https://web.dev/learn/javascript",
+      "type": "practical-course",
+      "priority": 8
+    },
+    {
+      "name": "Vite Guide",
+      "url": "https://vite.dev/guide/",
+      "type": "tooling",
+      "priority": 7
+    },
+    {
+      "name": "React Documentation",
+      "url": "https://react.dev/learn",
+      "type": "framework-practical",
+      "priority": 8
+    },
+    {
+      "name": "Next.js Documentation",
+      "url": "https://nextjs.org/docs",
+      "type": "framework-practical",
+      "priority": 8
+    },
+    {
+      "name": "Vue Documentation",
+      "url": "https://vuejs.org/guide/introduction.html",
+      "type": "framework-practical",
+      "priority": 7
+    }
+  ]
+}

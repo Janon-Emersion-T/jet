@@ -11,11 +11,12 @@ def _format_blocked_response(nlp) -> str:
     return "\n".join(lines)
 
 
-def _format_low_confidence_fallback(user_input: str, nlp, decision=None) -> str:
+def _format_low_confidence_fallback(user_input: str, nlp, decision=None, chat_context: str | None = None) -> str:
     intent = getattr(nlp, "intent", "")
     clean_text = getattr(nlp, "canonical_command", None) or getattr(nlp, "clean_text", "")
 
     routing_note = ""
+
     if decision is not None:
         routing_note = f"""
 
@@ -28,6 +29,9 @@ Routing reason:
 
     return f"""The user entered a low-confidence natural language command.
 
+Current chat context:
+{chat_context if chat_context else "No active chat context provided."}
+
 Original command:
 {user_input}
 
@@ -38,7 +42,7 @@ Clean routing text:
 {clean_text}
 {routing_note}
 
-Please respond naturally and ask a useful follow-up only if needed."""
+Please respond naturally. If this is a follow-up like yes, no, continue, explain more, or do it, infer the meaning from the current chat context."""
 
 def _guard_unconnected_external_tools(raw_text: str) -> str | None:
     text = " ".join((raw_text or "").lower().strip().split())
@@ -75,7 +79,7 @@ def _guard_unconnected_external_tools(raw_text: str) -> str | None:
 
     return None
 
-def route_command(user_input: str) -> str:
+def route_command(user_input: str, chat_context: str | None = None) -> str:
     raw_text = (user_input or "").strip()
 
     if not raw_text:
@@ -118,7 +122,8 @@ def route_command(user_input: str) -> str:
 
     if nlp_confidence < 0.35 and route_confidence < 0.35:
         return handle_ai_fallback(
-            _format_low_confidence_fallback(user_input, nlp, decision)
+            _format_low_confidence_fallback(user_input, nlp, decision, chat_context),
+            chat_context=chat_context,
         )
 
-    return handle_ai_fallback(user_input)
+    return handle_ai_fallback(user_input, chat_context=chat_context)
