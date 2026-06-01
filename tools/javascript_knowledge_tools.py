@@ -507,16 +507,24 @@ def audit_javascript_file(path: str) -> str:
     if not issues:
         issues.append("No major JavaScript issues detected from static inspection.")
 
+    strength_lines = (
+        [f"- {item}" for item in strengths]
+        if strengths
+        else ["- Basic file structure is readable."]
+    )
+
+    issue_lines = [f"- {item}" for item in issues]
+
     return "\n".join([
         "JAVASCRIPT FILE AUDIT",
         f"File: {path}",
         f"Lines: {len(lines)}",
         "",
         "Strengths:",
-        *[f"- {item}" for item in strengths] if strengths else ["- Basic file structure is readable."],
+        *strength_lines,
         "",
         "Recommendations:",
-        *[f"- {item}" for item in issues],
+        *issue_lines,
         "",
         "Next step:",
         "For deeper review, ask JARVIS to inspect the feature goal, related HTML, related CSS, and runtime errors together."

@@ -89,6 +89,24 @@ def route_command(user_input: str, chat_context: str | None = None) -> str:
     if external_guard_response:
         return external_guard_response
 
+    lower_text = raw_text.lower().strip()
+    if lower_text in [
+        "activate voice mode",
+        "start voice mode",
+        "voice mode",
+        "activate offline voice mode",
+    ]:
+        from core.system_modes import set_voice_mode
+        from voice.offline_voice_mode import start_offline_voice_mode
+
+        set_voice_mode(True)
+        try:
+            start_offline_voice_mode()
+        finally:
+            set_voice_mode(False)
+
+        return "Offline voice mode was activated and has now ended."
+
     # Everything passes through NLP first.
     nlp = orchestrate_command(user_input)
 

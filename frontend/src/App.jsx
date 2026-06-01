@@ -11,6 +11,8 @@ import ChatHistoryPanel from "./components/ChatHistoryPanel";
 
 import { useSystemPolling } from "./hooks/useSystemPolling";
 
+import SocialChannelPanel from "./panels/SocialChannelPanel";
+
 import {
   Activity,
   Bell,
@@ -416,6 +418,9 @@ function App() {
             savePromptTemplates={savePromptTemplates}
           />
         )}
+        {["whatsapp", "facebook", "instagram", "linkedin", "tiktok", "email"].includes(
+          activePanel
+        ) && <SocialChannelPanel channel={activePanel} />}
       </main>
       <Sidebar
         activePanel={activePanel}

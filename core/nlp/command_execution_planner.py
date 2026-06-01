@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List
 
 from core.nlp.multi_intent_parser import parse_multi_intent_command
-from core.nlp.phase000_engine import analyze_command
+from core.nlp_engine import analyze_command
 
 
 @dataclass

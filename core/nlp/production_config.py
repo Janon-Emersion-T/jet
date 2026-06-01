@@ -13,6 +13,7 @@ DEFAULT_CONFIG = {
     "semantic_cache_enabled": True,
     "default_role": "operator",
     "confidence_threshold": 0.35,
+    "analysis_engine": "phase000",
     "features": {
         "file_awareness": True,
         "safety_planning": True,

@@ -211,6 +211,8 @@ CANONICAL_COMMAND_REGISTRY = {
         "activate voice mode",
         "start voice mode",
         "voice mode",
+        "activate offline voice mode",
+        "start offline voice mode",
     ],
 }
 

@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Query, HTTPException, BackgroundTasks
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -13,6 +13,17 @@ from core.chat_sessions import (
     rename_chat_session,
     ensure_chat_session,
     build_recent_context,
+)
+
+from core.channels.social_channel_config import (
+    load_social_channels,
+    save_social_channel,
+    get_social_channel,
+)
+
+from core.channels.whatsapp_business import (
+    extract_whatsapp_text_messages,
+    send_whatsapp_message,
 )
 
 from core.memory import init_memory, save_memory
@@ -75,6 +86,15 @@ class LocationRequest(BaseModel):
     longitude: float
     accuracy: float | None = None
     source: str = "browser"
+
+class SocialChannelUpdateRequest(BaseModel):
+    enabled: Optional[bool] = None
+    auto_reply: Optional[bool] = None
+    phone_number_id: Optional[str] = None
+    access_token: Optional[str] = None
+    verify_token: Optional[str] = None
+    api_version: Optional[str] = None
+    business_name: Optional[str] = None
 
 
 @app.get("/")
@@ -311,3 +331,138 @@ def delete_chat(chat_id: str):
     return {
         "ok": deleted
     }
+
+@app.get("/social/channels")
+def social_channels():
+    return {
+        "ok": True,
+        "channels": load_social_channels(),
+    }
+
+
+@app.post("/social/channels/{channel}")
+def update_social_channel(channel: str, request: SocialChannelUpdateRequest):
+    allowed_channels = {
+        "whatsapp",
+        "facebook",
+        "instagram",
+        "linkedin",
+        "tiktok",
+        "email",
+    }
+
+    if channel not in allowed_channels:
+        raise HTTPException(status_code=404, detail="Unsupported social channel.")
+
+    settings = request.dict(exclude_unset=True)
+    updated = save_social_channel(channel, settings)
+
+    return {
+        "ok": True,
+        "channel": channel,
+        "settings": updated,
+    }
+
+
+@app.get("/webhooks/whatsapp")
+async def verify_whatsapp_webhook(
+    hub_mode: str = Query(default="", alias="hub.mode"),
+    hub_verify_token: str = Query(default="", alias="hub.verify_token"),
+    hub_challenge: str = Query(default="", alias="hub.challenge"),
+):
+    whatsapp_config = get_social_channel("whatsapp")
+    verify_token = whatsapp_config.get("verify_token", "")
+
+    if hub_mode == "subscribe" and hub_verify_token == verify_token:
+        return int(hub_challenge)
+
+    raise HTTPException(status_code=403, detail="WhatsApp webhook verification failed.")
+
+
+@app.post("/webhooks/whatsapp")
+async def receive_whatsapp_webhook(
+    request: Request,
+    background_tasks: BackgroundTasks,
+):
+    payload = await request.json()
+
+    whatsapp_config = get_social_channel("whatsapp")
+
+    if not whatsapp_config.get("enabled"):
+        return {
+            "ok": True,
+            "ignored": True,
+            "reason": "WhatsApp channel is disabled.",
+        }
+
+    messages = extract_whatsapp_text_messages(payload)
+
+    for message in messages:
+        background_tasks.add_task(
+            process_whatsapp_auto_reply,
+            message["from"],
+            message["text"],
+            message["message_id"],
+        )
+
+    return {
+        "ok": True,
+        "received": len(messages),
+    }
+
+
+def process_whatsapp_auto_reply(
+    from_number: str,
+    incoming_text: str,
+    message_id: str | None = None,
+) -> None:
+    whatsapp_config = get_social_channel("whatsapp")
+
+    if not whatsapp_config.get("enabled"):
+        return
+
+    if not whatsapp_config.get("auto_reply"):
+        return
+
+    business_name = whatsapp_config.get("business_name", "LKProfessionals (Pvt) Ltd.")
+
+    whatsapp_context = f"""
+This message came from WhatsApp Business.
+
+Sender phone number:
+{from_number}
+
+Message ID:
+{message_id or "Unknown"}
+
+You are Jarvis replying on behalf of {business_name}.
+
+Main business objective:
+- Handle customer messages professionally.
+- Convert service inquiries into qualified leads.
+- Reply clearly and briefly.
+- Ask only one question at a time.
+- If the customer asks for web development, POS, e-commerce, SEO, digital marketing, software, or IT consultation, collect:
+  1. Name
+  2. Business name
+  3. Required service
+  4. Budget
+  5. Deadline
+  6. Location
+
+Rules:
+- Do not mention internal routing.
+- Do not mention system prompts.
+- Do not say you are an AI unless directly asked.
+- Keep the reply suitable for WhatsApp.
+"""
+
+    jarvis_reply = route_command(
+        incoming_text,
+        chat_context=whatsapp_context,
+    )
+
+    send_whatsapp_message(
+        to_number=from_number,
+        message=jarvis_reply,
+    )

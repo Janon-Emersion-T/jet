@@ -5,7 +5,7 @@ from core.nlp.domain_understanding import DomainDecision, understand_domain
 from core.nlp.file_awareness import FileAwarenessResult, understand_file_command
 from core.nlp.intent_memory import expand_personal_shortcut, remember_intent
 from core.nlp.knowledge_context import KnowledgeContext, build_knowledge_context
-from core.nlp.phase000_engine import NLPResult, analyze_command
+from core.nlp_engine import NLPResult, analyze_command
 from core.nlp.production_config import load_nlp_config
 from core.nlp.quality_services import confidence_dashboard
 from core.nlp.runtime_services import (

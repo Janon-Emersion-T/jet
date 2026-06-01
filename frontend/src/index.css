@@ -787,3 +787,175 @@ nav button:hover,
   color: #b8d7e8;
   font-size: 12px;
 }
+
+
+.social-nav-block {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 12px 0;
+  margin: 4px 0;
+  border-top: 1px solid rgba(110, 220, 255, 0.12);
+  border-bottom: 1px solid rgba(110, 220, 255, 0.12);
+}
+
+.social-nav-icon {
+  min-height: 42px;
+  justify-content: center;
+  padding: 10px !important;
+  border-radius: 14px;
+}
+
+.social-nav-icon svg {
+  margin: 0;
+}
+
+.social-channel-panel .panel-title {
+  align-items: flex-start;
+}
+
+.social-channel-panel .panel-title p {
+  margin: 6px 0 0;
+  color: #88a7b8;
+}
+
+.social-loading {
+  margin-top: 24px;
+  color: #8ee7ff;
+}
+
+.social-toggle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.social-toggle-card {
+  background: #081827;
+  border: 1px solid rgba(110, 220, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #d7f6ff;
+  cursor: pointer;
+}
+
+.social-toggle-card input {
+  width: 18px;
+  height: 18px;
+}
+
+.social-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.social-form label {
+  display: grid;
+  gap: 8px;
+  color: #b8d7e8;
+  font-weight: 600;
+}
+
+.social-form input,
+.social-form textarea {
+  width: 100%;
+  background: #050b14;
+  color: #e8f7ff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 12px;
+  outline: none;
+}
+
+.social-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.webhook-card {
+  background: rgba(57, 255, 136, 0.06);
+  border: 1px solid rgba(57, 255, 136, 0.18);
+  border-radius: 16px;
+  padding: 16px;
+  color: #b8d7e8;
+}
+
+.webhook-card strong {
+  display: block;
+  color: #69ffb2;
+  margin-bottom: 10px;
+}
+
+.webhook-card code {
+  display: block;
+  background: #050b14;
+  border-radius: 12px;
+  padding: 12px;
+  color: #8ee7ff;
+  margin-bottom: 10px;
+}
+
+.webhook-card p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.webhook-card span {
+  color: #69ffb2;
+}
+
+.connector-placeholder {
+  margin-top: 24px;
+  background: #081827;
+  border: 1px solid rgba(110, 220, 255, 0.12);
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.connector-placeholder h3 {
+  margin: 0 0 8px;
+}
+
+.connector-placeholder p {
+  margin: 0;
+  color: #88a7b8;
+}
+
+.social-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.social-actions button {
+  border: 0;
+  border-radius: 14px;
+  background: #39ff88;
+  color: #03120a;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.social-actions button.secondary {
+  background: #0d1d30;
+  color: #e8f7ff;
+}
+
+.social-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.social-status {
+  margin-top: 16px;
+  color: #69ffb2;
+}

@@ -11,6 +11,7 @@ DEFAULT_STATE = {
     "active_mode": "default",
     "strict_mode": False,
     "developer_mode": False,
+    "voice_mode": False,
     "updated_at": None,
 }
 
@@ -172,6 +173,14 @@ def set_strict_mode(enabled):
     _save_state(state)
 
     return f"Strict mode {'enabled' if enabled else 'disabled'}."
+
+
+def set_voice_mode(enabled):
+    state = _load_state()
+    state["voice_mode"] = bool(enabled)
+    _save_state(state)
+
+    return f"Voice mode {'enabled' if enabled else 'disabled'}."
 
 
 def set_developer_mode(enabled):

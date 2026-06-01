@@ -1224,6 +1224,83 @@
       "route_hint": null,
       "success": null,
       "at": "2026-05-31T21:27:44"
+    },
+    {
+      "text": "activate voice mode",
+      "intent": "command",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T00:33:05"
+    },
+    {
+      "text": "create a new html file named index",
+      "intent": "general",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T16:33:47"
+    },
+    {
+      "text": "activate voice mode",
+      "intent": "command",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T17:02:37"
+    },
+    {
+      "text": "hey jammies",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T17:31:37"
+    },
+    {
+      "text": "(crickets chirping)",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T17:32:00"
+    },
+    {
+      "text": "(air whooshing)",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T17:32:12"
+    },
+    {
+      "text": "voice mode activated",
+      "intent": "command",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T17:32:46"
+    },
+    {
+      "text": "can you show me your story?",
+      "intent": "camera",
+      "route_hint": "vision",
+      "success": null,
+      "at": "2026-06-01T17:33:10"
+    },
+    {
+      "text": "can you tell me a story?",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T17:33:37"
+    },
+    {
+      "text": "hey yaddies!",
+      "intent": "general_chat",
+      "route_hint": null,
+      "success": null,
+      "at": "2026-06-01T19:37:32"
+    },
+    {
+      "text": "let me take a turn on the bottom. and i'll leave. goodbye.",
+      "intent": "memory",
+      "route_hint": "memory",
+      "success": null,
+      "at": "2026-06-01T19:38:04"
     }
   ],
   "shortcuts": {},
