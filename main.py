@@ -1,4 +1,5 @@
 import os
+import socket
 import subprocess
 import sys
 import time
@@ -13,6 +14,12 @@ FRONTEND_DIR = BASE_DIR / "frontend"
 COMFYUI_DIR = BASE_DIR / "engines" / "ComfyUI"
 COMFYUI_VENV_PYTHON = COMFYUI_DIR / "venv" / "bin" / "python"
 IMAGE_OUTPUT_DIR = BASE_DIR / "storage" / "generated_images" / "outputs"
+
+
+def reserve_local_port(host: str = "127.0.0.1") -> int:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind((host, 0))
+        return sock.getsockname()[1]
 
 
 def terminate_process(process, name):
@@ -79,6 +86,9 @@ def main():
     api_process = None
     frontend_process = None
     image_engine_process = None
+    api_host = "127.0.0.1"
+    api_port = reserve_local_port(api_host)
+    api_url = f"http://{api_host}:{api_port}"
 
     try:
         print("JARVIS STARTING...")
@@ -93,21 +103,24 @@ def main():
                 "-m",
                 "uvicorn",
                 "api_server:app",
-                "--host",
-                "127.0.0.1",
-                "--port",
-                "8000",
+                "--host", api_host,
+                "--port", str(api_port),
             ],
             cwd=BASE_DIR,
         )
 
         time.sleep(3)
+        print(f"JARVIS API running on {api_url}")
 
         print("Launching Electron frontend...")
+
+        frontend_env = os.environ.copy()
+        frontend_env["JARVIS_API_URL"] = api_url
 
         frontend_process = subprocess.Popen(
             ["npm", "run", "app"],
             cwd=FRONTEND_DIR,
+            env=frontend_env,
         )
 
         frontend_process.wait()
