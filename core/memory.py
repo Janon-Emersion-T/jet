@@ -81,3 +81,52 @@ def save_fact(fact: str):
 
     conn.close()
     return result
+
+
+def list_facts_data(limit: int = 50):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, fact, created_at
+        FROM facts
+        ORDER BY id DESC
+        LIMIT ?
+    """, (limit,))
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    return [
+        {
+            "id": row[0],
+            "fact": row[1],
+            "created_at": row[2],
+        }
+        for row in rows
+    ]
+
+
+def list_recent_memories(limit: int = 20):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, user_input, jarvis_response, created_at
+        FROM memory
+        ORDER BY id DESC
+        LIMIT ?
+    """, (limit,))
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    return [
+        {
+            "id": row[0],
+            "user_input": row[1],
+            "jarvis_response": row[2],
+            "created_at": row[3],
+        }
+        for row in rows
+    ]

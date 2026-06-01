@@ -1,6 +1,19 @@
-from playwright.sync_api import sync_playwright
+try:
+    from playwright.sync_api import sync_playwright
+except Exception:
+    sync_playwright = None
+
+
+def _playwright_missing_response() -> str:
+    return (
+        "Browser automation is not available in this install profile. "
+        "Install the full JARVIS profile to enable Playwright features."
+    )
 
 def open_and_read(url: str) -> str:
+    if sync_playwright is None:
+        return _playwright_missing_response()
+
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=False)
@@ -20,6 +33,9 @@ def open_and_read(url: str) -> str:
 
 
 def google_search(query: str) -> str:
+    if sync_playwright is None:
+        return _playwright_missing_response()
+
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=False)

@@ -2,6 +2,7 @@ import re
 from typing import List
 
 from core.routing.route_contracts import RouteDecision, RouteModule
+from tools.programming_knowledge_tools import resolve_programming_topic
 
 
 def _normalize(text: str) -> str:
@@ -162,6 +163,32 @@ def _specialist_boost(user_input: str, module: RouteModule) -> float:
         ]
 
         if any(signal in text for signal in css_signals):
+            return 0.35
+
+    if module.name == "programming_knowledge":
+        programming_signals = [
+            "programming language",
+            "programming languages",
+            "programming knowledge",
+            "teaching session",
+            "automate learning",
+            "learning curriculum",
+            "learn all 200 topics",
+        ]
+
+        if any(signal in text for signal in programming_signals):
+            return 0.35
+
+        if text.startswith(("learn ", "teach yourself ", "study ", "update ", "refresh ", "check ", "show ")):
+            topic_fragment = text
+            for prefix in ("learn ", "teach yourself ", "study ", "update ", "refresh ", "check ", "show "):
+                if topic_fragment.startswith(prefix):
+                    topic_fragment = topic_fragment[len(prefix):].strip()
+                    break
+            if resolve_programming_topic(topic_fragment):
+                return 0.40
+
+        if "all 200 topics" in text or "all learning topics" in text:
             return 0.35
 
     return 0.0

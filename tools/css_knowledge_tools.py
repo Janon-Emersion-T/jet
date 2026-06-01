@@ -16,8 +16,10 @@ from core.vector_memory.vector_store import add_vector_memory
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
+STORAGE_DIR = BASE_DIR / "storage"
 CSS_SOURCE_FILE = DATA_DIR / "css_knowledge_sources.json"
 CSS_MANIFEST_FILE = DATA_DIR / "css_knowledge_manifest.json"
+LEARNING_LOG_FILE = STORAGE_DIR / "programming_learning_log.jsonl"
 
 DEFAULT_HEADERS = {
     "User-Agent": "JARVIS-CSS-Knowledge-Engine/1.0 (+local private assistant)"
@@ -79,6 +81,7 @@ def _now_iso() -> str:
 
 def _ensure_data_dir() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    STORAGE_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def _load_json(path: Path, default):
@@ -94,6 +97,12 @@ def _load_json(path: Path, default):
 def _save_json(path: Path, data) -> None:
     _ensure_data_dir()
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def _append_learning_log(entry: dict) -> None:
+    _ensure_data_dir()
+    with LEARNING_LOG_FILE.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
 
 def _clean_text(text: str) -> str:
@@ -193,6 +202,7 @@ def css_knowledge_status() -> str:
 
 def update_css_knowledge(force: bool = False) -> str:
     _ensure_data_dir()
+    started_at = _now_iso()
 
     source_data = _load_json(CSS_SOURCE_FILE, None)
     if not source_data:
@@ -281,12 +291,25 @@ def update_css_knowledge(force: bool = False) -> str:
     manifest["topic"] = "css"
     manifest["version"] = source_data.get("version", "1.0.0")
     _save_json(CSS_MANIFEST_FILE, manifest)
+    _append_learning_log({
+        "topic": "css",
+        "trigger": "css-route",
+        "force": force,
+        "started_at": started_at,
+        "completed_at": _now_iso(),
+        "sources_updated": updated_sources,
+        "sources_skipped": skipped_sources,
+        "memory_chunks_saved": total_chunks,
+        "errors": errors,
+        "manifest_path": str(CSS_MANIFEST_FILE),
+    })
 
     lines = [
         "CSS KNOWLEDGE UPDATE COMPLETE",
         f"Sources updated: {updated_sources}",
         f"Sources skipped: {skipped_sources}",
         f"Memory chunks saved: {total_chunks}",
+        f"Log: {LEARNING_LOG_FILE}",
         "",
         "JARVIS can now use updated CSS knowledge through vector memory.",
     ]

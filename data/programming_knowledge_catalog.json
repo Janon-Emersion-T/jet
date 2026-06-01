@@ -1,0 +1,275 @@
+{
+  "version": "1.0.0",
+  "topics": [
+    {
+      "topic": "html",
+      "aliases": ["html5"],
+      "category": "frontend",
+      "tags": ["html", "web-development", "frontend", "standards"],
+      "sources": [
+        {
+          "name": "WHATWG HTML Living Standard",
+          "url": "https://html.spec.whatwg.org/multipage/",
+          "type": "official-standard",
+          "priority": 10
+        },
+        {
+          "name": "MDN HTML Elements Reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements",
+          "type": "developer-reference",
+          "priority": 9
+        },
+        {
+          "name": "MDN HTML Attributes Reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes",
+          "type": "developer-reference",
+          "priority": 8
+        }
+      ]
+    },
+    {
+      "topic": "css",
+      "aliases": ["stylesheet", "stylesheets"],
+      "category": "frontend",
+      "tags": ["css", "web-development", "frontend", "responsive-design"],
+      "sources": [
+        {
+          "name": "W3C CSS Current Work",
+          "url": "https://www.w3.org/Style/CSS/current-work",
+          "type": "official-standard-index",
+          "priority": 10
+        },
+        {
+          "name": "W3C CSS Snapshot 2026",
+          "url": "https://www.w3.org/TR/css-2026/",
+          "type": "official-snapshot",
+          "priority": 10
+        },
+        {
+          "name": "MDN CSS Reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference",
+          "type": "developer-reference",
+          "priority": 9
+        }
+      ]
+    },
+    {
+      "topic": "javascript",
+      "aliases": ["js", "ecmascript"],
+      "category": "programming-language",
+      "tags": ["javascript", "js", "browser", "runtime", "web-development"],
+      "sources": [
+        {
+          "name": "ECMAScript Latest Draft",
+          "url": "https://tc39.es/ecma262/",
+          "type": "official-standard",
+          "priority": 10
+        },
+        {
+          "name": "MDN JavaScript Reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference",
+          "type": "developer-reference",
+          "priority": 10
+        },
+        {
+          "name": "Node.js Documentation",
+          "url": "https://nodejs.org/en/docs/",
+          "type": "runtime-reference",
+          "priority": 9
+        }
+      ]
+    },
+    {
+      "topic": "python",
+      "aliases": ["py"],
+      "category": "programming-language",
+      "tags": ["python", "backend", "scripting"],
+      "sources": [
+        {
+          "name": "Python Documentation",
+          "url": "https://docs.python.org/3/",
+          "type": "official-documentation",
+          "priority": 10
+        },
+        {
+          "name": "Python Tutorial",
+          "url": "https://docs.python.org/3/tutorial/",
+          "type": "official-tutorial",
+          "priority": 9
+        },
+        {
+          "name": "Python Library Reference",
+          "url": "https://docs.python.org/3/library/",
+          "type": "standard-library-reference",
+          "priority": 9
+        }
+      ]
+    },
+    {
+      "topic": "java",
+      "aliases": ["jdk"],
+      "category": "programming-language",
+      "tags": ["java", "backend", "jvm"],
+      "sources": [
+        {
+          "name": "dev.java Learn Java",
+          "url": "https://dev.java/learn/",
+          "type": "official-learning-path",
+          "priority": 9
+        },
+        {
+          "name": "Oracle Java Documentation",
+          "url": "https://docs.oracle.com/en/java/",
+          "type": "official-documentation",
+          "priority": 9
+        }
+      ]
+    },
+    {
+      "topic": "rust",
+      "aliases": [],
+      "category": "programming-language",
+      "tags": ["rust", "systems-programming", "backend"],
+      "sources": [
+        {
+          "name": "Rust Documentation",
+          "url": "https://doc.rust-lang.org/",
+          "type": "official-documentation",
+          "priority": 10
+        },
+        {
+          "name": "The Rust Programming Language",
+          "url": "https://doc.rust-lang.org/book/",
+          "type": "official-book",
+          "priority": 10
+        },
+        {
+          "name": "Rust Standard Library",
+          "url": "https://doc.rust-lang.org/std/",
+          "type": "standard-library-reference",
+          "priority": 9
+        }
+      ]
+    },
+    {
+      "topic": "c++",
+      "aliases": ["cpp", "cplusplus"],
+      "category": "programming-language",
+      "tags": ["c++", "systems-programming", "native"],
+      "sources": [
+        {
+          "name": "cppreference C++ Language",
+          "url": "https://en.cppreference.com/w/cpp/language",
+          "type": "reference",
+          "priority": 9
+        },
+        {
+          "name": "ISO C++ Core Guidelines",
+          "url": "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines",
+          "type": "best-practices",
+          "priority": 8
+        }
+      ]
+    },
+    {
+      "topic": "c#",
+      "aliases": ["csharp", "dotnet"],
+      "category": "programming-language",
+      "tags": ["c#", "dotnet", "backend"],
+      "sources": [
+        {
+          "name": "C# Language Documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/",
+          "type": "official-documentation",
+          "priority": 10
+        },
+        {
+          "name": "C# Language Reference",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/",
+          "type": "language-reference",
+          "priority": 9
+        }
+      ]
+    },
+    {
+      "topic": "node",
+      "aliases": ["nodejs", "node.js"],
+      "category": "runtime",
+      "tags": ["node", "nodejs", "javascript", "backend", "runtime"],
+      "sources": [
+        {
+          "name": "Node.js Learn",
+          "url": "https://nodejs.org/en/learn",
+          "type": "official-learning-path",
+          "priority": 9
+        },
+        {
+          "name": "Node.js Documentation",
+          "url": "https://nodejs.org/en/docs/",
+          "type": "official-documentation",
+          "priority": 10
+        }
+      ]
+    },
+    {
+      "topic": "php",
+      "aliases": [],
+      "category": "programming-language",
+      "tags": ["php", "backend", "web-development"],
+      "sources": [
+        {
+          "name": "PHP Manual",
+          "url": "https://www.php.net/manual/en/",
+          "type": "official-documentation",
+          "priority": 10
+        },
+        {
+          "name": "PHP Language Reference",
+          "url": "https://www.php.net/manual/en/langref.php",
+          "type": "language-reference",
+          "priority": 9
+        }
+      ]
+    },
+    {
+      "topic": "laravel",
+      "aliases": [],
+      "category": "framework",
+      "tags": ["laravel", "php", "backend", "framework"],
+      "sources": [
+        {
+          "name": "Laravel Documentation",
+          "url": "https://laravel.com/docs",
+          "type": "official-documentation",
+          "priority": 10
+        },
+        {
+          "name": "Laravel Starter Kits",
+          "url": "https://laravel.com/docs/starter-kits",
+          "type": "official-guide",
+          "priority": 8
+        }
+      ]
+    },
+    {
+      "topic": "django",
+      "aliases": [],
+      "category": "framework",
+      "tags": ["django", "python", "backend", "framework"],
+      "sources": [
+        {
+          "name": "Django Documentation",
+          "url": "https://docs.djangoproject.com/en/stable/",
+          "type": "official-documentation",
+          "priority": 10
+        },
+        {
+          "name": "Django Getting Started",
+          "url": "https://docs.djangoproject.com/en/stable/intro/",
+          "type": "official-tutorial",
+          "priority": 9
+        }
+      ]
+    }
+  ]
+}

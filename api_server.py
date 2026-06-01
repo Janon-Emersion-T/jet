@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 from typing import Optional
+import threading
 
 from core.chat_sessions import (
     list_chat_sessions,
@@ -25,11 +26,19 @@ from core.channels.whatsapp_business import (
     extract_whatsapp_text_messages,
     send_whatsapp_message,
 )
+from core.channels.whatsapp_web import (
+    build_whatsapp_web_reply,
+    whatsapp_web_manager,
+)
 
 from core.memory import init_memory, save_memory
+from core.memory import list_facts_data, list_recent_memories
 from core.command_router import route_command
 from core.capabilities import list_capabilities
 from core.memory_search import list_facts, search_memory
+from core.activity_log import log_activity, list_recent_activity
+from core.system_modes import get_system_mode_state, set_voice_mode
+from voice.offline_voice_mode import start_offline_voice_mode
 from core.project_diagnostics import interpret_project_diagnostics
 from core.code_reviewer import review_code_file
 from tools.system_tools import read_project_file
@@ -72,6 +81,11 @@ class RenameChatRequest(BaseModel):
 class SearchMemoryRequest(BaseModel):
     query: str
 
+class CommandRequest(BaseModel):
+    command: str
+    save_to_memory: bool = True
+    source: str = "panel"
+
 
 class ProjectRequest(BaseModel):
     path: str
@@ -90,11 +104,14 @@ class LocationRequest(BaseModel):
 class SocialChannelUpdateRequest(BaseModel):
     enabled: Optional[bool] = None
     auto_reply: Optional[bool] = None
+    connection_mode: Optional[str] = None
     phone_number_id: Optional[str] = None
     access_token: Optional[str] = None
     verify_token: Optional[str] = None
     api_version: Optional[str] = None
     business_name: Optional[str] = None
+    web_session_name: Optional[str] = None
+    web_headless: Optional[bool] = None
 
 
 @app.get("/")
@@ -107,6 +124,7 @@ def root():
 
 @app.post("/chat")
 def chat(request: ChatRequest):
+    log_activity("chat_command", {"message": request.message, "chat_id": request.chat_id})
     session = ensure_chat_session(request.chat_id)
 
     append_message(session["id"], "user", request.message)
@@ -141,15 +159,68 @@ def capabilities():
 @app.get("/facts")
 def facts():
     return {
-        "facts": list_facts()
+        "facts": list_facts_data()
     }
 
 
 @app.post("/memory/search")
 def memory_search(request: SearchMemoryRequest):
+    log_activity("memory_search", {"query": request.query})
     return {
         "results": search_memory(request.query)
     }
+
+
+@app.get("/memory/recent")
+def memory_recent(limit: int = 20):
+    return {
+        "memories": list_recent_memories(limit=limit)
+    }
+
+
+@app.post("/command")
+def run_command(request: CommandRequest):
+    log_activity("panel_command", {"command": request.command, "source": request.source})
+    response = route_command(request.command)
+    if request.save_to_memory:
+        save_memory(request.command, response)
+    return {
+        "command": request.command,
+        "response": response,
+    }
+
+
+@app.get("/activity")
+def activity(limit: int = 50):
+    return {
+        "entries": list_recent_activity(limit=limit)
+    }
+
+
+def _start_voice_mode_thread():
+    start_offline_voice_mode()
+
+
+@app.get("/voice/status")
+def voice_status():
+    state = get_system_mode_state()
+    return {
+        "voice_mode": bool(state.get("voice_mode")),
+        "state": state,
+    }
+
+
+@app.post("/voice/start")
+def voice_start():
+    state = get_system_mode_state()
+    if state.get("voice_mode"):
+        return {"ok": True, "message": "Voice mode is already active."}
+
+    set_voice_mode(True)
+    thread = threading.Thread(target=_start_voice_mode_thread, daemon=True)
+    thread.start()
+    log_activity("voice_start", {"mode": "offline"})
+    return {"ok": True, "message": "Voice mode activation started."}
 
 
 @app.post("/project/analyze")
@@ -355,12 +426,40 @@ def update_social_channel(channel: str, request: SocialChannelUpdateRequest):
         raise HTTPException(status_code=404, detail="Unsupported social channel.")
 
     settings = request.dict(exclude_unset=True)
+
+    if channel == "whatsapp" and settings.get("auto_reply") is True:
+        settings["enabled"] = True
+
     updated = save_social_channel(channel, settings)
 
     return {
         "ok": True,
         "channel": channel,
         "settings": updated,
+    }
+
+
+@app.get("/social/whatsapp/web/status")
+def whatsapp_web_status():
+    return {
+        "ok": True,
+        "status": whatsapp_web_manager.get_status(),
+    }
+
+
+@app.post("/social/whatsapp/web/start")
+def start_whatsapp_web():
+    return {
+        "ok": True,
+        "status": whatsapp_web_manager.start(),
+    }
+
+
+@app.post("/social/whatsapp/web/stop")
+def stop_whatsapp_web():
+    return {
+        "ok": True,
+        "status": whatsapp_web_manager.stop(),
     }
 
 
@@ -466,3 +565,20 @@ Rules:
         to_number=from_number,
         message=jarvis_reply,
     )
+
+
+@app.post("/social/whatsapp/web/reply-preview")
+def whatsapp_web_reply_preview(payload: dict):
+    chat_name = payload.get("chat_name", "WhatsApp chat")
+    incoming_text = payload.get("message", "")
+
+    if not incoming_text.strip():
+        return {
+            "ok": False,
+            "error": "Message is required.",
+        }
+
+    return {
+        "ok": True,
+        "reply": build_whatsapp_web_reply(chat_name, incoming_text),
+    }

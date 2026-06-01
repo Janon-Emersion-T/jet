@@ -1,10 +1,9 @@
 import {
-  Bot,
   Power,
   MessageCircle,
-  Facebook,
-  Instagram,
-  Linkedin,
+  Users,
+  Camera,
+  BriefcaseBusiness,
   Mail,
   Music2,
 } from "lucide-react";
@@ -14,14 +13,14 @@ import { panels } from "../data/panels";
 
 const socialChannels = [
   { id: "whatsapp", label: "WhatsApp", icon: MessageCircle },
-  { id: "facebook", label: "Facebook", icon: Facebook },
-  { id: "instagram", label: "Instagram", icon: Instagram },
-  { id: "linkedin", label: "LinkedIn", icon: Linkedin },
+  { id: "facebook", label: "Facebook", icon: Users },
+  { id: "instagram", label: "Instagram", icon: Camera },
+  { id: "linkedin", label: "LinkedIn", icon: BriefcaseBusiness },
   { id: "tiktok", label: "TikTok", icon: Music2 },
   { id: "email", label: "Email", icon: Mail },
 ];
 
-export default function Sidebar({ activePanel, setActivePanel, apiOnline }) {
+export default function Sidebar({ activePanel, setActivePanel, apiOnline, voiceEnabled, onToggleVoice }) {
   async function closeJarvis() {
     if (window.jarvisDesktop?.quitApp) {
       await window.jarvisDesktop.quitApp();
@@ -31,7 +30,14 @@ export default function Sidebar({ activePanel, setActivePanel, apiOnline }) {
   return (
     <aside className="sidebar">
       <div className="brand">
-        <img src="/icon.png" className="brand-icon" alt="JARVIS" />
+        <button
+          type="button"
+          className={`voice-toggle ${voiceEnabled ? "active" : ""}`}
+          onClick={onToggleVoice}
+          title={voiceEnabled ? "Voice mode active" : "Activate voice mode"}
+        >
+          {voiceEnabled ? "Voice On" : "Voice"}
+        </button>
         <div>
           <h1>JARVIS</h1>
           <p>Local AI Workstation</p>

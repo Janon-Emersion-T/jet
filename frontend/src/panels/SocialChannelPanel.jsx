@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import {
   MessageCircle,
-  Facebook,
-  Instagram,
-  Linkedin,
+  Users,
+  Camera,
+  BriefcaseBusiness,
   Mail,
   Music2,
   Save,
   RefreshCw,
 } from "lucide-react";
 
-const API_URL = "http://127.0.0.1:8000";
+import { API_URL } from "../config/api";
+import WhatsAppWebPanel from "../components/WhatsAppWebPanel";
 
 const channelMeta = {
   whatsapp: {
@@ -20,17 +21,17 @@ const channelMeta = {
   },
   facebook: {
     label: "Facebook",
-    icon: Facebook,
+    icon: Users,
     description: "Facebook connector placeholder.",
   },
   instagram: {
     label: "Instagram",
-    icon: Instagram,
+    icon: Camera,
     description: "Instagram connector placeholder.",
   },
   linkedin: {
     label: "LinkedIn",
-    icon: Linkedin,
+    icon: BriefcaseBusiness,
     description: "LinkedIn connector placeholder.",
   },
   tiktok: {
@@ -56,11 +57,14 @@ export default function SocialChannelPanel({ channel }) {
   const [settings, setSettings] = useState({
     enabled: false,
     auto_reply: false,
+    connection_mode: "web",
     phone_number_id: "",
     access_token: "",
     verify_token: "jarvis_whatsapp_verify_token",
     api_version: "v20.0",
     business_name: "LKProfessionals (Pvt) Ltd.",
+    web_session_name: "default",
+    web_headless: true,
   });
 
   useEffect(() => {
@@ -93,6 +97,41 @@ export default function SocialChannelPanel({ channel }) {
       ...previous,
       [field]: value,
     }));
+  }
+
+  async function updateWhatsAppSettings(updates) {
+    const nextSettings = {
+      ...settings,
+      ...updates,
+    };
+
+    if (updates.auto_reply === true) {
+      nextSettings.enabled = true;
+    }
+
+    setSettings(nextSettings);
+    setSaving(true);
+    setStatus("");
+
+    try {
+      const response = await fetch(`${API_URL}/social/channels/whatsapp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nextSettings),
+      });
+
+      const data = await response.json();
+
+      if (!data.ok) {
+        setStatus("WhatsApp settings could not be saved.");
+      }
+    } catch {
+      setStatus("Unable to save WhatsApp settings.");
+    }
+
+    setSaving(false);
   }
 
   async function saveSettings() {
@@ -138,97 +177,39 @@ export default function SocialChannelPanel({ channel }) {
         <div className="social-loading">Loading channel settings...</div>
       ) : (
         <>
-          <div className="social-toggle-grid">
-            <label className="social-toggle-card">
-              <input
-                type="checkbox"
-                checked={Boolean(settings.enabled)}
-                onChange={(event) =>
-                  updateField("enabled", event.target.checked)
-                }
-              />
-              <span>Enable Channel</span>
-            </label>
+          {!isWhatsApp && (
+            <div className="social-toggle-grid">
+              <label className="social-toggle-card">
+                <input
+                  type="checkbox"
+                  checked={Boolean(settings.enabled)}
+                  onChange={(event) =>
+                    updateField("enabled", event.target.checked)
+                  }
+                />
+                <span>Enable Channel</span>
+              </label>
 
-            <label className="social-toggle-card">
-              <input
-                type="checkbox"
-                checked={Boolean(settings.auto_reply)}
-                onChange={(event) =>
-                  updateField("auto_reply", event.target.checked)
-                }
-              />
-              <span>Jarvis Auto Reply</span>
-            </label>
-          </div>
+              <label className="social-toggle-card">
+                <input
+                  type="checkbox"
+                  checked={Boolean(settings.auto_reply)}
+                  onChange={(event) =>
+                    updateField("auto_reply", event.target.checked)
+                  }
+                />
+                <span>Jarvis Auto Reply</span>
+              </label>
+            </div>
+          )}
 
           {isWhatsApp ? (
-            <div className="social-form">
-              <label>
-                Business Name
-                <input
-                  value={settings.business_name || ""}
-                  onChange={(event) =>
-                    updateField("business_name", event.target.value)
-                  }
-                  placeholder="LKProfessionals (Pvt) Ltd."
-                />
-              </label>
-
-              <label>
-                WhatsApp Phone Number ID
-                <input
-                  value={settings.phone_number_id || ""}
-                  onChange={(event) =>
-                    updateField("phone_number_id", event.target.value)
-                  }
-                  placeholder="Meta Phone Number ID"
-                />
-              </label>
-
-              <label>
-                Access Token
-                <textarea
-                  value={settings.access_token || ""}
-                  onChange={(event) =>
-                    updateField("access_token", event.target.value)
-                  }
-                  placeholder="Meta WhatsApp Business access token"
-                />
-              </label>
-
-              <label>
-                Verify Token
-                <input
-                  value={settings.verify_token || ""}
-                  onChange={(event) =>
-                    updateField("verify_token", event.target.value)
-                  }
-                  placeholder="jarvis_whatsapp_verify_token"
-                />
-              </label>
-
-              <label>
-                API Version
-                <input
-                  value={settings.api_version || ""}
-                  onChange={(event) =>
-                    updateField("api_version", event.target.value)
-                  }
-                  placeholder="v20.0"
-                />
-              </label>
-
-              <div className="webhook-card">
-                <strong>Webhook Endpoint</strong>
-                <code>/webhooks/whatsapp</code>
-                <p>
-                  When testing with ngrok, your full webhook URL will be:
-                  <br />
-                  <span>https://YOUR-NGROK-URL/webhooks/whatsapp</span>
-                </p>
-              </div>
-            </div>
+            <WhatsAppWebPanel
+              settings={settings}
+              updateWhatsAppSettings={updateWhatsAppSettings}
+              status={status}
+              setStatus={setStatus}
+            />
           ) : (
             <div className="connector-placeholder">
               <h3>{meta.label} connector is prepared.</h3>
@@ -239,19 +220,21 @@ export default function SocialChannelPanel({ channel }) {
             </div>
           )}
 
-          <div className="social-actions">
-            <button type="button" onClick={saveSettings} disabled={saving}>
-              {saving ? <RefreshCw size={18} /> : <Save size={18} />}
-              {saving ? "Saving..." : "Save Settings"}
-            </button>
+          {!isWhatsApp && (
+            <div className="social-actions">
+              <button type="button" onClick={saveSettings} disabled={saving}>
+                {saving ? <RefreshCw size={18} /> : <Save size={18} />}
+                {saving ? "Saving..." : "Save Settings"}
+              </button>
 
-            <button type="button" className="secondary" onClick={loadSettings}>
-              <RefreshCw size={18} />
-              Reload
-            </button>
-          </div>
+              <button type="button" className="secondary" onClick={loadSettings}>
+                <RefreshCw size={18} />
+                Reload
+              </button>
+            </div>
+          )}
 
-          {status && <div className="social-status">{status}</div>}
+          {!isWhatsApp && status && <div className="social-status">{status}</div>}
         </>
       )}
     </section>

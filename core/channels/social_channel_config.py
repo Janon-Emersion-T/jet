@@ -10,11 +10,14 @@ DEFAULT_CONFIG = {
     "whatsapp": {
         "enabled": False,
         "auto_reply": False,
+        "connection_mode": "web",
         "phone_number_id": "",
         "access_token": "",
         "verify_token": "jarvis_whatsapp_verify_token",
         "api_version": "v20.0",
         "business_name": "LKProfessionals (Pvt) Ltd.",
+        "web_session_name": "default",
+        "web_headless": True,
     },
     "facebook": {
         "enabled": False,

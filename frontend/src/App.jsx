@@ -14,21 +14,7 @@ import { useSystemPolling } from "./hooks/useSystemPolling";
 import SocialChannelPanel from "./panels/SocialChannelPanel";
 
 import {
-  Activity,
-  Bell,
-  Bot,
-  Brain,
-  Database,
-  Folder,
-  Hammer,
-  ListChecks,
-  Mic,
   Send,
-  Terminal,
-  Settings,
-  Cpu,
-  Save,
-  RefreshCw,
 } from "lucide-react";
 
 import {
@@ -42,8 +28,6 @@ import {
   getPromptTemplates,
   savePromptTemplatesRequest,
 } from "./services/modelService";
-
-import Panel from "./components/Panel";
 
 import SettingsPanel from "./panels/SettingsPanel";
 import Sidebar from "./components/Sidebar";
@@ -63,13 +47,11 @@ import ChatPanel from "./panels/ChatPanel";
 
 import DashboardPanel from "./panels/DashboardPanel";
 
-import VoicePanel from "./panels/VoicePanel";
 import ProjectPanel from "./panels/ProjectPanel";
 import MemoryPanel from "./panels/MemoryPanel";
 import ToolsPanel from "./panels/ToolsPanel";
 import LogsPanel from "./panels/LogsPanel";
-
-const API_URL = "http://127.0.0.1:8000";
+import { getVoiceStatus, startVoiceMode } from "./services/voiceService";
 
 function App() {
   const [activePanel, setActivePanel] = useState("dashboard");
@@ -93,6 +75,7 @@ function App() {
   const [routeInput, setRouteInput] = useState("");
   const [chatSessions, setChatSessions] = useState([]);
   const [activeChatId, setActiveChatId] = useState(null);
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
 
   const checkApi = useCallback(async () => {
     try {
@@ -101,6 +84,12 @@ function App() {
     } catch {
       setApiOnline(false);
     }
+  }, []);
+
+  useEffect(() => {
+    loadVoiceStatus();
+    const interval = setInterval(loadVoiceStatus, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const loadFacts = useCallback(async () => {
@@ -254,6 +243,31 @@ function App() {
     }
   }
 
+  async function loadVoiceStatus() {
+    try {
+      const data = await getVoiceStatus();
+      setVoiceEnabled(Boolean(data.voice_mode));
+    } catch {
+      setVoiceEnabled(false);
+    }
+  }
+
+  async function handleVoiceToggle() {
+    if (voiceEnabled) {
+      notify("Voice Mode", "Voice mode is already active. Say stop voice mode to exit.");
+      return;
+    }
+
+    try {
+      const data = await startVoiceMode();
+      setVoiceEnabled(true);
+      notify("Voice Mode", data.message || "Voice mode activation started.");
+      await loadVoiceStatus();
+    } catch (error) {
+      notify("Voice Mode Error", error.message);
+    }
+  }
+
   async function sendMessage(customMessage = null) {
     const message = (customMessage || input).trim();
 
@@ -362,12 +376,12 @@ function App() {
         apiOnline={apiOnline}
       />
 
-      <main className="main-panel jarvis-main">
+      <main className="main-content">
         {activePanel === "dashboard" && (
           <DashboardPanel
             apiOnline={apiOnline}
-            facts={facts}
             capabilities={capabilities}
+            facts={facts}
             runCommand={runCommand}
             notify={notify}
           />
@@ -376,56 +390,65 @@ function App() {
         {activePanel === "chat" && (
           <ChatPanel
             messages={messages}
-            loading={loading}
             input={input}
             setInput={setInput}
+            loading={loading}
             sendMessage={sendMessage}
             handleKeyDown={handleKeyDown}
+            chatSessions={chatSessions}
+            activeChatId={activeChatId}
+            selectChat={selectChat}
+            createNewChat={createNewChat}
+            deleteChat={deleteChat}
           />
         )}
 
-        {activePanel === "voice" && <VoicePanel runCommand={runCommand} />}
-
-
-        {activePanel === "projects" && <ProjectPanel runCommand={runCommand} />}
-
-        {activePanel === "memory" && (
-          <MemoryPanel runCommand={runCommand} loadFacts={loadFacts} />
+        {activePanel === "projects" && (
+          <ProjectPanel runCommand={runCommand} />
         )}
 
-        {activePanel === "tools" && <ToolsPanel runCommand={runCommand} />}
+        {activePanel === "memory" && (
+          <MemoryPanel />
+        )}
 
+        {activePanel === "tools" && (
+          <ToolsPanel runCommand={runCommand} />
+        )}
 
-        {activePanel === "logs" && <LogsPanel runCommand={runCommand} />}
+        {activePanel === "logs" && (
+          <LogsPanel />
+        )}
 
         {activePanel === "settings" && (
           <SettingsPanel
             modelSettings={modelSettings}
             setModelSettings={setModelSettings}
+            saveModelSettings={saveModelSettings}
             ollamaModels={ollamaModels}
             modelTestResult={modelTestResult}
+            testSelectedModel={testSelectedModel}
             performanceData={performanceData}
+            testPerformance={testPerformance}
             promptTemplates={promptTemplates}
             setPromptTemplates={setPromptTemplates}
+            savePromptTemplates={savePromptTemplates}
+            routePreview={routePreview}
             routeInput={routeInput}
             setRouteInput={setRouteInput}
-            routePreview={routePreview}
-            loadOllamaModels={loadOllamaModels}
-            saveModelSettings={saveModelSettings}
-            testSelectedModel={testSelectedModel}
-            testPerformance={testPerformance}
             previewRoute={previewRoute}
-            savePromptTemplates={savePromptTemplates}
           />
         )}
-        {["whatsapp", "facebook", "instagram", "linkedin", "tiktok", "email"].includes(
-          activePanel
-        ) && <SocialChannelPanel channel={activePanel} />}
+
+        {["whatsapp", "facebook", "instagram", "linkedin", "tiktok", "email"].includes(activePanel) && (
+          <SocialChannelPanel channel={activePanel} />
+        )}
       </main>
       <Sidebar
         activePanel={activePanel}
         setActivePanel={setActivePanel}
         apiOnline={apiOnline}
+        voiceEnabled={voiceEnabled}
+        onToggleVoice={handleVoiceToggle}
       />
     </div>
   );

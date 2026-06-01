@@ -9,11 +9,21 @@ const {
 } = require("electron");
 
 const path = require("path");
+const fs = require("fs");
 
 let mainWindow;
 let tray;
 
 const DEV_URL = "http://localhost:5173";
+const DIST_INDEX = path.join(__dirname, "../dist/index.html");
+
+function resolveAppEntry() {
+  const forceDev = process.env.JARVIS_ELECTRON_DEV === "1";
+  if (!forceDev && fs.existsSync(DIST_INDEX)) {
+    return { type: "file", value: DIST_INDEX };
+  }
+  return { type: "url", value: DEV_URL };
+}
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -30,10 +40,16 @@ function createWindow() {
       preload: path.join(__dirname, "preload.cjs"),
       nodeIntegration: false,
       contextIsolation: true,
+      webviewTag: true,
     },
   });
 
-  mainWindow.loadURL(DEV_URL);
+  const entry = resolveAppEntry();
+  if (entry.type === "file") {
+    mainWindow.loadFile(entry.value);
+  } else {
+    mainWindow.loadURL(entry.value);
+  }
 
   // mainWindow.maximize();
 

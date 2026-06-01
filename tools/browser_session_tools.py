@@ -1,5 +1,8 @@
 from pathlib import Path
-from playwright.sync_api import sync_playwright
+try:
+    from playwright.sync_api import sync_playwright
+except Exception:
+    sync_playwright = None
 
 
 BROWSER_SESSION_DIR = Path("storage/browser_session")
@@ -30,6 +33,12 @@ class PersistentBrowser:
         self.page = None
 
     def __enter__(self):
+        if sync_playwright is None:
+            raise RuntimeError(
+                "Playwright is not installed for this JARVIS profile. "
+                "Install the full profile to enable persistent browser sessions."
+            )
+
         self.playwright = sync_playwright().start()
 
         self.context = self.playwright.chromium.launch_persistent_context(

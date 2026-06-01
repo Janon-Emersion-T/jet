@@ -7,6 +7,7 @@ from voice.wake_word import has_wake_word
 from voice.silence_detector import is_noise_or_silence
 from voice.voice_config import VOICE_CONFIG
 from voice.voice_state import VOICE_STATE
+from core.system_modes import set_voice_mode
 
 STOP_PHRASES = [
     "stop voice mode",
@@ -19,6 +20,8 @@ STOP_PHRASES = [
 
 
 def start_offline_voice_mode():
+    VOICE_STATE["mode"] = "listening"
+    VOICE_STATE["interrupted"] = False
     speak("Voice mode activated.")
 
     try:
@@ -80,3 +83,6 @@ def start_offline_voice_mode():
             speak("Voice mode stopped safely.")
         except Exception:
             pass
+    finally:
+        VOICE_STATE["mode"] = "idle"
+        set_voice_mode(False)
