@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base ./",
     "preview": "vite preview",
     "electron": "electron --no-sandbox electron/main.cjs",
     "desktop": "electron --no-sandbox .",
