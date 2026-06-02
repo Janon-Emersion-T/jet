@@ -223,5 +223,6 @@ xlsxwriter==3.2.9
 xxhash==3.7.0
 yagmail==0.16.0
 yarl==1.24.2
+tavily-python==0.3.5
 zipp==4.1.0
 zstandard==0.25.0

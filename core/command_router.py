@@ -7,6 +7,12 @@ from core.conversational import handle_conversational_fallback
 from core.assistant_intent import plan_assistant_action
 from core.clarify import ask_for_clarification
 from core.system_modes import get_system_mode_state
+from core.live_intelligence import (
+    requires_realtime,
+    get_live_news_context,
+    build_live_prompt,
+)
+from core.brain import ask_brain
 
 
 def _strip_delegation_wrappers(raw_text: str) -> str:
@@ -104,6 +110,58 @@ def _guard_unconnected_external_tools(raw_text: str) -> str | None:
 
     return None
 
+
+def _handle_realtime_query(user_input: str, chat_context: str | None = None) -> str:
+    """
+    Handle queries that require real-time/live intelligence.
+    
+    Args:
+        user_input: The user's question
+        chat_context: The chat context for multi-turn conversations
+        
+    Returns:
+        Response enriched with live intelligence
+    """
+    try:
+        # Get live news context
+        context = get_live_news_context(user_input)
+        
+        # Check if there was an error retrieving live intelligence
+        if not context.get("results") or (
+            len(context.get("results", [])) == 1 
+            and context.get("results")[0].get("type") == "error"
+        ):
+            # Fall back to conversational response
+            error_msg = context.get("summary_context", "")
+            if error_msg:
+                return f"I could not access live intelligence right now. {error_msg}\n\nBased on my training data, I can still help with general information about this topic."
+            else:
+                return (
+                    "I could not access live intelligence right now. "
+                    "Please check the internet connection or API key configuration. "
+                    "I can still help with general information based on my training data."
+                )
+        
+        # Build enriched prompt with live context
+        enriched_prompt = build_live_prompt(user_input, context)
+        
+        # Send to brain with enriched context
+        response = ask_brain(enriched_prompt)
+        
+        return response.strip() if response else "I found live information but could not formulate a response."
+        
+    except Exception as e:
+        # Graceful fallback on any error
+        import traceback
+        print(f"Error in live intelligence handler: {e}")
+        print(traceback.format_exc())
+        return (
+            "I encountered an issue retrieving live intelligence. "
+            "I can still help with general information based on my training data. "
+            "What would you like to know?"
+        )
+
+
 def route_command(
     user_input: str,
     chat_context: str | None = None,
@@ -143,6 +201,10 @@ def route_command(
     # Safety must run before any module action.
     if nlp.safety.safety_level == "dangerous" and not nlp.safety.allowed:
         return _format_blocked_response(nlp)
+
+    # Check if this query requires real-time/live intelligence.
+    if requires_realtime(user_input):
+        return _handle_realtime_query(user_input, chat_context)
 
     # Diagnostics can still be handled, but after NLP has processed the input.
     diagnostic_response = handle_nlp_test_routes(
