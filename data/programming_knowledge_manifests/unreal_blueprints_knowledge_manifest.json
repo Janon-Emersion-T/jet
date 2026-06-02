@@ -1,0 +1,63 @@
+{
+  "updated_at": "2026-06-02T22:24:43Z",
+  "topic": "Unreal Blueprints",
+  "sources": {
+    "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/": {
+      "name": "Godot GDScript Basics",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "ef862f5cf2370d6d9d4d1cef1bf263be5d06d9fe42778e3a4eee6067cd33ffe7",
+      "last_learned_at": "2026-06-02T22:24:34Z",
+      "chunks_saved": 34,
+      "title": "GDScript — Godot Engine (stable) documentation in English"
+    },
+    "https://haxe.org/documentation/introduction/": {
+      "name": "Haxe Manual",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "60472ced8eacb158324c41da22be6817c54301ff090f3c25010d49cf070464cc",
+      "last_learned_at": "2026-06-02T22:24:35Z",
+      "chunks_saved": 2,
+      "title": "Haxe introduction - Haxe - The Cross-platform Toolkit"
+    },
+    "https://dev.epicgames.com/documentation/en-us/unreal-engine/blueprints-visual-scripting-in-unreal-engine": {
+      "name": "Unreal Engine Blueprint Visual Scripting",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "ecef775f1cb52927b46c7bb42775d64964e0d6ed7e458eaa46b2957a80d35a87",
+      "last_learned_at": "2026-06-02T22:24:37Z",
+      "chunks_saved": 1,
+      "title": "Blueprints Visual Scripting in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community"
+    },
+    "https://google.github.io/eng-practices/": {
+      "name": "Google Engineering Practices Documentation",
+      "type": "engineering-guide",
+      "priority": 9,
+      "hash": "9df646a0e84eef9c7c8e4e5d534e374be1f1cfdfc25cbce6030549c22f716f8c",
+      "last_learned_at": "2026-06-02T22:24:38Z",
+      "chunks_saved": 1,
+      "title": "Google Engineering Practices Documentation | eng-practices"
+    },
+    "https://www.atlassian.com/software": {
+      "name": "Atlassian Software Development Guides",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "1b84ddd43555b7992e461841353050631dee84429f28101ba7c87e30cb715cbe",
+      "last_learned_at": "2026-06-02T22:24:40Z",
+      "chunks_saved": 13,
+      "title": "Products | Atlassian"
+    },
+    "https://martinfowler.com/": {
+      "name": "Martin Fowler",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "323303d19fd536af4b44ee90e83fa97aac26b7c5c370b49d1a314e5c55cc2938",
+      "last_learned_at": "2026-06-02T22:24:42Z",
+      "chunks_saved": 8,
+      "title": "martinfowler.com"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

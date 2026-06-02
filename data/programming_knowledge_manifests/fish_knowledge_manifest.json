@@ -1,0 +1,99 @@
+{
+  "updated_at": "2026-06-02T22:33:32Z",
+  "topic": "Fish",
+  "sources": {
+    "https://www.gnu.org/software/bash/manual/": {
+      "name": "GNU Bash Manual",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "a415b8cef84742cef655d317a5e3479b98b5ad7174e4bde010fbb2d3acfe75da",
+      "last_learned_at": "2026-06-02T22:33:13Z",
+      "chunks_saved": 1,
+      "title": "GNU Bash manual - GNU Project - Free Software Foundation"
+    },
+    "https://learn.microsoft.com/en-us/powershell/": {
+      "name": "PowerShell Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "704aca22a41c624fc25e05c0ead4bfa6c3e3906c0c9e75d708ae8bebd9f8cf98",
+      "last_learned_at": "2026-06-02T22:33:14Z",
+      "chunks_saved": 2,
+      "title": "PowerShell Documentation - PowerShell | Microsoft Learn"
+    },
+    "https://zsh.sourceforge.io/Doc/": {
+      "name": "Zsh Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "6646c5a5f7a3f3beb9743f7a6da312f36d20bf25c9248f0b137619bf291ddc6e",
+      "last_learned_at": "2026-06-02T22:33:18Z",
+      "chunks_saved": 1,
+      "title": "ZSH - Documentation"
+    },
+    "https://fishshell.com/docs/current/": {
+      "name": "Fish Shell Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "3caf20ea97a67f3bbc49ecc88c4abe626e20ea3bfacc0e905f49e282e5c369d0",
+      "last_learned_at": "2026-06-02T22:33:20Z",
+      "chunks_saved": 5,
+      "title": "Introduction — fish-shell 4.7.1 documentation"
+    },
+    "https://www.tcl.tk/doc/": {
+      "name": "Tcl Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "cf55c8383362059fbb54aac9c03c0f0706f392f59ae994c00c6b1c716ec503a5",
+      "last_learned_at": "2026-06-02T22:33:22Z",
+      "chunks_saved": 2,
+      "title": "Tcl/Tk Doc­u­men­ta­tion"
+    },
+    "https://www.gnu.org/software/gawk/manual/": {
+      "name": "GNU Awk Manual",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "b08e5a3b99f9c1908a59741f322a2ef08098c53f0abd01bfbb65942798838125",
+      "last_learned_at": "2026-06-02T22:33:24Z",
+      "chunks_saved": 1,
+      "title": "Gawk: Effective AWK Programming - GNU Project - Free Software Foundation"
+    },
+    "https://www.gnu.org/software/sed/manual/": {
+      "name": "GNU Sed Manual",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "f5da90e1c0415d001990b4ae0e39bb917466d1b4d6b198ca65008127d90bdb63",
+      "last_learned_at": "2026-06-02T22:33:26Z",
+      "chunks_saved": 1,
+      "title": "GNU sed - GNU Sed: a stream editor - GNU Project - Free Software Foundation"
+    },
+    "https://learn.microsoft.com/en-us/windows/": {
+      "name": "Microsoft Learn Windows",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "bb2fc3cc8f42feff0dc20b96b94491b139fa78d75c13a719a3f2f2a2ff25d934",
+      "last_learned_at": "2026-06-02T22:33:27Z",
+      "chunks_saved": 1,
+      "title": "Windows Documentation | Microsoft Learn"
+    },
+    "https://training.linuxfoundation.org/": {
+      "name": "Linux Foundation Training",
+      "type": "official-learning-platform",
+      "priority": 8,
+      "hash": "e8b9c1a6edc645c2e146b5e3925e6f63403cfa7f079299d0c24556e3cf7b962f",
+      "last_learned_at": "2026-06-02T22:33:29Z",
+      "chunks_saved": 3,
+      "title": "Open Source Training | Linux Foundation Training and Certification"
+    },
+    "https://developer.apple.com/documentation/": {
+      "name": "Apple Developer Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "d55831e46c3bd3a223c582f46f006e65c533616a7f358011e1ca29f24661be5e",
+      "last_learned_at": "2026-06-02T22:33:31Z",
+      "chunks_saved": 1,
+      "title": "Featured | Apple Developer Documentation"
+    }
+  },
+  "category": "shell-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

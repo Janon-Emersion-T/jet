@@ -1,0 +1,90 @@
+{
+  "updated_at": "2026-06-02T22:30:43Z",
+  "topic": "MDX",
+  "sources": {
+    "https://www.postgresql.org/docs/": {
+      "name": "PostgreSQL Documentation",
+      "type": "sql-reference",
+      "priority": 9,
+      "hash": "5f2c37bccdcc78997f0e988001a3081c187701f4644cc92db87815a76f38ca70",
+      "last_learned_at": "2026-06-02T22:29:33Z",
+      "chunks_saved": 1,
+      "title": "PostgreSQL: Documentation"
+    },
+    "https://docs.oracle.com/en/database/oracle/oracle-database/": {
+      "name": "Oracle PL/SQL Language Reference",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "1fcbe6707ddd645d3328588deb47eddd373e5ba1bf6a0bee0ca63565603c5bd0",
+      "last_learned_at": "2026-06-02T22:29:34Z",
+      "chunks_saved": 2,
+      "title": "Oracle AI Database Documentation - Oracle Database"
+    },
+    "https://learn.microsoft.com/en-us/sql/t-sql/language-reference": {
+      "name": "Microsoft Transact-SQL",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "d911f49205dbb14378b29131c689f02e6e14b4c9a182ec8f86facd20a3438ed8",
+      "last_learned_at": "2026-06-02T22:29:36Z",
+      "chunks_saved": 3,
+      "title": "Transact-SQL Reference (Database Engine) - SQL Server | Microsoft Learn"
+    },
+    "https://graphql.org/learn/": {
+      "name": "GraphQL Learn",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "774c114ee2cdb83232ca8c434ceeefef3f2307327872a4b3ec30969a40f8fdea",
+      "last_learned_at": "2026-06-02T22:29:37Z",
+      "chunks_saved": 3,
+      "title": "Learn | GraphQL"
+    },
+    "https://neo4j.com/docs/cypher-manual/current/": {
+      "name": "Cypher Manual",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "cfbae89ef833a6bdd9668898f5e008084c9333a6634e36e40666ee83a8c7449f",
+      "last_learned_at": "2026-06-02T22:29:39Z",
+      "chunks_saved": 3,
+      "title": "Introduction - Cypher Manual"
+    },
+    "https://www.w3.org/TR/sparql12-query/": {
+      "name": "SPARQL 1.2 Specification",
+      "type": "official-specification",
+      "priority": 8,
+      "hash": "e2ab898fee046b526e65e81359f4bbadde6dc259d2bdd8b885829b500dc59fc7",
+      "last_learned_at": "2026-06-02T22:29:56Z",
+      "chunks_saved": 175,
+      "title": "SPARQL 1.2 Query Language"
+    },
+    "https://www.w3.org/TR/xquery-31/": {
+      "name": "XQuery 3.1",
+      "type": "official-specification",
+      "priority": 7,
+      "hash": "407f55ebc6a72b43ce6d10a941ed766ad0afc2bfc25a65ca341e3207d9766a02",
+      "last_learned_at": "2026-06-02T22:30:36Z",
+      "chunks_saved": 393,
+      "title": "XQuery 3.1: An XML Query Language"
+    },
+    "https://www.atlassian.com/agile": {
+      "name": "Atlassian Agile Coach",
+      "type": "practical-guide",
+      "priority": 8,
+      "hash": "3fc11270c7714c19a721f8048445c6754ef22bb9ed6162a56498badc91b3f72a",
+      "last_learned_at": "2026-06-02T22:30:40Z",
+      "chunks_saved": 24,
+      "title": "What is Agile? | Atlassian"
+    },
+    "https://startup.google.com/": {
+      "name": "Google for Startups",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "402b6a9f0cc012cb058ef61ccfd40c4ab232cbc2d8020454731e58114979f2d0",
+      "last_learned_at": "2026-06-02T22:30:42Z",
+      "chunks_saved": 3,
+      "title": "Start, build, grow: Tools, resources and support programs for startups - Google for Startups"
+    }
+  },
+  "category": "query-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

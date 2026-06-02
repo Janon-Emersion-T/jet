@@ -533,7 +533,8 @@ Return:
 
 Keep it practical and compact.
 """
-    return ask_brain(prompt, route_hint="fast", max_tokens=300)
+    # Synthesis benefits from the stronger long-context model more than the fast route.
+    return ask_brain(prompt, route_hint="long_context", max_tokens=300)
 
 
 def _run_reflection_task(task: dict) -> dict:

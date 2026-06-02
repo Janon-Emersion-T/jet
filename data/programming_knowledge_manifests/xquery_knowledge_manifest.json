@@ -1,0 +1,90 @@
+{
+  "updated_at": "2026-06-02T22:32:12Z",
+  "topic": "XQuery",
+  "sources": {
+    "https://www.postgresql.org/docs/": {
+      "name": "PostgreSQL Documentation",
+      "type": "sql-reference",
+      "priority": 9,
+      "hash": "5f2c37bccdcc78997f0e988001a3081c187701f4644cc92db87815a76f38ca70",
+      "last_learned_at": "2026-06-02T22:30:45Z",
+      "chunks_saved": 1,
+      "title": "PostgreSQL: Documentation"
+    },
+    "https://docs.oracle.com/en/database/oracle/oracle-database/": {
+      "name": "Oracle PL/SQL Language Reference",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "1fcbe6707ddd645d3328588deb47eddd373e5ba1bf6a0bee0ca63565603c5bd0",
+      "last_learned_at": "2026-06-02T22:30:47Z",
+      "chunks_saved": 2,
+      "title": "Oracle AI Database Documentation - Oracle Database"
+    },
+    "https://learn.microsoft.com/en-us/sql/t-sql/language-reference": {
+      "name": "Microsoft Transact-SQL",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "d911f49205dbb14378b29131c689f02e6e14b4c9a182ec8f86facd20a3438ed8",
+      "last_learned_at": "2026-06-02T22:30:48Z",
+      "chunks_saved": 3,
+      "title": "Transact-SQL Reference (Database Engine) - SQL Server | Microsoft Learn"
+    },
+    "https://graphql.org/learn/": {
+      "name": "GraphQL Learn",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "774c114ee2cdb83232ca8c434ceeefef3f2307327872a4b3ec30969a40f8fdea",
+      "last_learned_at": "2026-06-02T22:30:50Z",
+      "chunks_saved": 3,
+      "title": "Learn | GraphQL"
+    },
+    "https://neo4j.com/docs/cypher-manual/current/": {
+      "name": "Cypher Manual",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "cfbae89ef833a6bdd9668898f5e008084c9333a6634e36e40666ee83a8c7449f",
+      "last_learned_at": "2026-06-02T22:30:52Z",
+      "chunks_saved": 3,
+      "title": "Introduction - Cypher Manual"
+    },
+    "https://www.w3.org/TR/sparql12-query/": {
+      "name": "SPARQL 1.2 Specification",
+      "type": "official-specification",
+      "priority": 8,
+      "hash": "e2ab898fee046b526e65e81359f4bbadde6dc259d2bdd8b885829b500dc59fc7",
+      "last_learned_at": "2026-06-02T22:31:10Z",
+      "chunks_saved": 175,
+      "title": "SPARQL 1.2 Query Language"
+    },
+    "https://www.w3.org/TR/xquery-31/": {
+      "name": "XQuery 3.1",
+      "type": "official-specification",
+      "priority": 7,
+      "hash": "407f55ebc6a72b43ce6d10a941ed766ad0afc2bfc25a65ca341e3207d9766a02",
+      "last_learned_at": "2026-06-02T22:31:51Z",
+      "chunks_saved": 393,
+      "title": "XQuery 3.1: An XML Query Language"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/API": {
+      "name": "MDN Web APIs",
+      "type": "developer-reference",
+      "priority": 8,
+      "hash": "af5f1e69c9db1b0a1abfedb49b4266642c09a71a56e5af3e4aa4f18190dd6b43",
+      "last_learned_at": "2026-06-02T22:31:54Z",
+      "chunks_saved": 5,
+      "title": "Web APIs | MDN"
+    },
+    "https://spec.openapis.org/oas/latest.html": {
+      "name": "OpenAPI Specification",
+      "type": "official-standard",
+      "priority": 9,
+      "hash": "5adcd223aae47a1a84eef07fc8db5d08284cb53a910908541f71fcc2a651bf19",
+      "last_learned_at": "2026-06-02T22:32:11Z",
+      "chunks_saved": 159,
+      "title": "OpenAPI Specification v3.2.0"
+    }
+  },
+  "category": "query-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

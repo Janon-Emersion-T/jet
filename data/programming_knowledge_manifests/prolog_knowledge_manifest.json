@@ -1,0 +1,81 @@
+{
+  "updated_at": "2026-06-02T22:23:49Z",
+  "topic": "Prolog",
+  "sources": {
+    "https://www.nasm.us/doc/": {
+      "name": "NASM Documentation",
+      "type": "assembler-reference",
+      "priority": 8,
+      "hash": "41d3fcb80fabb9cede446587c551a83bc27c954a947b493b423d060131b63696",
+      "last_learned_at": "2026-06-02T22:23:35Z",
+      "chunks_saved": 10,
+      "title": "NASM - The Netwide Assembler"
+    },
+    "https://gcc.gnu.org/onlinedocs/gfortran/": {
+      "name": "GNU Fortran Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "4f86003b324b826fbac6febd112fb0680f0ec50750f89e3e16f3363b74cb1fcb",
+      "last_learned_at": "2026-06-02T22:23:37Z",
+      "chunks_saved": 5,
+      "title": "Top (The GNU Fortran Compiler)"
+    },
+    "https://learn.adacore.com/": {
+      "name": "AdaCore Learn",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "8ec431cbc91d99d25d11d839ad57a9f92eae6c4c5712b40850b2377aba4fc249",
+      "last_learned_at": "2026-06-02T22:23:39Z",
+      "chunks_saved": 4,
+      "title": "learn.adacore.com"
+    },
+    "https://gnucobol.sourceforge.io/": {
+      "name": "GnuCOBOL Programmer's Guide",
+      "type": "official-documentation",
+      "priority": 7,
+      "hash": "05bedab42f3642575fe4dd7116ebaad17a6887ee7b30e91bee2d7af3f331e27a",
+      "last_learned_at": "2026-06-02T22:23:40Z",
+      "chunks_saved": 3,
+      "title": "GnuCOBOL - GNU Project"
+    },
+    "https://www.swi-prolog.org/pldoc/": {
+      "name": "SWI-Prolog Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "6ff962af33d4a3ab905e7f565c3df646e65cd47f050ffc50c7eeea71e5287aab",
+      "last_learned_at": "2026-06-02T22:23:42Z",
+      "chunks_saved": 8,
+      "title": "plweb"
+    },
+    "https://docs.racket-lang.org/": {
+      "name": "Racket Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "a4e10ddeb1d10121941b46e5f9bdc8cfb8e5a9dc062092e963c35b5c53e4969c",
+      "last_learned_at": "2026-06-02T22:23:44Z",
+      "chunks_saved": 13,
+      "title": "Racket"
+    },
+    "https://www.nand2tetris.org/": {
+      "name": "Nand2Tetris",
+      "type": "foundational-course",
+      "priority": 9,
+      "hash": "72b2ac9498147045a2c914b0510d1d0c57a7d19aa5c1f3142a1d4d78c5b674ba",
+      "last_learned_at": "2026-06-02T22:23:46Z",
+      "chunks_saved": 1,
+      "title": "Home | nand2tetris"
+    },
+    "https://cs50.harvard.edu/x/": {
+      "name": "CS50 Computer Science Courses",
+      "type": "foundational-course",
+      "priority": 8,
+      "hash": "d7b6d94cdbebcc00865d7425037f2abae6554832adc6c2b81f38c5b67c7eec67",
+      "last_learned_at": "2026-06-02T22:23:48Z",
+      "chunks_saved": 3,
+      "title": "CS50x 2026"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

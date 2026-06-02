@@ -1,0 +1,99 @@
+{
+  "updated_at": "2026-06-02T22:23:33Z",
+  "topic": "Scheme",
+  "sources": {
+    "https://www.haskell.org/documentation/": {
+      "name": "Haskell Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "e6d1639b42197bf9a6ba76d1ec00eeb474a95af6b885389bd5d2ea056fb4dd8c",
+      "last_learned_at": "2026-06-02T22:23:11Z",
+      "chunks_saved": 3,
+      "title": "Documentation"
+    },
+    "https://hexdocs.pm/elixir/introduction.html": {
+      "name": "Elixir Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "c4af26786264bdb7b66cc2fefa9cead5aa7c5ab164dc84863498bc3e28951427",
+      "last_learned_at": "2026-06-02T22:23:12Z",
+      "chunks_saved": 2,
+      "title": "Introduction â Elixir v1.19.5"
+    },
+    "https://www.erlang.org/docs": {
+      "name": "Erlang Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "66005ec3d7f7af77906ba1b8650e4c77fe3171199fbc85f1c1bbb3ae31569336",
+      "last_learned_at": "2026-06-02T22:23:14Z",
+      "chunks_saved": 2,
+      "title": "Documentation - Erlang/OTP"
+    },
+    "https://learn.microsoft.com/en-us/dotnet/fsharp/": {
+      "name": "F# Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "1fde703eb13cc5f3c8db8fd5249629fd51909b1a12c5f101f84c36a057e8fe68",
+      "last_learned_at": "2026-06-02T22:23:16Z",
+      "chunks_saved": 1,
+      "title": "F# docs - get started, tutorials, reference. - .NET | Microsoft Learn"
+    },
+    "https://ocaml.org/docs": {
+      "name": "OCaml Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "fd6694f0f5f59746f4daebd230d4e66dbfde396bf5ed34b41cfd3e82b56389e1",
+      "last_learned_at": "2026-06-02T22:23:18Z",
+      "chunks_saved": 5,
+      "title": "Learn OCaml"
+    },
+    "https://clojure.org/guides/getting_started": {
+      "name": "Clojure Guides",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "0f30ebef0734f81ba0f74a6981f2acd748796bcb50c0331d18d778f014c2a3bc",
+      "last_learned_at": "2026-06-02T22:23:20Z",
+      "chunks_saved": 2,
+      "title": "Clojure - Getting Started"
+    },
+    "https://guide.elm-lang.org/": {
+      "name": "Elm Guide",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "6250322d29668e8389478607b9a4c57c09642a083131275343e84ca456b4d0f5",
+      "last_learned_at": "2026-06-02T22:23:21Z",
+      "chunks_saved": 2,
+      "title": "Introduction · An Introduction to Elm"
+    },
+    "https://docs.racket-lang.org/": {
+      "name": "Racket Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "a4e10ddeb1d10121941b46e5f9bdc8cfb8e5a9dc062092e963c35b5c53e4969c",
+      "last_learned_at": "2026-06-02T22:23:26Z",
+      "chunks_saved": 13,
+      "title": "Racket"
+    },
+    "https://help.dyalog.com/latest/": {
+      "name": "Dyalog APL Documentation",
+      "type": "official-documentation",
+      "priority": 7,
+      "hash": "8889fb4a20c695d3b1ec9bef50325e85a0e6bb796fbd968156c388a1e2b219bd",
+      "last_learned_at": "2026-06-02T22:23:28Z",
+      "chunks_saved": 1,
+      "title": "Dyalog version 19.0"
+    },
+    "https://www.eiffel.org/doc/": {
+      "name": "Eiffel Documentation",
+      "type": "official-documentation",
+      "priority": 7,
+      "hash": "38a930933ad3da0d11cf1e21b9e89aa3ccf9e2939539f0a602cc3183fbf6d6a8",
+      "last_learned_at": "2026-06-02T22:23:31Z",
+      "chunks_saved": 5,
+      "title": "Documentation"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

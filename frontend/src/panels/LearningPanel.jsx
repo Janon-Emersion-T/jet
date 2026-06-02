@@ -11,6 +11,7 @@ import {
   WandSparkles,
   Gauge,
   Radar,
+  ArrowRight,
 } from "lucide-react";
 
 import Panel from "../components/Panel";
@@ -41,6 +42,9 @@ function formatEventSummary(event) {
 
   if (payload.command) return payload.command;
   if (payload.message) return payload.message;
+  if (Array.isArray(payload.topics) && payload.topics.length > 0) {
+    return payload.topics.join(" · ");
+  }
   if (payload.topic) return `${payload.topic}${payload.domain ? ` (${payload.domain})` : ""}`;
   if (payload.task?.topic) return `${payload.task.topic} (${payload.task.domain || "task"})`;
   if (event.error) return event.error;
@@ -63,17 +67,35 @@ function summarizeBurstResult(result) {
   ].join("\n\n");
 }
 
-function ProgressBar({ value }) {
-  const safeValue = Math.max(0, Math.min(100, Number(value) || 0));
+function buildLearningLines(overview, events) {
+  const completedTopics = overview?.completed_topics || {};
+  const lines = [];
 
-  return (
-    <div className="learning-progress">
-      <div className="learning-progress-track">
-        <span style={{ width: `${safeValue}%` }} />
-      </div>
-      <strong>{safeValue}%</strong>
-    </div>
-  );
+  Object.entries(completedTopics).forEach(([domain, topics]) => {
+    (topics || []).slice(-12).forEach((topic, index) => {
+      lines.push({
+        id: `${domain}-${topic}-${index}`,
+        domain,
+        title: topic,
+        detail: "Topic learned and stored in curriculum memory.",
+        status: "completed",
+      });
+    });
+  });
+
+  events.slice(-18).forEach((event, index) => {
+    const label = formatEventLabel(event);
+    const summary = formatEventSummary(event);
+    lines.push({
+      id: `event-${label}-${index}`,
+      domain: event.domain || event.payload?.domain || "learning",
+      title: label,
+      detail: summary,
+      status: event.type || "event",
+    });
+  });
+
+  return lines.slice(-24);
 }
 
 export default function LearningPanel() {
@@ -104,6 +126,10 @@ export default function LearningPanel() {
   const latestEvent = overview?.latest_event || events[events.length - 1] || null;
   const activeLearning = Boolean(overview?.enabled);
   const isWorking = busy || autoAdvancing;
+  const learningLines = useMemo(
+    () => buildLearningLines(overview, events),
+    [overview, events]
+  );
 
   useEffect(() => {
     autoAdvanceRef.current = autoAdvance;
@@ -298,7 +324,7 @@ export default function LearningPanel() {
           </div>
 
           <div className="learning-hero-grid">
-            <div className="learning-hero-card">
+            <div className="learning-hero-card compact">
               <div className="learning-hero-label">
                 <Radar size={16} />
                 Current task
@@ -311,7 +337,7 @@ export default function LearningPanel() {
               </span>
             </div>
 
-            <div className="learning-hero-card">
+            <div className="learning-hero-card compact">
               <div className="learning-hero-label">
                 <Gauge size={16} />
                 Queue depth
@@ -320,7 +346,7 @@ export default function LearningPanel() {
               <span>{latestEvent ? formatEventLabel(latestEvent) : "Awaiting new learning signal"}</span>
             </div>
 
-            <div className="learning-hero-card">
+            <div className="learning-hero-card compact">
               <div className="learning-hero-label">
                 <WandSparkles size={16} />
                 Last refresh
@@ -366,7 +392,7 @@ export default function LearningPanel() {
           </button>
         </form>
 
-        <div className="learning-stat-grid">
+        <div className="learning-stat-grid learning-stat-grid-inline">
           <StatCard label="Tasks Completed" value={stats.tasks_completed ?? 0} />
           <StatCard label="Topics Learned" value={stats.topics_learned ?? 0} />
           <StatCard label="Reviews" value={stats.reviews_completed ?? 0} tone="secondary" />
@@ -377,84 +403,74 @@ export default function LearningPanel() {
 
         <div className="learning-grid learning-grid-top">
           <section className="panel-surface learning-card">
-            <div className="mini-heading">
-              <Activity size={16} />
-              Domain Progress
-            </div>
-            <div className="learning-domain-list learning-scroll">
-              {domainSummary.length === 0 && <p>No learning domains configured yet.</p>}
-              {domainSummary.map((domain) => {
-                const denominator = Math.max(
-                  (domain.completed_topics || 0) + (domain.pending_tasks || 0),
-                  1
-                );
-                const completion = Math.round(((domain.completed_topics || 0) / denominator) * 100);
-
-                return (
-                  <div className="learning-domain-item" key={domain.domain}>
-                    <div className="learning-domain-copy">
-                      <strong>{domain.domain}</strong>
-                      <span>{domain.completed_topics} completed topics</span>
-                      <ProgressBar value={completion} />
-                    </div>
-                    <div className="learning-domain-meta">
-                      <span>Stage {domain.stage_index}</span>
-                      <span>{domain.pending_tasks} pending</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-
-          <section className="panel-surface learning-card">
-            <div className="mini-heading">
-              <Sparkles size={16} />
-              Queue
-            </div>
-            <div className="learning-queue learning-scroll">
-              {queue.length === 0 && <p>No queued tasks right now.</p>}
-              {queue.map((task) => (
-                <div className="learning-event learning-event-compact" key={task.id}>
-                  <strong>{task.topic}</strong>
-                  <span>
-                    {task.domain} · {task.kind} · {task.status}
-                  </span>
-                  <div className="learning-task-meta">
-                    <span>{task.stage}</span>
-                    <span>{task.completed_at ? "completed" : "pending"}</span>
-                  </div>
+            <div className="learning-card-header">
+              <div className="learning-card-title">
+                <div className="mini-heading">
+                  <Activity size={16} />
+                  Next to learn
                 </div>
-              ))}
+                <p>These are the next topics queued for autonomous learning.</p>
+              </div>
+              <button
+                type="button"
+                className="learning-inline-action"
+                onClick={() => handleAction("start")}
+                disabled={isWorking || activeLearning}
+              >
+                <Play size={14} />
+                Start learning
+              </button>
             </div>
-          </section>
-        </div>
-
-        <div className="learning-grid learning-grid-bottom">
-          <section className="panel-surface learning-card">
-            <div className="mini-heading">
-              <BookOpen size={16} />
-              Recent Learning Events
-            </div>
-            <div className="learning-events learning-scroll">
-              {events.length === 0 && <p>No learning events yet.</p>}
-              {events.map((event, index) => (
-                <div className="learning-event" key={`${formatEventLabel(event)}-${index}`}>
-                  <strong>{formatEventLabel(event)}</strong>
-                  <span>{event.completed_at || event.time || event.created_at || "recent"}</span>
-                  <p>{formatEventSummary(event)}</p>
+            <div className="learning-queue learning-scroll learning-next-list">
+              {queue.length === 0 && (
+                <div className="learning-empty-state">
+                  <strong>No queued topics right now.</strong>
+                  <span>Jarvis will generate the next topic automatically when the curriculum advances.</span>
+                </div>
+              )}
+              {queue.map((task, index) => (
+                <div className="learning-next-item" key={task.id}>
+                  <div className="learning-next-index">{String(index + 1).padStart(2, "0")}</div>
+                  <div className="learning-next-copy">
+                    <strong>{task.topic}</strong>
+                    <span>{task.domain} · {task.kind} · {task.stage}</span>
+                  </div>
+                  <ArrowRight size={16} className="learning-next-arrow" />
                 </div>
               ))}
             </div>
           </section>
 
           <section className="panel-surface learning-card">
-            <div className="mini-heading">
-              <SquareTerminal size={16} />
-              Live Response
+            <div className="learning-card-title">
+              <div className="mini-heading">
+                <Sparkles size={16} />
+                Learning progress
+                <span className="learning-live-chip">Live</span>
+              </div>
+              <p>What Jarvis has learned, line by line, as the curriculum advances.</p>
             </div>
-            <div className="result-box learning-response">
-              <pre>{response || overview?.status_text || "Jarvis learning status will appear here."}</pre>
+            <div className="learning-live-banner">
+              <SquareTerminal size={14} />
+              <span>{response || overview?.status_text || "Jarvis learning status will appear here."}</span>
+            </div>
+            <div className="learning-events learning-scroll learning-progress-feed">
+              {learningLines.length === 0 && (
+                <div className="learning-empty-state">
+                  <strong>Waiting for learning activity.</strong>
+                  <span>Once Jarvis starts processing topics, each learned step will appear here line by line.</span>
+                </div>
+              )}
+              {learningLines.map((line, index) => (
+                <div className="learning-progress-line" key={line.id}>
+                  <span className="learning-line-number">{String(index + 1).padStart(2, "0")}</span>
+                  <div className="learning-line-copy">
+                    <strong>{line.title}</strong>
+                    <span>{line.domain} · {line.status}</span>
+                    <p>{line.detail}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
         </div>
