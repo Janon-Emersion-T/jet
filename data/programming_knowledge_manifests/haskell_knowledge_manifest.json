@@ -1,0 +1,99 @@
+{
+  "updated_at": "2026-06-02T22:11:12Z",
+  "topic": "Haskell",
+  "sources": {
+    "https://www.haskell.org/documentation/": {
+      "name": "Haskell Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "e6d1639b42197bf9a6ba76d1ec00eeb474a95af6b885389bd5d2ea056fb4dd8c",
+      "last_learned_at": "2026-06-02T22:10:52Z",
+      "chunks_saved": 3,
+      "title": "Documentation"
+    },
+    "https://hexdocs.pm/elixir/introduction.html": {
+      "name": "Elixir Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "c4af26786264bdb7b66cc2fefa9cead5aa7c5ab164dc84863498bc3e28951427",
+      "last_learned_at": "2026-06-02T22:10:54Z",
+      "chunks_saved": 2,
+      "title": "Introduction â Elixir v1.19.5"
+    },
+    "https://www.erlang.org/docs": {
+      "name": "Erlang Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "66005ec3d7f7af77906ba1b8650e4c77fe3171199fbc85f1c1bbb3ae31569336",
+      "last_learned_at": "2026-06-02T22:10:57Z",
+      "chunks_saved": 2,
+      "title": "Documentation - Erlang/OTP"
+    },
+    "https://learn.microsoft.com/en-us/dotnet/fsharp/": {
+      "name": "F# Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "1fde703eb13cc5f3c8db8fd5249629fd51909b1a12c5f101f84c36a057e8fe68",
+      "last_learned_at": "2026-06-02T22:10:59Z",
+      "chunks_saved": 1,
+      "title": "F# docs - get started, tutorials, reference. - .NET | Microsoft Learn"
+    },
+    "https://ocaml.org/docs": {
+      "name": "OCaml Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "fd6694f0f5f59746f4daebd230d4e66dbfde396bf5ed34b41cfd3e82b56389e1",
+      "last_learned_at": "2026-06-02T22:11:01Z",
+      "chunks_saved": 5,
+      "title": "Learn OCaml"
+    },
+    "https://clojure.org/guides/getting_started": {
+      "name": "Clojure Guides",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "0f30ebef0734f81ba0f74a6981f2acd748796bcb50c0331d18d778f014c2a3bc",
+      "last_learned_at": "2026-06-02T22:11:03Z",
+      "chunks_saved": 2,
+      "title": "Clojure - Getting Started"
+    },
+    "https://guide.elm-lang.org/": {
+      "name": "Elm Guide",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "6250322d29668e8389478607b9a4c57c09642a083131275343e84ca456b4d0f5",
+      "last_learned_at": "2026-06-02T22:11:04Z",
+      "chunks_saved": 2,
+      "title": "Introduction · An Introduction to Elm"
+    },
+    "https://google.github.io/eng-practices/": {
+      "name": "Google Engineering Practices Documentation",
+      "type": "engineering-guide",
+      "priority": 9,
+      "hash": "9df646a0e84eef9c7c8e4e5d534e374be1f1cfdfc25cbce6030549c22f716f8c",
+      "last_learned_at": "2026-06-02T22:11:07Z",
+      "chunks_saved": 1,
+      "title": "Google Engineering Practices Documentation | eng-practices"
+    },
+    "https://www.atlassian.com/software": {
+      "name": "Atlassian Software Development Guides",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "1b84ddd43555b7992e461841353050631dee84429f28101ba7c87e30cb715cbe",
+      "last_learned_at": "2026-06-02T22:11:09Z",
+      "chunks_saved": 13,
+      "title": "Products | Atlassian"
+    },
+    "https://martinfowler.com/": {
+      "name": "Martin Fowler",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "323303d19fd536af4b44ee90e83fa97aac26b7c5c370b49d1a314e5c55cc2938",
+      "last_learned_at": "2026-06-02T22:11:11Z",
+      "chunks_saved": 8,
+      "title": "martinfowler.com"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}
