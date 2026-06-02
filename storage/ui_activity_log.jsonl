@@ -6,3 +6,5 @@
 {"time": "2026-06-02T17:31:41", "event_type": "chat_command", "payload": {"message": "learn html", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}
 {"time": "2026-06-02T17:32:10", "event_type": "chat_command", "payload": {"message": "tell me all you know about html", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}
 {"time": "2026-06-02T17:33:01", "event_type": "chat_command", "payload": {"message": "what is your current level of Natural language processing", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}
+{"time": "2026-06-02T17:53:30", "event_type": "chat_command", "payload": {"message": "how to make a tea", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}
+{"time": "2026-06-02T17:53:57", "event_type": "voice_start", "payload": {"mode": "offline"}}

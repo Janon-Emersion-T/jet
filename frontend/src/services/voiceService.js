@@ -9,3 +9,8 @@ export async function getVoiceStatus() {
 export async function startVoiceMode() {
   return await apiPost("/voice/start", {});
 }
+
+
+export async function stopVoiceMode() {
+  return await apiPost("/voice/stop", {});
+}

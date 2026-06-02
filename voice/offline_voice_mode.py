@@ -23,13 +23,22 @@ STOP_PHRASES = [
 def start_offline_voice_mode():
     VOICE_STATE["mode"] = "listening"
     VOICE_STATE["interrupted"] = False
+    VOICE_STATE["stop_requested"] = False
     speak("Voice mode activated.")
 
     try:
         while True:
+            if VOICE_STATE.get("stop_requested"):
+                speak("Voice mode deactivated.")
+                break
+
             raw_input = listen_offline(seconds=VOICE_CONFIG["listen_seconds"]).strip()
 
             VOICE_STATE["last_heard"] = raw_input
+
+            if VOICE_STATE.get("stop_requested"):
+                speak("Voice mode deactivated.")
+                break
 
             if raw_input == "__INTERRUPTED__":
                 speak("Voice mode interrupted.")
@@ -94,4 +103,5 @@ def start_offline_voice_mode():
             pass
     finally:
         VOICE_STATE["mode"] = "idle"
+        VOICE_STATE["stop_requested"] = False
         set_voice_mode(False)

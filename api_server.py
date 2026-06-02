@@ -39,6 +39,7 @@ from core.memory_search import list_facts, search_memory
 from core.activity_log import log_activity, list_recent_activity
 from core.system_modes import get_system_mode_state, set_voice_mode
 from voice.offline_voice_mode import start_offline_voice_mode
+from voice.voice_state import VOICE_STATE
 from core.project_diagnostics import interpret_project_diagnostics
 from core.code_reviewer import review_code_file
 from tools.system_tools import read_project_file
@@ -216,11 +217,28 @@ def voice_start():
     if state.get("voice_mode"):
         return {"ok": True, "message": "Voice mode is already active."}
 
+    VOICE_STATE["stop_requested"] = False
+    VOICE_STATE["interrupted"] = False
     set_voice_mode(True)
     thread = threading.Thread(target=_start_voice_mode_thread, daemon=True)
     thread.start()
     log_activity("voice_start", {"mode": "offline"})
     return {"ok": True, "message": "Voice mode activation started."}
+
+
+@app.post("/voice/stop")
+def voice_stop():
+    state = get_system_mode_state()
+
+    if not state.get("voice_mode"):
+        return {"ok": True, "message": "Voice mode is already inactive."}
+
+    VOICE_STATE["stop_requested"] = True
+    VOICE_STATE["interrupted"] = True
+    VOICE_STATE["mode"] = "stopping"
+    set_voice_mode(False)
+    log_activity("voice_stop", {"mode": "offline"})
+    return {"ok": True, "message": "Voice mode deactivation requested."}
 
 
 @app.post("/project/analyze")

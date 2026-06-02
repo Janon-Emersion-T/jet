@@ -6,7 +6,7 @@ body {
   margin: 0;
   background: #050b14;
   color: #e8f7ff;
-  font-family: Inter, system-ui, Arial, sans-serif;
+  font-family: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
 }
 
 button,
@@ -21,7 +21,7 @@ textarea {
   background:
     radial-gradient(circle at 50% 20%, rgba(0, 195, 255, 0.18), transparent 34%),
     radial-gradient(circle at 20% 80%, rgba(0, 90, 255, 0.14), transparent 30%),
-    #030812;
+    linear-gradient(135deg, #02060d 0%, #05111d 48%, #04101d 100%);
 }
 
 .context-panel,
@@ -177,31 +177,42 @@ textarea {
 }
 
 .sidebar {
-  background: #07111f;
+  background:
+    linear-gradient(180deg, rgba(8, 18, 31, 0.98), rgba(4, 12, 22, 0.98));
   border-right: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 24px;
+  padding: 28px 22px 22px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 22px;
 }
 
 .brand {
-  display: flex;
+  display: grid;
   gap: 14px;
-  align-items: center;
+  align-items: start;
 }
 
 .voice-toggle {
   min-width: 74px;
-  height: 40px;
+  min-height: 46px;
   border: 1px solid rgba(111, 243, 255, 0.24);
-  border-radius: 999px;
+  border-radius: 16px;
   background: linear-gradient(135deg, rgba(7, 39, 66, 0.96), rgba(2, 12, 26, 0.98));
   color: #93efff;
-  padding: 0 14px;
+  padding: 0 16px;
   cursor: pointer;
   font-weight: 700;
   letter-spacing: 0.2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.voice-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(0, 163, 255, 0.14);
 }
 
 .voice-toggle.active {
@@ -210,20 +221,35 @@ textarea {
   box-shadow: 0 0 20px rgba(105, 255, 178, 0.2);
 }
 
-.brand h1 {
-  margin: 0;
-  font-size: 24px;
+.brand-copy {
+  display: grid;
+  gap: 8px;
 }
 
-.brand p {
-  margin: 4px 0 0;
-  color: #88a7b8;
-  font-size: 13px;
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(110, 220, 255, 0.08);
+  border: 1px solid rgba(110, 220, 255, 0.14);
+  color: #89e8ff;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.08em;
 }
 
 nav {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 nav button,
@@ -242,13 +268,19 @@ nav button {
   gap: 10px;
   align-items: center;
   text-align: left;
+  min-height: 48px;
+  border: 1px solid rgba(111, 243, 255, 0.08);
+  background: linear-gradient(135deg, rgba(10, 25, 42, 0.96), rgba(4, 12, 22, 0.98));
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
 
 nav button.active,
 nav button:hover,
 .quick-grid button:hover,
 .composer button:hover {
-  background: #12365a;
+  background: linear-gradient(135deg, rgba(16, 56, 92, 0.98), rgba(8, 28, 48, 0.98));
+  border-color: rgba(111, 243, 255, 0.26);
+  transform: translateY(-1px);
 }
 
 .status-pill {
@@ -257,6 +289,10 @@ nav button:hover,
   align-items: center;
   gap: 8px;
   color: #b8d7e8;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(5, 20, 36, 0.78);
+  border: 1px solid rgba(111, 243, 255, 0.1);
 }
 
 .dot {
@@ -426,21 +462,45 @@ nav button:hover,
 .chat-panel {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: 16px;
+  gap: 18px;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+}
+
+.chat-header h2 {
+  margin-bottom: 0;
+}
+
+.chat-header-note {
+  margin: 0;
+  max-width: 360px;
+  color: #9ebbc8;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: right;
 }
 
 .messages {
-  background: #050b14;
-  border-radius: 18px;
-  padding: 16px;
+  background:
+    linear-gradient(180deg, rgba(3, 10, 18, 0.94), rgba(5, 13, 24, 0.94));
+  border-radius: 22px;
+  padding: 18px;
   overflow: auto;
   max-height: calc(100vh - 230px);
+  border: 1px solid rgba(111, 243, 255, 0.08);
+  box-shadow: inset 0 0 28px rgba(0, 174, 255, 0.04);
 }
 
 .message {
   margin-bottom: 12px;
-  padding: 14px;
-  border-radius: 16px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid transparent;
 }
 
 .message pre {
@@ -449,28 +509,44 @@ nav button:hover,
 }
 
 .message.user {
-  background: #12365a;
+  background: linear-gradient(135deg, rgba(19, 66, 107, 0.92), rgba(9, 30, 52, 0.95));
+  border-color: rgba(100, 206, 255, 0.14);
 }
 
 .message.jarvis {
-  background: #0d1d30;
+  background: linear-gradient(135deg, rgba(10, 29, 48, 0.92), rgba(4, 14, 25, 0.96));
+  border-color: rgba(111, 243, 255, 0.08);
 }
 
 .composer {
   display: grid;
   grid-template-columns: 1fr 56px;
   gap: 12px;
+  align-items: end;
 }
 
 .composer textarea {
-  min-height: 58px;
+  min-height: 64px;
   max-height: 130px;
   resize: vertical;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: #050b14;
+  border: 1px solid rgba(111, 243, 255, 0.12);
+  background: linear-gradient(180deg, rgba(5, 12, 22, 0.98), rgba(3, 9, 16, 0.98));
   color: #e8f7ff;
-  border-radius: 16px;
-  padding: 14px;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: inset 0 0 18px rgba(0, 174, 255, 0.03);
+}
+
+.composer textarea:focus {
+  outline: none;
+  border-color: rgba(111, 243, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(111, 243, 255, 0.08);
+}
+
+.composer button {
+  min-height: 56px;
+  border: 1px solid rgba(111, 243, 255, 0.22);
+  background: linear-gradient(135deg, rgba(18, 75, 122, 0.98), rgba(8, 26, 48, 0.98));
 }
 
 .settings-grid {
@@ -770,7 +846,7 @@ nav button:hover,
   background: rgba(4, 13, 26, 0.92);
   border-right: 1px solid rgba(110, 220, 255, 0.14);
   backdrop-filter: blur(18px);
-  padding: 20px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -791,13 +867,15 @@ nav button:hover,
 
 .history-brand h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
+  letter-spacing: 0.08em;
 }
 
 .history-brand p {
   margin: 4px 0 0;
   color: #88a7b8;
   font-size: 13px;
+  letter-spacing: 0.04em;
 }
 
 .new-chat-button {
@@ -850,7 +928,7 @@ nav button:hover,
 
 .chat-history-item:hover,
 .chat-history-item.active {
-  background: #12365a;
+  background: linear-gradient(135deg, rgba(18, 54, 90, 0.98), rgba(8, 30, 50, 0.98));
 }
 
 .chat-history-item span {
@@ -916,8 +994,8 @@ nav button:hover,
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  padding: 12px 0;
-  margin: 4px 0;
+  padding: 14px 0;
+  margin: 6px 0;
   border-top: 1px solid rgba(110, 220, 255, 0.12);
   border-bottom: 1px solid rgba(110, 220, 255, 0.12);
 }
@@ -931,6 +1009,17 @@ nav button:hover,
 
 .social-nav-icon svg {
   margin: 0;
+}
+
+.danger-nav {
+  margin-top: 6px;
+  border-color: rgba(255, 107, 107, 0.18);
+  color: #ffd7d7;
+}
+
+.danger-nav:hover {
+  background: linear-gradient(135deg, rgba(104, 26, 26, 0.96), rgba(58, 12, 12, 0.96));
+  border-color: rgba(255, 122, 122, 0.35);
 }
 
 .social-channel-panel .panel-title {

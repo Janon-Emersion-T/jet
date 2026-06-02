@@ -51,7 +51,7 @@ import ProjectPanel from "./panels/ProjectPanel";
 import MemoryPanel from "./panels/MemoryPanel";
 import ToolsPanel from "./panels/ToolsPanel";
 import LogsPanel from "./panels/LogsPanel";
-import { getVoiceStatus, startVoiceMode } from "./services/voiceService";
+import { getVoiceStatus, startVoiceMode, stopVoiceMode } from "./services/voiceService";
 
 function App() {
   const [activePanel, setActivePanel] = useState("dashboard");
@@ -254,7 +254,14 @@ function App() {
 
   async function handleVoiceToggle() {
     if (voiceEnabled) {
-      notify("Voice Mode", "Voice mode is already active. Say stop voice mode to exit.");
+      try {
+        const data = await stopVoiceMode();
+        setVoiceEnabled(false);
+        notify("Voice Mode", data.message || "Voice mode deactivation started.");
+        await loadVoiceStatus();
+      } catch (error) {
+        notify("Voice Mode Error", error.message);
+      }
       return;
     }
 

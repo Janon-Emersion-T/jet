@@ -16,7 +16,7 @@ export default function ChatHistoryPanel({
 
         <div>
           <h1>JARVIS</h1>
-          <p>Conversation Context</p>
+          <p>Conversation Memory</p>
         </div>
       </div>
 

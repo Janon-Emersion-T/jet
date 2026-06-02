@@ -4,4 +4,5 @@ VOICE_STATE = {
     "last_command": None,
     "last_response": None,
     "interrupted": False,
+    "stop_requested": False,
 }

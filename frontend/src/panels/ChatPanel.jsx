@@ -10,7 +10,15 @@ export default function ChatPanel({
 }) {
   return (
     <section className="panel chat-panel">
-      <h2>Chat Panel</h2>
+      <div className="chat-header">
+        <div>
+          <p className="eyebrow">CONVERSATION</p>
+          <h2>Talk to JARVIS naturally</h2>
+        </div>
+        <p className="chat-header-note">
+          Ask normally by text or voice. JARVIS will decide the best next action.
+        </p>
+      </div>
 
       <div className="messages">
         {messages.map((message, index) => (
@@ -27,7 +35,7 @@ export default function ChatPanel({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type a JARVIS command..."
+          placeholder="Ask anything, describe a task, or tell JARVIS what to do..."
         />
 
         <button onClick={() => sendMessage()} disabled={loading}>

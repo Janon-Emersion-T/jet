@@ -6,6 +6,9 @@ import {
   BriefcaseBusiness,
   Mail,
   Music2,
+  Mic,
+  MicOff,
+  Sparkles,
 } from "lucide-react";
 
 import StatusPill from "./StatusPill";
@@ -34,13 +37,17 @@ export default function Sidebar({ activePanel, setActivePanel, apiOnline, voiceE
           type="button"
           className={`voice-toggle ${voiceEnabled ? "active" : ""}`}
           onClick={onToggleVoice}
-          title={voiceEnabled ? "Voice mode active" : "Activate voice mode"}
+          title={voiceEnabled ? "Deactivate voice mode" : "Activate voice mode"}
         >
-          {voiceEnabled ? "Voice On" : "Voice"}
+          {voiceEnabled ? <MicOff size={16} /> : <Mic size={16} />}
+          {voiceEnabled ? "Stop Voice" : "Start Voice"}
         </button>
-        <div>
+        <div className="brand-copy">
+          <div className="brand-badge">
+            <Sparkles size={14} />
+            Assistant Core
+          </div>
           <h1>JARVIS</h1>
-          <p>Local AI Workstation</p>
         </div>
       </div>
 
