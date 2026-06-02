@@ -58,6 +58,55 @@ def _extract_json(text: str) -> dict | None:
         return None
 
 
+def infer_web_development_action(user_input: str) -> dict:
+    """
+    Infer the most likely web development action from a natural language request.
+
+    This keeps the web development route responsive even when the user speaks
+    naturally instead of using a rigid command format.
+    """
+    text = _normalize(user_input).lower()
+
+    action = {
+        "action": "plan",
+        "target_dir": None,
+        "request": user_input,
+    }
+
+    target = _parse_target(user_input)
+    if target:
+        action["target_dir"] = str(target)
+
+    if any(term in text for term in ["generate migration", "generate controller", "generate model", "generate view", "generate readme"]):
+        action["action"] = "module"
+        return action
+
+    if any(term in text for term in ["plan", "roadmap", "break down", "task breakdown", "architecture", "audit", "review", "analyze"]):
+        action["action"] = "plan"
+        return action
+
+    if any(term in text for term in [
+        "create",
+        "build",
+        "make",
+        "scaffold",
+        "install laravel",
+        "laravel web application",
+        "laravel app",
+        "web application",
+        "web app",
+        "saas",
+    ]):
+        action["action"] = "create"
+        return action
+
+    if target and any(term in text for term in ["laravel", "blade", "tailwind", "alpine", "vite", "project"]):
+        action["action"] = "create"
+        return action
+
+    return action
+
+
 def _parse_target(user_input: str, chat_context: str | None = None) -> Path | None:
     text = f"{user_input}\n{chat_context or ''}"
     match = re.search(r"(/[^\s`]+|~/[^\s`]+)", text)

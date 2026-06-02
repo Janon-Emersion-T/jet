@@ -58,6 +58,7 @@ from core.models.model_performance import load_model_performance, benchmark_mode
 from core.models.model_router import get_model_with_fallback
 from core.autonomous_learning import (
     ensure_autonomous_learning_worker,
+    get_autonomous_learning_overview,
     autonomous_learning_status,
     enable_autonomous_learning,
     disable_autonomous_learning,
@@ -192,6 +193,11 @@ def learning_status():
     return {
         "status": autonomous_learning_status()
     }
+
+
+@app.get("/learning/overview")
+def learning_overview(limit: int = Query(default=12, ge=1, le=24)):
+    return get_autonomous_learning_overview(limit=limit)
 
 
 @app.post("/learning/start")

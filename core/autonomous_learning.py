@@ -601,6 +601,90 @@ def autonomous_learning_status() -> str:
     return "\n".join(lines)
 
 
+def _recent_learning_events(limit: int = 12) -> list[dict]:
+    if not LOG_FILE.exists():
+        return []
+
+    events: list[dict] = []
+
+    try:
+        lines = LOG_FILE.read_text(encoding="utf-8").splitlines()
+    except Exception:
+        return []
+
+    for raw in reversed(lines):
+        if len(events) >= limit:
+            break
+
+        try:
+            entry = json.loads(raw)
+        except Exception:
+            continue
+
+        if isinstance(entry, dict):
+            events.append(entry)
+
+    return list(reversed(events))
+
+
+def get_autonomous_learning_overview(limit: int = 12) -> dict:
+    state = _load_state()
+    _ensure_schedule(state)
+    _save_state(state)
+
+    active_domains = list(state.get("active_domains", []))
+    domain_summaries = []
+
+    for domain in active_domains:
+        completed = state.get("completed_topics", {}).get(domain, [])
+        pending_tasks = [
+            task for task in state.get("schedule", [])
+            if task.get("domain") == domain and task.get("status") in {"pending", "in_progress", "failed"}
+        ]
+        domain_summaries.append(
+            {
+                "domain": domain,
+                "completed_topics": len(completed),
+                "pending_tasks": len(pending_tasks),
+                "stage_index": state.get("domain_stage_index", {}).get(domain, 0),
+                "recent_topics": completed[-5:],
+            }
+        )
+
+    queue = [
+        {
+            "id": task.get("id"),
+            "domain": task.get("domain"),
+            "topic": task.get("topic"),
+            "kind": task.get("kind"),
+            "stage": task.get("stage"),
+            "status": task.get("status"),
+            "created_at": task.get("created_at"),
+            "started_at": task.get("started_at"),
+            "completed_at": task.get("completed_at"),
+        }
+        for task in state.get("schedule", [])
+        if task.get("status") in {"pending", "in_progress", "failed"}
+    ][:limit]
+
+    recent_events = _recent_learning_events(limit=limit)
+
+    return {
+        "enabled": bool(state.get("enabled")),
+        "started_at": state.get("started_at"),
+        "last_cycle_at": state.get("last_cycle_at"),
+        "cycle_interval_seconds": state.get("cycle_interval_seconds"),
+        "current_task_id": state.get("current_task_id"),
+        "active_domains": active_domains,
+        "domain_summaries": domain_summaries,
+        "stats": state.get("stats", {}),
+        "completed_topics": state.get("completed_topics", {}),
+        "queue": queue,
+        "recent_events": recent_events,
+        "status_text": autonomous_learning_status(),
+    }
+
+
 def enable_autonomous_learning() -> str:
     state = _load_state()
     state["enabled"] = True

@@ -155,7 +155,7 @@ class WebDevelopmentToolTests(unittest.TestCase):
     def test_web_development_route_returns_plan_or_execution(self):
         with patch("core.routes.web_development_routes.build_web_development_plan") as plan_mock:
             plan_mock.return_value = {
-                "objective": "Build a Laravel app",
+                "objective": "Build a premium SaaS dashboard using Laravel, Blade, Tailwind, Alpine, and Vite",
                 "target_path": "/var/www/testJarvis",
                 "project_type": "plan",
                 "confirmation_needed": False,
@@ -171,6 +171,27 @@ class WebDevelopmentToolTests(unittest.TestCase):
             )
 
         self.assertIn("WEB DEVELOPMENT PLAN", result)
+
+    def test_web_development_route_falls_back_to_a_plan_in_natural_language(self):
+        with patch("core.routes.web_development_routes.build_web_development_plan") as plan_mock:
+            plan_mock.return_value = {
+                "objective": "Build a Laravel app",
+                "target_path": "/var/www/testJarvis",
+                "project_type": "plan",
+                "confirmation_needed": False,
+                "steps": [],
+                "risks": [],
+                "validation": [],
+            }
+
+            result = handle_web_development_routes(
+                "I want a premium SaaS dashboard with Laravel, Blade, Tailwind, Alpine, and Vite",
+                "I want a premium SaaS dashboard with Laravel, Blade, Tailwind, Alpine, and Vite",
+                "I want a premium SaaS dashboard with Laravel, Blade, Tailwind, Alpine, and Vite",
+            )
+
+        self.assertIn("WEB DEVELOPMENT PLAN", result)
+        self.assertNotIn("ROUTE SELECTED BUT ACTION NOT HANDLED", result)
 
     def test_shell_command_approval_blocks_dangerous_commands(self):
         result = request_shell_command("rm -rf storage")

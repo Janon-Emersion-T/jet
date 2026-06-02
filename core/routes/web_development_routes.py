@@ -3,6 +3,7 @@ import re
 from tools.web_development_tools import (
     build_web_development_plan,
     create_laravel_app_from_request,
+    infer_web_development_action,
     generate_laravel_module,
     format_web_development_plan,
 )
@@ -10,15 +11,24 @@ from tools.web_development_tools import (
 
 def handle_web_development_routes(user_input: str, text: str, clean_text: str):
     combined = f"{user_input}\n{clean_text}".lower()
+    action = infer_web_development_action(user_input)
 
-    if re.search(r"\b(create|build|make|scaffold).{0,60}\blaravel\b", combined) or "web application" in combined:
+    if action["action"] == "create":
         return create_laravel_app_from_request(user_input)
 
-    if any(term in combined for term in ["plan", "break down", "task breakdown", "roadmap", "architecture", "readme", "module"]):
+    if action["action"] == "module":
+        return generate_laravel_module(user_input)
+
+    if action["action"] == "plan":
         plan = build_web_development_plan(user_input)
         return format_web_development_plan(plan)
 
-    if any(term in combined for term in ["generate migration", "generate controller", "generate model", "generate view", "generate readme"]):
-        return generate_laravel_module(user_input)
+    # Natural-language fallback: if the module was selected, always return a
+    # concrete answer rather than leaving dispatch to emit a forced error.
+    if re.search(r"\b(laravel|blade|tailwind|alpine|vite|web app|web application|saas|project)\b", combined):
+        if any(term in combined for term in ["create", "build", "make", "scaffold", "install", "generate"]):
+            return create_laravel_app_from_request(user_input)
+
+        return format_web_development_plan(build_web_development_plan(user_input))
 
     return None

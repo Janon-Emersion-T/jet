@@ -48,6 +48,7 @@ import ChatPanel from "./panels/ChatPanel";
 import DashboardPanel from "./panels/DashboardPanel";
 
 import ProjectPanel from "./panels/ProjectPanel";
+import LearningPanel from "./panels/LearningPanel";
 import MemoryPanel from "./panels/MemoryPanel";
 import ToolsPanel from "./panels/ToolsPanel";
 import LogsPanel from "./panels/LogsPanel";
@@ -109,6 +110,7 @@ function App() {
       setCapabilities([]);
     }
   }, []);
+
 
   async function loadModelSettings() {
     const data = await getModelSettings();
@@ -412,6 +414,10 @@ function App() {
 
         {activePanel === "projects" && (
           <ProjectPanel runCommand={runCommand} />
+        )}
+
+        {activePanel === "learning" && (
+          <LearningPanel />
         )}
 
         {activePanel === "memory" && (
