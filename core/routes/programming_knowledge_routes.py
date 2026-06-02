@@ -5,6 +5,12 @@ from tools.programming_knowledge_tools import (
     update_all_programming_knowledge,
     update_programming_topic,
 )
+from core.autonomous_learning import (
+    autonomous_learning_status,
+    enable_autonomous_learning,
+    disable_autonomous_learning,
+    run_autonomous_learning_cycle,
+)
 
 
 def _normalize(value: str) -> str:
@@ -38,9 +44,36 @@ def handle_programming_knowledge_routes(user_input: str, text: str, clean_text: 
         "programming languages status",
         "show programming knowledge status",
         "learning curriculum status",
-        "autonomous learning status",
     }:
         return programming_knowledge_status()
+
+    if raw in {
+        "autonomous learning status",
+        "show autonomous learning status",
+        "background learning status",
+    }:
+        return autonomous_learning_status()
+
+    if raw in {
+        "start autonomous learning",
+        "enable autonomous learning",
+        "start background learning",
+    }:
+        return enable_autonomous_learning()
+
+    if raw in {
+        "stop autonomous learning",
+        "disable autonomous learning",
+        "stop background learning",
+    }:
+        return disable_autonomous_learning()
+
+    if raw in {
+        "run autonomous learning cycle",
+        "run background learning now",
+    }:
+        run_autonomous_learning_cycle()
+        return autonomous_learning_status()
 
     action = infer_programming_knowledge_action(user_input)
 

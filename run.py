@@ -10,6 +10,7 @@ os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
 from core.memory import init_memory, save_memory
 from core.command_router import route_command
+from core.autonomous_learning import ensure_autonomous_learning_worker
 
 
 def print_banner():
@@ -24,6 +25,7 @@ def print_banner():
 
 def main():
     init_memory()
+    ensure_autonomous_learning_worker()
     print_banner()
 
     while True:

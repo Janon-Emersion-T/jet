@@ -52,6 +52,7 @@ Rules:
 - Prefer mode "command" when the request sounds like JARVIS should do an action.
 - Use only realistic internal commands, not explanations.
 - If the user is just chatting, asking for advice, or asking for an explanation, use mode "answer".
+- If this is a follow-up like "do it", "I want you to do it", or "yes", infer the real action from chat context.
 - If you still cannot infer the action, use mode "clarify".
 - Never claim email, calendar, or other unconnected tools are available.
 - Return strict JSON only.
@@ -67,6 +68,7 @@ JSON schema:
 Examples:
 - "can you check the project health for me" -> {{"mode":"command","command":"project health score","answer":"","confidence":0.86}}
 - "open google and search laravel queues" -> {{"mode":"command","command":"search google for laravel queues","answer":"","confidence":0.82}}
+- With context about creating `/var/www/csl` and installing Laravel, "I want you to do it" -> {{"mode":"command","command":"install laravel project /var/www/csl","answer":"","confidence":0.91}}
 - "what is dependency injection" -> {{"mode":"answer","command":"","answer":"Dependency injection is ...","confidence":0.90}}
 
 User request:

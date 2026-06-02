@@ -13,6 +13,7 @@ from core.routes.nlp_test_routes import handle_nlp_test_routes
 from core.routes.basic_routes import handle_basic_routes
 from core.routes.memory_routes import handle_memory_routes
 from core.routes.project_context_routes import handle_project_context_routes
+from core.routes.developer_setup_routes import handle_developer_setup_routes
 from core.routes.project_analyzer_routes import handle_project_analyzer_routes
 from core.routes.dev_ops_routes import handle_dev_ops_routes
 from core.routes.framework_routes import handle_framework_routes
@@ -587,6 +588,32 @@ ROUTE_MODULES = [
         description="Manage project context and project-specific memory.",
         keywords=["project context", "current project", "remember this project"],
         intents=["project_context"],
+    ),
+
+    RouteModule(
+        name="developer_setup",
+        domain="development",
+        handler=handle_developer_setup_routes,
+        description="Create developer project folders and scaffold frameworks like Laravel from natural language requests.",
+        keywords=[
+            "install laravel",
+            "create laravel project",
+            "composer create-project",
+            "create folder",
+            "scaffold website",
+            "set up laravel",
+            "setup laravel",
+            "/var/www",
+        ],
+        intents=["development", "execution", "project_setup", "command"],
+        canonical_commands=[
+            "install laravel project",
+        ],
+        examples=[
+            "create /var/www/csl and install laravel",
+            "install laravel in /var/www/csl",
+            "set up a laravel project in /var/www/csl",
+        ],
     ),
 
     RouteModule(

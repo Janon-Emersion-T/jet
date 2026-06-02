@@ -8,3 +8,16 @@
 {"time": "2026-06-02T17:33:01", "event_type": "chat_command", "payload": {"message": "what is your current level of Natural language processing", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}
 {"time": "2026-06-02T17:53:30", "event_type": "chat_command", "payload": {"message": "how to make a tea", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}
 {"time": "2026-06-02T17:53:57", "event_type": "voice_start", "payload": {"mode": "offline"}}
+{"time": "2026-06-02T18:05:23", "event_type": "voice_stop", "payload": {"mode": "offline"}}
+{"time": "2026-06-02T18:05:30", "event_type": "voice_start", "payload": {"mode": "offline"}}
+{"time": "2026-06-02T18:07:04", "event_type": "voice_stop", "payload": {"mode": "offline"}}
+{"time": "2026-06-02T18:07:33", "event_type": "memory_search", "payload": {"query": "HTML"}}
+{"time": "2026-06-02T18:08:03", "event_type": "chat_command", "payload": {"message": "Lets create an website", "chat_id": "dd4c0d1f-45e3-4169-a7e0-a9ff242da925"}}
+{"time": "2026-06-02T18:09:40", "event_type": "chat_command", "payload": {"message": "A website for the company name \"Center for systematic learning\". A 5 page website with Home page, Resource Person's Page, About Us page. Blog Page and contact Us Page", "chat_id": "dd4c0d1f-45e3-4169-a7e0-a9ff242da925"}}
+{"time": "2026-06-02T18:11:01", "event_type": "chat_command", "payload": {"message": "/var/www/, in there create a folder named csl and install laravel", "chat_id": "dd4c0d1f-45e3-4169-a7e0-a9ff242da925"}}
+{"time": "2026-06-02T18:12:15", "event_type": "chat_command", "payload": {"message": "I want you to do it", "chat_id": "dd4c0d1f-45e3-4169-a7e0-a9ff242da925"}}
+{"time": "2026-06-02T18:12:29", "event_type": "chat_command", "payload": {"message": "Yep", "chat_id": "dd4c0d1f-45e3-4169-a7e0-a9ff242da925"}}
+{"time": "2026-06-02T18:12:58", "event_type": "chat_command", "payload": {"message": "Did you create the folder and install laravel?", "chat_id": "dd4c0d1f-45e3-4169-a7e0-a9ff242da925"}}
+{"time": "2026-06-02T18:14:26", "event_type": "chat_command", "payload": {"message": "I want you to do it yourself", "chat_id": "dd4c0d1f-45e3-4169-a7e0-a9ff242da925"}}
+{"time": "2026-06-02T18:29:42", "event_type": "chat_command", "payload": {"message": "in the /var/www folder create a folder named csl and install laravel", "chat_id": "57a81cd5-d4b1-46e2-92a3-a7813d84a839"}}
+{"time": "2026-06-02T18:30:28", "event_type": "chat_command", "payload": {"message": "yes", "chat_id": "57a81cd5-d4b1-46e2-92a3-a7813d84a839"}}

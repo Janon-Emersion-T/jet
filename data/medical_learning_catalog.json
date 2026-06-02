@@ -1,0 +1,188 @@
+{
+  "version": "1.0.0",
+  "topics": [
+    {
+      "topic": "Human Anatomy and Physiology",
+      "aliases": ["anatomy", "physiology"],
+      "category": "medical-foundation",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "anatomy", "physiology", "foundation"],
+      "sources": [
+        {"name": "MedlinePlus Anatomy", "url": "https://medlineplus.gov/anatomy.html", "type": "clinical-reference", "priority": 9},
+        {"name": "NHLBI How the Body Works", "url": "https://www.nhlbi.nih.gov/health/how-body-works", "type": "government-reference", "priority": 9},
+        {"name": "MSD Manual Professional Anatomy and Physiology", "url": "https://www.msdmanuals.com/professional/special-subjects/bioterrorism-and-chemical-agents/biology-of-infectious-disease", "type": "professional-manual", "priority": 7}
+      ]
+    },
+    {
+      "topic": "Medical Terminology and Communication",
+      "aliases": ["medical terminology", "clinical communication"],
+      "category": "medical-foundation",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "terminology", "communication"],
+      "sources": [
+        {"name": "MedlinePlus Medical Words Tutorial", "url": "https://medlineplus.gov/medicalwords.html", "type": "patient-education-reference", "priority": 8},
+        {"name": "AHRQ Health Literacy Universal Precautions Toolkit", "url": "https://www.ahrq.gov/health-literacy/improve/precautions/index.html", "type": "government-guideline", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Evidence-Based Medicine Fundamentals",
+      "aliases": ["evidence based medicine", "ebm"],
+      "category": "clinical-reasoning",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "evidence", "research", "clinical-decision-making"],
+      "sources": [
+        {"name": "NIH Evidence-Based Practice Centers", "url": "https://effectivehealthcare.ahrq.gov/about/epc", "type": "government-guideline", "priority": 9},
+        {"name": "Cochrane Evidence", "url": "https://www.cochrane.org/evidence", "type": "systematic-review", "priority": 10},
+        {"name": "NICE Evidence Standards Framework", "url": "https://www.nice.org.uk/about/what-we-do/our-programmes/evidence-standards-framework-for-digital-health-technologies", "type": "clinical-guideline", "priority": 8}
+      ]
+    },
+    {
+      "topic": "Clinical History and Physical Examination",
+      "aliases": ["physical exam", "history taking"],
+      "category": "clinical-skills",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "clinical-skills", "examination"],
+      "sources": [
+        {"name": "MSD Manual Professional Evaluation of the Patient", "url": "https://www.msdmanuals.com/professional/special-subjects/approach-to-the-patient/evaluation-of-the-patient", "type": "professional-manual", "priority": 10},
+        {"name": "CDC Clinical Assessment Basics", "url": "https://www.cdc.gov/training-development/php/clinical-overview/index.html", "type": "government-reference", "priority": 7}
+      ]
+    },
+    {
+      "topic": "Diagnostics and Laboratory Interpretation",
+      "aliases": ["lab interpretation", "diagnostics"],
+      "category": "clinical-reasoning",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "diagnostics", "laboratory"],
+      "sources": [
+        {"name": "MedlinePlus Lab Tests", "url": "https://medlineplus.gov/lab-tests/", "type": "clinical-reference", "priority": 9},
+        {"name": "MSD Manual Professional Laboratory Tests", "url": "https://www.msdmanuals.com/professional/special-subjects/laboratory-tests-and-imaging-studies/overview-of-laboratory-tests", "type": "professional-manual", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Pharmacology Principles",
+      "aliases": ["pharmacology"],
+      "category": "therapeutics",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "pharmacology", "medication-safety"],
+      "sources": [
+        {"name": "NIGMS Medicines By Design", "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/medicines-by-design.aspx", "type": "government-reference", "priority": 8},
+        {"name": "WHO Medication Safety", "url": "https://www.who.int/teams/integrated-health-services/patient-safety/research/medication-safety", "type": "global-guideline", "priority": 9},
+        {"name": "MSD Manual Professional Pharmacokinetics", "url": "https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics", "type": "professional-manual", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Infectious Disease and Immunology",
+      "aliases": ["infectious disease", "immunology"],
+      "category": "medicine-system",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "infection", "immunology"],
+      "sources": [
+        {"name": "CDC Infectious Diseases", "url": "https://www.cdc.gov/diseasesconditions/infectiousdiseases.html", "type": "government-reference", "priority": 10},
+        {"name": "WHO Infectious Hazards", "url": "https://www.who.int/teams/environment-climate-change-and-health/chemical-safety-and-health/health-topics/infectious-hazards", "type": "global-guideline", "priority": 9},
+        {"name": "NIAID Immune System Overview", "url": "https://www.niaid.nih.gov/research/immune-system-overview", "type": "government-reference", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Emergency Triage and Red Flags",
+      "aliases": ["emergency medicine", "triage", "red flags"],
+      "category": "acute-care",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "emergency", "triage", "safety"],
+      "sources": [
+        {"name": "WHO Emergency Care Systems", "url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-care", "type": "global-guideline", "priority": 10},
+        {"name": "MSD Manual Professional Approach to the Critical Patient", "url": "https://www.msdmanuals.com/professional/critical-care-medicine/approach-to-the-critically-ill-patient/overview-of-the-critically-ill-patient", "type": "professional-manual", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Cardiovascular Medicine Fundamentals",
+      "aliases": ["cardiology basics", "cardiology"],
+      "category": "medicine-system",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "cardiology", "heart"],
+      "sources": [
+        {"name": "NHLBI Heart and Vascular Diseases", "url": "https://www.nhlbi.nih.gov/health/heart-and-vascular-diseases", "type": "government-reference", "priority": 10},
+        {"name": "MSD Manual Professional Cardiovascular Disorders", "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders", "type": "professional-manual", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Respiratory Medicine Fundamentals",
+      "aliases": ["pulmonology basics", "respiratory medicine"],
+      "category": "medicine-system",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "respiratory", "lungs"],
+      "sources": [
+        {"name": "NHLBI Lung Diseases", "url": "https://www.nhlbi.nih.gov/health/lung-diseases", "type": "government-reference", "priority": 9},
+        {"name": "MSD Manual Professional Pulmonary Disorders", "url": "https://www.msdmanuals.com/professional/pulmonary-disorders", "type": "professional-manual", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Endocrinology and Metabolism Fundamentals",
+      "aliases": ["endocrinology", "metabolism"],
+      "category": "medicine-system",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "endocrinology", "metabolism"],
+      "sources": [
+        {"name": "NIDDK Endocrine Diseases", "url": "https://www.niddk.nih.gov/health-information/endocrine-diseases", "type": "government-reference", "priority": 9},
+        {"name": "MSD Manual Professional Endocrine and Metabolic Disorders", "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders", "type": "professional-manual", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Neurology Fundamentals",
+      "aliases": ["neurology basics", "neurology"],
+      "category": "medicine-system",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "neurology", "brain"],
+      "sources": [
+        {"name": "NINDS Disorders A-Z", "url": "https://www.ninds.nih.gov/health-information/disorders", "type": "government-reference", "priority": 10},
+        {"name": "MSD Manual Professional Neurologic Disorders", "url": "https://www.msdmanuals.com/professional/neurologic-disorders", "type": "professional-manual", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Preventive Medicine and Public Health",
+      "aliases": ["public health", "prevention"],
+      "category": "population-health",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "prevention", "public-health"],
+      "sources": [
+        {"name": "WHO Public Health", "url": "https://www.who.int/health-topics/public-health", "type": "global-guideline", "priority": 10},
+        {"name": "CDC Prevention Guidelines", "url": "https://www.cdc.gov/prevention/index.html", "type": "government-reference", "priority": 9},
+        {"name": "USPSTF Recommendations", "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation-topics/uspstf-and-b-recommendations", "type": "clinical-guideline", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Medical Ethics and Patient Safety",
+      "aliases": ["medical ethics", "patient safety"],
+      "category": "professional-practice",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "ethics", "patient-safety"],
+      "sources": [
+        {"name": "WHO Patient Safety", "url": "https://www.who.int/teams/integrated-health-services/patient-safety", "type": "global-guideline", "priority": 10},
+        {"name": "AMA Code of Medical Ethics", "url": "https://code-medical-ethics.ama-assn.org/", "type": "professional-guideline", "priority": 9},
+        {"name": "AHRQ Patient Safety Network", "url": "https://psnet.ahrq.gov/", "type": "government-reference", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Chronic Disease Management",
+      "aliases": ["chronic disease", "long-term management"],
+      "category": "longitudinal-care",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "chronic-care", "management"],
+      "sources": [
+        {"name": "WHO Noncommunicable Diseases", "url": "https://www.who.int/news-room/fact-sheets/detail/noncommunicable-diseases", "type": "global-guideline", "priority": 9},
+        {"name": "CDC Chronic Disease Center", "url": "https://www.cdc.gov/chronicdisease/index.htm", "type": "government-reference", "priority": 9}
+      ]
+    },
+    {
+      "topic": "Clinical Decision Support and Guidelines",
+      "aliases": ["clinical guidelines", "decision support"],
+      "category": "professional-practice",
+      "proficiency_target": "doctor-level-reference",
+      "tags": ["medicine", "guidelines", "decision-support"],
+      "sources": [
+        {"name": "NICE Guidance", "url": "https://www.nice.org.uk/guidance", "type": "clinical-guideline", "priority": 10},
+        {"name": "CDC Clinical Guidelines", "url": "https://www.cdc.gov/clinical-guidelines/index.html", "type": "government-reference", "priority": 9},
+        {"name": "WHO Guidelines", "url": "https://www.who.int/publications/guidelines", "type": "global-guideline", "priority": 9}
+      ]
+    }
+  ]
+}

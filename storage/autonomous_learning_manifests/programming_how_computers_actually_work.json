@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-06-02T12:53:14Z",
+  "topic": "How Computers Actually Work",
+  "domain": "programming",
+  "sources": {
+    "https://www.nand2tetris.org/": {
+      "name": "Nand2Tetris",
+      "type": "foundational-course",
+      "priority": 9,
+      "hash": "72b2ac9498147045a2c914b0510d1d0c57a7d19aa5c1f3142a1d4d78c5b674ba",
+      "last_learned_at": "2026-06-02T12:53:10Z",
+      "chunks_saved": 1,
+      "title": "Home | nand2tetris"
+    },
+    "https://cs50.harvard.edu/x/": {
+      "name": "CS50 Computer Science Courses",
+      "type": "foundational-course",
+      "priority": 8,
+      "hash": "d7b6d94cdbebcc00865d7425037f2abae6554832adc6c2b81f38c5b67c7eec67",
+      "last_learned_at": "2026-06-02T12:53:13Z",
+      "chunks_saved": 3,
+      "title": "CS50x 2026"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}

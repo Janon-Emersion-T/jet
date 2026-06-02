@@ -56,6 +56,13 @@ from core.models.model_router import detect_model_route, explain_model_route
 from core.models.prompt_templates import load_prompt_templates, save_prompt_templates
 from core.models.model_performance import load_model_performance, benchmark_model
 from core.models.model_router import get_model_with_fallback
+from core.autonomous_learning import (
+    ensure_autonomous_learning_worker,
+    autonomous_learning_status,
+    enable_autonomous_learning,
+    disable_autonomous_learning,
+    run_autonomous_learning_cycle,
+)
 
 
 app = FastAPI(title="JARVIS Local API")
@@ -69,6 +76,7 @@ app.add_middleware(
 )
 
 init_memory()
+ensure_autonomous_learning_worker()
 
 
 class ChatRequest(BaseModel):
@@ -176,6 +184,38 @@ def memory_search(request: SearchMemoryRequest):
 def memory_recent(limit: int = 20):
     return {
         "memories": list_recent_memories(limit=limit)
+    }
+
+
+@app.get("/learning/status")
+def learning_status():
+    return {
+        "status": autonomous_learning_status()
+    }
+
+
+@app.post("/learning/start")
+def learning_start():
+    return {
+        "ok": True,
+        "status": enable_autonomous_learning()
+    }
+
+
+@app.post("/learning/stop")
+def learning_stop():
+    return {
+        "ok": True,
+        "status": disable_autonomous_learning()
+    }
+
+
+@app.post("/learning/run-once")
+def learning_run_once():
+    return {
+        "ok": True,
+        "result": run_autonomous_learning_cycle(),
+        "status": autonomous_learning_status(),
     }
 
 
