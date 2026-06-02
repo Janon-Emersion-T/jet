@@ -295,6 +295,13 @@ def _pending_or_active(state: dict, domain: str) -> list[dict]:
     ]
 
 
+def _find_task_by_id(state: dict, task_id: str) -> dict | None:
+    for task in state.get("schedule", []):
+        if task.get("id") == task_id:
+            return task
+    return None
+
+
 def _recent_completed_topics(state: dict, domain: str, limit: int = 3) -> list[str]:
     return state.get("completed_topics", {}).get(domain, [])[-limit:]
 
@@ -567,6 +574,63 @@ def _run_task(task: dict) -> dict:
     raise RuntimeError(f"Unknown learning task kind: {task['kind']}")
 
 
+def _finalize_task_execution(task: dict, success: bool, result: dict, error_text: str | None = None) -> None:
+    with _WORKER_LOCK:
+        state = _load_state()
+        for item in state.get("schedule", []):
+            if item.get("id") != task["id"]:
+                continue
+            item["status"] = "completed" if success else "failed"
+            item["completed_at"] = _now_iso()
+            item["result"] = result
+            break
+
+        if success and task["kind"] == "learn":
+            completed = state["completed_topics"].setdefault(task["domain"], [])
+            if _normalize(task["topic"]) not in {_normalize(entry) for entry in completed}:
+                completed.append(task["topic"])
+                state["stats"]["topics_learned"] += 1
+
+            # Schedule a compact synthesis after each successful topic.
+            if not _has_task(
+                state,
+                task["domain"],
+                "synthesis",
+                metadata={"topics": [task["topic"]]},
+                topic=task["topic"],
+            ):
+                state["schedule"].append(
+                    _create_task(
+                        task["domain"],
+                        task["topic"],
+                        "synthesis",
+                        f"{task['stage']} Synthesis",
+                        {"topics": [task["topic"]]},
+                    )
+                )
+
+        if success and task["kind"] == "review":
+            state["stats"]["reviews_completed"] += 1
+
+        if success and task["kind"] == "synthesis":
+            state["stats"]["syntheses_completed"] += 1
+
+        if success:
+            state["stats"]["tasks_completed"] += 1
+        else:
+            state["stats"]["errors"] += 1
+            _append_jsonl(LOG_FILE, {
+                "type": "learning_task_error",
+                "task": task,
+                "error": error_text,
+                "completed_at": _now_iso(),
+            })
+
+        state["current_task_id"] = None
+        _ensure_schedule(state)
+        _save_state(state)
+
+
 def autonomous_learning_status() -> str:
     state = _load_state()
     if _ensure_schedule(state):
@@ -759,63 +823,59 @@ def run_autonomous_learning_cycle() -> dict | None:
         result = {"errors": [str(exc)]}
         success = False
         error_text = str(exc)
+    _finalize_task_execution(task, success, result, error_text=error_text)
+
+    return result
+
+
+def run_manual_learning_task(task_id: str) -> dict:
+    clean_task_id = (task_id or "").strip()
+    if not clean_task_id:
+        return {"ok": False, "error": "Task id is required."}
 
     with _WORKER_LOCK:
         state = _load_state()
-        for item in state.get("schedule", []):
-            if item.get("id") != task["id"]:
-                continue
-            item["status"] = "completed" if success else "failed"
-            item["completed_at"] = _now_iso()
-            item["result"] = result
-            break
+        task = _find_task_by_id(state, clean_task_id)
+        if task is None:
+            return {"ok": False, "error": "Selected topic is no longer in the queue."}
+        if task.get("status") == "completed":
+            return {"ok": False, "error": "Selected topic has already been completed."}
+        if task.get("status") == "in_progress":
+            return {"ok": False, "error": "Selected topic is already in progress."}
 
-        if success and task["kind"] == "learn":
-            completed = state["completed_topics"].setdefault(task["domain"], [])
-            if _normalize(task["topic"]) not in {_normalize(entry) for entry in completed}:
-                completed.append(task["topic"])
-                state["stats"]["topics_learned"] += 1
-
-            # Schedule a compact synthesis after each successful topic.
-            if not _has_task(
-                state,
-                task["domain"],
-                "synthesis",
-                metadata={"topics": [task["topic"]]},
-                topic=task["topic"],
-            ):
-                state["schedule"].append(
-                    _create_task(
-                        task["domain"],
-                        task["topic"],
-                        "synthesis",
-                        f"{task['stage']} Synthesis",
-                        {"topics": [task["topic"]]},
-                    )
-                )
-
-        if success and task["kind"] == "review":
-            state["stats"]["reviews_completed"] += 1
-
-        if success and task["kind"] == "synthesis":
-            state["stats"]["syntheses_completed"] += 1
-
-        if success:
-            state["stats"]["tasks_completed"] += 1
-        else:
-            state["stats"]["errors"] += 1
-            _append_jsonl(LOG_FILE, {
-                "type": "learning_task_error",
-                "task": task,
-                "error": error_text,
-                "completed_at": _now_iso(),
-            })
-
-        state["current_task_id"] = None
-        _ensure_schedule(state)
+        task["status"] = "in_progress"
+        task["started_at"] = _now_iso()
+        state["current_task_id"] = task["id"]
+        state["last_cycle_at"] = _now_iso()
         _save_state(state)
 
-    return result
+    try:
+        result = _run_task(task)
+        success = True
+        error_text = None
+    except Exception as exc:
+        result = {"errors": [str(exc)]}
+        success = False
+        error_text = str(exc)
+
+    _finalize_task_execution(task, success, result, error_text=error_text)
+
+    overview = get_autonomous_learning_overview(limit=12)
+    return {
+        "ok": success,
+        "task": {
+            "id": task.get("id"),
+            "domain": task.get("domain"),
+            "topic": task.get("topic"),
+            "kind": task.get("kind"),
+            "stage": task.get("stage"),
+            "status": "completed" if success else "failed",
+        },
+        "result": result,
+        "error": error_text,
+        "overview": overview,
+        "status": autonomous_learning_status(),
+    }
 
 
 def _worker_loop() -> None:

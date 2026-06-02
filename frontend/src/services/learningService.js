@@ -23,3 +23,7 @@ export async function runLearningCycle() {
 export async function runLearningBurst(maxCycles = 4) {
   return await apiPost(`/learning/burst?max_cycles=${maxCycles}`, {});
 }
+
+export async function runManualLearning(taskId) {
+  return await apiPost("/learning/manual-run", { task_id: taskId });
+}

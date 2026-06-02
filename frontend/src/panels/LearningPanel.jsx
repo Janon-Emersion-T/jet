@@ -11,7 +11,6 @@ import {
   WandSparkles,
   Gauge,
   Radar,
-  ArrowRight,
 } from "lucide-react";
 
 import Panel from "../components/Panel";
@@ -19,6 +18,7 @@ import {
   getLearningOverview,
   runLearningBurst,
   runLearningCycle,
+  runManualLearning,
   startLearning,
   stopLearning,
 } from "../services/learningService";
@@ -67,6 +67,46 @@ function summarizeBurstResult(result) {
   ].join("\n\n");
 }
 
+function summarizeManualResult(result) {
+  if (!result) return "Manual learning completed.";
+
+  const task = result.task || {};
+  const payload = result.result || {};
+  const lines = [
+    result.ok ? "MANUAL LEARNING COMPLETE" : "MANUAL LEARNING STOPPED",
+    [task.domain, task.kind, task.topic].filter(Boolean).join(" · "),
+  ].filter(Boolean);
+
+  if (payload.summary) {
+    lines.push(payload.summary);
+  } else {
+    const details = [];
+    if (payload.topic) details.push(`Topic: ${payload.topic}`);
+    if (payload.sources_updated != null) details.push(`Sources updated: ${payload.sources_updated}`);
+    if (payload.sources_skipped != null) details.push(`Sources skipped: ${payload.sources_skipped}`);
+    if (payload.memory_chunks_saved != null) details.push(`Memory chunks saved: ${payload.memory_chunks_saved}`);
+    if (payload.errors && payload.errors.length > 0) details.push(`Errors: ${payload.errors.join(" | ")}`);
+    if (details.length > 0) {
+      lines.push(details.join("\n"));
+    } else {
+      lines.push(JSON.stringify(payload, null, 2));
+    }
+  }
+
+  if (!result.ok && result.error) {
+    lines.push(`Error: ${result.error}`);
+  }
+
+  return lines.join("\n\n");
+}
+
+function buildConsoleLines(text) {
+  return String(text || "")
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .filter((line) => line.length > 0);
+}
+
 function buildLearningLines(overview, events) {
   const completedTopics = overview?.completed_topics || {};
   const lines = [];
@@ -106,6 +146,7 @@ export default function LearningPanel() {
   const [autoAdvancing, setAutoAdvancing] = useState(false);
   const [autoAdvance, setAutoAdvance] = useState(true);
   const [lastRefreshedAt, setLastRefreshedAt] = useState("");
+  const [selectedTaskId, setSelectedTaskId] = useState("");
 
   const autoBurstCooldownRef = useRef(0);
   const mountedRef = useRef(true);
@@ -130,6 +171,22 @@ export default function LearningPanel() {
     () => buildLearningLines(overview, events),
     [overview, events]
   );
+  const selectedTask = useMemo(() => {
+    if (queue.length === 0) {
+      return null;
+    }
+
+    return (
+      queue.find((task) => task.id === selectedTaskId) ||
+      queue[0] ||
+      null
+    );
+  }, [queue, selectedTaskId]);
+
+  const consoleLines = useMemo(
+    () => buildConsoleLines(response || overview?.status_text || "Jarvis learning status will appear here."),
+    [response, overview]
+  );
 
   useEffect(() => {
     autoAdvanceRef.current = autoAdvance;
@@ -142,6 +199,20 @@ export default function LearningPanel() {
   useEffect(() => {
     autoAdvancingRef.current = autoAdvancing;
   }, [autoAdvancing]);
+
+  useEffect(() => {
+    if (queue.length === 0) {
+      if (selectedTaskId) {
+        setSelectedTaskId("");
+      }
+      return;
+    }
+
+    const selectedStillExists = queue.some((task) => task.id === selectedTaskId);
+    if (!selectedTaskId || !selectedStillExists) {
+      setSelectedTaskId(queue[0].id);
+    }
+  }, [queue, selectedTaskId]);
 
   const refreshOverview = useCallback(
     async ({ allowAutoBurst = true } = {}) => {
@@ -266,6 +337,39 @@ export default function LearningPanel() {
     }
   }
 
+  async function handleManualRun() {
+    if (!selectedTask || isWorking || activeLearning) {
+      return;
+    }
+
+    busyRef.current = true;
+    setBusy(true);
+    setResponse("");
+
+    try {
+      const data = await runManualLearning(selectedTask.id);
+      const text =
+        summarizeManualResult(data) ||
+        data?.status ||
+        data?.message ||
+        JSON.stringify(data, null, 2);
+
+      setResponse(text);
+
+      if (data?.overview) {
+        setOverview(data.overview);
+        setLastRefreshedAt(new Date().toISOString());
+      } else {
+        await refreshOverview({ allowAutoBurst: false });
+      }
+    } catch (error) {
+      setResponse(error.message);
+    } finally {
+      busyRef.current = false;
+      setBusy(false);
+    }
+  }
+
   async function handleCommandSubmit(event) {
     event.preventDefault();
     const trimmed = command.trim();
@@ -304,7 +408,7 @@ export default function LearningPanel() {
               <p className="eyebrow">AUTONOMOUS MEMORY + CURRICULUM</p>
               <h2>Jarvis Learning Workspace</h2>
               <p className="learning-subtitle">
-                Track what Jarvis is learning, queue new topics, and let the curriculum advance automatically in the background.
+                Track what Jarvis is learning, queue new topics, and switch into manual mode when you want to drive a single topic yourself.
               </p>
             </div>
 
@@ -392,6 +496,33 @@ export default function LearningPanel() {
           </button>
         </form>
 
+        <div className={`learning-manual-strip ${activeLearning ? "locked" : "ready"}`}>
+          <div className="learning-manual-copy">
+            <div className="mini-heading">
+              <Sparkles size={16} />
+              Manual learning
+              <span className={`learning-manual-badge ${activeLearning ? "locked" : "ready"}`}>
+                {activeLearning ? "Pause required" : "Ready"}
+              </span>
+            </div>
+            <strong>{selectedTask?.topic || "Select a topic from the queue"}</strong>
+            <p>
+              {selectedTask
+                ? `${selectedTask.domain} · ${selectedTask.kind} · ${selectedTask.stage}`
+                : "Stop learning, choose one queued topic, then push it through manually."}
+            </p>
+          </div>
+          <button
+            type="button"
+            className="learning-manual-action"
+            onClick={handleManualRun}
+            disabled={isWorking || activeLearning || !selectedTask}
+          >
+            <Play size={16} />
+            Push to learn
+          </button>
+        </div>
+
         <div className="learning-stat-grid learning-stat-grid-inline">
           <StatCard label="Tasks Completed" value={stats.tasks_completed ?? 0} />
           <StatCard label="Topics Learned" value={stats.topics_learned ?? 0} />
@@ -409,17 +540,19 @@ export default function LearningPanel() {
                   <Activity size={16} />
                   Next to learn
                 </div>
-                <p>These are the next topics queued for autonomous learning.</p>
+                <p>Choose a queued topic. When learning is paused, the selected one can be pushed manually.</p>
               </div>
-              <button
-                type="button"
-                className="learning-inline-action"
-                onClick={() => handleAction("start")}
-                disabled={isWorking || activeLearning}
-              >
-                <Play size={14} />
-                Start learning
-              </button>
+              <div className="learning-card-header-actions">
+                <button
+                  type="button"
+                  className="learning-inline-action"
+                  onClick={() => handleAction("start")}
+                  disabled={isWorking || activeLearning}
+                >
+                  <Play size={14} />
+                  Start learning
+                </button>
+              </div>
             </div>
             <div className="learning-queue learning-scroll learning-next-list">
               {queue.length === 0 && (
@@ -429,14 +562,21 @@ export default function LearningPanel() {
                 </div>
               )}
               {queue.map((task, index) => (
-                <div className="learning-next-item" key={task.id}>
+                <button
+                  type="button"
+                  className={`learning-next-item ${selectedTask?.id === task.id ? "selected" : ""}`}
+                  key={task.id}
+                  onClick={() => setSelectedTaskId(task.id)}
+                >
                   <div className="learning-next-index">{String(index + 1).padStart(2, "0")}</div>
                   <div className="learning-next-copy">
                     <strong>{task.topic}</strong>
                     <span>{task.domain} · {task.kind} · {task.stage}</span>
                   </div>
-                  <ArrowRight size={16} className="learning-next-arrow" />
-                </div>
+                  <div className="learning-next-flag">
+                    {selectedTask?.id === task.id ? "Selected" : "Select"}
+                  </div>
+                </button>
               ))}
             </div>
           </section>
@@ -448,11 +588,17 @@ export default function LearningPanel() {
                 Learning progress
                 <span className="learning-live-chip">Live</span>
               </div>
-              <p>What Jarvis has learned, line by line, as the curriculum advances.</p>
+              <p>Live console output and a line-by-line memory trail of what Jarvis has learned.</p>
             </div>
-            <div className="learning-live-banner">
+            <div className="learning-live-banner learning-console">
               <SquareTerminal size={14} />
-              <span>{response || overview?.status_text || "Jarvis learning status will appear here."}</span>
+              <div className="learning-console-lines">
+                {consoleLines.map((line, index) => (
+                  <div className="learning-console-line" key={`${line}-${index}`}>
+                    {line}
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="learning-events learning-scroll learning-progress-feed">
               {learningLines.length === 0 && (

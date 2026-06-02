@@ -64,6 +64,7 @@ from core.autonomous_learning import (
     disable_autonomous_learning,
     run_autonomous_learning_cycle,
     run_autonomous_learning_burst,
+    run_manual_learning_task,
 )
 
 
@@ -96,6 +97,10 @@ class CommandRequest(BaseModel):
     command: str
     save_to_memory: bool = True
     source: str = "panel"
+
+
+class ManualLearningRequest(BaseModel):
+    task_id: str
 
 
 class ProjectRequest(BaseModel):
@@ -232,6 +237,11 @@ def learning_burst(max_cycles: int = 4):
         "ok": True,
         "result": run_autonomous_learning_burst(max_cycles=max_cycles),
     }
+
+
+@app.post("/learning/manual-run")
+def learning_manual_run(request: ManualLearningRequest):
+    return run_manual_learning_task(request.task_id)
 
 
 @app.post("/command")
