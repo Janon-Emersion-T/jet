@@ -23,6 +23,7 @@ MEDICAL_CATALOG_FILE = Path("data/medical_learning_catalog.json")
 DEFAULT_CYCLE_INTERVAL_SECONDS = 180
 MAX_BURST_CYCLES = 4
 DISCOVERY_BATCH_SIZE = 2
+STALE_TASK_TIMEOUT_SECONDS = 15 * 60
 
 DOMAIN_PROFILES = {
     "programming": {
@@ -163,6 +164,17 @@ def _normalize(text: str) -> str:
     return " ".join((text or "").lower().strip().split())
 
 
+def _timestamp_from_iso(value: str | None) -> float | None:
+    if not value:
+        return None
+
+    try:
+        normalized = value[:-1] + "+00:00" if value.endswith("Z") else value
+        return datetime.fromisoformat(normalized).timestamp()
+    except Exception:
+        return None
+
+
 def _slugify(text: str) -> str:
     return pkt._slugify(text)
 
@@ -201,6 +213,8 @@ def _load_state() -> dict:
         "medicine": int(state.get("domain_stage_index", {}).get("medicine", 0)),
     }
     merged["stats"].update(state.get("stats", {}))
+    if _recover_stale_tasks(merged):
+        _save_state(merged)
     return merged
 
 
@@ -334,6 +348,7 @@ def _has_task(state: dict, domain: str, kind: str, metadata: dict | None = None,
 
 
 def _pending_or_active(state: dict, domain: str) -> list[dict]:
+    _recover_stale_tasks(state)
     return [
         task for task in state.get("schedule", [])
         if task.get("domain") == domain and task.get("status") in {"pending", "in_progress"}
@@ -349,6 +364,45 @@ def _find_task_by_id(state: dict, task_id: str) -> dict | None:
 
 def _topic_is_queued(state: dict, domain: str, topic: str, kind: str = "learn") -> bool:
     return _has_task(state, domain, kind, metadata=None, topic=topic)
+
+
+def _recover_stale_tasks(state: dict) -> bool:
+    now = time.time()
+    recovered: list[dict] = []
+
+    for task in state.get("schedule", []):
+        if task.get("status") != "in_progress":
+            continue
+
+        started_at = _timestamp_from_iso(task.get("started_at"))
+        if started_at is not None and (now - started_at) < STALE_TASK_TIMEOUT_SECONDS:
+            continue
+
+        task["status"] = "pending"
+        task["started_at"] = None
+        task["completed_at"] = None
+        task["recovered_at"] = _now_iso()
+        recovered.append(task)
+
+    if not recovered:
+        return False
+
+    if state.get("current_task_id") and not any(
+        task.get("id") == state.get("current_task_id") and task.get("status") == "in_progress"
+        for task in state.get("schedule", [])
+    ):
+        state["current_task_id"] = None
+
+    _append_jsonl(
+        LOG_FILE,
+        {
+            "type": "learning_task_recovered",
+            "count": len(recovered),
+            "task_ids": [task.get("id") for task in recovered],
+            "recovered_at": _now_iso(),
+        },
+    )
+    return True
 
 
 def _recent_completed_topics(state: dict, domain: str, limit: int = 3) -> list[str]:
@@ -632,6 +686,7 @@ def _create_manual_learning_task(domain: str, topic: str, kind: str = "learn", s
 def _finalize_task_execution(task: dict, success: bool, result: dict, error_text: str | None = None) -> None:
     with _WORKER_LOCK:
         state = _load_state()
+        _recover_stale_tasks(state)
         for item in state.get("schedule", []):
             if item.get("id") != task["id"]:
                 continue
@@ -688,6 +743,7 @@ def _finalize_task_execution(task: dict, success: bool, result: dict, error_text
 
 def autonomous_learning_status() -> str:
     state = _load_state()
+    _recover_stale_tasks(state)
     if _ensure_schedule(state):
         _save_state(state)
     lines = [
@@ -750,6 +806,7 @@ def _recent_learning_events(limit: int = 12) -> list[dict]:
 
 def get_autonomous_learning_overview(limit: int = 12) -> dict:
     state = _load_state()
+    _recover_stale_tasks(state)
     _ensure_schedule(state)
     _save_state(state)
 
@@ -855,6 +912,7 @@ def disable_autonomous_learning() -> str:
 def run_autonomous_learning_cycle() -> dict | None:
     with _WORKER_LOCK:
         state = _load_state()
+        _recover_stale_tasks(state)
         if not state.get("enabled", True):
             return None
 
@@ -900,6 +958,7 @@ def run_manual_learning_task(
 
     with _WORKER_LOCK:
         state = _load_state()
+        _recover_stale_tasks(state)
 
         if state.get("enabled", True):
             return {"ok": False, "error": "Pause learning before using manual learning."}
@@ -991,6 +1050,7 @@ def _worker_loop() -> None:
             })
 
         state = _load_state()
+        _recover_stale_tasks(state)
         delay = int(state.get("cycle_interval_seconds", DEFAULT_CYCLE_INTERVAL_SECONDS))
         queue_depth = len(
             [
@@ -1011,6 +1071,7 @@ def ensure_autonomous_learning_worker() -> None:
 
     with _WORKER_LOCK:
         state = _load_state()
+        _recover_stale_tasks(state)
         _ensure_schedule(state)
         _save_state(state)
 
