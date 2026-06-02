@@ -345,3 +345,124 @@ def cross_platform_build_helper():
     output.append("\nRecommendation:")
     output.append("- Prefer Node-based scripts, cross-env, rimraf, and path-safe tooling for Windows/Linux/macOS compatibility.")
     return "\n".join(output)
+
+
+def frontend_excellence_audit():
+    project, error = _project()
+    if error:
+        return error
+
+    deps = _deps(project)
+    package = _package(project)
+    scripts = package.get("scripts", {})
+    files = _files(project, {".jsx", ".tsx", ".js", ".ts", ".vue", ".astro", ".blade.php"})
+
+    score = 100
+    findings = []
+    strengths = []
+
+    if any(key in deps for key in ["tailwindcss", "react", "vue", "next", "astro"]):
+        strengths.append("Modern frontend stack detected.")
+    else:
+        score -= 10
+        findings.append("Modern frontend framework signals are weak or missing.")
+
+    if "build" in scripts:
+        strengths.append("A production build script exists.")
+    else:
+        score -= 8
+        findings.append("No obvious production build script found in package.json.")
+
+    design_token_signals = 0
+    motion_signals = 0
+    a11y_signals = 0
+    large_component_risks = 0
+
+    for file in files:
+        text = _read(file)
+        lines = len(text.splitlines())
+        if lines > 280:
+            large_component_risks += 1
+        if any(token in text for token in ["--color", "--font", "--spacing", "@theme", ":root"]):
+            design_token_signals += 1
+        if any(token in text for token in ["focus-visible", "aria-", "sr-only", "aria-label"]):
+            a11y_signals += 1
+        if any(token in text for token in ["framer-motion", "motion.", "transition", "animate-"]):
+            motion_signals += 1
+
+    if design_token_signals == 0:
+        score -= 12
+        findings.append("No strong design token system detected. Use variables or theme tokens instead of ad hoc styling.")
+    else:
+        strengths.append("Design token or theming signals exist.")
+
+    if a11y_signals == 0:
+        score -= 8
+        findings.append("Accessibility signals are light. Add focus-visible states, labels, and keyboard-friendly UI patterns.")
+    else:
+        strengths.append("Accessibility-conscious patterns are present.")
+
+    if large_component_risks >= 3:
+        score -= 12
+        findings.append(f"{large_component_risks} large component files detected. Consider splitting layout, logic, and section components.")
+    elif large_component_risks:
+        score -= 4
+        findings.append(f"{large_component_risks} oversized component file(s) detected.")
+
+    if motion_signals:
+        strengths.append("Motion/interaction patterns are present.")
+    else:
+        findings.append("Motion direction looks minimal. Consider purposeful page transitions, staggered reveals, and state transitions where useful.")
+
+    score = max(score, 40)
+
+    return "\n".join([
+        "FRONTEND EXCELLENCE AUDIT",
+        f"Project: {project}",
+        f"Score: {score}/100",
+        "",
+        "Strengths:",
+        *([f"- {item}" for item in strengths] or ["- No major strengths detected yet."]),
+        "",
+        "Upgrade priorities:",
+        *([f"- {item}" for item in findings] or ["- No major excellence risks detected."]),
+        "",
+        "Best-of-the-best standard:",
+        "- Strong design tokens and reusable primitives",
+        "- Accessibility visible in the code, not added later",
+        "- Responsive layouts that feel intentional on mobile and desktop",
+        "- Meaningful motion and hierarchy, not template-looking UI",
+        "- Component boundaries that keep styling and behavior maintainable",
+    ])
+
+
+def frontend_system_blueprint():
+    project, error = _project()
+    if error:
+        return error
+
+    deps = _deps(project)
+    stack = []
+    for key in ["react", "next", "vue", "astro", "tailwindcss", "framer-motion"]:
+        if key in deps:
+            stack.append(key)
+
+    return "\n".join([
+        "FRONTEND SYSTEM BLUEPRINT",
+        f"Project: {project}",
+        f"Detected stack: {', '.join(stack) if stack else 'generic frontend'}",
+        "",
+        "Recommended system layers:",
+        "1. Foundations: colors, type scale, spacing, radius, shadow, motion, grid tokens",
+        "2. Primitives: button, input, textarea, card, badge, heading, section shell",
+        "3. Composition blocks: hero, feature grid, testimonial rail, CTA band, dashboard shell",
+        "4. States: loading, empty, error, success, disabled, skeleton",
+        "5. Editorial system: image ratios, caption styles, rich text spacing, metadata rows",
+        "",
+        "Implementation direction:",
+        "- Keep one visual language per product area.",
+        "- Promote repeated Tailwind utilities into components or variants.",
+        "- Prefer tokenized color and spacing over arbitrary one-off values.",
+        "- Reserve bold gradients and motion for emphasis, not every surface.",
+        "- Make mobile layouts feel designed first, then expand for desktop.",
+    ])

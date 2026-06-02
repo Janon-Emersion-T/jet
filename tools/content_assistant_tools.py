@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 
 
 BRAND_CONTEXT = """
@@ -16,6 +17,11 @@ def _clean_topic(topic: str) -> str:
 def _company_slug(name: str) -> str:
     cleaned = " ".join((name or "").split()).strip()
     return cleaned if cleaned else "Your Company"
+
+
+def _slugify_topic(value: str) -> str:
+    cleaned = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return cleaned or "brand-story"
 
 
 def website_content_pack(company_name: str, focus: str | None = None) -> dict:
@@ -52,7 +58,179 @@ def website_content_pack(company_name: str, focus: str | None = None) -> dict:
             f"{company_name} works best with organisations that want to build meaningful capability, not just deliver a one-off presentation. "
             "Use this page to start conversations about workshops, advisory work, speaking, curriculum design, and partnerships."
         ),
+        "brand_promise": "Serious learning systems designed with clarity, structure, and real-world transfer in mind.",
+        "tone_words": ["clear", "credible", "structured", "warm", "practical", "premium"],
+        "visual_direction": "Editorial clarity, premium institutional confidence, layered layouts, restrained motion, and purposeful typography.",
+        "content_pillars": [
+            "Learning strategy and program design",
+            "Resource persons and expert facilitation",
+            "Institutional partnerships and consulting",
+            "Media, publishing, and knowledge assets",
+            "Professional development and capability building",
+        ],
+        "cta_messages": [
+            "Book a consultation",
+            "Plan a workshop series",
+            "Invite a resource person",
+            "Build a learning system",
+        ],
+        "unsplash_queries": [
+            "education workshop professionals",
+            "speaker audience seminar",
+            "team learning strategy",
+            "modern library study collaboration",
+            "professional training session",
+        ],
+        "page_angles": {
+            "home": "Lead with trust, structure, and ambitious outcomes.",
+            "about": "Explain the operating philosophy behind the company.",
+            "media": "Show that content and events extend the life of teaching.",
+            "blog": "Frame publishing as thoughtful, useful, and domain-driven.",
+            "contact": "Make outreach feel easy, serious, and partnership-ready.",
+        },
     }
+
+
+def brand_voice_blueprint(company_name: str, focus: str | None = None) -> str:
+    company_name = _company_slug(company_name)
+    pack = website_content_pack(company_name, focus=focus)
+
+    return f"""BRAND VOICE BLUEPRINT
+
+Company:
+{company_name}
+
+Core promise:
+{pack["brand_promise"]}
+
+Voice attributes:
+- {", ".join(pack["tone_words"])}
+
+Voice rules:
+- Sound like an experienced operator, not a hype machine.
+- Explain difficult ideas simply without flattening nuance.
+- Prefer confidence, clarity, and practical specificity.
+- Lead with the reader's problem before the company's offer.
+- Make every CTA feel like a professional next step, not a sales shove.
+
+Messaging priorities:
+1. Structure beats chaos.
+2. Expertise should feel usable, not intimidating.
+3. Learning should transfer into real outcomes.
+4. Trust is built through clarity, proof, and consistency.
+
+Avoid:
+- Empty superlatives.
+- Generic corporate filler.
+- Trendy phrases that weaken credibility.
+- Overly academic wording that slows readability.
+"""
+
+
+def content_system_pack(company_name: str, focus: str | None = None) -> str:
+    company_name = _company_slug(company_name)
+    pack = website_content_pack(company_name, focus=focus)
+    slug = _slugify_topic(company_name)
+
+    unsplash_links = [
+        f"https://unsplash.com/s/photos/{query.replace(' ', '-')}"
+        for query in pack["unsplash_queries"]
+    ]
+
+    return f"""CONTENT SYSTEM PACK
+
+Company:
+{company_name}
+
+Brand promise:
+{pack["brand_promise"]}
+
+Visual direction:
+{pack["visual_direction"]}
+
+Content pillars:
+- {pack["content_pillars"][0]}
+- {pack["content_pillars"][1]}
+- {pack["content_pillars"][2]}
+- {pack["content_pillars"][3]}
+- {pack["content_pillars"][4]}
+
+Page strategy:
+- Home: {pack["page_angles"]["home"]}
+- About: {pack["page_angles"]["about"]}
+- Media: {pack["page_angles"]["media"]}
+- Blog: {pack["page_angles"]["blog"]}
+- Contact: {pack["page_angles"]["contact"]}
+
+Recommended CTA system:
+- {pack["cta_messages"][0]}
+- {pack["cta_messages"][1]}
+- {pack["cta_messages"][2]}
+- {pack["cta_messages"][3]}
+
+Editorial series ideas:
+1. {company_name} Field Notes
+2. The {company_name} Playbook
+3. Lessons from the Learning Room
+4. Expert Resource Person Series
+5. Strategy Briefs for Institutions
+
+Image sourcing plan:
+- Use candid, high-trust editorial photography over generic office stock.
+- Prefer real people teaching, collaborating, presenting, or documenting ideas.
+- Use wide establishing images for hero sections and tighter detail shots inside content.
+- Keep color grading natural and premium, not oversaturated.
+
+Unsplash sourcing shortcuts:
+- {unsplash_links[0]}
+- {unsplash_links[1]}
+- {unsplash_links[2]}
+- {unsplash_links[3]}
+- {unsplash_links[4]}
+
+Suggested content slugs:
+- /insights/{slug}-field-notes
+- /insights/{slug}-playbook
+- /media/{slug}-resource-library
+"""
+
+
+def unsplash_image_plan(topic: str) -> str:
+    topic = _clean_topic(topic)
+    slug = _slugify_topic(topic)
+    queries = [
+        f"{topic} portrait",
+        f"{topic} workshop",
+        f"{topic} team collaboration",
+        f"{topic} conference",
+        f"{topic} editorial",
+    ]
+
+    lines = [
+        "UNSPLASH IMAGE PLAN",
+        "",
+        f"Topic: {topic}",
+        "",
+        "Search queries:",
+    ]
+    lines.extend(f"- {query}" for query in queries)
+    lines.extend([
+        "",
+        "Unsplash links:",
+        *[f"- https://unsplash.com/s/photos/{_slugify_topic(query)}" for query in queries],
+        "",
+        "Selection rules:",
+        "- Prefer human-centered photography over abstract placeholders.",
+        "- Choose images with room for headline overlays when selecting hero visuals.",
+        "- Avoid obvious staged handshake stock imagery.",
+        "- Keep the image set visually consistent in lighting, crop style, and tone.",
+        "",
+        "Asset naming suggestion:",
+        f"- hero-{slug}.jpg",
+        f"- feature-{slug}-01.jpg",
+        f"- feature-{slug}-02.jpg",
+    ])
+    return "\n".join(lines)
 
 
 def blog_idea_generator(topic: str) -> str:
@@ -341,4 +519,7 @@ def content_assistant_help() -> str:
 169. draft client email for <request>
 170. social post for <topic>
 171. website content for <company or brand>
+172. brand voice for <company or brand>
+173. content system for <company or brand>
+174. unsplash plan for <topic or brand>
 """

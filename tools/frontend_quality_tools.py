@@ -385,3 +385,77 @@ def mobile_first_audit() -> str:
         lines.append("No obvious mobile-first risks found.")
 
     return "\n".join(lines)
+
+
+def visual_hierarchy_audit() -> str:
+    project, error = _project()
+    if error:
+        return error
+
+    files = _files(project)
+    issues = []
+    strengths = []
+
+    for path in files:
+        text = _read_text(path)
+        rel = path.relative_to(project)
+
+        if re.search(r"\btext-(xs|sm)\b", text) and not re.search(r"\btext-(4xl|5xl|6xl|7xl)\b", text):
+            issues.append(f"- Weak heading contrast risk: {rel}")
+        if "space-y-" in text or "gap-" in text:
+            strengths.append(f"- Good spacing utilities detected: {rel}")
+        if "bg-" in text and "shadow" in text and "rounded" in text:
+            strengths.append(f"- Surface styling system signal: {rel}")
+
+    strength_lines = strengths[:25] if strengths else ["- No strong hierarchy signals detected yet."]
+    issue_lines = issues[:25] if issues else ["- No obvious hierarchy risks detected."]
+
+    return "\n".join([
+        "VISUAL HIERARCHY AUDIT",
+        "",
+        "Strength signals:",
+        *strength_lines,
+        "",
+        "Potential improvement areas:",
+        *issue_lines,
+        "",
+        "Best practice reminder:",
+        "- Let typography, spacing, and contrast create the first impression before decoration does.",
+    ])
+
+
+def image_readiness_audit() -> str:
+    project, error = _project()
+    if error:
+        return error
+
+    files = _files(project, [".html", ".blade.php", ".jsx", ".tsx", ".vue"])
+    image_signals = 0
+    issues = []
+
+    for path in files:
+        text = _read_text(path)
+        rel = path.relative_to(project)
+        imgs = len(re.findall(r"<img\b", text))
+        image_signals += imgs
+
+        if re.search(r"<img(?![^>]*alt=)", text, re.I):
+            issues.append(f"- Missing alt text risk: {rel}")
+        if re.search(r"<img(?![^>]*loading=)", text, re.I):
+            issues.append(f"- Missing loading strategy on image tag: {rel}")
+        if "unsplash.com" in text:
+            issues.append(f"- Direct Unsplash source detected. Consider downloading/optimizing stable assets later: {rel}")
+
+    issue_lines = issues[:40] if issues else ["- No obvious image-readiness issues detected."]
+
+    return "\n".join([
+        "IMAGE READINESS AUDIT",
+        f"Image tag signals detected: {image_signals}",
+        "",
+        "Findings:",
+        *issue_lines,
+        "",
+        "Current direction:",
+        "- Unsplash is fine for sourcing and exploration.",
+        "- Move important production assets into your own optimized image pipeline later.",
+    ])

@@ -765,8 +765,9 @@ ROUTE_MODULES = [
         domain="frontend",
         handler=handle_frontend_platform_routes,
         description="Handle frontend platform tasks.",
-        keywords=["frontend", "ui", "layout", "component", "responsive", "tailwind", "css"],
+        keywords=["frontend", "ui", "layout", "component", "responsive", "tailwind", "css", "design system", "frontend audit", "premium frontend", "visual hierarchy"],
         intents=["frontend"],
+        examples=["frontend excellence audit", "design system blueprint", "make the frontend best of the best"],
     ),
 
     RouteModule(
@@ -774,8 +775,9 @@ ROUTE_MODULES = [
         domain="frontend",
         handler=handle_frontend_quality_routes,
         description="Audit frontend quality, responsiveness, accessibility, SEO, and UX.",
-        keywords=["frontend quality", "responsive", "accessibility", "ux", "ui audit", "seo html"],
+        keywords=["frontend quality", "responsive", "accessibility", "ux", "ui audit", "seo html", "image audit", "visual hierarchy", "mobile first"],
         intents=["frontend_quality"],
+        examples=["visual hierarchy audit", "image readiness audit", "mobile first audit"],
     ),
 
     RouteModule(
@@ -895,9 +897,9 @@ ROUTE_MODULES = [
         domain="marketing",
         handler=handle_content_assistant_routes,
         description="Create content, captions, blogs, and marketing copy.",
-        keywords=["content", "caption", "blog", "copywriting", "post", "website content", "brand copy", "landing page copy"],
+        keywords=["content", "caption", "blog", "copywriting", "post", "website content", "brand copy", "landing page copy", "brand voice", "content system", "unsplash", "image sourcing"],
         intents=["content"],
-        examples=["website content for center for systematic learning", "write brand copy for our website"],
+        examples=["website content for center for systematic learning", "write brand copy for our website", "brand voice for center for systematic learning", "content system for our company", "unsplash plan for our landing page"],
     ),
 
     RouteModule(

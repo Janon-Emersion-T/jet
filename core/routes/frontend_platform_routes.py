@@ -9,6 +9,8 @@ from tools.frontend_platform_tools import (
     nextjs_analyzer,
     electron_packaging_assistant,
     cross_platform_build_helper,
+    frontend_excellence_audit,
+    frontend_system_blueprint,
 )
 
 
@@ -43,6 +45,16 @@ def handle_frontend_platform_routes(user_input: str, text: str, clean_text: str)
     if text in ["cross platform build helper", "cross-platform build helper"]:
         return cross_platform_build_helper()
 
+    if text in ["frontend excellence audit", "frontend engineer audit", "frontend excellence"] or (
+        "frontend" in text and any(phrase in text for phrase in ["best of the best", "excellence", "world class", "industry standard"])
+    ):
+        return frontend_excellence_audit()
+
+    if text in ["frontend system blueprint", "frontend blueprint", "design system blueprint"] or (
+        "frontend" in text and "blueprint" in text
+    ) or "design system blueprint" in text:
+        return frontend_system_blueprint()
+
     if text in ["frontend platform help", "281 290 help", "phases 281 290"]:
         return """FRONTEND / PLATFORM COMMANDS — PHASES 281–290
 
@@ -55,6 +67,8 @@ def handle_frontend_platform_routes(user_input: str, text: str, clean_text: str)
 287. astro project analyzer
 288. nextjs analyzer
 289. electron packaging assistant
-290. cross platform build helper"""
+290. cross platform build helper
+291. frontend excellence audit
+292. frontend system blueprint"""
 
     return None

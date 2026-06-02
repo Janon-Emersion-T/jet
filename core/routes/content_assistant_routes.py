@@ -10,6 +10,9 @@ from tools.content_assistant_tools import (
     client_email_draft_mode,
     social_post_generator,
     website_content_pack,
+    brand_voice_blueprint,
+    content_system_pack,
+    unsplash_image_plan,
     content_assistant_help,
 )
 
@@ -71,5 +74,17 @@ def handle_content_assistant_routes(user_input: str, text: str, clean_text: str)
             f"Blogs intro:\n{pack['blogs_intro']}\n\n"
             f"Contact intro:\n{pack['contact_intro']}"
         )
+
+    if text.startswith("brand voice for ") or text.startswith("create brand voice for "):
+        company = user_input.replace("create brand voice for ", "", 1).replace("brand voice for ", "", 1).strip()
+        return brand_voice_blueprint(company)
+
+    if text.startswith("content system for ") or text.startswith("create content system for "):
+        company = user_input.replace("create content system for ", "", 1).replace("content system for ", "", 1).strip()
+        return content_system_pack(company)
+
+    if text.startswith("unsplash plan for ") or text.startswith("image sourcing plan for "):
+        topic = user_input.replace("image sourcing plan for ", "", 1).replace("unsplash plan for ", "", 1).strip()
+        return unsplash_image_plan(topic)
 
     return None

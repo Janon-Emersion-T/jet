@@ -9,6 +9,8 @@ from tools.frontend_quality_tools import (
     color_contrast_analyzer,
     responsive_layout_analyzer,
     mobile_first_audit,
+    visual_hierarchy_audit,
+    image_readiness_audit,
 )
 
 
@@ -42,5 +44,13 @@ def handle_frontend_quality_routes(user_input: str, text: str, clean_text: str):
 
     if text == "mobile-first audit" or text == "mobile first audit":
         return mobile_first_audit()
+
+    if text in ["visual hierarchy audit", "visual hierarchy"] or "visual hierarchy" in text:
+        return visual_hierarchy_audit()
+
+    if text in ["image readiness audit", "frontend image audit"] or (
+        "image" in text and any(phrase in text for phrase in ["readiness", "frontend audit", "unsplash", "image audit"])
+    ):
+        return image_readiness_audit()
 
     return None

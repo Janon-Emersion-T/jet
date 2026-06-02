@@ -63,14 +63,14 @@ AGENTS: Dict[str, AgentProfile] = {
     "peter": AgentProfile(
         key="peter",
         name="Peter",
-        title="Frontend Developer",
+        title="Frontend Experience Engineer",
         universe="Marvel",
         department="frontend",
-        objective="Builds UI, frontend components, HTML, CSS, Tailwind, React, responsive layouts, and user interfaces.",
+        objective="Builds premium, modern frontend systems with strong visual hierarchy, responsive behavior, accessibility, design tokens, reusable components, and product-grade UI execution.",
         route_names=["html_knowledge", "css_knowledge", "frontend_platform", "frontend_quality", "developer_setup"],
         domains=["frontend"],
         intents=["frontend", "html_knowledge", "css_knowledge", "frontend_html", "frontend_css"],
-        keywords=["html", "css", "tailwind", "react", "frontend", "ui", "component", "responsive", "website", "landing page", "blade", "page"],
+        keywords=["html", "css", "tailwind", "react", "frontend", "ui", "component", "responsive", "website", "landing page", "blade", "page", "design system", "ux", "accessibility", "visual hierarchy", "premium frontend"],
     ),
 
     "shuri": AgentProfile(
@@ -175,14 +175,14 @@ AGENTS: Dict[str, AgentProfile] = {
     "natasha": AgentProfile(
         key="natasha",
         name="Natasha",
-        title="Social Media & Communication Strategist",
+        title="Content Strategy & Brand Narrative Lead",
         universe="Marvel",
         department="marketing",
-        objective="Creates captions, campaigns, outreach messages, social media strategy, and brand communication.",
+        objective="Builds brand voice, website copy systems, editorial direction, campaigns, image sourcing direction, and conversion-aware communication across web and social surfaces.",
         route_names=["content_assistant", "social_planner", "business_growth"],
         domains=["marketing", "business"],
         intents=["content", "social"],
-        keywords=["caption", "post", "campaign", "facebook", "instagram", "linkedin", "tiktok", "content", "copy", "brand", "messaging", "website content", "footer", "blog", "landing page"],
+        keywords=["caption", "post", "campaign", "facebook", "instagram", "linkedin", "tiktok", "content", "copy", "brand", "messaging", "website content", "footer", "blog", "landing page", "brand voice", "editorial", "content system", "unsplash", "image sourcing"],
     ),
 
     "tchalla": AgentProfile(
