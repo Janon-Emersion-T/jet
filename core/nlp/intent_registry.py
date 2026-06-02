@@ -69,6 +69,23 @@ INTENT_REGISTRY = {
         "review codebase",
     ],
 
+    "web_development": [
+        "create laravel web application",
+        "build laravel app",
+        "web development",
+        "web app",
+        "web application",
+        "blade",
+        "tailwind",
+        "alpine",
+        "vite",
+        "generate migration",
+        "generate controller",
+        "generate model",
+        "generate view",
+        "generate readme",
+    ],
+
     "patch_workflow": [
         "apply patch",
         "file diff",

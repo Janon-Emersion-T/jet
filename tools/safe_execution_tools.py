@@ -2,6 +2,7 @@ import subprocess
 import json
 from pathlib import Path
 from datetime import datetime
+import shlex
 
 from tools.command_guard import (
     get_workspace,
@@ -36,6 +37,17 @@ def _save_approval(command_type, command_key, command):
     }
     _approval_file(command_id).write_text(json.dumps(data, indent=4))
     return data
+
+
+def _save_shell_approval(command_text: str, cwd: str | None = None):
+    command = shlex.split(command_text)
+    approval = _save_approval("shell", "shell", command)
+    if cwd:
+        data = json.loads(_approval_file(approval["id"]).read_text())
+        data["cwd"] = cwd
+        _approval_file(approval["id"]).write_text(json.dumps(data, indent=4))
+        return data
+    return approval
 
 
 def _run(command, cwd, timeout=90):
@@ -113,6 +125,39 @@ def request_composer_run(script_name: str):
     )
 
 
+def request_shell_command(command_text: str, cwd: str | None = None):
+    workspace, error = get_workspace()
+    if error:
+        return error
+
+    command_text = (command_text or "").strip()
+    if not command_text:
+        return "Shell command is required."
+
+    blocked, reason = block_dangerous_command(command_text)
+    if blocked:
+        return (
+            "Shell command blocked.\n"
+            f"{reason}\n\n"
+            f"Command: {command_text}"
+        )
+
+    try:
+        command = shlex.split(command_text)
+    except Exception:
+        return "Invalid shell command syntax."
+
+    approval = _save_shell_approval(command_text, cwd=cwd or str(workspace))
+
+    return (
+        "COMMAND APPROVAL REQUIRED\n"
+        f"ID: {approval['id']}\n"
+        f"Command: {command_text}\n"
+        f"Workspace: {workspace}\n\n"
+        f"To execute: confirm command {approval['id']}"
+    )
+
+
 def confirm_command(command_id: str):
     workspace, error = get_workspace()
     if error:
@@ -124,6 +169,7 @@ def confirm_command(command_id: str):
 
     data = json.loads(file.read_text())
     command = data["command"]
+    cwd = Path(data.get("cwd") or workspace)
 
     data["approved"] = True
     data["approved_at"] = datetime.now().isoformat(timespec="seconds")
@@ -131,9 +177,9 @@ def confirm_command(command_id: str):
 
     return (
         "APPROVED COMMAND EXECUTION\n"
-        f"Project: {workspace}\n"
+        f"Project: {cwd}\n"
         f"Command: {' '.join(command)}\n\n"
-        + _run(command, workspace)
+        + _run(command, cwd)
     )
 
 

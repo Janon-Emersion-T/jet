@@ -76,16 +76,15 @@ class ProposalManager:
         }
 
     def apply(self, proposal_id, confirmed=False):
-        (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
+        folder = self._folder(proposal_id)
+        meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
+
         if not confirmed:
             return (
                 "Write blocked.\n"
                 "Confirm-before-write mode is active.\n"
                 f"Use: confirm apply proposal {proposal_id}"
             )
-
-        folder = self._folder(proposal_id)
-        meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
 
         if meta.get("applied") and not meta.get("rolled_back"):
             return f"Proposal {proposal_id} is already applied."

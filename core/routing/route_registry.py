@@ -14,6 +14,7 @@ from core.routes.basic_routes import handle_basic_routes
 from core.routes.memory_routes import handle_memory_routes
 from core.routes.project_context_routes import handle_project_context_routes
 from core.routes.developer_setup_routes import handle_developer_setup_routes
+from core.routes.web_development_routes import handle_web_development_routes
 from core.routes.project_analyzer_routes import handle_project_analyzer_routes
 from core.routes.dev_ops_routes import handle_dev_ops_routes
 from core.routes.framework_routes import handle_framework_routes
@@ -619,6 +620,48 @@ ROUTE_MODULES = [
         keywords=["test nlp", "analyze command", "nlp memory", "followup"],
         intents=["nlp_test", "diagnostic"],
         examples=["test nlp create html page", "analyze command update html"],
+    ),
+
+    RouteModule(
+        name="web_development",
+        domain="development",
+        handler=handle_web_development_routes,
+        description="Plan and execute web development workflows, Laravel scaffolding, and safe code generation.",
+        keywords=[
+            "create laravel web application",
+            "build laravel app",
+            "web development",
+            "web app",
+            "web application",
+            "blade",
+            "tailwind",
+            "alpine",
+            "vite",
+            "migrations",
+            "controllers",
+            "models",
+            "views",
+            "readme",
+            "scaffold",
+            "saas",
+            "dashboard style layout",
+        ],
+        intents=[
+            "web_development",
+            "laravel",
+            "project_analysis",
+        ],
+        canonical_commands=[
+            "create laravel web application",
+            "build laravel app",
+            "generate laravel module",
+        ],
+        examples=[
+            "Create a Laravel web application in /var/www/testJarvis",
+            "Generate migration controller model and view workflows",
+            "Plan the build for a Blade Tailwind Alpine Laravel SaaS",
+        ],
+        safety_level="write",
     ),
 
     RouteModule(

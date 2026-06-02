@@ -7851,5 +7851,35 @@
         "created_at": "2026-06-02T21:23:51",
         "updated_at": null,
         "active": true
+    },
+    {
+        "id": "c28c641c7ddffe8d",
+        "text": "PROGRAMMING SYNTHESIS NOTE\nTopics: system design and scalability\n\n1. What matters most:\n   - Designing scalable systems that can handle increasing loads efficiently, ensuring minimal degradation in performance.\n   - Implementing modular, loosely-coupled architectures for easy maintenance and extension.\n   - Prioritizing security by using secure coding practices, encryption, and authentication mechanisms.\n   - Ensuring high test coverage to catch bugs early and maintain system stability.\n   - Optimizing for performance by profiling code, choosing appropriate data structures, and leveraging caching strategies.\n   - Building systems with a focus on maintainability through clear documentation, consistent naming conventions, and adherence to coding standards.\n\n2. Common mistakes:\n   - Ignoring scalability considerations in the early stages of development, leading to system bottlenecks as the user base grows.\n   - Over-optimizing prematurely, which can lead to code bloat and reduced maintainability.\n   - Neglecting security, leaving the system vulnerable to attacks.\n   - Lacking adequate testing, resulting in undetected bugs that cause system crashes or data corruption.\n   - Failing to consider the long-term implications of design decisions, leading to inflexible systems that are difficult to modify as requirements change.\n\n3. What an expert notices:\n   - Anticipating potential scalability issues and designing solutions proactively.\n   -",
+        "tags": [
+            "programming",
+            "synthesis",
+            "autonomous-learning",
+            "senior-software-engineer"
+        ],
+        "source": "autonomous-learning-reflection",
+        "importance": 8,
+        "created_at": "2026-06-02T21:27:28",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "727b4966bcd5ed27",
+        "text": "PROGRAMMING SYNTHESIS NOTE\nTopics: web security fundamentals\n\n1. What matters most in web security fundamentals for a senior software engineer:\n   - Understanding the OWASP Top Ten (latest version) and how to mitigate each risk.\n   - Secure coding practices, including input validation, error handling, and authentication/authorization.\n   - Knowledge of encryption methods (e.g., HTTPS, SSL/TLS) and secure communication protocols (e.g., REST vs GraphQL).\n   - Familiarity with security frameworks and libraries for various programming languages.\n   - Understanding the basics of threat modeling, vulnerability assessment, and penetration testing.\n\n2. Common mistakes:\n   - Overlooking input validation and sanitization, leading to SQL injection or XSS attacks.\n   - Using outdated libraries or dependencies with known security vulnerabilities.\n   - Neglecting proper authentication and authorization, allowing unauthorized access to sensitive data.\n   - Ignoring secure coding practices, such as avoiding hardcoded secrets or using insecure functions.\n   - Failing to keep up-to-date with the latest security threats and updates.\n\n3. What an expert notices:\n   - Identifying potential security risks during code review and suggesting mitigation strategies.\n   - Recognizing patterns of common vulnerabilities and knowing how to prevent them.\n   - Understanding the tradeoffs between security measures and performance,",
+        "tags": [
+            "programming",
+            "synthesis",
+            "autonomous-learning",
+            "senior-software-engineer"
+        ],
+        "source": "autonomous-learning-reflection",
+        "importance": 8,
+        "created_at": "2026-06-02T21:30:55",
+        "updated_at": null,
+        "active": true
     }
 ]

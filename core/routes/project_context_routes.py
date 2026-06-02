@@ -95,6 +95,15 @@ def handle_project_context_routes(user_input: str, text: str, clean_text: str):
     if text.startswith("write file "):
         return parse_write_command(user_input)
 
+    if text.startswith("create file "):
+        return parse_write_command(user_input.replace("create file ", "write file ", 1))
+
+    if text.startswith("update file "):
+        return parse_write_command(user_input.replace("update file ", "write file ", 1))
+
+    if text.startswith("edit file "):
+        return parse_write_command(user_input.replace("edit file ", "write file ", 1))
+
     if text.startswith("detect stack "):
         folder = user_input.replace("detect stack ", "", 1).strip()
         return detect_project_stack(folder)

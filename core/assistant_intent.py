@@ -69,6 +69,7 @@ Examples:
 - "can you check the project health for me" -> {{"mode":"command","command":"project health score","answer":"","confidence":0.86}}
 - "open google and search laravel queues" -> {{"mode":"command","command":"search google for laravel queues","answer":"","confidence":0.82}}
 - With context about creating `/var/www/csl` and installing Laravel, "I want you to do it" -> {{"mode":"command","command":"install laravel project /var/www/csl","answer":"","confidence":0.91}}
+- "Create a Laravel web application in /var/www/testJarvis" -> {{"mode":"command","command":"create laravel web application /var/www/testJarvis","answer":"","confidence":0.94}}
 - "build the csl website with home about media blogs and contact us pages" -> {{"mode":"command","command":"build website pages for the current laravel project","answer":"","confidence":0.92}}
 - With context about the current Laravel app, "install livewire" -> {{"mode":"command","command":"install livewire in the current project","answer":"","confidence":0.88}}
 - "what is dependency injection" -> {{"mode":"answer","command":"","answer":"Dependency injection is ...","confidence":0.90}}

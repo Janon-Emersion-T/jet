@@ -42,6 +42,10 @@ CAPABILITIES = {
     "seo_automation": {
         "status": "planned",
         "description": "SEO automation will be added later."
+    },
+    "web_development": {
+        "status": "active",
+        "description": "Can plan and execute Laravel web app builds with safe file, command, and project-scoped workflows."
     }
 }
 

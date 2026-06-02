@@ -10,6 +10,7 @@ ROUTE_COMMAND_PREFIX = {
     "patch": "patch:",
     "vision": "vision:",
     "laravel": "laravel:",
+    "web_development": "webdev:",
 }
 
 

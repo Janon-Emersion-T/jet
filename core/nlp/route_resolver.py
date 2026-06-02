@@ -12,6 +12,7 @@ INTENT_TO_ROUTE_HINT = {
     "memory": "memory",
     "task": "task",
     "patch_workflow": "patch",
+    "web_development": "web_development",
     "camera": "vision",
     "nlp": "nlp",
 }
@@ -27,11 +28,11 @@ def resolve_route_hint(intent: str, clean_text: str, entities: Dict[str, str]) -
     if entities.get("url"):
         return "browser"
 
+    if any(term in clean_text for term in ["laravel", "blade", "tailwind", "alpine", "vite", "migration", "controller", "model", "view", "readme", "web application"]):
+        return "web_development"
+
     if intent in INTENT_TO_ROUTE_HINT:
         return INTENT_TO_ROUTE_HINT[intent]
-
-    if "laravel" in clean_text:
-        return "laravel"
 
     if "nginx" in clean_text or "server" in clean_text:
         return "devops"
