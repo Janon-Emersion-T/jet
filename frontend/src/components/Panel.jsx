@@ -5,7 +5,7 @@ export default function Panel({ title, icon, children }) {
         {icon}
         <h2>{title}</h2>
       </div>
-      {children}
+      <div className="panel-body">{children}</div>
     </section>
   );
 }

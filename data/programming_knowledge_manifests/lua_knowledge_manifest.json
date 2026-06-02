@@ -1,0 +1,45 @@
+{
+  "updated_at": "2026-06-02T22:10:28Z",
+  "topic": "Lua",
+  "sources": {
+    "https://www.lua.org/manual/": {
+      "name": "Lua Reference Manual",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "c4c11c7d28580d9425b23c3f3719ce2f133d6e3641de020dce0246fe8dc9c8b2",
+      "last_learned_at": "2026-06-02T22:10:21Z",
+      "chunks_saved": 1,
+      "title": "Lua: reference manuals"
+    },
+    "https://google.github.io/eng-practices/": {
+      "name": "Google Engineering Practices Documentation",
+      "type": "engineering-guide",
+      "priority": 9,
+      "hash": "9df646a0e84eef9c7c8e4e5d534e374be1f1cfdfc25cbce6030549c22f716f8c",
+      "last_learned_at": "2026-06-02T22:10:22Z",
+      "chunks_saved": 1,
+      "title": "Google Engineering Practices Documentation | eng-practices"
+    },
+    "https://www.atlassian.com/software": {
+      "name": "Atlassian Software Development Guides",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "1b84ddd43555b7992e461841353050631dee84429f28101ba7c87e30cb715cbe",
+      "last_learned_at": "2026-06-02T22:10:25Z",
+      "chunks_saved": 13,
+      "title": "Products | Atlassian"
+    },
+    "https://martinfowler.com/": {
+      "name": "Martin Fowler",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "323303d19fd536af4b44ee90e83fa97aac26b7c5c370b49d1a314e5c55cc2938",
+      "last_learned_at": "2026-06-02T22:10:27Z",
+      "chunks_saved": 8,
+      "title": "martinfowler.com"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

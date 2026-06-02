@@ -1,0 +1,81 @@
+{
+  "updated_at": "2026-06-02T22:09:33Z",
+  "topic": "Kotlin",
+  "sources": {
+    "https://kotlinlang.org/docs/home.html": {
+      "name": "Kotlin Documentation",
+      "type": "official-documentation",
+      "priority": 10,
+      "hash": "49526cb4cdba79960249ba6dbf56df3bbbe9c17a440e2f4c8aba647f3c222e7e",
+      "last_learned_at": "2026-06-02T22:09:19Z",
+      "chunks_saved": 1,
+      "title": "Kotlin Docs | Kotlin Documentation"
+    },
+    "https://kotlinlang.org/docs/reference/": {
+      "name": "Kotlin Language Reference",
+      "type": "language-reference",
+      "priority": 9,
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "last_learned_at": "2026-06-02T22:09:20Z",
+      "chunks_saved": 0,
+      "title": "Untitled Kotlin Source"
+    },
+    "https://developer.android.com/": {
+      "name": "Android Developers",
+      "type": "official-documentation",
+      "priority": 10,
+      "hash": "caddbb44b6bc01ac605792a0b923db74933b48a56e18e5885407d5dc3c1ab435",
+      "last_learned_at": "2026-06-02T22:09:23Z",
+      "chunks_saved": 6,
+      "title": "Android Mobile App Developer Tools - Android Developers"
+    },
+    "https://developer.apple.com/documentation/": {
+      "name": "Apple Developer Documentation",
+      "type": "official-documentation",
+      "priority": 10,
+      "hash": "d55831e46c3bd3a223c582f46f006e65c533616a7f358011e1ca29f24661be5e",
+      "last_learned_at": "2026-06-02T22:09:25Z",
+      "chunks_saved": 1,
+      "title": "Featured | Apple Developer Documentation"
+    },
+    "https://docs.flutter.dev/": {
+      "name": "Flutter Docs",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "468c4b0e955c685b26b740728817bbf7a921fe73129e033244dcd0d10bbd1895",
+      "last_learned_at": "2026-06-02T22:09:26Z",
+      "chunks_saved": 4,
+      "title": "Flutter documentation"
+    },
+    "https://google.github.io/eng-practices/": {
+      "name": "Google Engineering Practices Documentation",
+      "type": "engineering-guide",
+      "priority": 9,
+      "hash": "9df646a0e84eef9c7c8e4e5d534e374be1f1cfdfc25cbce6030549c22f716f8c",
+      "last_learned_at": "2026-06-02T22:09:27Z",
+      "chunks_saved": 1,
+      "title": "Google Engineering Practices Documentation | eng-practices"
+    },
+    "https://www.atlassian.com/software": {
+      "name": "Atlassian Software Development Guides",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "1b84ddd43555b7992e461841353050631dee84429f28101ba7c87e30cb715cbe",
+      "last_learned_at": "2026-06-02T22:09:30Z",
+      "chunks_saved": 13,
+      "title": "Products | Atlassian"
+    },
+    "https://martinfowler.com/": {
+      "name": "Martin Fowler",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "323303d19fd536af4b44ee90e83fa97aac26b7c5c370b49d1a314e5c55cc2938",
+      "last_learned_at": "2026-06-02T22:09:32Z",
+      "chunks_saved": 8,
+      "title": "martinfowler.com"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

@@ -1,0 +1,63 @@
+{
+  "updated_at": "2026-06-02T22:10:41Z",
+  "topic": "R",
+  "sources": {
+    "https://cran.r-project.org/manuals.html": {
+      "name": "R Manuals",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "cc449958d9c6023a708ccf2a21cd69986742382022bdd99f459589202a39b3e5",
+      "last_learned_at": "2026-06-02T22:10:29Z",
+      "chunks_saved": 2,
+      "title": "CRAN: Manuals"
+    },
+    "https://www.mathworks.com/help/matlab/": {
+      "name": "MATLAB Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "72d3c20541bbc4f6e4aefecfc42c7993ad0491da035b03ea2c9ee708b99f5ffe",
+      "last_learned_at": "2026-06-02T22:10:30Z",
+      "chunks_saved": 3,
+      "title": "MATLAB Documentation"
+    },
+    "https://documentation.sas.com/": {
+      "name": "SAS Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "2cd6f30349a12ab430603e520563e9221abb558bb28b18420ee0438586194e68",
+      "last_learned_at": "2026-06-02T22:10:33Z",
+      "chunks_saved": 1,
+      "title": "SAS Help Center"
+    },
+    "https://developers.google.com/machine-learning/crash-course": {
+      "name": "Google Machine Learning Crash Course",
+      "type": "official-course",
+      "priority": 9,
+      "hash": "5bb70f91b1d5bce2705d1b8b131994d2c82ff3d24d1dec042c248e6d603bae67",
+      "last_learned_at": "2026-06-02T22:10:36Z",
+      "chunks_saved": 4,
+      "title": "Machine Learning  |  Google for Developers"
+    },
+    "https://pytorch.org/tutorials/": {
+      "name": "PyTorch Tutorials",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "1a0baade57320de1dc2a4b5d28b5fac6ee9fb21b8ebb9a2bc00ef4e243ca0f3e",
+      "last_learned_at": "2026-06-02T22:10:38Z",
+      "chunks_saved": 14,
+      "title": "Welcome to PyTorch Tutorials — PyTorch Tutorials 2.12.0+cu130 documentation"
+    },
+    "https://huggingface.co/learn": {
+      "name": "Hugging Face Learn",
+      "type": "official-learning-platform",
+      "priority": 8,
+      "hash": "93e21a2b96411f0f09d07a9a3de656ce0ff6cd19c6833934435e9b782a3cbd07",
+      "last_learned_at": "2026-06-02T22:10:40Z",
+      "chunks_saved": 1,
+      "title": "Hugging Face - Learn"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

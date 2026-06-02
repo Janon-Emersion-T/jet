@@ -1,0 +1,81 @@
+{
+  "updated_at": "2026-06-02T22:10:13Z",
+  "topic": "Scala",
+  "sources": {
+    "https://docs.scala-lang.org/": {
+      "name": "Scala Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "ec02e6ca0875a7fe79a849c20f03145c341baea1caa0c2f7d361222468ad7ceb",
+      "last_learned_at": "2026-06-02T22:09:59Z",
+      "chunks_saved": 2,
+      "title": "Learn Scala | \n      \n      Scala Documentation"
+    },
+    "https://docs.scala-lang.org/scala3/reference/": {
+      "name": "Scala 3 Reference",
+      "type": "language-reference",
+      "priority": 8,
+      "hash": "c159df149a7fa0b34578a4cb60bda1f514162184fd870673ea3be313e7e3d908",
+      "last_learned_at": "2026-06-02T22:10:01Z",
+      "chunks_saved": 6,
+      "title": "Scala 3 Reference"
+    },
+    "https://dev.java/learn/": {
+      "name": "dev.java Learn",
+      "type": "official-learning-path",
+      "priority": 9,
+      "hash": "cf7c29029f8f3317bb99bf0fdb262f19950b38200ad5ec9cac74dd257da22903",
+      "last_learned_at": "2026-06-02T22:10:02Z",
+      "chunks_saved": 5,
+      "title": "Learn Java - Dev.java"
+    },
+    "https://docs.oracle.com/en/java/": {
+      "name": "Oracle Java Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "ac0f87d8237411a235d6c511f3566c400d943a59d602d78408fa912504d95a22",
+      "last_learned_at": "2026-06-02T22:10:04Z",
+      "chunks_saved": 2,
+      "title": "Java Documentation - Get Started"
+    },
+    "https://docs.oracle.com/javase/specs/": {
+      "name": "JVM Specification",
+      "type": "platform-specification",
+      "priority": 8,
+      "hash": "4acb986836423a2e48354ebd0bb9e558aa1c6f400544d4c5a694560fc219584e",
+      "last_learned_at": "2026-06-02T22:10:05Z",
+      "chunks_saved": 1,
+      "title": "Java SE Specifications"
+    },
+    "https://google.github.io/eng-practices/": {
+      "name": "Google Engineering Practices Documentation",
+      "type": "engineering-guide",
+      "priority": 9,
+      "hash": "9df646a0e84eef9c7c8e4e5d534e374be1f1cfdfc25cbce6030549c22f716f8c",
+      "last_learned_at": "2026-06-02T22:10:06Z",
+      "chunks_saved": 1,
+      "title": "Google Engineering Practices Documentation | eng-practices"
+    },
+    "https://www.atlassian.com/software": {
+      "name": "Atlassian Software Development Guides",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "1b84ddd43555b7992e461841353050631dee84429f28101ba7c87e30cb715cbe",
+      "last_learned_at": "2026-06-02T22:10:10Z",
+      "chunks_saved": 13,
+      "title": "Products | Atlassian"
+    },
+    "https://martinfowler.com/": {
+      "name": "Martin Fowler",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "323303d19fd536af4b44ee90e83fa97aac26b7c5c370b49d1a314e5c55cc2938",
+      "last_learned_at": "2026-06-02T22:10:12Z",
+      "chunks_saved": 8,
+      "title": "martinfowler.com"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

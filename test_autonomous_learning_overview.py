@@ -62,6 +62,27 @@ class AutonomousLearningOverviewTests(unittest.TestCase):
         self.assertEqual(overview["recent_events"][0]["type"], "learning_task_error")
         self.assertIn("AUTONOMOUS LEARNING STATUS", overview["status_text"])
 
+    def test_burst_returns_multiple_cycles_and_overview(self):
+        with patch.object(
+            autonomous_learning,
+            "run_autonomous_learning_cycle",
+            side_effect=[{"task": "one"}, {"task": "two"}, None],
+        ) as cycle_mock, patch.object(
+            autonomous_learning,
+            "get_autonomous_learning_overview",
+            return_value={"queue_depth": 0},
+        ) as overview_mock, patch.object(
+            autonomous_learning,
+            "autonomous_learning_status",
+            return_value="burst-status",
+        ):
+            result = autonomous_learning.run_autonomous_learning_burst(max_cycles=4)
+
+        self.assertEqual(cycle_mock.call_count, 3)
+        self.assertEqual(overview_mock.call_count, 1)
+        self.assertEqual(result["completed_cycles"], 2)
+        self.assertEqual(result["status"], "burst-status")
+
 
 if __name__ == "__main__":
     unittest.main()

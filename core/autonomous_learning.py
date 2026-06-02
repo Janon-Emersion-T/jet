@@ -21,6 +21,7 @@ MANIFEST_DIR = STORAGE_DIR / "autonomous_learning_manifests"
 MEDICAL_CATALOG_FILE = Path("data/medical_learning_catalog.json")
 
 DEFAULT_CYCLE_INTERVAL_SECONDS = 180
+MAX_BURST_CYCLES = 4
 DISCOVERY_BATCH_SIZE = 2
 
 DOMAIN_PROFILES = {
@@ -668,6 +669,14 @@ def get_autonomous_learning_overview(limit: int = 12) -> dict:
     ][:limit]
 
     recent_events = _recent_learning_events(limit=limit)
+    queue_depth = len(
+        [
+            task
+            for task in state.get("schedule", [])
+            if task.get("status") in {"pending", "in_progress", "failed"}
+        ]
+    )
+    latest_event = recent_events[-1] if recent_events else None
 
     return {
         "enabled": bool(state.get("enabled")),
@@ -679,9 +688,31 @@ def get_autonomous_learning_overview(limit: int = 12) -> dict:
         "domain_summaries": domain_summaries,
         "stats": state.get("stats", {}),
         "completed_topics": state.get("completed_topics", {}),
+        "queue_depth": queue_depth,
         "queue": queue,
         "recent_events": recent_events,
+        "latest_event": latest_event,
         "status_text": autonomous_learning_status(),
+    }
+
+
+def run_autonomous_learning_burst(max_cycles: int = MAX_BURST_CYCLES) -> dict:
+    requested_cycles = max(1, int(max_cycles or MAX_BURST_CYCLES))
+    completed_runs: list[dict] = []
+
+    for _ in range(requested_cycles):
+        result = run_autonomous_learning_cycle()
+        if result is None:
+            break
+        completed_runs.append(result)
+
+    overview = get_autonomous_learning_overview(limit=12)
+    return {
+        "requested_cycles": requested_cycles,
+        "completed_cycles": len(completed_runs),
+        "results": completed_runs,
+        "overview": overview,
+        "status": autonomous_learning_status(),
     }
 
 
@@ -789,7 +820,13 @@ def run_autonomous_learning_cycle() -> dict | None:
 def _worker_loop() -> None:
     while True:
         try:
-            run_autonomous_learning_cycle()
+            burst_runs = 0
+
+            while burst_runs < MAX_BURST_CYCLES:
+                result = run_autonomous_learning_cycle()
+                if result is None:
+                    break
+                burst_runs += 1
         except Exception as exc:
             _append_jsonl(LOG_FILE, {
                 "type": "worker_loop_error",
@@ -799,7 +836,18 @@ def _worker_loop() -> None:
 
         state = _load_state()
         delay = int(state.get("cycle_interval_seconds", DEFAULT_CYCLE_INTERVAL_SECONDS))
-        time.sleep(max(30, delay))
+        queue_depth = len(
+            [
+                task
+                for task in state.get("schedule", [])
+                if task.get("status") in {"pending", "in_progress", "failed"}
+            ]
+        )
+
+        if queue_depth > 0:
+            delay = min(delay, 45)
+
+        time.sleep(max(15, delay))
 
 
 def ensure_autonomous_learning_worker() -> None:

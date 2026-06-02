@@ -2,11 +2,18 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   background: #050b14;
   color: #e8f7ff;
   font-family: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  overflow: hidden;
 }
 
 button,
@@ -17,7 +24,9 @@ textarea {
 .app-shell {
   display: grid;
   grid-template-columns: 320px 1fr 260px;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
   background:
     radial-gradient(circle at 50% 20%, rgba(0, 195, 255, 0.18), transparent 34%),
     radial-gradient(circle at 20% 80%, rgba(0, 90, 255, 0.14), transparent 30%),
@@ -29,6 +38,7 @@ textarea {
   background: rgba(4, 13, 26, 0.88);
   border: 1px solid rgba(110, 220, 255, 0.12);
   backdrop-filter: blur(18px);
+  min-height: 0;
 }
 
 .context-panel {
@@ -37,11 +47,14 @@ textarea {
   flex-direction: column;
   gap: 18px;
   border-right: 1px solid rgba(110, 220, 255, 0.14);
+  overflow: hidden;
 }
 
 .sidebar {
   border-left: 1px solid rgba(110, 220, 255, 0.14);
   border-right: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .jarvis-main {
@@ -314,12 +327,33 @@ nav button:hover,
   overflow: auto;
 }
 
+.main-content {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  padding: 28px;
+  display: flex;
+}
+
 .panel {
   background: rgba(13, 29, 48, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   padding: 24px;
-  min-height: calc(100vh - 56px);
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
 }
 
 .panel h2 {
@@ -462,6 +496,9 @@ nav button:hover,
 .learning-shell {
   display: grid;
   gap: 18px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .learning-header {
@@ -469,6 +506,71 @@ nav button:hover,
   justify-content: space-between;
   gap: 24px;
   align-items: flex-start;
+}
+
+.learning-hero {
+  display: grid;
+  gap: 18px;
+}
+
+.learning-status-stack {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
+.learning-auto-toggle {
+  border: 1px solid rgba(111, 243, 255, 0.18);
+  background: rgba(5, 18, 35, 0.9);
+  color: #8fb2c2;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.learning-auto-toggle.active {
+  color: #69ffb2;
+  border-color: rgba(105, 255, 178, 0.3);
+  box-shadow: 0 0 14px rgba(105, 255, 178, 0.12);
+}
+
+.learning-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.learning-hero-card {
+  border: 1px solid rgba(110, 220, 255, 0.1);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(7, 21, 38, 0.96), rgba(3, 10, 19, 0.96));
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.learning-hero-card strong {
+  font-size: 20px;
+  color: #d7f6ff;
+}
+
+.learning-hero-card span {
+  color: #8fb2c2;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.learning-hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #8ee7ff;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .learning-header h2 {
@@ -603,12 +705,14 @@ nav button:hover,
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  min-height: 0;
 }
 
 .learning-card {
-  min-height: 280px;
+  min-height: 0;
   display: grid;
   gap: 14px;
+  overflow: hidden;
 }
 
 .learning-domain-list,
@@ -616,6 +720,12 @@ nav button:hover,
 .learning-queue {
   display: grid;
   gap: 12px;
+  min-height: 0;
+  overflow: auto;
+}
+
+.learning-scroll {
+  padding-right: 4px;
 }
 
 .learning-domain-item {
@@ -632,6 +742,13 @@ nav button:hover,
 .learning-domain-item strong,
 .learning-event strong {
   color: #bff8ff;
+}
+
+.learning-domain-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
 }
 
 .learning-domain-item span,
@@ -654,6 +771,7 @@ nav button:hover,
   border: 1px solid rgba(110, 220, 255, 0.08);
   border-radius: 14px;
   padding: 12px 14px;
+  min-width: 0;
 }
 
 .learning-event p {
@@ -664,7 +782,45 @@ nav button:hover,
 }
 
 .learning-response {
-  min-height: 360px;
+  min-height: 0;
+  flex: 1;
+}
+
+.learning-event-compact {
+  display: grid;
+  gap: 6px;
+}
+
+.learning-task-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #8fb2c2;
+  font-size: 12px;
+}
+
+.learning-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #8ee7ff;
+  font-size: 12px;
+}
+
+.learning-progress-track {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(110, 220, 255, 0.08);
+  overflow: hidden;
+}
+
+.learning-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6ff3ff, #69ffb2);
+  box-shadow: 0 0 18px rgba(111, 243, 255, 0.35);
 }
 
 .chat-panel {
@@ -1058,7 +1214,18 @@ nav button:hover,
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-height: 100vh;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sidebar nav {
+  display: grid;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 4px;
 }
 
 @media (max-width: 1100px) {
@@ -1067,6 +1234,10 @@ nav button:hover,
   }
 
   .learning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-hero-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1080,6 +1251,10 @@ nav button:hover,
 
   .learning-stat-grid {
     grid-template-columns: 1fr;
+  }
+
+  .learning-status-stack {
+    justify-items: start;
   }
 }
 

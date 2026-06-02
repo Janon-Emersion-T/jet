@@ -63,6 +63,7 @@ from core.autonomous_learning import (
     enable_autonomous_learning,
     disable_autonomous_learning,
     run_autonomous_learning_cycle,
+    run_autonomous_learning_burst,
 )
 
 
@@ -222,6 +223,14 @@ def learning_run_once():
         "ok": True,
         "result": run_autonomous_learning_cycle(),
         "status": autonomous_learning_status(),
+    }
+
+
+@app.post("/learning/burst")
+def learning_burst(max_cycles: int = 4):
+    return {
+        "ok": True,
+        "result": run_autonomous_learning_burst(max_cycles=max_cycles),
     }
 
 

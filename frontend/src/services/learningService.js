@@ -19,3 +19,7 @@ export async function stopLearning() {
 export async function runLearningCycle() {
   return await apiPost("/learning/run-once", {});
 }
+
+export async function runLearningBurst(maxCycles = 4) {
+  return await apiPost(`/learning/burst?max_cycles=${maxCycles}`, {});
+}
