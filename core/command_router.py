@@ -131,16 +131,11 @@ def _handle_realtime_query(user_input: str, chat_context: str | None = None) -> 
             len(context.get("results", [])) == 1 
             and context.get("results")[0].get("type") == "error"
         ):
-            # Fall back to conversational response
-            error_msg = context.get("summary_context", "")
-            if error_msg:
-                return f"I could not access live intelligence right now. {error_msg}\n\nBased on my training data, I can still help with general information about this topic."
-            else:
-                return (
-                    "I could not access live intelligence right now. "
-                    "Please check the internet connection or API key configuration. "
-                    "I can still help with general information based on my training data."
-                )
+            # Fall back to a calm, non-technical response.
+            return (
+                "I couldn't fetch live web updates right now, so I can't verify the latest details from the internet.\n\n"
+                "If you want, I can still give you a general answer from my training data, or you can ask me to try a different search query."
+            )
         
         # Build enriched prompt with live context
         enriched_prompt = build_live_prompt(user_input, context)
@@ -156,9 +151,8 @@ def _handle_realtime_query(user_input: str, chat_context: str | None = None) -> 
         print(f"Error in live intelligence handler: {e}")
         print(traceback.format_exc())
         return (
-            "I encountered an issue retrieving live intelligence. "
-            "I can still help with general information based on my training data. "
-            "What would you like to know?"
+            "I couldn't retrieve live web information just now. "
+            "I can still help with a general answer based on my training data, or we can try a narrower query."
         )
 
 

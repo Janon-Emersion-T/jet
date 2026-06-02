@@ -5,6 +5,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from core.nlp import route_resolver
+from core import command_router
 from core.patches.proposal_manager import ProposalManager
 from core.routing.nlp_route_selector import select_route
 from core.routing.route_registry import get_route_modules
@@ -130,6 +131,26 @@ class WebDevelopmentToolTests(unittest.TestCase):
 
         self.assertIsNotNone(decision.module)
         self.assertEqual(decision.module.name, "web_development")
+
+    def test_live_intelligence_fallback_is_user_friendly(self):
+        with patch("core.command_router.requires_realtime", return_value=True), \
+                patch(
+                    "core.command_router.get_live_news_context",
+                    return_value={
+                        "results": [
+                            {
+                                "type": "error",
+                                "message": "Web search failed: 400 Client Error"
+                            }
+                        ],
+                        "summary_context": "Web search failed: 400 Client Error",
+                    },
+                ):
+            response = command_router.route_command("What is the current status of the war in the middle east")
+
+        self.assertIn("couldn't fetch live web updates", response.lower())
+        self.assertNotIn("400 client error", response.lower())
+        self.assertNotIn("api key", response.lower())
 
     def test_web_development_route_returns_plan_or_execution(self):
         with patch("core.routes.web_development_routes.build_web_development_plan") as plan_mock:

@@ -1,13 +1,15 @@
 """
 Web Search Module
 
-Provides live web search using Tavily API.
+Provides live web search using Tavily API with a browser-backed fallback.
 Handles API integration, error handling, and result normalization.
 """
 
 import os
+import re
 from typing import List, Dict, Optional
-import json
+
+from tools.browser_automation_tools import browser_google_results
 
 
 def search_live_web(query: str, max_results: int = 5) -> List[Dict]:
@@ -31,36 +33,43 @@ def search_live_web(query: str, max_results: int = 5) -> List[Dict]:
         If API is not available or no results, returns empty list or error dict.
     """
     
+    safe_query = _sanitize_query(query)
     api_key = os.getenv("TAVILY_API_KEY", "").strip()
     
     if not api_key:
+        fallback_results = _search_with_browser(safe_query, max_results=max_results)
+        if fallback_results:
+            return fallback_results
         return [
             {
                 "type": "error",
-                "message": "TAVILY_API_KEY environment variable not set. "
-                          "Live web search is not configured."
+                "message": "Live web search is not configured."
             }
         ]
     
     try:
         from tavily import TavilyClient
     except ImportError:
+        fallback_results = _search_with_browser(safe_query, max_results=max_results)
+        if fallback_results:
+            return fallback_results
         return [
             {
                 "type": "error",
-                "message": "Tavily Python package not installed. "
-                          "Install with: pip install tavily-python"
+                "message": "Live web search is unavailable because the Tavily Python package is not installed."
             }
         ]
     
     try:
         client = TavilyClient(api_key=api_key)
-        
-        # Perform the search with news context
+
+        # Keep the request conservative so live-news searches stay reliable.
         response = client.search(
-            query=query,
+            query=safe_query,
             max_results=max_results,
-            include_answer=True,
+            include_answer="basic",
+            search_depth="basic",
+            topic="news",
         )
         
         # Normalize the results
@@ -88,21 +97,83 @@ def search_live_web(query: str, max_results: int = 5) -> List[Dict]:
                 }
             )
         
-        return normalized if normalized else [
-            {
-                "type": "error",
-                "message": "No results found for the query."
-            }
-        ]
-        
-    except Exception as e:
+        if normalized:
+            return normalized
+
+        fallback_results = _search_with_browser(safe_query, max_results=max_results)
+        if fallback_results:
+            return fallback_results
+
         return [
             {
                 "type": "error",
-                "message": f"Web search failed: {str(e)}. "
-                          "Please check your internet connection and API key."
+                "message": "No live search results were found for the query."
             }
         ]
+
+    except Exception:
+        fallback_results = _search_with_browser(safe_query, max_results=max_results)
+        if fallback_results:
+            return fallback_results
+
+        return [
+            {
+                "type": "error",
+                "message": "Live web search is temporarily unavailable."
+            }
+        ]
+
+
+def _sanitize_query(query: str) -> str:
+    safe = " ".join((query or "").split())
+    safe = re.sub(r"[\x00-\x1f\x7f]+", " ", safe).strip()
+    return safe[:380]
+
+
+def _search_with_browser(query: str, max_results: int = 5) -> List[Dict]:
+    """
+    Best-effort fallback search using the local browser automation parser.
+    """
+    if not query:
+        return []
+
+    try:
+        raw = browser_google_results(query, limit=max_results)
+    except Exception:
+        return []
+
+    if not raw or "RESULTS:" not in raw:
+        return []
+
+    results: List[Dict] = []
+    current_title = ""
+    current_url = ""
+
+    for line in raw.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+
+        if re.match(r"^\d+\.\s+", stripped):
+            current_title = re.sub(r"^\d+\.\s+", "", stripped).strip()
+            current_url = ""
+            continue
+
+        if stripped.startswith("http://") or stripped.startswith("https://"):
+            current_url = stripped
+            results.append(
+                {
+                    "title": current_title or stripped,
+                    "url": current_url,
+                    "content": current_title or stripped,
+                    "source": _extract_domain(current_url),
+                    "published_date": None,
+                }
+            )
+            current_title = ""
+            current_url = ""
+
+    return results
 
 
 def _extract_domain(url: str) -> str:
