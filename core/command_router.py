@@ -1,3 +1,5 @@
+import re
+
 from core.nlp.unified_orchestrator import orchestrate_command
 from core.routing.dispatcher import dispatch_to_module
 from core.routes.nlp_test_routes import handle_nlp_test_routes
@@ -5,6 +7,26 @@ from core.conversational import handle_conversational_fallback
 from core.assistant_intent import plan_assistant_action
 from core.clarify import ask_for_clarification
 from core.system_modes import get_system_mode_state
+
+
+def _strip_delegation_wrappers(raw_text: str) -> str:
+    text = (raw_text or "").strip()
+    if not text:
+        return text
+
+    lowered = text.lower().strip()
+    patterns = [
+        r"^(?:can you|could you)\s+(?:ask|tell)\s+[^ ]+(?:\s+and\s+[^ ]+)*\s+to\s+",
+        r"^(?:can you|could you)\s+ask\s+the\s+website'?s\s+developer\s+to\s+",
+        r"^(?:tony|peter|natasha|shuri|rocket)(?:\s+and\s+(?:tony|peter|natasha|shuri|rocket))*\s+can\s+you(?:\s+guys)?\s+",
+        r"^(?:tony|peter|natasha|shuri|rocket)(?:,?\s*(?:and)?\s*(?:tony|peter|natasha|shuri|rocket))*[:,]?\s*",
+    ]
+
+    rewritten = lowered
+    for pattern in patterns:
+        rewritten = re.sub(pattern, "", rewritten, flags=re.I).strip()
+
+    return rewritten or lowered
 
 
 def _format_blocked_response(nlp) -> str:
@@ -88,7 +110,7 @@ def route_command(
     allow_clarify: bool = True,
     allow_assistant_plan: bool = True,
 ) -> str:
-    raw_text = (user_input or "").strip()
+    raw_text = _strip_delegation_wrappers(user_input)
 
     if not raw_text:
         return "Please enter a command."

@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-06-02T15:40:01Z",
+  "topic": "operating system fundamentals",
+  "domain": "programming",
+  "sources": {
+    "https://learn.microsoft.com/en-us/windows/": {
+      "name": "Microsoft Learn Windows",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "bb2fc3cc8f42feff0dc20b96b94491b139fa78d75c13a719a3f2f2a2ff25d934",
+      "last_learned_at": "2026-06-02T15:39:56Z",
+      "chunks_saved": 1,
+      "title": "Windows Documentation | Microsoft Learn"
+    },
+    "https://training.linuxfoundation.org/": {
+      "name": "Linux Foundation Training",
+      "type": "official-learning-platform",
+      "priority": 8,
+      "hash": "93e10fcaf2e2b29e4b65b4f8933331c758804e752bff70dbf9cda9d3de95e87b",
+      "last_learned_at": "2026-06-02T15:39:58Z",
+      "chunks_saved": 3,
+      "title": "Open Source Training | Linux Foundation Training and Certification"
+    },
+    "https://developer.apple.com/documentation/": {
+      "name": "Apple Developer Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "d55831e46c3bd3a223c582f46f006e65c533616a7f358011e1ca29f24661be5e",
+      "last_learned_at": "2026-06-02T15:40:00Z",
+      "chunks_saved": 1,
+      "title": "Featured | Apple Developer Documentation"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}

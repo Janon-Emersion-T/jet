@@ -13,6 +13,48 @@ def _clean_topic(topic: str) -> str:
     return topic.strip() if topic and topic.strip() else "General business technology"
 
 
+def _company_slug(name: str) -> str:
+    cleaned = " ".join((name or "").split()).strip()
+    return cleaned if cleaned else "Your Company"
+
+
+def website_content_pack(company_name: str, focus: str | None = None) -> dict:
+    company_name = _company_slug(company_name)
+    focus = (focus or "structured education, expert facilitation, and modern knowledge delivery").strip()
+
+    return {
+        "hero_kicker": "Systematic learning for ambitious institutions",
+        "hero_title": f"{company_name} helps people learn with more structure, more clarity, and more staying power.",
+        "hero_body": (
+            f"{company_name} is built for organisations that want education, training, and knowledge systems "
+            f"to feel deliberate instead of improvised. We combine {focus} into programs that improve both confidence and outcomes."
+        ),
+        "hero_cta": "Start a Learning Conversation",
+        "hero_secondary_cta": "See How We Work",
+        "footer_tagline": "Learning designed for depth, clarity, and real-world impact.",
+        "footer_body": (
+            f"{company_name} builds structured learning experiences for institutions, professionals, and communities "
+            f"that want stronger outcomes without losing the human side of education."
+        ),
+        "about_intro": (
+            f"{company_name} exists for organisations that care about long-term capability, not short-term box-ticking. "
+            "We design learning systems that respect how adults actually grow: through sequence, practice, reflection, and reinforcement."
+        ),
+        "media_intro": (
+            f"The media presence of {company_name} should extend the life of teaching. This includes lectures, interviews, "
+            "resource libraries, event highlights, and public-facing educational content that stays useful after the event ends."
+        ),
+        "blogs_intro": (
+            f"The blog at {company_name} should feel informed, readable, and trustworthy. It should publish ideas on education strategy, "
+            "leadership, professional development, digital learning, and domain-specific practice."
+        ),
+        "contact_intro": (
+            f"{company_name} works best with organisations that want to build meaningful capability, not just deliver a one-off presentation. "
+            "Use this page to start conversations about workshops, advisory work, speaking, curriculum design, and partnerships."
+        ),
+    }
+
+
 def blog_idea_generator(topic: str) -> str:
     topic = _clean_topic(topic)
 
@@ -298,4 +340,5 @@ def content_assistant_help() -> str:
 168. generate quote for <service>
 169. draft client email for <request>
 170. social post for <topic>
+171. website content for <company or brand>
 """

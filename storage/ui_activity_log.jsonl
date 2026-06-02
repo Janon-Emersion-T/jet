@@ -28,3 +28,16 @@
 {"time": "2026-06-02T18:45:12", "event_type": "chat_command", "payload": {"message": "Whatr we are building here is a website application for Center for Systematic Leaning, We now need to create 5 pages, which are Home page, About Page, Media , Blogs, Contact Us.", "chat_id": "52eb0018-7535-48c2-8688-42b1baacf053"}}
 {"time": "2026-06-02T18:52:09", "event_type": "voice_start", "payload": {"mode": "offline"}}
 {"time": "2026-06-02T18:59:31", "event_type": "voice_stop", "payload": {"mode": "offline"}}
+{"time": "2026-06-02T20:48:53", "event_type": "chat_command", "payload": {"message": "create /var/www/csl folder and install laravel 13 with tailwind and create the following pages \nHome page, About Us Page, Media page, Blog page and Contact us page", "chat_id": "8a356626-0b5c-42c9-aa94-0848acd2e209"}}
+{"time": "2026-06-02T21:06:43", "event_type": "chat_command", "payload": {"message": "did you create the home page", "chat_id": "8a356626-0b5c-42c9-aa94-0848acd2e209"}}
+{"time": "2026-06-02T21:07:42", "event_type": "chat_command", "payload": {"message": "Can you ask the website's developer to create the home page", "chat_id": "8a356626-0b5c-42c9-aa94-0848acd2e209"}}
+{"time": "2026-06-02T21:08:27", "event_type": "chat_command", "payload": {"message": "Can you create a responsive footer and it should be best of the best", "chat_id": "8a356626-0b5c-42c9-aa94-0848acd2e209"}}
+{"time": "2026-06-02T21:09:56", "event_type": "chat_command", "payload": {"message": "can you tell peter to implement the footer for the website", "chat_id": "8a356626-0b5c-42c9-aa94-0848acd2e209"}}
+{"time": "2026-06-02T21:10:27", "event_type": "chat_command", "payload": {"message": "Tony and Peter can you guys build the footer to this website?", "chat_id": "8a356626-0b5c-42c9-aa94-0848acd2e209"}}
+{"time": "2026-06-02T21:13:24", "event_type": "chat_command", "payload": {"message": "How is Scarlet Hohanson", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
+{"time": "2026-06-02T21:13:57", "event_type": "chat_command", "payload": {"message": "I am speaking about Scarlett Johansan", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
+{"time": "2026-06-02T21:14:16", "event_type": "chat_command", "payload": {"message": "Tell me all about her", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
+{"time": "2026-06-02T21:14:39", "event_type": "chat_command", "payload": {"message": "You can search from online to find more about her", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
+{"time": "2026-06-02T21:16:10", "event_type": "chat_command", "payload": {"message": "Can I know more about Janon Emersion T\nYou can go online to scrap information about Janon Emersion T", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
+{"time": "2026-06-02T21:16:45", "event_type": "chat_command", "payload": {"message": "Write a biography about Scarlett Johansan", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
+{"time": "2026-06-02T21:17:15", "event_type": "chat_command", "payload": {"message": "I want the biography in about 1000 words", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}

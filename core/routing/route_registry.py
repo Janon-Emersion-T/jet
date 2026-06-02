@@ -49,19 +49,59 @@ from core.routes.email_routes import handle_email_routes
 from core.routes.knowledge_academic_routes import handle_knowledge_academic_routes
 from core.routes.live_environment_routes import handle_live_environment_routes
 from core.routes.report_export_routes import handle_report_export_routes
-from core.routes.powerpoint_export_routes import handle_powerpoint_export_routes
-from core.routes.spreadsheet_analysis_routes import handle_spreadsheet_analysis_routes
-from core.routes.financial_report_routes import handle_financial_report_routes
-from core.routes.accounting_anomaly_routes import handle_accounting_anomaly_routes
+try:
+    from core.routes.powerpoint_export_routes import handle_powerpoint_export_routes
+except Exception:
+    def handle_powerpoint_export_routes(*args, **kwargs):
+        return "PowerPoint export dependency missing."
+try:
+    from core.routes.spreadsheet_analysis_routes import handle_spreadsheet_analysis_routes
+except Exception:
+    def handle_spreadsheet_analysis_routes(*args, **kwargs):
+        return "Spreadsheet analysis dependency missing."
+try:
+    from core.routes.financial_report_routes import handle_financial_report_routes
+except Exception:
+    def handle_financial_report_routes(*args, **kwargs):
+        return "Financial report dependency missing."
+try:
+    from core.routes.accounting_anomaly_routes import handle_accounting_anomaly_routes
+except Exception:
+    def handle_accounting_anomaly_routes(*args, **kwargs):
+        return "Accounting anomaly dependency missing."
 from core.routes.invoice_ocr_routes import handle_invoice_ocr_routes
 from core.routes.receipt_parser_routes import handle_receipt_parser_routes
 from core.routes.tax_calculation_routes import handle_tax_calculation_routes
-from core.routes.payroll_assistant_routes import handle_payroll_assistant_routes
-from core.routes.hr_onboarding_routes import handle_hr_onboarding_routes
-from core.routes.employee_task_tracker_routes import handle_employee_task_tracker_routes
-from core.routes.attendance_assistant_routes import handle_attendance_assistant_routes
-from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
-from core.routes.ticket_prioritization_routes import handle_ticket_prioritization_routes
+try:
+    from core.routes.payroll_assistant_routes import handle_payroll_assistant_routes
+except Exception:
+    def handle_payroll_assistant_routes(*args, **kwargs):
+        return "Payroll assistant dependency missing."
+try:
+    from core.routes.hr_onboarding_routes import handle_hr_onboarding_routes
+except Exception:
+    def handle_hr_onboarding_routes(*args, **kwargs):
+        return "HR onboarding dependency missing."
+try:
+    from core.routes.employee_task_tracker_routes import handle_employee_task_tracker_routes
+except Exception:
+    def handle_employee_task_tracker_routes(*args, **kwargs):
+        return "Employee task tracker dependency missing."
+try:
+    from core.routes.attendance_assistant_routes import handle_attendance_assistant_routes
+except Exception:
+    def handle_attendance_assistant_routes(*args, **kwargs):
+        return "Attendance assistant dependency missing."
+try:
+    from core.routes.internal_helpdesk_routes import handle_internal_helpdesk_routes
+except Exception:
+    def handle_internal_helpdesk_routes(*args, **kwargs):
+        return "Internal helpdesk dependency missing."
+try:
+    from core.routes.ticket_prioritization_routes import handle_ticket_prioritization_routes
+except Exception:
+    def handle_ticket_prioritization_routes(*args, **kwargs):
+        return "Ticket prioritization dependency missing."
 from core.routes.bug_severity_routes import handle_bug_severity_routes
 
 
@@ -603,11 +643,16 @@ ROUTE_MODULES = [
             "scaffold website",
             "build website",
             "create pages",
+            "create home page",
+            "did you create the home page",
             "home page",
             "about page",
             "contact us page",
             "media page",
             "blogs page",
+            "build footer",
+            "implement footer",
+            "responsive footer",
             "set up laravel",
             "setup laravel",
             "install tailwind",
@@ -626,6 +671,8 @@ ROUTE_MODULES = [
             "install tailwind",
             "build website pages",
             "install dependency",
+            "build footer",
+            "check page status",
         ],
         examples=[
             "create /var/www/csl and install laravel",
@@ -634,6 +681,9 @@ ROUTE_MODULES = [
             "install tailwind in the same project",
             "build the website with home about media blogs and contact us pages",
             "install livewire in the current project",
+            "did you create the home page",
+            "can you tell peter to implement the footer for the website",
+            "tony and peter can you guys build the footer to this website",
         ],
     ),
 
@@ -845,8 +895,9 @@ ROUTE_MODULES = [
         domain="marketing",
         handler=handle_content_assistant_routes,
         description="Create content, captions, blogs, and marketing copy.",
-        keywords=["content", "caption", "blog", "copywriting", "post"],
+        keywords=["content", "caption", "blog", "copywriting", "post", "website content", "brand copy", "landing page copy"],
         intents=["content"],
+        examples=["website content for center for systematic learning", "write brand copy for our website"],
     ),
 
     RouteModule(

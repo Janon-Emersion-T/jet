@@ -191,6 +191,23 @@ def _specialist_boost(user_input: str, module: RouteModule) -> float:
         if "all 200 topics" in text or "all learning topics" in text:
             return 0.35
 
+    if module.name == "developer_setup":
+        execution_signals = [
+            "build the footer",
+            "implement the footer",
+            "responsive footer",
+            "create the home page",
+            "did you create the home page",
+            "did you build the home page",
+            "create pages",
+            "website",
+            "laravel",
+            "tailwind",
+        ]
+
+        if any(signal in text for signal in execution_signals):
+            return 0.35
+
     return 0.0
 
 def select_route(user_input: str, nlp, modules: List[RouteModule]) -> RouteDecision:

@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-06-02T15:50:49Z",
+  "topic": "system design and scalability",
+  "domain": "programming",
+  "sources": {
+    "https://aws.amazon.com/architecture/": {
+      "name": "AWS Architecture Center",
+      "type": "cloud-architecture",
+      "priority": 9,
+      "hash": "9b6bcadaaa20289a40b899d8268b7e4b9c6eace4e4092c5bf1d48e6eacd65d7d",
+      "last_learned_at": "2026-06-02T15:50:13Z",
+      "chunks_saved": 2,
+      "title": "Reference Architecture Examples and Best Practices"
+    },
+    "https://cloud.google.com/architecture": {
+      "name": "Google Cloud Architecture Center",
+      "type": "cloud-architecture",
+      "priority": 9,
+      "hash": "1957f0a44316366fd5c0e94f65855645c0c1993f0bf9c81edeb4d9ebafa26cdc",
+      "last_learned_at": "2026-06-02T15:50:16Z",
+      "chunks_saved": 3,
+      "title": "Cloud Architecture Guidance and Topologies  |  Cloud Architecture Center  |  Google Cloud Documentation"
+    },
+    "https://martinfowler.com/architecture/": {
+      "name": "Martin Fowler Architecture",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "0eb4f7f7c305f42971759939c89666709b416f6c6b5d5e554410ca6a2db44b52",
+      "last_learned_at": "2026-06-02T15:50:48Z",
+      "chunks_saved": 11,
+      "title": "Software Architecture Guide"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}

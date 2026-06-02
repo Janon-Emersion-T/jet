@@ -182,7 +182,7 @@ AGENTS: Dict[str, AgentProfile] = {
         route_names=["content_assistant", "social_planner", "business_growth"],
         domains=["marketing", "business"],
         intents=["content", "social"],
-        keywords=["caption", "post", "campaign", "facebook", "instagram", "linkedin", "tiktok", "content"],
+        keywords=["caption", "post", "campaign", "facebook", "instagram", "linkedin", "tiktok", "content", "copy", "brand", "messaging", "website content", "footer", "blog", "landing page"],
     ),
 
     "tchalla": AgentProfile(

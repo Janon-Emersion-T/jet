@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from tools.project_context_tools import set_current_project, get_current_project_path
+from tools.content_assistant_tools import website_content_pack
 
 MAX_OUTPUT = 12000
 SAFE_BASE_DIRS = [
@@ -275,6 +276,48 @@ def install_project_dependency(package_name: str, target_dir: str | None = None,
     ])
 
 
+def check_laravel_page_status(page_name: str, target_dir: str | None = None) -> str:
+    project_dir, error = _project_dir_from_hint(target_dir)
+    if error:
+        return error
+
+    if not (project_dir / "artisan").exists():
+        return "The current project is not a Laravel application."
+
+    normalized = _normalize(page_name).lower()
+    normalized = normalized.replace(" page", "").replace("contact us", "contact-us").replace(" ", "-")
+    page_map = {
+        "home": ("resources/views/pages/home.blade.php", "/"),
+        "about": ("resources/views/pages/about.blade.php", "/about"),
+        "media": ("resources/views/pages/media.blade.php", "/media"),
+        "blog": ("resources/views/pages/blogs.blade.php", "/blogs"),
+        "blogs": ("resources/views/pages/blogs.blade.php", "/blogs"),
+        "contact": ("resources/views/pages/contact.blade.php", "/contact-us"),
+        "contact-us": ("resources/views/pages/contact.blade.php", "/contact-us"),
+        "footer": ("resources/views/layouts/app.blade.php", "shared layout footer"),
+    }
+
+    if normalized not in page_map:
+        return f"Unknown page or section: {page_name}"
+
+    file_rel, route_hint = page_map[normalized]
+    target = project_dir / file_rel
+    exists = target.exists()
+
+    lines = [
+        "WEBSITE STATUS",
+        f"Project: {project_dir}",
+        f"Requested page/section: {page_name}",
+        f"Exists: {'YES' if exists else 'NO'}",
+        f"File: {target}",
+        f"Route or section: {route_hint}",
+    ]
+    if exists:
+        preview = target.read_text(encoding="utf-8", errors="replace")[:240].strip()
+        lines.extend(["", "Preview:", preview])
+    return "\n".join(lines)
+
+
 def install_tailwind_for_project(target_dir: str | None = None) -> str:
     project_dir, error = _project_dir_from_hint(target_dir)
     if error:
@@ -386,6 +429,10 @@ def build_laravel_marketing_site(
         return "The current project is not a Laravel application."
 
     pages = page_names or ["home", "about", "media", "blogs", "contact-us"]
+    content_pack = website_content_pack(
+        company_name,
+        focus="structured education, expert facilitation, research-led media, and institution-ready learning programs",
+    )
 
     routes_content = """<?php
 
@@ -498,11 +545,23 @@ Route::get('/contact-us', function () use ($sitePages) {
     </main>
 
     <footer class="border-t border-slate-900/10 bg-[var(--csl-paper)] text-slate-800">
-        <div class="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1.5fr_1fr_1fr] lg:px-10">
+        <div class="mx-auto max-w-7xl px-6 py-14 lg:px-10">
+            <div class="mb-10 flex flex-col gap-6 rounded-[2rem] bg-[var(--csl-ink)] px-6 py-8 text-white lg:flex-row lg:items-end lg:justify-between lg:px-8">
+                <div class="max-w-2xl space-y-4">
+                    <p class="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--csl-gold)]">Ready to build a stronger learning system?</p>
+                    <h2 class="font-display text-3xl">{content_pack["footer_tagline"]}</h2>
+                    <p class="text-base leading-7 text-white/72">{content_pack["footer_body"]}</p>
+                </div>
+                <div class="flex flex-col gap-3 sm:flex-row">
+                    <a href="{{{{ route('contact') }}}}" class="inline-flex items-center justify-center rounded-full bg-[var(--csl-gold)] px-6 py-3 text-sm font-semibold text-[var(--csl-ink)] transition hover:translate-y-[-1px] hover:bg-[var(--csl-gold-soft)]">Book a Consultation</a>
+                    <a href="{{{{ route('blogs') }}}}" class="inline-flex items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/8">Read Insights</a>
+                </div>
+            </div>
+            <div class="grid gap-10 lg:grid-cols-[1.6fr_0.9fr_0.9fr_1fr]">
             <div class="space-y-4">
-                <p class="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--csl-teal)]">Center for Systematic Learning</p>
-                <h2 class="font-display text-3xl text-[var(--csl-ink)]">Learning designed for depth, clarity, and real-world impact.</h2>
-                <p class="max-w-xl text-base leading-7 text-slate-600">CSL builds structured learning experiences for institutions, professionals, and communities that want stronger outcomes without losing the human side of education.</p>
+                <p class="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--csl-teal)]">{company_name}</p>
+                <h2 class="font-display text-3xl text-[var(--csl-ink)]">{content_pack["footer_tagline"]}</h2>
+                <p class="max-w-xl text-base leading-7 text-slate-600">{content_pack["footer_body"]}</p>
             </div>
             <div>
                 <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Explore</p>
@@ -511,6 +570,15 @@ Route::get('/contact-us', function () use ($sitePages) {
                     <li><a class="transition hover:text-[var(--csl-teal)]" href="{{{{ route('media') }}}}">Media</a></li>
                     <li><a class="transition hover:text-[var(--csl-teal)]" href="{{{{ route('blogs') }}}}">Blogs</a></li>
                     <li><a class="transition hover:text-[var(--csl-teal)]" href="{{{{ route('contact') }}}}">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Focus Areas</p>
+                <ul class="mt-5 space-y-3 text-sm text-slate-700">
+                    <li>Executive education</li>
+                    <li>Professional upskilling</li>
+                    <li>Research-led media</li>
+                    <li>Institutional learning design</li>
                 </ul>
             </div>
             <div>
@@ -535,22 +603,22 @@ Route::get('/contact-us', function () use ($sitePages) {
         <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div class="space-y-8">
                 <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">
-                    Systematic learning for modern institutions
+                    {content_pack["hero_kicker"]}
                 </span>
                 <div class="space-y-6">
                     <h1 class="font-display max-w-4xl text-5xl leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-                        Thoughtful learning systems for people who need more than generic training.
+                        {content_pack["hero_title"]}
                     </h1>
                     <p class="max-w-2xl text-lg leading-8 text-white/72 sm:text-xl">
-                        CSL helps organisations build repeatable learning architecture across leadership, professional development, academic initiatives, and media-driven knowledge delivery.
+                        {content_pack["hero_body"]}
                     </p>
                 </div>
                 <div class="flex flex-col gap-4 sm:flex-row">
                     <a href="{{ route('contact') }}" class="inline-flex items-center justify-center rounded-full bg-[var(--csl-gold)] px-6 py-3.5 text-sm font-semibold text-[var(--csl-ink)] transition hover:translate-y-[-1px] hover:bg-[var(--csl-gold-soft)]">
-                        Plan a Learning Initiative
+                        {content_pack["hero_cta"]}
                     </a>
                     <a href="{{ route('about') }}" class="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/8">
-                        Discover Our Method
+                        {content_pack["hero_secondary_cta"]}
                     </a>
                 </div>
             </div>
@@ -611,7 +679,7 @@ Route::get('/contact-us', function () use ($sitePages) {
                 <h1 class="mt-5 font-display text-5xl leading-tight text-white">We design learning like a serious system, not a one-off event.</h1>
             </div>
             <div class="space-y-6 text-lg leading-8 text-white/72">
-                <p>Center for Systematic Learning exists for organisations that care about long-term capability, not short-term box-ticking. We combine curriculum design, research, expert facilitation, and media production so learning can live beyond the classroom.</p>
+                <p>{content_pack["about_intro"]}</p>
                 <p>Our method borrows from education, systems thinking, and high-performance product teams. That means clear sequencing, intentional feedback loops, and strong accountability for the final outcome.</p>
             </div>
         </div>
@@ -645,7 +713,7 @@ Route::get('/contact-us', function () use ($sitePages) {
         <div class="max-w-3xl">
             <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">Media</p>
             <h1 class="mt-5 font-display text-5xl leading-tight text-white">Stories, lectures, interviews, and learning moments worth revisiting.</h1>
-            <p class="mt-6 text-lg leading-8 text-white/72">This page gives CSL a professional media home for event recaps, public education content, institutional updates, and speaker highlights.</p>
+            <p class="mt-6 text-lg leading-8 text-white/72">{content_pack["media_intro"]}</p>
         </div>
     </section>
 
@@ -680,7 +748,7 @@ Route::get('/contact-us', function () use ($sitePages) {
                 <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">Blogs</p>
                 <h1 class="mt-5 font-display text-5xl leading-tight text-white">A publishing space for serious ideas that still feel readable.</h1>
             </div>
-            <p class="text-lg leading-8 text-white/72">This section is ready for editorial content around education strategy, leadership, professional growth, digital learning, and domain-specific insight.</p>
+            <p class="text-lg leading-8 text-white/72">{content_pack["blogs_intro"]}</p>
         </div>
     </section>
 
@@ -714,7 +782,7 @@ Route::get('/contact-us', function () use ($sitePages) {
             <div class="space-y-6">
                 <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">Contact Us</p>
                 <h1 class="font-display text-5xl leading-tight text-white">Tell us what you want people to learn, and we’ll help shape the path.</h1>
-                <p class="text-lg leading-8 text-white/72">CSL supports organisations, institutions, and mission-driven teams that want better learning systems, stronger content, and meaningful capability building.</p>
+                <p class="text-lg leading-8 text-white/72">{content_pack["contact_intro"]}</p>
             </div>
             <div class="rounded-[2rem] border border-white/10 bg-white/6 p-8 backdrop-blur">
                 <form class="grid gap-4">
@@ -811,6 +879,15 @@ Route::get('/contact-us', function () use ($sitePages) {
     ])
 
 
+def build_marketing_footer(target_dir: str | None = None, company_name: str = "Center for Systematic Learning") -> str:
+    result = build_laravel_marketing_site(
+        target_dir=target_dir,
+        company_name=company_name,
+        page_names=["home", "about", "media", "blogs", "contact-us"],
+    )
+    return result.replace("LARAVEL WEBSITE BUILD COMPLETE", "LARAVEL FOOTER UPGRADE COMPLETE", 1)
+
+
 def infer_developer_setup_action(user_input: str, chat_context: str | None = None) -> dict:
     text = _normalize(user_input).lower()
     context = _normalize(chat_context or "").lower()
@@ -829,6 +906,16 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
     )
     website_build_match = re.search(
         r"(?:build|create|make|design).{0,40}\b(?:website|site|web app|pages?)\b",
+        combined,
+        flags=re.I | re.S,
+    )
+    footer_build_match = re.search(
+        r"(?:build|create|make|implement|add|upgrade).{0,24}\bfooter\b",
+        combined,
+        flags=re.I | re.S,
+    )
+    status_match = re.search(
+        r"(?:did you create|did you build|is there|check)\s+(?:the\s+)?(home|about|media|blog|blogs|contact(?:\s+us)?|footer)",
         combined,
         flags=re.I | re.S,
     )
@@ -887,6 +974,20 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
                 "action": "install_tailwind",
                 "target_dir": str(current_project) if current_project else None,
             }
+
+    if footer_build_match and (current_project or target_dir):
+        return {
+            "action": "build_footer",
+            "target_dir": target_dir or (str(current_project) if current_project else None),
+            "company_name": company_name or "Center for Systematic Learning",
+        }
+
+    if status_match and (current_project or target_dir):
+        return {
+            "action": "check_page_status",
+            "target_dir": target_dir or (str(current_project) if current_project else None),
+            "page_name": status_match.group(1),
+        }
 
     if (website_build_match or page_bundle_match) and (current_project or target_dir):
         return {

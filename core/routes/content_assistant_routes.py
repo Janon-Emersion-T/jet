@@ -9,6 +9,7 @@ from tools.content_assistant_tools import (
     quote_generator,
     client_email_draft_mode,
     social_post_generator,
+    website_content_pack,
     content_assistant_help,
 )
 
@@ -56,5 +57,19 @@ def handle_content_assistant_routes(user_input: str, text: str, clean_text: str)
     if text.startswith("social post for "):
         topic = user_input.replace("social post for ", "", 1).strip()
         return social_post_generator(topic)
+
+    if text.startswith("website content for "):
+        company = user_input.replace("website content for ", "", 1).strip()
+        pack = website_content_pack(company)
+        return (
+            "WEBSITE CONTENT PACK\n\n"
+            f"Company: {company}\n\n"
+            f"Hero title:\n{pack['hero_title']}\n\n"
+            f"Hero body:\n{pack['hero_body']}\n\n"
+            f"About intro:\n{pack['about_intro']}\n\n"
+            f"Media intro:\n{pack['media_intro']}\n\n"
+            f"Blogs intro:\n{pack['blogs_intro']}\n\n"
+            f"Contact intro:\n{pack['contact_intro']}"
+        )
 
     return None

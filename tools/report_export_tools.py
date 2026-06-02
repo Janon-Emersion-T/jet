@@ -1,9 +1,16 @@
 from pathlib import Path
 from datetime import datetime
 
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+try:
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+    REPORTLAB_AVAILABLE = True
+except Exception:
+    A4 = None
+    getSampleStyleSheet = None
+    SimpleDocTemplate = Paragraph = Spacer = None
+    REPORTLAB_AVAILABLE = False
 
 from tools.project_context_tools import get_current_project_path
 from tools.project_health_tools import (
@@ -38,6 +45,9 @@ def _safe_text(value: str) -> str:
 
 
 def export_project_health_pdf():
+    if not REPORTLAB_AVAILABLE:
+        return "PDF export dependency missing. Install reportlab to enable PDF report export."
+
     project, error = _project()
     if error:
         return error
