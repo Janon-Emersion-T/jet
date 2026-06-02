@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-06-02T14:01:29Z",
+  "topic": "Diagnostics and Laboratory Interpretation",
+  "domain": "medicine",
+  "sources": {
+    "https://medlineplus.gov/lab-tests/": {
+      "name": "MedlinePlus Lab Tests",
+      "type": "clinical-reference",
+      "priority": 9,
+      "hash": "53bb51c42b89f5a0cb7274532494b9d96941563b3fd056307575d77fe86c5e45",
+      "last_learned_at": "2026-06-02T14:01:25Z",
+      "chunks_saved": 5,
+      "title": "MedlinePlus: Medical Tests"
+    }
+  },
+  "proficiency_target": "doctor-level-reference"
+}

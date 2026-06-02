@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-06-02T15:04:30Z",
+  "topic": "Cardiovascular Medicine Fundamentals",
+  "domain": "medicine",
+  "sources": {
+    "https://www.msdmanuals.com/professional/cardiovascular-disorders": {
+      "name": "MSD Manual Professional Cardiovascular Disorders",
+      "type": "professional-manual",
+      "priority": 9,
+      "hash": "2b743b41f91fcd0878f76615a66e543a1cda20f3bcb2aa521313bf2f19070435",
+      "last_learned_at": "2026-06-02T15:04:29Z",
+      "chunks_saved": 2,
+      "title": "Cardiology - MSD Manual Professional Edition"
+    }
+  },
+  "proficiency_target": "doctor-level-reference"
+}

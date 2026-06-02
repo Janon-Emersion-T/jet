@@ -23,3 +23,8 @@
 {"time": "2026-06-02T18:30:28", "event_type": "chat_command", "payload": {"message": "yes", "chat_id": "57a81cd5-d4b1-46e2-92a3-a7813d84a839"}}
 {"time": "2026-06-02T18:32:09", "event_type": "chat_command", "payload": {"message": "in the /var/www/ create a folder named csl and install laravel 13 in it", "chat_id": "b895a3e6-49e6-469a-9cd4-4abda23d0b4f"}}
 {"time": "2026-06-02T18:32:43", "event_type": "chat_command", "payload": {"message": "install tailwind in the for the same project", "chat_id": "b895a3e6-49e6-469a-9cd4-4abda23d0b4f"}}
+{"time": "2026-06-02T18:41:56", "event_type": "chat_command", "payload": {"message": "in the /var/www/ create a folder named csl and install laravel 13 in it", "chat_id": "52eb0018-7535-48c2-8688-42b1baacf053"}}
+{"time": "2026-06-02T18:42:20", "event_type": "chat_command", "payload": {"message": "install tailwind", "chat_id": "52eb0018-7535-48c2-8688-42b1baacf053"}}
+{"time": "2026-06-02T18:45:12", "event_type": "chat_command", "payload": {"message": "Whatr we are building here is a website application for Center for Systematic Leaning, We now need to create 5 pages, which are Home page, About Page, Media , Blogs, Contact Us.", "chat_id": "52eb0018-7535-48c2-8688-42b1baacf053"}}
+{"time": "2026-06-02T18:52:09", "event_type": "voice_start", "payload": {"mode": "offline"}}
+{"time": "2026-06-02T18:59:31", "event_type": "voice_stop", "payload": {"mode": "offline"}}

@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-06-02T14:57:59Z",
+  "topic": "database concepts and normalization",
+  "domain": "programming",
+  "sources": {
+    "https://www.postgresql.org/docs/": {
+      "name": "PostgreSQL Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "5f2c37bccdcc78997f0e988001a3081c187701f4644cc92db87815a76f38ca70",
+      "last_learned_at": "2026-06-02T14:57:54Z",
+      "chunks_saved": 1,
+      "title": "PostgreSQL: Documentation"
+    },
+    "https://www.mongodb.com/docs/": {
+      "name": "MongoDB Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "3eaea784dbdcea2e6db4ee194ad2dc1e32956a6d3372945f37272ec2ed8c4e72",
+      "last_learned_at": "2026-06-02T14:57:56Z",
+      "chunks_saved": 4,
+      "title": "MongoDB Documentation - Homepage"
+    },
+    "https://learn.microsoft.com/en-us/sql/": {
+      "name": "Microsoft SQL Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "1e613c59e5e65c16f8e8cc800ea3b9d8beccb0c518941e637d9aaba002ba7d7d",
+      "last_learned_at": "2026-06-02T14:57:58Z",
+      "chunks_saved": 2,
+      "title": "Microsoft SQL Documentation - SQL Server | Microsoft Learn"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}

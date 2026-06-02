@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-06-02T14:34:28Z",
+  "topic": "Emergency Triage and Red Flags",
+  "domain": "medicine",
+  "sources": {
+    "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-care": {
+      "name": "WHO Emergency Care Systems",
+      "type": "global-guideline",
+      "priority": 10,
+      "hash": "2bef053753d18de1f1b07171cd561361db52e525e449917fa5727454953dd721",
+      "last_learned_at": "2026-06-02T14:34:25Z",
+      "chunks_saved": 8,
+      "title": "Emergency care"
+    }
+  },
+  "proficiency_target": "doctor-level-reference"
+}

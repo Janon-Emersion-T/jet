@@ -1,0 +1,62 @@
+{
+  "updated_at": "2026-06-02T14:21:41Z",
+  "topic": "software architecture fundamentals",
+  "domain": "programming",
+  "sources": {
+    "https://google.github.io/eng-practices/": {
+      "name": "Google Engineering Practices Documentation",
+      "type": "engineering-guide",
+      "priority": 9,
+      "hash": "9df646a0e84eef9c7c8e4e5d534e374be1f1cfdfc25cbce6030549c22f716f8c",
+      "last_learned_at": "2026-06-02T14:21:29Z",
+      "chunks_saved": 1,
+      "title": "Google Engineering Practices Documentation | eng-practices"
+    },
+    "https://www.atlassian.com/software": {
+      "name": "Atlassian Software Development Guides",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "1b84ddd43555b7992e461841353050631dee84429f28101ba7c87e30cb715cbe",
+      "last_learned_at": "2026-06-02T14:21:31Z",
+      "chunks_saved": 13,
+      "title": "Products | Atlassian"
+    },
+    "https://martinfowler.com/": {
+      "name": "Martin Fowler",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "323303d19fd536af4b44ee90e83fa97aac26b7c5c370b49d1a314e5c55cc2938",
+      "last_learned_at": "2026-06-02T14:21:33Z",
+      "chunks_saved": 8,
+      "title": "martinfowler.com"
+    },
+    "https://aws.amazon.com/architecture/": {
+      "name": "AWS Architecture Center",
+      "type": "cloud-architecture",
+      "priority": 9,
+      "hash": "9b6bcadaaa20289a40b899d8268b7e4b9c6eace4e4092c5bf1d48e6eacd65d7d",
+      "last_learned_at": "2026-06-02T14:21:35Z",
+      "chunks_saved": 2,
+      "title": "Reference Architecture Examples and Best Practices"
+    },
+    "https://cloud.google.com/architecture": {
+      "name": "Google Cloud Architecture Center",
+      "type": "cloud-architecture",
+      "priority": 9,
+      "hash": "1957f0a44316366fd5c0e94f65855645c0c1993f0bf9c81edeb4d9ebafa26cdc",
+      "last_learned_at": "2026-06-02T14:21:37Z",
+      "chunks_saved": 3,
+      "title": "Cloud Architecture Guidance and Topologies  |  Cloud Architecture Center  |  Google Cloud Documentation"
+    },
+    "https://martinfowler.com/architecture/": {
+      "name": "Martin Fowler Architecture",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "0eb4f7f7c305f42971759939c89666709b416f6c6b5d5e554410ca6a2db44b52",
+      "last_learned_at": "2026-06-02T14:21:40Z",
+      "chunks_saved": 11,
+      "title": "Software Architecture Guide"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}

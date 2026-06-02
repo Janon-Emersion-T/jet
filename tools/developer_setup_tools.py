@@ -134,6 +134,147 @@ def _read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _write_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content.rstrip() + "\n", encoding="utf-8")
+
+
+def _detect_package_manager(project_dir: Path, package_name: str, user_input: str) -> str | None:
+    text = _normalize(user_input).lower()
+    package = (package_name or "").strip().lower()
+
+    has_npm = (project_dir / "package.json").exists()
+    has_composer = (project_dir / "composer.json").exists()
+    has_pip = (project_dir / "requirements.txt").exists() or (project_dir / "pyproject.toml").exists()
+    has_cargo = (project_dir / "Cargo.toml").exists()
+    has_go = (project_dir / "go.mod").exists()
+
+    frontend_hints = {
+        "tailwindcss", "@tailwindcss/vite", "react", "vue", "svelte", "axios",
+        "vite", "next", "nuxt", "eslint", "prettier", "typescript", "alpinejs",
+    }
+    php_hints = {
+        "livewire/livewire", "filament/filament", "spatie/laravel-permission",
+        "laravel/sanctum", "laravel/breeze", "laravel/jetstream", "barryvdh/laravel-debugbar",
+    }
+
+    if has_npm and not has_composer and not has_pip:
+        return "npm"
+    if has_composer and not has_npm and not has_pip:
+        return "composer"
+    if has_pip and not has_npm and not has_composer:
+        return "pip"
+    if has_cargo:
+        return "cargo"
+    if has_go:
+        return "go"
+
+    if has_npm and has_composer:
+        if package.startswith("@") or package in frontend_hints:
+            return "npm"
+        if package in php_hints or "laravel" in text or "php" in text or "composer" in text:
+            return "composer"
+        if any(word in text for word in ["frontend", "ui", "css", "javascript", "typescript", "vite"]):
+            return "npm"
+        if any(word in text for word in ["backend", "php", "artisan", "laravel", "eloquent", "composer"]):
+            return "composer"
+        if "/" in package and not package.startswith("@"):
+            return "composer"
+        return "npm"
+
+    return None
+
+
+def _venv_python(project_dir: Path) -> str:
+    for candidate in (project_dir / ".venv" / "bin" / "python", project_dir / "venv" / "bin" / "python"):
+        if candidate.exists():
+            return str(candidate)
+    return "python3"
+
+
+def install_project_dependency(package_name: str, target_dir: str | None = None, user_input: str = "") -> str:
+    project_dir, error = _project_dir_from_hint(target_dir)
+    if error:
+        return error
+
+    package_name = (package_name or "").strip()
+    if not package_name:
+        return "Package name is required."
+
+    manager = _detect_package_manager(project_dir, package_name, user_input)
+    if not manager:
+        return "Could not detect a supported package manager for the current project."
+
+    commands_run: list[str] = []
+    outputs: list[str] = []
+
+    if manager == "npm":
+        command = ["npm", "install", package_name]
+        ok, output = _run(command, cwd=project_dir, timeout=1800)
+        commands_run.append(" ".join(command))
+        outputs.append(output)
+        if not ok:
+            return f"DEPENDENCY INSTALL FAILED\nProject: {project_dir}\nManager: npm\n\n{output}"
+
+        package_json = _read_json(project_dir / "package.json")
+        if "build" in package_json.get("scripts", {}):
+            ok, build_output = _run(["npm", "run", "build"], cwd=project_dir, timeout=1800)
+            commands_run.append("npm run build")
+            outputs.append(build_output)
+            if not ok:
+                return (
+                    "DEPENDENCY INSTALLED, BUT BUILD FAILED\n"
+                    f"Project: {project_dir}\nManager: npm\nPackage: {package_name}\n\n"
+                    f"{build_output}"
+                )
+
+    elif manager == "composer":
+        command = ["composer", "require", package_name]
+        ok, output = _run(command, cwd=project_dir, timeout=3600)
+        commands_run.append(" ".join(command))
+        outputs.append(output)
+        if not ok:
+            return f"DEPENDENCY INSTALL FAILED\nProject: {project_dir}\nManager: composer\n\n{output}"
+
+    elif manager == "pip":
+        python_bin = _venv_python(project_dir)
+        command = [python_bin, "-m", "pip", "install", package_name]
+        ok, output = _run(command, cwd=project_dir, timeout=3600)
+        commands_run.append(" ".join(command))
+        outputs.append(output)
+        if not ok:
+            return f"DEPENDENCY INSTALL FAILED\nProject: {project_dir}\nManager: pip\n\n{output}"
+
+    elif manager == "cargo":
+        command = ["cargo", "add", package_name]
+        ok, output = _run(command, cwd=project_dir, timeout=1800)
+        commands_run.append(" ".join(command))
+        outputs.append(output)
+        if not ok:
+            return f"DEPENDENCY INSTALL FAILED\nProject: {project_dir}\nManager: cargo\n\n{output}"
+
+    elif manager == "go":
+        command = ["go", "get", package_name]
+        ok, output = _run(command, cwd=project_dir, timeout=1800)
+        commands_run.append(" ".join(command))
+        outputs.append(output)
+        if not ok:
+            return f"DEPENDENCY INSTALL FAILED\nProject: {project_dir}\nManager: go\n\n{output}"
+
+    set_current_project(str(project_dir))
+    return "\n".join([
+        "DEPENDENCY INSTALL COMPLETE",
+        f"Project: {project_dir}",
+        f"Manager: {manager}",
+        f"Package: {package_name}",
+        "",
+        "Commands executed:",
+        *[f"- {command}" for command in commands_run],
+        "",
+        *outputs,
+    ])
+
+
 def install_tailwind_for_project(target_dir: str | None = None) -> str:
     project_dir, error = _project_dir_from_hint(target_dir)
     if error:
@@ -232,6 +373,444 @@ def install_tailwind_for_project(target_dir: str | None = None) -> str:
     return "\n".join(lines)
 
 
+def build_laravel_marketing_site(
+    target_dir: str | None = None,
+    company_name: str = "Center for Systematic Learning",
+    page_names: list[str] | None = None,
+) -> str:
+    project_dir, error = _project_dir_from_hint(target_dir)
+    if error:
+        return error
+
+    if not (project_dir / "artisan").exists():
+        return "The current project is not a Laravel application."
+
+    pages = page_names or ["home", "about", "media", "blogs", "contact-us"]
+
+    routes_content = """<?php
+
+use Illuminate\\Support\\Facades\\Route;
+
+$sitePages = [
+    'home' => [
+        'title' => 'Center for Systematic Learning',
+        'description' => 'A modern learning organisation focused on structured growth, thoughtful teaching, and measurable impact.',
+    ],
+    'about' => [
+        'title' => 'About Us',
+        'description' => 'Learn how CSL turns ambitious ideas into repeatable, human-centered learning systems.',
+    ],
+    'media' => [
+        'title' => 'Media',
+        'description' => 'Explore lectures, interviews, event highlights, and knowledge resources from CSL.',
+    ],
+    'blogs' => [
+        'title' => 'Blogs',
+        'description' => 'Read essays, field notes, and practical guides from the CSL team.',
+    ],
+    'contact-us' => [
+        'title' => 'Contact Us',
+        'description' => 'Start a conversation with CSL about training, advisory work, or institutional partnerships.',
+    ],
+];
+
+Route::get('/', function () use ($sitePages) {
+    return view('pages.home', [
+        'meta' => $sitePages['home'],
+        'pageKey' => 'home',
+    ]);
+})->name('home');
+
+Route::get('/about', function () use ($sitePages) {
+    return view('pages.about', [
+        'meta' => $sitePages['about'],
+        'pageKey' => 'about',
+    ]);
+})->name('about');
+
+Route::get('/media', function () use ($sitePages) {
+    return view('pages.media', [
+        'meta' => $sitePages['media'],
+        'pageKey' => 'media',
+    ]);
+})->name('media');
+
+Route::get('/blogs', function () use ($sitePages) {
+    return view('pages.blogs', [
+        'meta' => $sitePages['blogs'],
+        'pageKey' => 'blogs',
+    ]);
+})->name('blogs');
+
+Route::get('/contact-us', function () use ($sitePages) {
+    return view('pages.contact', [
+        'meta' => $sitePages['contact-us'],
+        'pageKey' => 'contact-us',
+    ]);
+})->name('contact');
+"""
+
+    layout_content = f"""<!DOCTYPE html>
+<html lang="{{{{ str_replace('_', '-', app()->getLocale()) }}}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{{{ $meta['title'] ?? '{company_name}' }}}}</title>
+    <meta name="description" content="{{{{ $meta['description'] ?? '{company_name}' }}}}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-[var(--csl-ink)] text-white antialiased">
+    <div class="absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(circle_at_top,rgba(243,173,85,0.28),transparent_42%),linear-gradient(180deg,rgba(8,30,40,1)_0%,rgba(8,30,40,0.96)_52%,rgba(243,244,238,1)_52%,rgba(243,244,238,1)_100%)]"></div>
+    <header class="sticky top-0 z-40 border-b border-white/10 bg-[rgba(8,30,40,0.82)] backdrop-blur-xl">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+            <a href="{{{{ route('home') }}}}" class="flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/15 bg-white/8 text-sm font-semibold tracking-[0.3em] text-[var(--csl-gold)]">CSL</div>
+                <div>
+                    <p class="text-xs uppercase tracking-[0.32em] text-white/55">Center for</p>
+                    <p class="font-display text-lg text-white">Systematic Learning</p>
+                </div>
+            </a>
+            <nav class="hidden items-center gap-2 lg:flex">
+                @php
+                    $navItems = [
+                        'home' => ['label' => 'Home', 'route' => 'home'],
+                        'about' => ['label' => 'About', 'route' => 'about'],
+                        'media' => ['label' => 'Media', 'route' => 'media'],
+                        'blogs' => ['label' => 'Blogs', 'route' => 'blogs'],
+                        'contact-us' => ['label' => 'Contact Us', 'route' => 'contact'],
+                    ];
+                @endphp
+                @foreach ($navItems as $key => $item)
+                    <a
+                        href="{{{{ route($item['route']) }}}}"
+                        class="rounded-full px-4 py-2 text-sm transition {{{{ $pageKey === $key ? 'bg-white text-[var(--csl-ink)] shadow-lg shadow-black/20' : 'text-white/72 hover:bg-white/8 hover:text-white' }}}}"
+                    >
+                        {{{{ $item['label'] }}}}
+                    </a>
+                @endforeach
+            </nav>
+            <a href="{{{{ route('contact') }}}}" class="hidden rounded-full bg-[var(--csl-gold)] px-5 py-3 text-sm font-semibold text-[var(--csl-ink)] transition hover:translate-y-[-1px] hover:bg-[var(--csl-gold-soft)] lg:inline-flex">Start a Conversation</a>
+        </div>
+    </header>
+
+    <main>
+        @yield('content')
+    </main>
+
+    <footer class="border-t border-slate-900/10 bg-[var(--csl-paper)] text-slate-800">
+        <div class="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1.5fr_1fr_1fr] lg:px-10">
+            <div class="space-y-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--csl-teal)]">Center for Systematic Learning</p>
+                <h2 class="font-display text-3xl text-[var(--csl-ink)]">Learning designed for depth, clarity, and real-world impact.</h2>
+                <p class="max-w-xl text-base leading-7 text-slate-600">CSL builds structured learning experiences for institutions, professionals, and communities that want stronger outcomes without losing the human side of education.</p>
+            </div>
+            <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Explore</p>
+                <ul class="mt-5 space-y-3 text-sm text-slate-700">
+                    <li><a class="transition hover:text-[var(--csl-teal)]" href="{{{{ route('about') }}}}">About Us</a></li>
+                    <li><a class="transition hover:text-[var(--csl-teal)]" href="{{{{ route('media') }}}}">Media</a></li>
+                    <li><a class="transition hover:text-[var(--csl-teal)]" href="{{{{ route('blogs') }}}}">Blogs</a></li>
+                    <li><a class="transition hover:text-[var(--csl-teal)]" href="{{{{ route('contact') }}}}">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Contact</p>
+                <ul class="mt-5 space-y-3 text-sm text-slate-700">
+                    <li>hello@csl.global</li>
+                    <li>+94 11 245 7788</li>
+                    <li>Colombo Learning District</li>
+                    <li>Mon to Fri, 9:00 AM to 6:00 PM</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+"""
+
+    home_content = """@extends('layouts.app')
+
+@section('content')
+    <section class="mx-auto max-w-7xl px-6 pb-24 pt-16 lg:px-10 lg:pb-32 lg:pt-24">
+        <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+            <div class="space-y-8">
+                <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">
+                    Systematic learning for modern institutions
+                </span>
+                <div class="space-y-6">
+                    <h1 class="font-display max-w-4xl text-5xl leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+                        Thoughtful learning systems for people who need more than generic training.
+                    </h1>
+                    <p class="max-w-2xl text-lg leading-8 text-white/72 sm:text-xl">
+                        CSL helps organisations build repeatable learning architecture across leadership, professional development, academic initiatives, and media-driven knowledge delivery.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-4 sm:flex-row">
+                    <a href="{{ route('contact') }}" class="inline-flex items-center justify-center rounded-full bg-[var(--csl-gold)] px-6 py-3.5 text-sm font-semibold text-[var(--csl-ink)] transition hover:translate-y-[-1px] hover:bg-[var(--csl-gold-soft)]">
+                        Plan a Learning Initiative
+                    </a>
+                    <a href="{{ route('about') }}" class="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/8">
+                        Discover Our Method
+                    </a>
+                </div>
+            </div>
+            <div class="rounded-[2rem] border border-white/10 bg-white/6 p-6 shadow-2xl shadow-black/20 backdrop-blur">
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div class="rounded-3xl bg-[var(--csl-teal)]/22 p-5">
+                        <p class="text-sm uppercase tracking-[0.22em] text-[var(--csl-gold)]">Core focus</p>
+                        <p class="mt-3 text-2xl font-semibold text-white">Structured growth pathways</p>
+                    </div>
+                    <div class="rounded-3xl bg-white/8 p-5">
+                        <p class="text-sm uppercase tracking-[0.22em] text-white/55">Signature work</p>
+                        <p class="mt-3 text-2xl font-semibold text-white">Leadership, health, and technology learning programs</p>
+                    </div>
+                    <div class="rounded-3xl bg-white/8 p-5">
+                        <p class="text-sm uppercase tracking-[0.22em] text-white/55">Delivery style</p>
+                        <p class="mt-3 text-2xl font-semibold text-white">Workshops, cohorts, research media, and advisory support</p>
+                    </div>
+                    <div class="rounded-3xl bg-[var(--csl-gold)]/18 p-5">
+                        <p class="text-sm uppercase tracking-[0.22em] text-[var(--csl-gold)]">Promise</p>
+                        <p class="mt-3 text-2xl font-semibold text-white">Clarity without oversimplification</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[var(--csl-paper)] py-24 text-slate-900">
+        <div class="mx-auto max-w-7xl px-6 lg:px-10">
+            <div class="grid gap-8 lg:grid-cols-3">
+                <div class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">01. Diagnose</p>
+                    <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">Map the real learning need.</h2>
+                    <p class="mt-4 text-base leading-7 text-slate-600">We begin with systems thinking, not assumptions. CSL studies context, capability gaps, and the practical outcomes your learners need.</p>
+                </div>
+                <div class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">02. Design</p>
+                    <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">Build the curriculum with discipline.</h2>
+                    <p class="mt-4 text-base leading-7 text-slate-600">Programs are sequenced like strong product systems: foundations first, then guided practice, review, reinforcement, and synthesis.</p>
+                </div>
+                <div class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">03. Sustain</p>
+                    <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">Turn learning into durable capability.</h2>
+                    <p class="mt-4 text-base leading-7 text-slate-600">We measure momentum, create reusable media assets, and keep the learning system alive after the first workshop ends.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+"""
+
+    about_content = """@extends('layouts.app')
+
+@section('content')
+    <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">About CSL</p>
+                <h1 class="mt-5 font-display text-5xl leading-tight text-white">We design learning like a serious system, not a one-off event.</h1>
+            </div>
+            <div class="space-y-6 text-lg leading-8 text-white/72">
+                <p>Center for Systematic Learning exists for organisations that care about long-term capability, not short-term box-ticking. We combine curriculum design, research, expert facilitation, and media production so learning can live beyond the classroom.</p>
+                <p>Our method borrows from education, systems thinking, and high-performance product teams. That means clear sequencing, intentional feedback loops, and strong accountability for the final outcome.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[var(--csl-paper)] py-24 text-slate-900">
+        <div class="mx-auto max-w-7xl px-6 lg:px-10">
+            <div class="grid gap-8 lg:grid-cols-3">
+                <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">Mission</p>
+                    <p class="mt-4 text-lg leading-8 text-slate-700">To help people and institutions learn with more depth, better structure, and stronger transfer into real work.</p>
+                </article>
+                <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">Approach</p>
+                    <p class="mt-4 text-lg leading-8 text-slate-700">Every program is designed around foundations, practice, review, synthesis, and measurable evidence of progress.</p>
+                </article>
+                <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">Standards</p>
+                    <p class="mt-4 text-lg leading-8 text-slate-700">We aim for academic integrity, practical clarity, and communication that respects how adults actually learn.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+@endsection
+"""
+
+    media_content = """@extends('layouts.app')
+
+@section('content')
+    <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="max-w-3xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">Media</p>
+            <h1 class="mt-5 font-display text-5xl leading-tight text-white">Stories, lectures, interviews, and learning moments worth revisiting.</h1>
+            <p class="mt-6 text-lg leading-8 text-white/72">This page gives CSL a professional media home for event recaps, public education content, institutional updates, and speaker highlights.</p>
+        </div>
+    </section>
+
+    <section class="bg-[var(--csl-paper)] py-24 text-slate-900">
+        <div class="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-3 lg:px-10">
+            <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">Featured lecture</p>
+                <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">Designing institutions that learn continuously</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">A flagship talk on building teams that improve through evidence, reflection, and better systems.</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">In the press</p>
+                <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">CSL conversations with educators and industry leaders</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">Use this space for partnerships, interviews, and public-facing thought leadership.</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">Resource archive</p>
+                <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">Slides, recordings, and downloadable learning tools</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">A clear place to publish assets that extend the life of your teaching and events.</p>
+            </article>
+        </div>
+    </section>
+@endsection
+"""
+
+    blogs_content = """@extends('layouts.app')
+
+@section('content')
+    <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+            <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">Blogs</p>
+                <h1 class="mt-5 font-display text-5xl leading-tight text-white">A publishing space for serious ideas that still feel readable.</h1>
+            </div>
+            <p class="text-lg leading-8 text-white/72">This section is ready for editorial content around education strategy, leadership, professional growth, digital learning, and domain-specific insight.</p>
+        </div>
+    </section>
+
+    <section class="bg-[var(--csl-paper)] py-24 text-slate-900">
+        <div class="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-3 lg:px-10">
+            <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">Editorial</p>
+                <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">Why high-performing organisations treat learning like infrastructure</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">A framework for leaders who want learning systems that scale without becoming shallow.</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">Practice note</p>
+                <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">Designing review loops that make knowledge stick</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">Practical advice for keeping learning active after workshops, seminars, or training sessions end.</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--csl-teal)]">Field report</p>
+                <h2 class="mt-4 font-display text-3xl text-[var(--csl-ink)]">What institutions gain when media and education work together</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">How resource libraries, video archives, and commentary expand the reach of a learning organisation.</p>
+            </article>
+        </div>
+    </section>
+@endsection
+"""
+
+    contact_content = """@extends('layouts.app')
+
+@section('content')
+    <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+            <div class="space-y-6">
+                <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--csl-gold)]">Contact Us</p>
+                <h1 class="font-display text-5xl leading-tight text-white">Tell us what you want people to learn, and we’ll help shape the path.</h1>
+                <p class="text-lg leading-8 text-white/72">CSL supports organisations, institutions, and mission-driven teams that want better learning systems, stronger content, and meaningful capability building.</p>
+            </div>
+            <div class="rounded-[2rem] border border-white/10 bg-white/6 p-8 backdrop-blur">
+                <form class="grid gap-4">
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <label class="grid gap-2 text-sm text-white/72">
+                            Name
+                            <input type="text" class="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none transition focus:border-[var(--csl-gold)]" placeholder="Your name">
+                        </label>
+                        <label class="grid gap-2 text-sm text-white/72">
+                            Email
+                            <input type="email" class="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none transition focus:border-[var(--csl-gold)]" placeholder="you@example.com">
+                        </label>
+                    </div>
+                    <label class="grid gap-2 text-sm text-white/72">
+                        Organisation
+                        <input type="text" class="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none transition focus:border-[var(--csl-gold)]" placeholder="Organisation or team">
+                    </label>
+                    <label class="grid gap-2 text-sm text-white/72">
+                        Project brief
+                        <textarea rows="5" class="rounded-3xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none transition focus:border-[var(--csl-gold)]" placeholder="Tell us what you want to build."></textarea>
+                    </label>
+                    <button type="button" class="inline-flex justify-center rounded-full bg-[var(--csl-gold)] px-6 py-3.5 text-sm font-semibold text-[var(--csl-ink)] transition hover:translate-y-[-1px] hover:bg-[var(--csl-gold-soft)]">
+                        Send Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+@endsection
+"""
+
+    css_content = """@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --csl-ink: #081e28;
+    --csl-paper: #f3f4ee;
+    --csl-teal: #12646b;
+    --csl-gold: #f3ad55;
+    --csl-gold-soft: #f6c47a;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-sans);
+    }
+}
+
+@layer utilities {
+    .font-display {
+        font-family: var(--font-display);
+        letter-spacing: -0.04em;
+    }
+}
+"""
+
+    _write_text(project_dir / "routes" / "web.php", routes_content)
+    _write_text(project_dir / "resources" / "views" / "layouts" / "app.blade.php", layout_content)
+    _write_text(project_dir / "resources" / "views" / "pages" / "home.blade.php", home_content)
+    _write_text(project_dir / "resources" / "views" / "pages" / "about.blade.php", about_content)
+    _write_text(project_dir / "resources" / "views" / "pages" / "media.blade.php", media_content)
+    _write_text(project_dir / "resources" / "views" / "pages" / "blogs.blade.php", blogs_content)
+    _write_text(project_dir / "resources" / "views" / "pages" / "contact.blade.php", contact_content)
+    _write_text(project_dir / "resources" / "css" / "app.css", css_content)
+
+    commands_run: list[str] = []
+    build_output = "Build skipped because no frontend build step was detected."
+    if (project_dir / "package.json").exists():
+        ok, build_output = _run(["npm", "run", "build"], cwd=project_dir, timeout=1800)
+        commands_run.append("npm run build")
+        if not ok:
+            return f"LARAVEL WEBSITE BUILD PARTIALLY COMPLETE\nProject: {project_dir}\n\n{build_output}"
+
+    set_current_project(str(project_dir))
+    return "\n".join([
+        "LARAVEL WEBSITE BUILD COMPLETE",
+        f"Project: {project_dir}",
+        f"Company: {company_name}",
+        "Pages created:",
+        *[f"- {page}" for page in pages],
+        "",
+        "Commands executed:",
+        *([f"- {command}" for command in commands_run] or ["- No additional commands were required."]),
+        "",
+        build_output,
+    ])
+
+
 def infer_developer_setup_action(user_input: str, chat_context: str | None = None) -> dict:
     text = _normalize(user_input).lower()
     context = _normalize(chat_context or "").lower()
@@ -247,6 +826,21 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
         r"(?:install|setup|set up|configure|add).{0,40}\btailwind\b",
         combined,
         flags=re.I | re.S,
+    )
+    website_build_match = re.search(
+        r"(?:build|create|make|design).{0,40}\b(?:website|site|web app|pages?)\b",
+        combined,
+        flags=re.I | re.S,
+    )
+    page_bundle_match = re.search(
+        r"\bhome\b.*\babout\b.*\bmedia\b.*\bblogs?\b.*\bcontact(?:\s+us)?\b",
+        combined,
+        flags=re.I | re.S,
+    )
+    dependency_match = re.search(
+        r"(?:install|add|require)\s+([@a-z0-9_.-]+/[a-z0-9_.-]+|@[a-z0-9_.-]+/[a-z0-9_.-]+|[a-z0-9_.-]+)",
+        text,
+        flags=re.I,
     )
     explicit_path_match = re.search(
         r"(/var/www/[a-zA-Z0-9._-]+|~/[a-zA-Z0-9_./-]+)",
@@ -292,6 +886,23 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
             return {
                 "action": "install_tailwind",
                 "target_dir": str(current_project) if current_project else None,
+            }
+
+    if (website_build_match or page_bundle_match) and (current_project or target_dir):
+        return {
+            "action": "build_laravel_website",
+            "target_dir": target_dir or (str(current_project) if current_project else None),
+            "company_name": company_name or "Center for Systematic Learning",
+            "pages": ["home", "about", "media", "blogs", "contact-us"],
+        }
+
+    if dependency_match:
+        package_name = dependency_match.group(1).strip()
+        if package_name not in {"laravel", "tailwind"} and (current_project or target_dir):
+            return {
+                "action": "install_dependency",
+                "target_dir": target_dir or (str(current_project) if current_project else None),
+                "package_name": package_name,
             }
 
     return {"action": "unknown"}

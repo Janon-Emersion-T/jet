@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-06-02T14:04:37Z",
+  "topic": "Pharmacology Principles",
+  "domain": "medicine",
+  "sources": {
+    "https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics": {
+      "name": "MSD Manual Professional Pharmacokinetics",
+      "type": "professional-manual",
+      "priority": 9,
+      "hash": "bcd73abccde9c6d653eb6ca8ffcf7a645252e08575546f67a53f33024a5e466a",
+      "last_learned_at": "2026-06-02T14:04:36Z",
+      "chunks_saved": 4,
+      "title": "Overview of Pharmacokinetics - Clinical Pharmacology - MSD Manual Professional Edition"
+    }
+  },
+  "proficiency_target": "doctor-level-reference"
+}

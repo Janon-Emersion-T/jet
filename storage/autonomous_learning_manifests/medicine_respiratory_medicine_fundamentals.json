@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-06-02T15:07:35Z",
+  "topic": "Respiratory Medicine Fundamentals",
+  "domain": "medicine",
+  "sources": {
+    "https://www.msdmanuals.com/professional/pulmonary-disorders": {
+      "name": "MSD Manual Professional Pulmonary Disorders",
+      "type": "professional-manual",
+      "priority": 9,
+      "hash": "1aee5f18fc3e307117c7f6972251b3edfcf8859fda12e1e2fe9c724a4f295543",
+      "last_learned_at": "2026-06-02T15:07:34Z",
+      "chunks_saved": 2,
+      "title": "Pulmonology - MSD Manual Professional Edition"
+    }
+  },
+  "proficiency_target": "doctor-level-reference"
+}

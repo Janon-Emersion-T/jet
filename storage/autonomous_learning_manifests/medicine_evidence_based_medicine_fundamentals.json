@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-06-02T13:31:31Z",
+  "topic": "Evidence-Based Medicine Fundamentals",
+  "domain": "medicine",
+  "sources": {
+    "https://www.cochrane.org/evidence": {
+      "name": "Cochrane Evidence",
+      "type": "systematic-review",
+      "priority": 10,
+      "hash": "54d3ee1bad3f68855c5c29b45fa66b8c82d759712d4b977d302751fc9a5970c2",
+      "last_learned_at": "2026-06-02T13:31:27Z",
+      "chunks_saved": 4,
+      "title": "Our evidence | Cochrane"
+    },
+    "https://www.nice.org.uk/about/what-we-do/our-programmes/evidence-standards-framework-for-digital-health-technologies": {
+      "name": "NICE Evidence Standards Framework",
+      "type": "clinical-guideline",
+      "priority": 8,
+      "hash": "95bec44b1e00d0341b43d683289c807734e19600bbbde29672a49f52327c6c9f",
+      "last_learned_at": "2026-06-02T13:31:30Z",
+      "chunks_saved": 6,
+      "title": "Evidence standards framework (ESF) for digital health technologies | NICE"
+    }
+  },
+  "proficiency_target": "doctor-level-reference"
+}

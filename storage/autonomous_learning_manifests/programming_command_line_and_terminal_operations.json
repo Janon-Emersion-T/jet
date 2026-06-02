@@ -1,0 +1,53 @@
+{
+  "updated_at": "2026-06-02T13:24:56Z",
+  "topic": "command line and terminal operations",
+  "domain": "programming",
+  "sources": {
+    "https://www.nand2tetris.org/": {
+      "name": "Nand2Tetris",
+      "type": "foundational-course",
+      "priority": 9,
+      "hash": "72b2ac9498147045a2c914b0510d1d0c57a7d19aa5c1f3142a1d4d78c5b674ba",
+      "last_learned_at": "2026-06-02T13:24:47Z",
+      "chunks_saved": 1,
+      "title": "Home | nand2tetris"
+    },
+    "https://cs50.harvard.edu/x/": {
+      "name": "CS50 Computer Science Courses",
+      "type": "foundational-course",
+      "priority": 8,
+      "hash": "d7b6d94cdbebcc00865d7425037f2abae6554832adc6c2b81f38c5b67c7eec67",
+      "last_learned_at": "2026-06-02T13:24:49Z",
+      "chunks_saved": 3,
+      "title": "CS50x 2026"
+    },
+    "https://google.github.io/eng-practices/": {
+      "name": "Google Engineering Practices Documentation",
+      "type": "engineering-guide",
+      "priority": 9,
+      "hash": "9df646a0e84eef9c7c8e4e5d534e374be1f1cfdfc25cbce6030549c22f716f8c",
+      "last_learned_at": "2026-06-02T13:24:51Z",
+      "chunks_saved": 1,
+      "title": "Google Engineering Practices Documentation | eng-practices"
+    },
+    "https://www.atlassian.com/software": {
+      "name": "Atlassian Software Development Guides",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "1b84ddd43555b7992e461841353050631dee84429f28101ba7c87e30cb715cbe",
+      "last_learned_at": "2026-06-02T13:24:53Z",
+      "chunks_saved": 13,
+      "title": "Products | Atlassian"
+    },
+    "https://martinfowler.com/": {
+      "name": "Martin Fowler",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "323303d19fd536af4b44ee90e83fa97aac26b7c5c370b49d1a314e5c55cc2938",
+      "last_learned_at": "2026-06-02T13:24:55Z",
+      "chunks_saved": 8,
+      "title": "martinfowler.com"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}

@@ -42,7 +42,7 @@ AGENTS: Dict[str, AgentProfile] = {
         route_names=["project_analyzer", "framework", "advanced_laravel", "architecture_quality", "developer_setup"],
         domains=["development", "project"],
         intents=["project_analysis", "framework", "laravel"],
-        keywords=["architecture", "system design", "project", "application", "build app", "software"],
+        keywords=["architecture", "system design", "project", "application", "build app", "software", "website", "pages", "laravel", "blade"],
     ),
 
     "steve": AgentProfile(
@@ -70,7 +70,7 @@ AGENTS: Dict[str, AgentProfile] = {
         route_names=["html_knowledge", "css_knowledge", "frontend_platform", "frontend_quality", "developer_setup"],
         domains=["frontend"],
         intents=["frontend", "html_knowledge", "css_knowledge", "frontend_html", "frontend_css"],
-        keywords=["html", "css", "tailwind", "react", "frontend", "ui", "component", "responsive"],
+        keywords=["html", "css", "tailwind", "react", "frontend", "ui", "component", "responsive", "website", "landing page", "blade", "page"],
     ),
 
     "shuri": AgentProfile(
@@ -256,7 +256,7 @@ AGENTS: Dict[str, AgentProfile] = {
         route_names=["integration", "execution", "patch", "developer_setup"],
         domains=["development", "system"],
         intents=["integration", "execution", "patch"],
-        keywords=["tool", "script", "automation", "utility", "command", "terminal"],
+        keywords=["tool", "script", "automation", "utility", "command", "terminal", "install package", "dependency", "scaffold"],
     ),
 
     "groot": AgentProfile(

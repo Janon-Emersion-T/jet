@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-06-02T13:55:00Z",
+  "topic": "Git and GitHub workflows",
+  "domain": "programming",
+  "sources": {
+    "https://git-scm.com/docs": {
+      "name": "Git Documentation",
+      "type": "official-documentation",
+      "priority": 10,
+      "hash": "d0632472307a2f6cfb44f860d0673029afad090581c04d3fa85da8b58ae0701d",
+      "last_learned_at": "2026-06-02T13:54:58Z",
+      "chunks_saved": 1,
+      "title": "Git - Reference"
+    },
+    "https://docs.github.com/en": {
+      "name": "GitHub Docs",
+      "type": "official-documentation",
+      "priority": 10,
+      "hash": "94091e7336512736a78f8cb5e955e26a8c99600b51047ce091620b76de2f484c",
+      "last_learned_at": "2026-06-02T13:54:59Z",
+      "chunks_saved": 2,
+      "title": "GitHub Docs"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}
