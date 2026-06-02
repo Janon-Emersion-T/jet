@@ -12665,5 +12665,789 @@
         "created_at": "2026-06-03T03:41:33",
         "updated_at": null,
         "active": true
+    },
+    {
+        "id": "efd79d38c71796b1",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: F# Documentation\nSource type: official-documentation\nURL: https://learn.microsoft.com/en-us/dotnet/fsharp/\nPage title: F# docs - get started, tutorials, reference. - .NET | Microsoft Learn\nHeadings: F# documentation | Learn to program in F# | Get started | video | Download | F# language guide | Overview | Reference | F# fundamentals | Overview | Concept | Tutorial | F# in practice | Overview | Training | F# tools | Overview | New features in F# | What's new | Tutorial\nChunk: 1/1\n\nF# docs - get started, tutorials, reference. - .NET | Microsoft Learn Skip to main content This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Download Microsoft Edge More info about Internet Explorer and Microsoft Edge Table of contents Read in English Edit F# documentation Learn how to write any application using the F# programming language on .NET. Learn to program in F# Get started What is F#? F# strategy First steps in F# Install F# Get started with F# in Visual Studio Get started with F# in Visual Studio Code Further learning video Beginning F# video series Download Download the .NET SDK F# language guide Overview F# language guide Reference F# language specification F# RFCs F# library reference .NET library reference F# fundamentals Overview Overview Tour of F# Values Concept Types and inference Functional concepts Type providers Tutorial Using Functions Pattern matching Object programming Async programming F# in practice Overview F# for web development F# for machine learning F# for deploying Azure resources Training F# style guide F# code formatting guidelines F# coding conventions F# tools Overview F# Interactive F# development tools F# notebooks F# for JavaScript New features in F# What's new What's new in F# 10 What's new in F# 9 What's new in F# 8 What's new in F# 7 What's new in F# 6 What's new in F# 5 What's new in F# 4.7 Tutorial Explore tasks Explore interpolated strings Explore anonymous records en-us Your Privacy Choices Theme Light Dark High contrast AI Disclaimer Previous Versions Blog Contribute Privacy Consumer Health Privacy Terms of Use Trademarks \u00a9 Microsoft 2026",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:35",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "e040ee10dde2b049",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 1/5\n\nLearn OCaml Search OCaml packages Standard Library API Learn Tools Packages Community News Play Get Started Search OCaml packages Learn Tools Packages Community News Play Standard Library API Get started Learn Overview Get Started Language Platform Guides Cookbook Exercises Books \u25be Overview Get Started Language Platform Guides Cookbook Exercises Books Explore the OCaml Documentation You can explore the OCaml documentation, Platform Tools, guides, exercises, and books to enhance your knowledge. Search inside the OCaml documentation Install OCaml 5.4.1 Standard Library API OCaml Language Manual Jump to Beginner Section Jump to Intermediate Section Jump to Advanced Section FOUNDATIONS FOR BEGINNERS GET STARTED Introduction To OCaml Install OCaml and gain a high-level understanding of the language Installing OCaml A Tour of OCaml Your First OCaml Program Introduction to opam Switches Get Started LANGUAGE The OCaml Language An in-depth explanation of language features and data structures from the Standard Library Values and Functions Data Types and Pattern Matching Lists Loops and Recursions Language Documentation RECOMMENDED BOOK OCaml Programming: Correct + Efficient + Beautiful FREE Beginner This textbook, used in a third-semester Cornell course, teaches functional programming and data structures in OCaml, emphasizing semantics and software engineering. Suitable for students with Python and Java backgrounds, it requires some imperative language skills and basic discrete mathematics. The book includes over 200 YouTube videos as supplementary or alternative learning resources.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:36",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "53d1414c82162700",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 2/5\n\nRead Online See More Books RECOMMENDED BOOK OCaml From the Very Beginning FREE Beginner John Whitington's \"OCaml from the Very Beginning\" is a beginner-friendly guide to learning OCaml, a modern programming language. The book gradually introduces concepts in concise chapters, with exercises and answers. It's suitable for both novice and experienced programmers, and can be used in academic settings or for self-study. Read Online Buy on Amazon See More Books EXERCISES Exercises for Beginners Write a function that returns the last element of a list. Beginner Write a function to reverse a list. Beginner Find out whether a list is a palindrome. Beginner Eliminate consecutive duplicates of list elements. Intermediate View all Exercises PLATFORM TOOLS The OCaml Platform opam OCaml's package manager for managing OCaml compilers and libraries Get Started Dune Dune is a user-friendly and efficient build system for developing OCaml projects Get Started Go to Platform Tools Documentation EXPLORING THE INTERMEDIATE LEVEL GUIDES Practical-Minded Tutorials and Guides How to solve real-world problems in OCaml Formatting and Wrapping Text Debugging Error Handling Profiling See More Guides PLATFORM The OCaml Platform Learn to leverage the tooling around OCaml and create your own projects and libraries Bootstrapping a Project Managing Dependencies Install a Specific Compiler Version Configuring Your Editor Platform Tools Documentation RECOMMENDED BOOK Real World OCaml FREE Intermediate This practical book guides through using OCaml for real-world problems in data processing and web applications, covering its various programming styles with real examples.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:36",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "a7539699725b04f5",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 3/5\n\nIt starts with basics and advances to topics like the module system and foreign-function interface, focusing on efficient coding using the Jane Street core library. Read Online See More Books RECOMMENDED BOOK More OCaml: Algorithms, Methods, & Diversions Intermediate \"More OCaml\" by John Whitington explores OCaml's functional programming and algorithms, concluding with a PDF file project. Tailored for both existing OCaml programmers and those new to the language, it includes exercises with answers. The book starts with an OCaml fundamentals summary, making it accessible and informative for a diverse readership. Buy on Amazon See More Books EXERCISES Practice with Exercises Generate completely balanced binary trees for a given number of nodes using the cbal_tree function. Intermediate Assign coordinates (x, y) to nodes in a binary tree, with x based on the inorder sequence and y based on the depth of the node. Intermediate Generate the preorder and inorder sequences of a binary tree. Intermediate Return all acyclic paths between two nodes a and b in a given graph. Intermediate View all Exercises GUIDE Language Manual The OCaml language manual is a comprehensive guide covering syntax, features, and usage. It assists developers and learners in understanding capabilities, best practices, and language features. Take Me There ELEVATED EXPERTISE RECOMMENDED BOOK OCaml Scientific Computing Advanced This book merges functional programming in OCaml with numerical computation, tailored for data science and AI. It's ideal for those familiar with functional programming, offering a mix of foundational concepts and advanced cloud computing techniques. The structure allows readers to choose topics of interest, making it a versatile guide for learning and applying scientific computing.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:36",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "b253acc785af37d8",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 4/5\n\nBuy on Springer Buy on Amazon See More Books Papers Aspiring towards greater understanding of the language? Want to push the limits and discover brand new things? Check out papers written by leading OCaml researchers: Retrofitting Effect Handlers Onto OCaml Effect handlers have been gathering momentum as a mechanism for modular programming with user-defined effects. Effect handlers allow for non-local control flow mechanisms such as generators, async/await, lightweight threads, and coroutines to be composably expressed. We present a design and evaluate a full-fledged efficient implementation of effect handlers for OCaml, an industrial-strength multi-paradigm programming language. Our implementation strives to maintain the backwards compatibility and performance profile of existing OCaml code. Retrofitting effect handlers onto OCaml is challenging since OCaml does not currently have any non-local control flow mechanisms other than exceptions. Our implementation of effect handlers for OCaml: (i) imposes a mean 1% overhead on a comprehensive macro benchmark suite that does not use effect handlers; (ii) remains compatible with program analysis tools that inspect the stack; and (iii) is efficient for new code that makes use of effect handlers. K. C. Sivaramakrishnan, Stephen Dolan, Leo White, Tom Kelly, Sadiq Jaffer, Anil Madhavapeddy PLDI effects Extending OCaml's `open` We propose a harmonious extension of OCaml's `open` construct. OCaml's existing construct `open M` imports the names exported by the module `M` into the current scope. At present `M` is required to be the path to a module.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:36",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "11f0d053658f7aeb",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 5/5\n\nWe propose extending `open` to instead accept an arbitrary module expression, making it possible to succinctly address a number of existing scope-related difficulties that arise when writing OCaml programs. Runhang Li, Jeremy Yallop ocaml-workshop core language Bounding Data Races in Space and Time We propose a new semantics for shared-memory parallel programs that gives strong guarantees even in the presence of data races. Our local data race freedom property guar- antees that all data-race-free portions of programs exhibit sequential semantics. We provide a straightforward oper- ational semantics and an equivalent axiomatic model, and evaluate an implementation for the OCaml programming language. Our evaluation demonstrates that it is possible to balance a comprehensible memory model with a reasonable (no overhead on x86, ~0.6% on ARM) sequential performance trade-off in a mainstream programming language Stephen Dolan, KC Sivaramakrishnan, Anil Madhavapeddy PLDI multicore View all papers Footer Light Dark System Innovation. Community. Security. GitHub Discord Twitter Peertube RSS Light Dark System About OCaml Changelog Releases Industrial Users Academic Users Why OCaml Resources Install OCaml Get Started Platform Tools Language Manual Standard Library API Books Exercises Papers OCaml Playground Logo Ecosystem Packages Community Events OCaml Planet Jobs Policies Security Carbon Footprint Governance Privacy Code of Conduct",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:36",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "939e51a4a35cb3b1",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Clojure Guides\nSource type: official-documentation\nURL: https://clojure.org/guides/getting_started\nPage title: Clojure - Getting Started\nHeadings: Getting Started | What tools do I need? | Step-by-Step Installation Videos | How do I work with these tools? | How do I learn the language? | Where can I ask questions?\nChunk: 1/2\n\nClojure - Getting Started Clojure Overview Reference\u00e2\u0080\u008d API Releases Guides Community Dev News \ued11 clojure.org ask.clojure.org Learning Getting Started Install Clojure Editors Structural Editing REPL Programming \ueab8 Learn Clojure \ueab8 FAQ Language spec Reading Clojure Characters Destructuring Threading Macros Equality Comparators Reader Conditionals Higher Order Functions Usage Dev Startup Time Tools Deps and CLI tools.build Libraries Go Block Best Practices test.check Getting Started \ueab2 \ueab9 Getting Started Table of Contents What tools do I need? Step-by-Step Installation Videos How do I work with these tools? How do I learn the language? Where can I ask questions? Welcome to Clojure! What tools do I need? Clojure is a dynamic development environment where you interact with your program while you write it, growing and adding to it while it\u2019s running. To work with Clojure you need an editor that supports evaluation in source files and structural editing (working with nested forms in addition to character editing). Install these first: Clojure provides the language, a REPL (Read Eval Print Loop), library support, and program runner Editor with interactive development support Step-by-Step Installation Videos macOS Linux Windows WSL Windows How do I work with these tools? The details will depend on your operating system and editor but the essential flow for all of them is the same: Create or open a file Connect a Clojure environment (aka the REPL) Write Clojure code in your editor Evaluate the code in your editor using the connected environment Repeat! Learn more: REPL - learn more about the REPL and how to use it interactively Structural editing - working with code as forms, not text How do I learn the language? There are many ways to learn the Clojure language.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:38",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "c2f76df9b8a103e9",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Clojure Guides\nSource type: official-documentation\nURL: https://clojure.org/guides/getting_started\nPage title: Clojure - Getting Started\nHeadings: Getting Started | What tools do I need? | Step-by-Step Installation Videos | How do I work with these tools? | How do I learn the language? | Where can I ask questions?\nChunk: 2/2\n\nThis tutorial covers the basics: Learn Clojure guide If you\u2019d like to work from a book , these are some excellent starting points: If you\u2019d like to try some practice problems: 4Clojure - a large set of Clojure practice problems exercism Clojure track - larger problems with mentor support Also check out: Clojure Camp - an interactive community for beginner Clojure developers Other learning resources for more options\u2026\u200b Where can I ask questions? There are many places to interact with other Clojure developers: Ask Clojure [official] - Clojure Q&A and knowledge base Clojurians Slack channel - Clojure live chat, check out #beginners, #jobs, etc Clojureverse - Clojure forum Original author: Alex Miller Community Resources Contributing Companies Site Legal License Privacy Policy Documentation Overview Reference API Guides Libraries & Tools Updates News Events ETC ClojureTV Books Swag Code Releases Source ClojureScript ClojureCLR Copyright 2008-2022 Rich Hickey | Privacy Policy Logo & site design by Tom Hickey Published 2026-06-01 Update this page",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:38",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "9db06aaf158a9108",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Elm Guide\nSource type: official-documentation\nURL: https://guide.elm-lang.org/\nPage title: Introduction \u00b7 An Introduction to Elm\nHeadings: Introduction | An Introduction to Elm | A Quick Sample | Why a functional language ? | results matching \" \" | No results matching \" \"\nChunk: 1/2\n\nIntroduction \u00b7 An Introduction to Elm Introduction Core Language The Elm Architecture Buttons Text Fields Forms Types Reading Types Type Aliases Custom Types Pattern Matching Error Handling Maybe Result Commands and Subscriptions HTTP JSON Random Time Installation Code Editor Elm JavaScript Interop Flags Ports Custom Elements Limits Web Apps Navigation URL Parsing Modules Structure Optimization Html.lazy Html.keyed Minification Next Steps Appendix Types as Sets Types as Bits Function Types Published with GitBook Introduction An Introduction to Elm Elm is a functional language that compiles to JavaScript. It helps you make websites and web apps. It has a strong emphasis on simplicity and quality tooling. This guide will: Teach you the fundamentals of programming in Elm. Show you how to make interactive apps with The Elm Architecture . Emphasize principles and patterns that generalize to programming in any language. By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use. If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript code. The ideas transfer pretty easily!",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:39",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "8e9a858e06d19dfe",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Elm Guide\nSource type: official-documentation\nURL: https://guide.elm-lang.org/\nPage title: Introduction \u00b7 An Introduction to Elm\nHeadings: Introduction | An Introduction to Elm | A Quick Sample | Why a functional language ? | results matching \" \" | No results matching \" \"\nChunk: 2/2\n\nA Quick Sample Here is a little program that lets you increment and decrement a number: import Browser import Html exposing ( Html , button, div, text) import Html.Events exposing (onClick) main = Browser .sandbox { init = 0 , update = update, view = view } type Msg = Increment | Decrement update msg model = case msg of Increment -> model + 1 Decrement -> model - 1 view model = div [] [ button [ onClick Decrement ] [ text \"-\" ] , div [] [ text ( String .fromInt model) ] , button [ onClick Increment ] [ text \"+\" ] ] Try it out in the online editor here . The code can definitely look unfamiliar at first, so we will get into how this example works soon! Why a functional language ? You can get some benefits from programming in a functional style , but there are some things you can only get from a functional language like Elm: No runtime errors in practice. Friendly error messages. Reliable refactoring. Automatically enforced semantic versioning for all Elm packages. No combination of JS libraries can give you all of these guarantees. They come from the design of the language itself! And thanks to these guarantees, it is quite common for Elm programmers to say they never felt so confident while programming. Confident to add features quickly. Confident to refactor thousands of lines. But without the background anxiety that you missed something important! I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised! results matching \" \" No results matching \" \"",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:40",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "232cbcc962aa2eed",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Google Engineering Practices Documentation\nSource type: engineering-guide\nURL: https://google.github.io/eng-practices/\nPage title: Google Engineering Practices Documentation | eng-practices\nHeadings: eng-practices | Google Engineering Practices Documentation | Terminology | License\nChunk: 1/1\n\nGoogle Engineering Practices Documentation | eng-practices eng-practices Google Engineering Practices Documentation Google has many generalized engineering practices that cover all languages and all projects. These documents represent our collective experience of various best practices that we have developed over time. It is possible that open source projects or other organizations would benefit from this knowledge, so we work to make it available publicly when possible. Currently this contains the following documents: Google\u2019s Code Review Guidelines , which are actually two separate sets of documents: The Code Reviewer\u2019s Guide The Change Author\u2019s Guide Terminology There is some Google-internal terminology used in some of these documents, which we clarify here for external readers: CL : Stands for \u201cchangelist\u201d, which means one self-contained change that has been submitted to version control or which is undergoing code review. Other organizations often call this a \u201cchange\u201d, \u201cpatch\u201d, or \u201cpull-request\u201d. LGTM : Means \u201cLooks Good to Me\u201d. It is what a code reviewer says when approving a CL. License The documents in this project are licensed under the CC-By 3.0 License , which encourages you to share these documents. See https://creativecommons.org/licenses/by/3.0/ for more details. This site is open source. Improve this page .",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "engineering-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:41",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "72034c44d93bcffe",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 1/13\n\nProducts | Atlassian Skip to content Products Featured Developers Product Managers IT professionals Business Teams Leadership Teams See all apps Featured apps Jira Flexible project management Confluence Knowledge, all in one place Jira Service Management Deliver service at high velocity Atlassian Collections Supercharge teamwork seamlessly Jira Confluence Loom Optimize strategy and outcomes confidently Focus Talent Align Deliver service at high-velocity Jira Service Management Customer Service Management Assets Ship high-quality software fast Rovo Dev DX Pipelines Bitbucket Build products with confidence Jira Product Discovery Feedback Rovo Powered by Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Jira Flexible project management Bitbucket Source code and CI/CD Rovo Dev Agentic AI for developers Pipelines Scalable CI/CD automation DX Measure productivity and AI impact \u00c2 Ship high-quality software fast Rovo Dev DX Pipelines Bitbucket Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Jira Product Discovery Capture & prioritize ideas Jira Flexible project management Confluence Knowledge, all in one place \u00c2 Supercharge teamwork seamlessly Jira Confluence Loom Build products with confidence Jira Product Discovery Feedback Rovo Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Jira Service Management Deliver service at high velocity Guard Enhanced cloud security Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "cb57eb8b34545f98",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 2/13\n\nJira Flexible project management Confluence Knowledge, all in one place Trello Capture and organize your tasks Loom Quick, async video updates Jira Service Management Deliver service at high velocity Customer Service Management Customer experiences reimagined Supercharge teamwork seamlessly Jira Confluence Loom Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Focus Enterprise-scale strategic planning Talent Knowledge workforce planning Align Enterprise-wide work planning & value \u00c2 Optimize strategy and outcomes confidently Focus Talent Align Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Solutions Solutions By Use Case Team collaboration Strategy and planning Service management Software development By Team Software Marketing IT Product By Size Enterprise Small Business Startup Non-profit By Industry Retail Telecommunications Professional Services Government Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Why Atlassian?",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "a019ea8757a4cb11",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 3/13\n\nSystem of Work New Atlassian's blueprint for how teams work together Marketplace Connect thousands of apps to your Atlassian products Customers Case studies & stories powered by teamwork FedRAMP Compliant solutions for the public sector Resilience Enterprise-grade & highly performant infrastructure Platform Our deeply integrated, reliable & secure platform Trust center Ensure your data's security, compliance & availability Resources Customer Support Ask questions, report bugs & give us feedback Find Partners Consulting, training & product customization support Atlassian Ascend Resources and support for your transformation Community Learn, connect and grow with the Atlassian Community Support General Inquiries Technical Support Product Advice Pricing and Billing Partner Support Developer Support Enterprise Support Purchasing and Licensing Resources Project Management Project Collaboration Agile Team Playbook Atlassian Learning Product Documentation Get Started Enterprise More + Skip to content Products Featured Developers Product Managers IT professionals Business Teams Leadership Teams Solutions Why Atlassian? Resources Enterprise Sign in Featured apps Jira Flexible project management Confluence Knowledge, all in one place Jira Service Management Deliver service at high velocity Atlassian Collections Supercharge teamwork seamlessly Jira Confluence Loom Optimize strategy and outcomes confidently Focus Talent Align Deliver service at high-velocity Jira Service Management Customer Service Management Assets Ship high-quality software fast Rovo Dev DX Pipelines Bitbucket Build products with confidence Jira Product Discovery Feedback Rovo Powered by Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "494e8ed0325830ab",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 4/13\n\nDevelopers Jira Flexible project management Bitbucket Source code and CI/CD Rovo Dev Agentic AI for developers Pipelines Scalable CI/CD automation DX Measure productivity and AI impact \u00c2 Ship high-quality software fast Rovo Dev DX Pipelines Bitbucket Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Product Managers Jira Product Discovery Capture & prioritize ideas Jira Flexible project management Confluence Knowledge, all in one place \u00c2 Supercharge teamwork seamlessly Jira Confluence Loom Build products with confidence Jira Product Discovery Feedback Rovo Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. IT professionals Jira Service Management Deliver service at high velocity Guard Enhanced cloud security Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Business Teams Jira Flexible project management Confluence Knowledge, all in one place Trello Capture and organize your tasks Loom Quick, async video updates Jira Service Management Deliver service at high velocity Customer Service Management Customer experiences reimagined Supercharge teamwork seamlessly Jira Confluence Loom Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Leadership Teams Focus Enterprise-scale strategic planning Talent Knowledge workforce planning Align Enterprise-wide work planning & value \u00c2 Optimize strategy and outcomes confidently Focus Talent Align Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Solutions By Use Case Team collaboration Strategy and planning Service management Software development By Team Software Marketing IT Product By Size Enterprise Small Business Startup Non-profit By Industry Retail Telecommunications Professional Services Government Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "44879310c7c4beda",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 5/13\n\nWhy Atlassian System of Work New Atlassian's blueprint for how teams work together Marketplace Connect thousands of apps to your Atlassian products Customers Case studies & stories powered by teamwork FedRAMP Compliant solutions for the public sector Resilience Enterprise-grade & highly performant infrastructure Platform Our deeply integrated, reliable & secure platform Trust center Ensure your data's security, compliance & availability Resources Customer Support Ask questions, report bugs & give us feedback Find Partners Consulting, training & product customization support Atlassian Ascend Resources and support for your transformation Community Learn, connect and grow with the Atlassian Community Support General Inquiries Technical Support Product Advice Pricing and Billing Partner Support Developer Support Enterprise Support Purchasing and Licensing Resources Project Management Project Collaboration Agile Team Playbook Atlassian Learning Product Documentation Get Started Products Featured Developers Product Managers IT professionals Business Teams Leadership Teams Solutions Why Atlassian? Resources Enterprise Sign in Featured apps Jira Flexible project management Confluence Knowledge, all in one place Jira Service Management Deliver service at high velocity Atlassian Collections Supercharge teamwork seamlessly Jira Confluence Loom Optimize strategy and outcomes confidently Focus Talent Align Deliver service at high-velocity Jira Service Management Customer Service Management Assets Ship high-quality software fast Rovo Dev DX Pipelines Bitbucket Build products with confidence Jira Product Discovery Feedback Rovo Powered by Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "df2b44a48a9488ed",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 6/13\n\nDevelopers Jira Flexible project management Bitbucket Source code and CI/CD Rovo Dev Agentic AI for developers Pipelines Scalable CI/CD automation DX Measure productivity and AI impact \u00c2 Ship high-quality software fast Rovo Dev DX Pipelines Bitbucket Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Product Managers Jira Product Discovery Capture & prioritize ideas Jira Flexible project management Confluence Knowledge, all in one place \u00c2 Supercharge teamwork seamlessly Jira Confluence Loom Build products with confidence Jira Product Discovery Feedback Rovo Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. IT professionals Jira Service Management Deliver service at high velocity Guard Enhanced cloud security Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Business Teams Jira Flexible project management Confluence Knowledge, all in one place Trello Capture and organize your tasks Loom Quick, async video updates Jira Service Management Deliver service at high velocity Customer Service Management Customer experiences reimagined Supercharge teamwork seamlessly Jira Confluence Loom Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Leadership Teams Focus Enterprise-scale strategic planning Talent Knowledge workforce planning Align Enterprise-wide work planning & value \u00c2 Optimize strategy and outcomes confidently Focus Talent Align Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge. Solutions By Use Case Team collaboration Strategy and planning Service management Software development By Team Software Marketing IT Product By Size Enterprise Small Business Startup Non-profit By Industry Retail Telecommunications Professional Services Government Rovo AI-powered apps \u00e2\u0080\u0093 driven by your team's knowledge.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "c48fdf7d98e89c43",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 7/13\n\nWhy Atlassian System of Work New Atlassian's blueprint for how teams work together Marketplace Connect thousands of apps to your Atlassian products Customers Case studies & stories powered by teamwork FedRAMP Compliant solutions for the public sector Resilience Enterprise-grade & highly performant infrastructure Platform Our deeply integrated, reliable & secure platform Trust center Ensure your data's security, compliance & availability Resources Customer Support Ask questions, report bugs & give us feedback Find Partners Consulting, training & product customization support Atlassian Ascend Resources and support for your transformation Community Learn, connect and grow with the Atlassian Community Support General Inquiries Technical Support Product Advice Pricing and Billing Partner Support Developer Support Enterprise Support Purchasing and Licensing Resources Project Management Project Collaboration Agile Team Playbook Atlassian Learning Product Documentation Get Started featured app \u00e2\u0080\u00a2 Jira Great outcomes start with Jira AI-powered project management that removes the work around work. Keep teams in sync and on track. Try now Learn more Explore Atlassian products For every team, from startup to enterprise Recommended Top apps to kickstart your productivity Confluence Spend less time hunting things down and more time getting things done. Organize your work, create documents, and discuss everything in one place. Try now Learn more Rovo Help every team work smarter and faster with AI-powered Search, Chat and Agents - or build custom agents, automations, and apps with Studio. Try now Learn more Jira Service Management Unite teams on a single AI-powered platform to deliver service at scale.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "e097931c6308a745",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 8/13\n\nTry now Learn more Collections Curated Atlassian apps and AI agents to help every team work better together Supercharge teamwork seamlessly Jira \u00e2\u0080\u00a2 Confluence \u00e2\u0080\u00a2 Loom Try now Learn more Optimize strategy and outcomes confidently\u00e2\u0080\u00a8\u00e2\u0080\u00a8 Focus \u00e2\u0080\u00a2 Talent \u00e2\u0080\u00a2 Align Contact sales Learn more Deliver service at high-velocity\u00e2\u0080\u00a8\u00e2\u0080\u00a8 Jira Service Management \u00e2\u0080\u00a2 Customer Service Management \u00e2\u0080\u00a2 Assets Try now Learn more Ship high-quality software fast Rovo Dev \u00e2\u0080\u00a2 DX \u00e2\u0080\u00a2 Pipelines \u00e2\u0080\u00a2 Bitbucket Contact sales Learn more Build products with confidence Jira Product Discovery \u00e2\u0080\u00a2 Feedback \u00e2\u0080\u00a2 Rovo Contact sales Learn more Explore by role All Developers Product Managers IT Professionals Business Teams Leadership Jira Plan, track, and deliver your biggest ideas together with Jira - the project management tool for all teams. Try now Learn more Confluence Spend less time hunting things down and more time getting things done. Organize your work, create documents, and discuss everything in one place. Try now Learn more Loom Move work forward by sharing Loom video messages and AI-powered meeting recaps. Try now Learn more Rovo Help every team work smarter and faster with AI-powered Search, Chat and Agents - or build custom agents, automations, and apps with Studio. Try now Learn more Bitbucket Collaborate on code with inline comments and pull requests. Manage and share your Git repositories to build and ship software, as a team. Try now Learn more Jira Service Management Unite teams on a single AI-powered platform to deliver service at scale. Try now Learn more Jira Product Discovery Build the right thing with Jira Product Discovery. Capture feedback, prioritize ideas, and create roadmaps tied to delivery in Jira. Try now Learn more Trello Collaborate and get more done.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "897f40855970adda",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 9/13\n\nTrello boards enable your team to organize projects in a fun, flexible, and visual way. Try now Learn more Rovo Dev Stay in the flow longer with AI-enabled productivity and quality for the full software delivery lifecycle. Try now Learn more Jira Align part of strategy collection Align work planning and delivery to strategy across the entire enterprise. Contact sales Learn more Talent part of strategy collection Plan and assemble your future-ready workforce with Talent. Contact sales Learn more Pipelines Orchestrate your software delivery journey, for a single team or across your organization, with Bitbucket Pipelines. Try now Learn more Customer Service Management Part of Service Collection AI-powered customer service that gives teams the context to deliver smarter service and improve with every interaction. Try now Learn more Focus part of strategy collection Connect strategy to goals, work, people, and funds. With the Strategy Collection, decision-makers bridge the gap between strategy and execution and achieve remarkable outcomes. Contact sales Learn more DX part of software collection Measure and improve productivity, quality, and speed with the AI-native SDLC for every software team. Contact sales Learn more Assets Part of Service Collection Gain visibility into dependencies so you can manage assets and configuration items, quickly troubleshoot incidents, and minimize the risk of changes. Try now Learn more Guard Company-wide visibility, security policies, and control across your Atlassian cloud infrastructure. Try now Learn more Statuspage Incidents happen. Keep your users informed and ditch the flood of support emails during downtime. Try now Learn more Bamboo Continuous integration, deployment, and release management.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "3ce49f9c8081593f",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 10/13\n\nDownload Learn more SourceTree Harness the full power of Git and Mercurial in a beautifully simple application. Download Learn more Jira Plan, track, and deliver your biggest ideas together with Jira - the project management tool for all teams. Try now Learn more Rovo Help every team work smarter and faster with AI-powered Search, Chat and Agents - or build custom agents, automations, and apps with Studio. Try now Learn more Bitbucket Collaborate on code with inline comments and pull requests. Manage and share your Git repositories to build and ship software, as a team. Try now Learn more Rovo Dev Stay in the flow longer with AI-enabled productivity and quality for the full software delivery lifecycle. Try now Learn more Pipelines Orchestrate your software delivery journey, for a single team or across your organization, with Bitbucket Pipelines. Try now Learn more DX part of software collection Measure and improve productivity, quality, and speed with the AI-native SDLC for every software team. Contact sales Learn more SourceTree Harness the full power of Git and Mercurial in a beautifully simple application. Try now Learn more Bamboo Continuous integration, deployment, and release management. Contact sales Learn more Jira Plan, track, and deliver your biggest ideas together with Jira - the project management tool for all teams. Try now Learn more Confluence Spend less time hunting things down and more time getting things done. Organize your work, create documents, and discuss everything in one place. Try now Learn more Jira Product Discovery Build the right thing with Jira Product Discovery. Capture feedback, prioritize ideas, and create roadmaps tied to delivery in Jira.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "c8f02268769b3fd4",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 11/13\n\nTry now Learn more Rovo Help every team work smarter and faster with AI-powered Search, Chat and Agents - or build custom agents, automations, and apps with Studio. Try now Learn more Jira Service Management Unite teams on a single AI-powered platform to deliver service at scale. Try now Learn more Rovo Help every team work smarter and faster with AI-powered Search, Chat and Agents - or build custom agents, automations, and apps with Studio. Try now Learn more Guard Company-wide visibility, security policies, and control across your Atlassian cloud infrastructure. Try now Learn more Assets Part of Service Collection Gain visibility into dependencies so you can manage assets and configuration items, quickly troubleshoot incidents, and minimize the risk of changes. Try now Learn more Customer Service Management Part of Service Collection AI-powered customer service that gives teams the context to deliver smarter service and improve with every interaction. Try now Learn more Statuspage Incidents happen. Keep your users informed and ditch the flood of support emails during downtime. Try now Learn more Jira Plan, track, and deliver your biggest ideas together with Jira - the project management tool for all teams. Try now Learn more Confluence Spend less time hunting things down and more time getting things done. Organize your work, create documents, and discuss everything in one place. Try now Learn more Jira Service Management Unite teams on a single AI-powered platform to deliver service at scale. Try now Learn more Loom Move work forward by sharing Loom video messages and AI-powered meeting recaps. Try now Learn more Rovo Help every team work smarter and faster with AI-powered Search, Chat and Agents - or build custom agents, automations, and apps with Studio.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "962fc5d593148fa4",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 12/13\n\nTry now Learn more Trello Collaborate and get more done. Trello boards enable your team to organize projects in a fun, flexible, and visual way. Try now Learn more Assets Part of Service Collection Gain visibility into dependencies so you can manage assets and configuration items, quickly troubleshoot incidents, and minimize the risk of changes. Try now Learn more Customer Service Management Part of Service Collection AI-powered customer service that gives teams the context to deliver smarter service and improve with every interaction. Try now Learn more Statuspage Incidents happen. Keep your users informed and ditch the flood of support emails during downtime. Try now Learn more Rovo Help every team work smarter and faster with AI-powered Search, Chat and Agents - or build custom agents, automations, and apps with Studio. Try now Learn more Focus part of strategy collection Connect strategy to goals, work, people, and funds. With the Strategy Collection, decision-makers bridge the gap between strategy and execution and achieve remarkable outcomes. Contact sales Learn more Talent part of strategy collection Plan and assemble your future-ready workforce with Talent. Contact sales Learn more Jira Align part of strategy collection Align work planning and delivery to strategy across the entire enterprise.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "63e0b72077fd65b6",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Atlassian Software Development Guides\nSource type: practical-guide\nURL: https://www.atlassian.com/software\nPage title: Products | Atlassian\nHeadings: Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Support | Resources | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Featured apps | Atlassian Collections | By Use Case | By Team | By Size | By Industry | Great outcomes start with Jira | Explore Atlassian products | Explore by role | Atlassian Cloud Platform | Additional resources | Marketplace | Community | Find a partner | Products | Resources | Learn\nChunk: 13/13\n\nContact sales Learn more Atlassian Cloud Platform The connected foundation of your system of work Home Goals Teams Studio Search Chat Analytics Admin Learn more Additional resources Marketplace Connect thousands of apps to your Atlassian products Learn more Community Learn, connect, and grow with the Atlassian Community Learn more Find a partner Consulting, training, & product customization support Learn more Company Careers Events Blogs Investor Relations Atlassian Foundation Press kit Contact us Products Rovo Jira Jira Align Jira Service Management Confluence Loom Trello Bitbucket See all products Resources Technical support Purchasing & licensing Atlassian Community Knowledge base Marketplace My account Create support ticket Learn Partners Training & certification Documentation Developer resources Enterprise services See all resources Copyright \u00c2\u00a9 2026 Atlassian Privacy policy Notice at Collection Terms Impressum English \u00e2\u0096\u00be",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "practical-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 7,
+        "created_at": "2026-06-03T03:41:43",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "3550e23415ef8bfa",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Martin Fowler\nSource type: architecture-guide\nURL: https://martinfowler.com/\nPage title: martinfowler.com\nHeadings: Topics | about me | content | Thoughtworks | follow | A website on building software effectively | Photostream | Data Management | Domain-Specific Languages | Books | Conference Talks | Board Games | Tags | Recent Changes | Fragments: June  2 | Fragments: May 27 | The VibeSec Reckoning | Bliki: Vibe Coding | Maintainability sensors for coding agents | Bliki: Interrogatory LLM | What is Code | Bliki: Mythical Man Month | Topics | about me | content | Thoughtworks | follow\nChunk: 1/8\n\nmartinfowler.com Refactoring Agile Architecture About Thoughtworks Topics Architecture Refactoring Agile Delivery Microservices Data Testing DSL about me About Books FAQ content Videos Content Index Fragments Board Games Photography Thoughtworks Home Insights Careers Radar Engineering follow RSS Mastodon LinkedIn Bluesky X BGG Software development is a young profession, and we are still learning the techniques and building the tools to do it effectively. I've been involved in this activity for over three decades and in the last two I've been writing on this website about patterns and practices that make it easier to build useful software. The site began as a place to put my own writing, but I also use it to publish articles by my colleagues. In 2000, I joined Thoughtworks , where my role is to learn about the techniques that we've learned to deliver software for our clients, and pass these techniques on to the wider software industry. As this site has developed into a respected platform on software development, I've edited and published articles by my colleagues, both Thoughtworkers and others, to help useful writing reach a wider audience. photo: Christopher Ferguson Martin Fowler A website on building software effectively If there's a theme that runs through my work and writing on this site, it's the interplay between the shift towards agile thinking and the technical patterns and practices that make agile software development practical. While specifics of technology change rapidly in our profession, fundamental practices and patterns are more stable. So writing about these allows me to have articles on this site that are several years old but still as relevant as when they were written.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "architecture-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:45",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "1ddf7787fca7194e",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Martin Fowler\nSource type: architecture-guide\nURL: https://martinfowler.com/\nPage title: martinfowler.com\nHeadings: Topics | about me | content | Thoughtworks | follow | A website on building software effectively | Photostream | Data Management | Domain-Specific Languages | Books | Conference Talks | Board Games | Tags | Recent Changes | Fragments: June  2 | Fragments: May 27 | The VibeSec Reckoning | Bliki: Vibe Coding | Maintainability sensors for coding agents | Bliki: Interrogatory LLM | What is Code | Bliki: Mythical Man Month | Topics | about me | content | Thoughtworks | follow\nChunk: 2/8\n\nAs software becomes more critical to modern business, software needs to be able to react quickly to changes, allowing new features to be conceived, developed and put into production rapidly. The techniques of agile software development began in the 1990s and became steadily more popular in the last decade. They focus on a flexible approach to planning, which allows software products to change direction as the users' needs change and as product managers learn more about how to make their users effective. While widely accepted now, agile approaches are not easy, requiring significant skills for a team, but more importantly a culture of open collaboration both within the team and with a team's partners. This need to respond fluently to changes has an important impact upon the architecture of a software system. The software needs to be built in such a way that it is able to adapt to unexpected changes in features. One of the most important ways to do this is to write clear code, making it easy to understand what the program is supposed to do. This code should be divided into modules which allow developers to understand only the parts of the system they need to make a change. This production code should be supported with automated tests that can detect any errors made when making a change while providing examples of how internal structures are used. Large and complex software efforts may find the microservices architectural style helps teams deploy software with less entangling dependencies. Creating software that has a good architecture isn't something that can be done first time. Like good prose, it needs regular revisions as programmers learn more about what the product needs to do and how best to design the product to achieve its goals.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "architecture-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:45",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "8192042701caccd0",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Martin Fowler\nSource type: architecture-guide\nURL: https://martinfowler.com/\nPage title: martinfowler.com\nHeadings: Topics | about me | content | Thoughtworks | follow | A website on building software effectively | Photostream | Data Management | Domain-Specific Languages | Books | Conference Talks | Board Games | Tags | Recent Changes | Fragments: June  2 | Fragments: May 27 | The VibeSec Reckoning | Bliki: Vibe Coding | Maintainability sensors for coding agents | Bliki: Interrogatory LLM | What is Code | Bliki: Mythical Man Month | Topics | about me | content | Thoughtworks | follow\nChunk: 3/8\n\nRefactoring is an essential technique to allow a program to be changed safely. It consists of making small changes that don't alter the observable behavior of the software. By combining lots of small changes, developers can revise the software's structure supporting significant modifications that weren't planned when the system was first conceived. Software that runs only on a developer's machine isn't providing value to the customers of the software. Traditionally releasing software has been a long and complicated process, one that hinders the need to evolve software quickly. Continuous Delivery uses automation and collaborative workflows to remove this bottleneck, allowing teams to release software as often as the customers demand. For Continuous Delivery to be possible, we need to build in a solid foundation of Testing , with a range of automated tests that can give us confidence that our changes haven't introduced any bugs. This leads us to integrate testing into programming, which can act to improve our architecture. Photostream San Francisco Data Management There are many kinds of software out there, the kind I'm primarily engaged is Enterprise Applications. One of the enduring problems we need to tackle in this world is data management . The aspects of data managment I've focused on here are how to migrate data stores as their applications respond to changing needs, coping with different contexts across a large enterprise, the role of NoSQL databases, and the broader issues of coping with data that is both Big and Messy. Domain-Specific Languages A common problem in complex software systems is how to capture complicated domain logic in a way that programmers can both easily manipulate and also easily communicate to domain experts.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "architecture-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:45",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "83e54a615e1f098f",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Martin Fowler\nSource type: architecture-guide\nURL: https://martinfowler.com/\nPage title: martinfowler.com\nHeadings: Topics | about me | content | Thoughtworks | follow | A website on building software effectively | Photostream | Data Management | Domain-Specific Languages | Books | Conference Talks | Board Games | Tags | Recent Changes | Fragments: June  2 | Fragments: May 27 | The VibeSec Reckoning | Bliki: Vibe Coding | Maintainability sensors for coding agents | Bliki: Interrogatory LLM | What is Code | Bliki: Mythical Man Month | Topics | about me | content | Thoughtworks | follow\nChunk: 4/8\n\nDomain-Specific Languages (DSLs) create a custom language for a particular problem, either with custom parsers or by conventions within a host language. Books I've written seven books on software development, including Refactoring, Patterns of Enterprise Application Architecture, and UML Distilled. I'm also the editor of a signature series for Addison-Wesley that includes five jolt award winners. My Books Page... Conference Talks I'm often asked to give talks at conferences, from which I've inferred that I'm a pretty good speaker - which is ironic since I really hate giving talks. You can form your own opinion of my talks by watching videos of some my conference talks. My Videos Page... Board Games I've long been a fan of board games, I enjoy a game that fully occupies my mind, clearing out all the serious thoughts for a bit, while enjoying the company of good friends. Modern board games saw dramatic improvement in the 1990's with the rise of Eurogames, and I expect many people would be surprised if they haven't tried any of this new generation. I also appear regularly on Heavy Cardboard . My Board Games page...",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "architecture-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:45",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "c70606ed3ce9966f",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Martin Fowler\nSource type: architecture-guide\nURL: https://martinfowler.com/\nPage title: martinfowler.com\nHeadings: Topics | about me | content | Thoughtworks | follow | A website on building software effectively | Photostream | Data Management | Domain-Specific Languages | Books | Conference Talks | Board Games | Tags | Recent Changes | Fragments: June  2 | Fragments: May 27 | The VibeSec Reckoning | Bliki: Vibe Coding | Maintainability sensors for coding agents | Bliki: Interrogatory LLM | What is Code | Bliki: Mythical Man Month | Topics | about me | content | Thoughtworks | follow\nChunk: 5/8\n\nTags API design \u00b7 agile \u00b7 agile adoption \u00b7 analysis patterns \u00b7 application architecture \u00b7 application integration \u00b7 bad things \u00b7 board games \u00b7 build scripting \u00b7 certification \u00b7 collaboration \u00b7 computer history \u00b7 conference panels \u00b7 conferences \u00b7 continuous delivery \u00b7 covid-19 \u00b7 data analytics \u00b7 data mesh \u00b7 database \u00b7 design \u00b7 dictionary \u00b7 distributed computing magazine \u00b7 diversions \u00b7 diversity \u00b7 documentation \u00b7 domain driven design \u00b7 domain specific language \u00b7 domestic \u00b7 encapsulation \u00b7 enterprise architecture \u00b7 estimation \u00b7 event architectures \u00b7 evolutionary design \u00b7 experience reports \u00b7 expositional architectures \u00b7 extreme programming \u00b7 front-end \u00b7 gadgets \u00b7 generative AI \u00b7 ieeeSoftware \u00b7 infodecks \u00b7 internet culture \u00b7 interviews \u00b7 language feature \u00b7 language workbench \u00b7 lean \u00b7 legacy modernization \u00b7 legal \u00b7 metrics \u00b7 microservices \u00b7 mobile \u00b7 noSQL \u00b7 object collaboration design \u00b7 parser generators \u00b7 photography \u00b7 platforms \u00b7 podcast \u00b7 presentation technique \u00b7 privacy \u00b7 process theory \u00b7 productivity \u00b7 programming environments \u00b7 programming style \u00b7 project planning \u00b7 recruiting \u00b7 refactoring \u00b7 refactoring boundary \u00b7 requirements analysis \u00b7 ruby \u00b7 security \u00b7 talk videos \u00b7 team environment \u00b7 team organization \u00b7 technical debt \u00b7 technical leadership \u00b7 test categories \u00b7 testing \u00b7 thoughtworks \u00b7 tools \u00b7 travel \u00b7 uml \u00b7 version control \u00b7 web development \u00b7 web services \u00b7 website \u00b7 writing 2026 \u00b7 2025 \u00b7 2024 \u00b7 2023 \u00b7 2022 \u00b7 2021 \u00b7 2020 \u00b7 2019 \u00b7 2018 \u00b7 2017 \u00b7 2016 \u00b7 2015 \u00b7 2014 \u00b7 2013 \u00b7 2012 \u00b7 2011 \u00b7 2010 \u00b7 2009 \u00b7 2008 \u00b7 2007 \u00b7 2006 \u00b7 2005 \u00b7 2004 \u00b7 2003 \u00b7 2002 \u00b7 2001 \u00b7 2000 \u00b7 1999 \u00b7 1998 \u00b7 1997 \u00b7 1996 All Content Recent Changes If you'd like to be notified when I post new material, subscribe to my RSS feed.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "architecture-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:45",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "6b2728ef4f708968",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Martin Fowler\nSource type: architecture-guide\nURL: https://martinfowler.com/\nPage title: martinfowler.com\nHeadings: Topics | about me | content | Thoughtworks | follow | A website on building software effectively | Photostream | Data Management | Domain-Specific Languages | Books | Conference Talks | Board Games | Tags | Recent Changes | Fragments: June  2 | Fragments: May 27 | The VibeSec Reckoning | Bliki: Vibe Coding | Maintainability sensors for coding agents | Bliki: Interrogatory LLM | What is Code | Bliki: Mythical Man Month | Topics | about me | content | Thoughtworks | follow\nChunk: 6/8\n\nI also post announcements of new material to Fediverse (Mastodon) , Bluesky , LinkedIn , and X (Twitter) . I also have a page dedicated to recent changes . Fragments: June 2 Tue 02 Jun 2026 11:21 CEST Dodgy metrics for AI usage, history of tech removing jobs, benchmarking closed and open models, LLMs multiply existing cruft, AI slop driving us crazy, I am the Global Interpreter Lock for agents more... Fragments: May 27 Wed 27 May 2026 15:40 GOTO chat with Kent Beck, using AI to help restructure a gnarly codebase, open-source and security, cognitive endurance, Gen Z future with AI, impact of AI on jobs, fumbling AI regulation more... The VibeSec Reckoning Wed 27 May 2026 10:03 Vibe coding has significantly accelerated software prototyping but AI agents frequently recommend insecure configurations, creating security problems. Gautam Koul, Lucian Moss, Neil Drew-Lopez, and Daberechi Ruth Edeokoh share their experience while building applications for Thoughtworks's global marketing. They learned that to combat this we need to write a security context file to guide the AI, be cautious with AI permission requests, create a daily security intelligence feed, and provide builders with a secure-by-default harness and templates. more\u00e2\u0080\u00a6 Bliki: Vibe Coding Thu 21 May 2026 07:49 Vibe coding is building a software application by prompting an LLM, telling it what to build, trying it out, prompting for changes - but without looking at any of the code that the LLM generates. This technique can be used by people without any knowledge of programming. However the resulting software often shows problems with maintainability, correctness, and security - so is best used for disposable software written for a limited audience. more ...",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "architecture-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:45",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "c504c0fc3622ea5b",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Martin Fowler\nSource type: architecture-guide\nURL: https://martinfowler.com/\nPage title: martinfowler.com\nHeadings: Topics | about me | content | Thoughtworks | follow | A website on building software effectively | Photostream | Data Management | Domain-Specific Languages | Books | Conference Talks | Board Games | Tags | Recent Changes | Fragments: June  2 | Fragments: May 27 | The VibeSec Reckoning | Bliki: Vibe Coding | Maintainability sensors for coding agents | Bliki: Interrogatory LLM | What is Code | Bliki: Mythical Man Month | Topics | about me | content | Thoughtworks | follow\nChunk: 7/8\n\nMaintainability sensors for coding agents Tue 19 May 2026 12:38 In her recent article about harness engineering for coding agent users, Birgitta B\u00c3\u00b6ckeler laid out a mental model for expanding a coding agent harness: a system of guides and sensors that increase the probability of good agent outputs and enable self-correction before issues reach human eyes. Birgitta has now started publishing an article where she walks though her experiences using sensors to keep a codebase maintainable. This part looks at static analysis with basic code linting. more\u00e2\u0080\u00a6 Bliki: Interrogatory LLM Thu 14 May 2026 11:04 When we need an LLM to perform a complex task, we often need to feed it a lot of context. Coming up with a design for a new feature requires descriptions of how we want the feature to appear to the user, guidelines on how it should be implemented, information on external systems to consult, and so on. All this can be several pages of markdown. The obvious way to do this is for a human to write this context, but an alternative is to use an LLM to write this context after interviewing a human. more ... What is Code Tue 12 May 2026 09:30 Increasingly humans delegate writing code to agents. Will there even be source code in the future? To wrestle with this question, we have to understand what code is. Unmesh Joshi sees code as having two distinct but intertwined purposes: instructions to a machine and a conceptual model of the problem domain . He explores why it's vital to build a vocabulary to talk to the machine, how programming languages are thinking tools, and how this affects our future as we work with LLMs. more\u00e2\u0080\u00a6 Bliki: Mythical Man Month Tue 05 May 2026 12:18 In the early 1960s, Fred Brooks managed the development of IBM's System/360 computer systems.",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "architecture-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:45",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "e7ccf32056cd2115",
+        "text": "ERLANG KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Martin Fowler\nSource type: architecture-guide\nURL: https://martinfowler.com/\nPage title: martinfowler.com\nHeadings: Topics | about me | content | Thoughtworks | follow | A website on building software effectively | Photostream | Data Management | Domain-Specific Languages | Books | Conference Talks | Board Games | Tags | Recent Changes | Fragments: June  2 | Fragments: May 27 | The VibeSec Reckoning | Bliki: Vibe Coding | Maintainability sensors for coding agents | Bliki: Interrogatory LLM | What is Code | Bliki: Mythical Man Month | Topics | about me | content | Thoughtworks | follow\nChunk: 8/8\n\nAfter it was done he penned his thoughts in the book The Mythical Man-Month which became one of the most influential books on software development after its publication in 1975. Reading it in 2026, we'll find some of it outdated, but it also retains many lessons that are still relevant today. more ... Topics Architecture Refactoring Agile Delivery Microservices Data Testing DSL about me About Books FAQ content Videos Content Index Fragments Board Games Photography Thoughtworks Home Insights Careers Radar Engineering follow RSS Mastodon LinkedIn Bluesky X BGG \u00c2\u00a9 Martin Fowler | Disclosures",
+        "tags": [
+            "erlang",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "architecture-guide"
+        ],
+        "source": "erlang-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:45",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "e57fcabaf8244308",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Haskell Documentation\nSource type: official-documentation\nURL: https://www.haskell.org/documentation/\nPage title: Documentation\nHeadings: Documentation | Introductory Books for Learning Haskell | Intermediate Haskell Books | Courses | Tutorials | Online Resources | Manuals and Guides | Package and Dependency Management | Library Documentation | Language Report\nChunk: 1/3\n\nDocumentation Get started Downloads Playground Community Documentation Security Donate Blog Documentation This page lists various resources to help you with Haskell. Resources marked with [$] require payment. If you are new to Haskell and are not sure where to start from, we recommend CIS194 . CIS194 is the introductory Haskell course of the University of Pennsylvania; it is free, thorough, practical and will guide you from the basics to advanced features of the language. Introductory Books for Learning Haskell Learn You a Haskell for Great Good!",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:47",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "309381b593cd45a0",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Haskell Documentation\nSource type: official-documentation\nURL: https://www.haskell.org/documentation/\nPage title: Documentation\nHeadings: Documentation | Introductory Books for Learning Haskell | Intermediate Haskell Books | Courses | Tutorials | Online Resources | Manuals and Guides | Package and Dependency Management | Library Documentation | Language Report\nChunk: 2/3\n\nReal World Haskell Learn Haskell by building a blog generator [$] Haskell from the Very Beginning [$] Haskell Programming from first principles [$] Thinking Functionally with Haskell [$] Programming in Haskell [$] Haskell: The Craft of Functional Programming [$] The Haskell School of Music [$] Get Programming with Haskell [$] Effective Haskell [$] Haskell: Uma introdu\u00c3\u00a7\u00c3\u00a3o \u00c3 programa\u00c3\u00a7\u00c3\u00a3o funcional (PT-BR) [$] Learn Physics with Functional Programming: A Hands-on Guide to Exploring Physics with Haskell [$] Learn Haskell by Example [$] Finding Success (and Failure) in Haskell Intermediate Haskell Books Developing Web Applications with Haskell and Yesod Parallel and Concurrent Programming in Haskell [$] Functional Design and Architecture [$] Haskell in Depth [$] Practical Haskell [$] Production Haskell [$] Algorithm Design with Haskell Courses Course material created by instructors Well-Typed\u00e2\u0080\u0099s Introduction to Haskell University of Pennsylvania\u00e2\u0080\u0099s CIS 194 Data61 (NICTA) Functional Programming Course Stanford\u00e2\u0080\u0099s cs240h Hendrix\u00e2\u0080\u0099s CSCI 360 University of Helsinki\u00e2\u0080\u0099s Haskell MOOC University of Nottingham\u00e2\u0080\u0099s introductory Haskell course University of Nottingham\u00e2\u0080\u0099s advanced Haskell course Tutorials Short, dense, classic ways to hit the ground running A Gentle Introduction to Haskell Happy Learn Haskell Tutorial Yet Another Haskell Tutorial Write Yourself a Scheme in 48 Hours Write Yourself a Scheme 2.0 Haskell Beginners Course 2022 Online Resources Curated resources put together by Haskellers: The Haskell Wiki The Haskell Wikibook FP Complete\u00e2\u0080\u0099s School of Haskell Stephen Diehl\u00e2\u0080\u0099s What I Wish I Knew When Learning Haskell Chris Allen\u00e2\u0080\u0099s List of Learning Haskell Resources Bob Ippolito\u00e2\u0080\u0099s Getting Started with Haskell Albert Y.C.",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:47",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "b152adfd6f5e35d1",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Haskell Documentation\nSource type: official-documentation\nURL: https://www.haskell.org/documentation/\nPage title: Documentation\nHeadings: Documentation | Introductory Books for Learning Haskell | Intermediate Haskell Books | Courses | Tutorials | Online Resources | Manuals and Guides | Package and Dependency Management | Library Documentation | Language Report\nChunk: 3/3\n\nLai\u00e2\u0080\u0099s Haskell Notes and Examples Learning Haskell Resources on the Haskell Wiki Manuals and Guides Manuals and guides that cover common Haskell tooling: GHC User\u00e2\u0080\u0099s Guide Cabal Homepage And Quick Links Cabal User Guide Haskell Language Server Stack User Guide Haddock User Guide Haskeleton: A Haskell Project Skeleton How to Write a Haskell Program Package and Dependency Management The Cabal guide is a good start but there\u00e2\u0080\u0099s a lot to learn: Stephen Diehl\u00e2\u0080\u0099s Cabal Quickstart The Storage and Interpretation of Cabal Packages The Cabal of Cabal Library Documentation Documentation for Haskell libraries is typically available on Hackage. We also have specialized tools for searching across it, not only by name, but by type. Hoogle API Search Hackage Stackage (with API Search) The Typeclassopedia Haddocks for Libraries included with GHC Language Report The Haskell 2010 language report is available online as HTML and as PDF . The source is available on GitHub . The differences between GHC and the report can be found in the GHC User\u00e2\u0080\u0099s Guide . \u00c2\u00a9 2014\u00e2\u0080\u00932026 haskell.org Got changes to contribute to the site? Fork or comment on GitHub",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:47",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "932fb1cca385242d",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Elixir Documentation\nSource type: official-documentation\nURL: https://hexdocs.pm/elixir/introduction.html\nPage title: Introduction \u00e2\u0080\u0094 Elixir v1.19.5\nHeadings: Introduction | Installation | Interactive mode | Running scripts\nChunk: 1/2\n\nIntroduction \u00e2\u0080\u0094 Elixir v1.19.5 Elixir v1.19.5 Search documentation of Elixir Default Default In-browser search Settings Introduction View Source Welcome! This guide will teach you about Elixir fundamentals - the language syntax, how to define modules, the common data structures in the language, and more. This chapter will focus on ensuring that Elixir is installed and that you can successfully run Elixir's Interactive Shell, called IEx. Let's get started. Installation If you haven't yet installed Elixir, visit our installation page . Once you are done, you can run elixir --version to get the current Elixir version. The requirements for this guide are: Elixir 1.15.0 onwards Erlang/OTP 26 onwards If you are looking for other resources for learning Elixir, you can also consult the learning page of the official website. Interactive mode When you install Elixir, you will have three new command line executables: iex , elixir and elixirc . For now, let's start by running iex (or iex.bat if you are on Windows PowerShell, where iex is a PowerShell command) which stands for Interactive Elixir. In interactive mode, we can type any Elixir expression and get its result. Let's warm up with some basic expressions. Open up iex and type the following expressions: Erlang / OTP 26 [ 64 - bit ] [ smp : 2 : 2 ] [ ... ] Interactive Elixir - press Ctrl + C to exit iex(1)> 40 + 2 42 iex(2)> \"hello\" <> \" world\" \"hello world\" Please note that some details like version numbers may differ a bit in your session, that's not important. By executing the code above, you should evaluate expressions and see their results. To exit iex press Ctrl+C twice. It seems we are ready to go!",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:49",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "29d6bf5953577a77",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Elixir Documentation\nSource type: official-documentation\nURL: https://hexdocs.pm/elixir/introduction.html\nPage title: Introduction \u00e2\u0080\u0094 Elixir v1.19.5\nHeadings: Introduction | Installation | Interactive mode | Running scripts\nChunk: 2/2\n\nWe will use the interactive shell quite a lot in the next chapters to get a bit more familiar with the language constructs and basic types, starting in the next chapter. Running scripts After getting familiar with the basics of the language you may want to try writing simple programs. This can be accomplished by putting the following Elixir code into a file: IO . puts ( \"Hello world from Elixir\" ) Save it as simple.exs and execute it with elixir : $ elixir simple.exs Hello world from Elixir iex and elixir are all we need to learn the main language concepts. There is a separate guide named \"Mix and OTP guide\" that explores how to actually create, manage, and test full-blown Elixir projects. For now, let's move on to learn the basic data types in the language. \u00e2\u0086\u0090 Previous Page Changelog for Elixir v1.19 Next Page \u00e2\u0086\u0092 Basic types Go to package docs Download ePub version Built using ExDoc (v0.39.3) for the Elixir programming language",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:49",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "69bd7a48bd688628",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Erlang Documentation\nSource type: official-documentation\nURL: https://www.erlang.org/docs\nPage title: Documentation - Erlang/OTP\nHeadings: \nChunk: 1/2\n\nDocumentation - Erlang/OTP Download Documentation Community News Blog Security EEP About Search On-line documentation Erlang/OTP Documentation Online documentation for the latest version of the run-time system as well as all the libraries. Programming Erlang: Software for a Concurrent World (Limited Free) Programming Erlang: Software for a Concurrent World (Joe Armstrong) is a book about Erlang written by one of the original inventors, published in 2007. You can buy it on paper from Amazon and other online bookstores, or directly from the publisher. Erlang Reference Manual - User's Guide Description of Erlang the language Efficiency Guide - User's Guide A guide that teaches you what to use and what to avoid in Erlang, as well as how certain Erlang features are implemented. System Principles - User's Guide A guide on a number of Erlang system principles. OTP Design Principles - User\u2019s Guide The OTP design principles define how to structure Erlang code in terms of processes, modules, and directories. OTP Versions Tree All released OTP versions since OTP 17.0, with links to GitHub source tags and to README:s. As of OTP 23, Windows installers for all patches can be downloaded from here as well. EEF Secure Coding and Deployment Hardening Guidelines Best-practices for writing and running applications on the BEAM, by the Erlang Ecosystem Foundation\u2019s Security Working Group. Erlang Books Programming Erlang: Software for a Concurrent World (Full Edition) Programming Erlang: Software for a Concurrent World (Joe Armstrong) is a book about Erlang written by one of the original inventors, published in 2007. You can buy it on paper from Amazon and other online bookstores, or directly from the publisher. Learn You Some Erlang for Great Good! Learn You Some Erlang for Great Good!",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:50",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "32f98be738419a1c",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Erlang Documentation\nSource type: official-documentation\nURL: https://www.erlang.org/docs\nPage title: Documentation - Erlang/OTP\nHeadings: \nChunk: 2/2\n\nby Fred Hebert is a beginner's book about Erlang, published in 2013. It is available in paper copies and online. Erlang Programming Erlang Programming (A Concurrent Approach to Software Development) by Francesco Cesarini and Simon Thompson was published in 2009. Get it from Amazon etc or directly from the publisher. Erlang and OTP in Action Erlang and OTP in Action by Martin Logan, Eric Merritt and Richard Carlsson was published in 2010. You can buy it from various online bookstores, or directly from the publisher. Introducing Erlang Introducing Erlang by Simon St. Laurent, 2013, is an introduction to Erlang for beginners. It is available directly from the publisher. Designing for Scalability with Erlang/OTP With this hands-on book, you\u2019ll learn how to apply OTP libraries and techniques to develop concurrent, fault-tolerant systems with no single point of failure. Erlang Papers Making reliable distributed systems in the presence of software errors PhD thesis of Joe Armstrong, Erlang\u2019s co-inventor, describing the origins of Erlang. The Erlang/OTP FAQ - Frequently Asked Questions about all aspects of Erlang Search documentation for function, module, or application names similar to the search string. Try e.g \"list foldl\" or \"mnesia\" Erlang Books And More...",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:50",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "5a2125bfba818fa0",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: F# Documentation\nSource type: official-documentation\nURL: https://learn.microsoft.com/en-us/dotnet/fsharp/\nPage title: F# docs - get started, tutorials, reference. - .NET | Microsoft Learn\nHeadings: F# documentation | Learn to program in F# | Get started | video | Download | F# language guide | Overview | Reference | F# fundamentals | Overview | Concept | Tutorial | F# in practice | Overview | Training | F# tools | Overview | New features in F# | What's new | Tutorial\nChunk: 1/1\n\nF# docs - get started, tutorials, reference. - .NET | Microsoft Learn Skip to main content This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Download Microsoft Edge More info about Internet Explorer and Microsoft Edge Table of contents Read in English Edit F# documentation Learn how to write any application using the F# programming language on .NET. Learn to program in F# Get started What is F#? F# strategy First steps in F# Install F# Get started with F# in Visual Studio Get started with F# in Visual Studio Code Further learning video Beginning F# video series Download Download the .NET SDK F# language guide Overview F# language guide Reference F# language specification F# RFCs F# library reference .NET library reference F# fundamentals Overview Overview Tour of F# Values Concept Types and inference Functional concepts Type providers Tutorial Using Functions Pattern matching Object programming Async programming F# in practice Overview F# for web development F# for machine learning F# for deploying Azure resources Training F# style guide F# code formatting guidelines F# coding conventions F# tools Overview F# Interactive F# development tools F# notebooks F# for JavaScript New features in F# What's new What's new in F# 10 What's new in F# 9 What's new in F# 8 What's new in F# 7 What's new in F# 6 What's new in F# 5 What's new in F# 4.7 Tutorial Explore tasks Explore interpolated strings Explore anonymous records en-us Your Privacy Choices Theme Light Dark High contrast AI Disclaimer Previous Versions Blog Contribute Privacy Consumer Health Privacy Terms of Use Trademarks \u00a9 Microsoft 2026",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:52",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "5c1ed75fa68f31d0",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 1/5\n\nLearn OCaml Search OCaml packages Standard Library API Learn Tools Packages Community News Play Get Started Search OCaml packages Learn Tools Packages Community News Play Standard Library API Get started Learn Overview Get Started Language Platform Guides Cookbook Exercises Books \u25be Overview Get Started Language Platform Guides Cookbook Exercises Books Explore the OCaml Documentation You can explore the OCaml documentation, Platform Tools, guides, exercises, and books to enhance your knowledge. Search inside the OCaml documentation Install OCaml 5.4.1 Standard Library API OCaml Language Manual Jump to Beginner Section Jump to Intermediate Section Jump to Advanced Section FOUNDATIONS FOR BEGINNERS GET STARTED Introduction To OCaml Install OCaml and gain a high-level understanding of the language Installing OCaml A Tour of OCaml Your First OCaml Program Introduction to opam Switches Get Started LANGUAGE The OCaml Language An in-depth explanation of language features and data structures from the Standard Library Values and Functions Data Types and Pattern Matching Lists Loops and Recursions Language Documentation RECOMMENDED BOOK OCaml Programming: Correct + Efficient + Beautiful FREE Beginner This textbook, used in a third-semester Cornell course, teaches functional programming and data structures in OCaml, emphasizing semantics and software engineering. Suitable for students with Python and Java backgrounds, it requires some imperative language skills and basic discrete mathematics. The book includes over 200 YouTube videos as supplementary or alternative learning resources.",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:54",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "8b2529014e85f870",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 2/5\n\nRead Online See More Books RECOMMENDED BOOK OCaml From the Very Beginning FREE Beginner John Whitington's \"OCaml from the Very Beginning\" is a beginner-friendly guide to learning OCaml, a modern programming language. The book gradually introduces concepts in concise chapters, with exercises and answers. It's suitable for both novice and experienced programmers, and can be used in academic settings or for self-study. Read Online Buy on Amazon See More Books EXERCISES Exercises for Beginners Write a function that returns the last element of a list. Beginner Write a function to reverse a list. Beginner Find out whether a list is a palindrome. Beginner Eliminate consecutive duplicates of list elements. Intermediate View all Exercises PLATFORM TOOLS The OCaml Platform opam OCaml's package manager for managing OCaml compilers and libraries Get Started Dune Dune is a user-friendly and efficient build system for developing OCaml projects Get Started Go to Platform Tools Documentation EXPLORING THE INTERMEDIATE LEVEL GUIDES Practical-Minded Tutorials and Guides How to solve real-world problems in OCaml Formatting and Wrapping Text Debugging Error Handling Profiling See More Guides PLATFORM The OCaml Platform Learn to leverage the tooling around OCaml and create your own projects and libraries Bootstrapping a Project Managing Dependencies Install a Specific Compiler Version Configuring Your Editor Platform Tools Documentation RECOMMENDED BOOK Real World OCaml FREE Intermediate This practical book guides through using OCaml for real-world problems in data processing and web applications, covering its various programming styles with real examples.",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:54",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "630b16391a5c6918",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 3/5\n\nIt starts with basics and advances to topics like the module system and foreign-function interface, focusing on efficient coding using the Jane Street core library. Read Online See More Books RECOMMENDED BOOK More OCaml: Algorithms, Methods, & Diversions Intermediate \"More OCaml\" by John Whitington explores OCaml's functional programming and algorithms, concluding with a PDF file project. Tailored for both existing OCaml programmers and those new to the language, it includes exercises with answers. The book starts with an OCaml fundamentals summary, making it accessible and informative for a diverse readership. Buy on Amazon See More Books EXERCISES Practice with Exercises Generate completely balanced binary trees for a given number of nodes using the cbal_tree function. Intermediate Assign coordinates (x, y) to nodes in a binary tree, with x based on the inorder sequence and y based on the depth of the node. Intermediate Generate the preorder and inorder sequences of a binary tree. Intermediate Return all acyclic paths between two nodes a and b in a given graph. Intermediate View all Exercises GUIDE Language Manual The OCaml language manual is a comprehensive guide covering syntax, features, and usage. It assists developers and learners in understanding capabilities, best practices, and language features. Take Me There ELEVATED EXPERTISE RECOMMENDED BOOK OCaml Scientific Computing Advanced This book merges functional programming in OCaml with numerical computation, tailored for data science and AI. It's ideal for those familiar with functional programming, offering a mix of foundational concepts and advanced cloud computing techniques. The structure allows readers to choose topics of interest, making it a versatile guide for learning and applying scientific computing.",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:54",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "3e4a705bbb32f0a0",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 4/5\n\nBuy on Springer Buy on Amazon See More Books Papers Aspiring towards greater understanding of the language? Want to push the limits and discover brand new things? Check out papers written by leading OCaml researchers: Retrofitting Effect Handlers Onto OCaml Effect handlers have been gathering momentum as a mechanism for modular programming with user-defined effects. Effect handlers allow for non-local control flow mechanisms such as generators, async/await, lightweight threads, and coroutines to be composably expressed. We present a design and evaluate a full-fledged efficient implementation of effect handlers for OCaml, an industrial-strength multi-paradigm programming language. Our implementation strives to maintain the backwards compatibility and performance profile of existing OCaml code. Retrofitting effect handlers onto OCaml is challenging since OCaml does not currently have any non-local control flow mechanisms other than exceptions. Our implementation of effect handlers for OCaml: (i) imposes a mean 1% overhead on a comprehensive macro benchmark suite that does not use effect handlers; (ii) remains compatible with program analysis tools that inspect the stack; and (iii) is efficient for new code that makes use of effect handlers. K. C. Sivaramakrishnan, Stephen Dolan, Leo White, Tom Kelly, Sadiq Jaffer, Anil Madhavapeddy PLDI effects Extending OCaml's `open` We propose a harmonious extension of OCaml's `open` construct. OCaml's existing construct `open M` imports the names exported by the module `M` into the current scope. At present `M` is required to be the path to a module.",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:54",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "a1a28da03420dcf6",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: OCaml Documentation\nSource type: official-documentation\nURL: https://ocaml.org/docs\nPage title: Learn OCaml\nHeadings: Explore the OCaml Documentation | FOUNDATIONS FOR BEGINNERS | Introduction To OCaml | The OCaml Language | OCaml Programming: Correct + Efficient + Beautiful | OCaml From the Very Beginning | Exercises for Beginners | The OCaml Platform | opam | Dune | EXPLORING THE INTERMEDIATE LEVEL | Practical-Minded Tutorials and Guides | The OCaml Platform | Real World OCaml | More OCaml: Algorithms, Methods, & Diversions | Practice with Exercises | ELEVATED EXPERTISE | OCaml Scientific Computing | Papers | Footer | About OCaml | Resources | Ecosystem | Policies\nChunk: 5/5\n\nWe propose extending `open` to instead accept an arbitrary module expression, making it possible to succinctly address a number of existing scope-related difficulties that arise when writing OCaml programs. Runhang Li, Jeremy Yallop ocaml-workshop core language Bounding Data Races in Space and Time We propose a new semantics for shared-memory parallel programs that gives strong guarantees even in the presence of data races. Our local data race freedom property guar- antees that all data-race-free portions of programs exhibit sequential semantics. We provide a straightforward oper- ational semantics and an equivalent axiomatic model, and evaluate an implementation for the OCaml programming language. Our evaluation demonstrates that it is possible to balance a comprehensible memory model with a reasonable (no overhead on x86, ~0.6% on ARM) sequential performance trade-off in a mainstream programming language Stephen Dolan, KC Sivaramakrishnan, Anil Madhavapeddy PLDI multicore View all papers Footer Light Dark System Innovation. Community. Security. GitHub Discord Twitter Peertube RSS Light Dark System About OCaml Changelog Releases Industrial Users Academic Users Why OCaml Resources Install OCaml Get Started Platform Tools Language Manual Standard Library API Books Exercises Papers OCaml Playground Logo Ecosystem Packages Community Events OCaml Planet Jobs Policies Security Carbon Footprint Governance Privacy Code of Conduct",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 9,
+        "created_at": "2026-06-03T03:41:54",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "fd4ded9d5effa8d5",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Clojure Guides\nSource type: official-documentation\nURL: https://clojure.org/guides/getting_started\nPage title: Clojure - Getting Started\nHeadings: Getting Started | What tools do I need? | Step-by-Step Installation Videos | How do I work with these tools? | How do I learn the language? | Where can I ask questions?\nChunk: 1/2\n\nClojure - Getting Started Clojure Overview Reference\u00e2\u0080\u008d API Releases Guides Community Dev News \ued11 clojure.org ask.clojure.org Learning Getting Started Install Clojure Editors Structural Editing REPL Programming \ueab8 Learn Clojure \ueab8 FAQ Language spec Reading Clojure Characters Destructuring Threading Macros Equality Comparators Reader Conditionals Higher Order Functions Usage Dev Startup Time Tools Deps and CLI tools.build Libraries Go Block Best Practices test.check Getting Started \ueab2 \ueab9 Getting Started Table of Contents What tools do I need? Step-by-Step Installation Videos How do I work with these tools? How do I learn the language? Where can I ask questions? Welcome to Clojure! What tools do I need? Clojure is a dynamic development environment where you interact with your program while you write it, growing and adding to it while it\u2019s running. To work with Clojure you need an editor that supports evaluation in source files and structural editing (working with nested forms in addition to character editing). Install these first: Clojure provides the language, a REPL (Read Eval Print Loop), library support, and program runner Editor with interactive development support Step-by-Step Installation Videos macOS Linux Windows WSL Windows How do I work with these tools? The details will depend on your operating system and editor but the essential flow for all of them is the same: Create or open a file Connect a Clojure environment (aka the REPL) Write Clojure code in your editor Evaluate the code in your editor using the connected environment Repeat! Learn more: REPL - learn more about the REPL and how to use it interactively Structural editing - working with code as forms, not text How do I learn the language? There are many ways to learn the Clojure language.",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:55",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "d7c6c62d4884bab7",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Clojure Guides\nSource type: official-documentation\nURL: https://clojure.org/guides/getting_started\nPage title: Clojure - Getting Started\nHeadings: Getting Started | What tools do I need? | Step-by-Step Installation Videos | How do I work with these tools? | How do I learn the language? | Where can I ask questions?\nChunk: 2/2\n\nThis tutorial covers the basics: Learn Clojure guide If you\u2019d like to work from a book , these are some excellent starting points: If you\u2019d like to try some practice problems: 4Clojure - a large set of Clojure practice problems exercism Clojure track - larger problems with mentor support Also check out: Clojure Camp - an interactive community for beginner Clojure developers Other learning resources for more options\u2026\u200b Where can I ask questions? There are many places to interact with other Clojure developers: Ask Clojure [official] - Clojure Q&A and knowledge base Clojurians Slack channel - Clojure live chat, check out #beginners, #jobs, etc Clojureverse - Clojure forum Original author: Alex Miller Community Resources Contributing Companies Site Legal License Privacy Policy Documentation Overview Reference API Guides Libraries & Tools Updates News Events ETC ClojureTV Books Swag Code Releases Source ClojureScript ClojureCLR Copyright 2008-2022 Rich Hickey | Privacy Policy Logo & site design by Tom Hickey Published 2026-06-01 Update this page",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:55",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "2a4bf600632a7a8b",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Elm Guide\nSource type: official-documentation\nURL: https://guide.elm-lang.org/\nPage title: Introduction \u00b7 An Introduction to Elm\nHeadings: Introduction | An Introduction to Elm | A Quick Sample | Why a functional language ? | results matching \" \" | No results matching \" \"\nChunk: 1/2\n\nIntroduction \u00b7 An Introduction to Elm Introduction Core Language The Elm Architecture Buttons Text Fields Forms Types Reading Types Type Aliases Custom Types Pattern Matching Error Handling Maybe Result Commands and Subscriptions HTTP JSON Random Time Installation Code Editor Elm JavaScript Interop Flags Ports Custom Elements Limits Web Apps Navigation URL Parsing Modules Structure Optimization Html.lazy Html.keyed Minification Next Steps Appendix Types as Sets Types as Bits Function Types Published with GitBook Introduction An Introduction to Elm Elm is a functional language that compiles to JavaScript. It helps you make websites and web apps. It has a strong emphasis on simplicity and quality tooling. This guide will: Teach you the fundamentals of programming in Elm. Show you how to make interactive apps with The Elm Architecture . Emphasize principles and patterns that generalize to programming in any language. By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use. If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript code. The ideas transfer pretty easily!",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:56",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "c65d9b9de0e060d9",
+        "text": "F# KNOWLEDGE SOURCE\nLearning target: senior-software-engineer\nSource name: Elm Guide\nSource type: official-documentation\nURL: https://guide.elm-lang.org/\nPage title: Introduction \u00b7 An Introduction to Elm\nHeadings: Introduction | An Introduction to Elm | A Quick Sample | Why a functional language ? | results matching \" \" | No results matching \" \"\nChunk: 2/2\n\nA Quick Sample Here is a little program that lets you increment and decrement a number: import Browser import Html exposing ( Html , button, div, text) import Html.Events exposing (onClick) main = Browser .sandbox { init = 0 , update = update, view = view } type Msg = Increment | Decrement update msg model = case msg of Increment -> model + 1 Decrement -> model - 1 view model = div [] [ button [ onClick Decrement ] [ text \"-\" ] , div [] [ text ( String .fromInt model) ] , button [ onClick Increment ] [ text \"+\" ] ] Try it out in the online editor here . The code can definitely look unfamiliar at first, so we will get into how this example works soon! Why a functional language ? You can get some benefits from programming in a functional style , but there are some things you can only get from a functional language like Elm: No runtime errors in practice. Friendly error messages. Reliable refactoring. Automatically enforced semantic versioning for all Elm packages. No combination of JS libraries can give you all of these guarantees. They come from the design of the language itself! And thanks to these guarantees, it is quite common for Elm programmers to say they never felt so confident while programming. Confident to add features quickly. Confident to refactor thousands of lines. But without the background anxiety that you missed something important! I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised! results matching \" \" No results matching \" \"",
+        "tags": [
+            "f",
+            "programming",
+            "programming-language",
+            "senior-engineer-curriculum",
+            "official-documentation"
+        ],
+        "source": "f-knowledge-engine",
+        "importance": 8,
+        "created_at": "2026-06-03T03:41:57",
+        "updated_at": null,
+        "active": true
     }
 ]
