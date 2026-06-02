@@ -2,6 +2,8 @@ from tools.developer_setup_tools import (
     build_laravel_marketing_site,
     build_marketing_footer,
     check_laravel_page_status,
+    complete_laravel_content_platform,
+    execute_project_automation,
     infer_developer_setup_action,
     install_project_dependency,
     install_laravel_project,
@@ -18,6 +20,12 @@ def handle_developer_setup_routes(user_input: str, text: str, clean_text: str):
             company_name=action.get("company_name"),
         )
 
+    if action["action"] == "complete_laravel_platform":
+        return complete_laravel_content_platform(
+            target_dir=action.get("target_dir"),
+            company_name=action.get("company_name", "Center for Systematic Learning"),
+        )
+
     if action["action"] == "install_tailwind":
         return install_tailwind_for_project(action.get("target_dir"))
 
@@ -26,6 +34,12 @@ def handle_developer_setup_routes(user_input: str, text: str, clean_text: str):
             action.get("package_name", ""),
             target_dir=action.get("target_dir"),
             user_input=user_input,
+        )
+
+    if action["action"] == "project_automation":
+        return execute_project_automation(
+            user_input=user_input,
+            target_dir=action.get("target_dir"),
         )
 
     if action["action"] == "build_laravel_website":

@@ -276,6 +276,126 @@ def install_project_dependency(package_name: str, target_dir: str | None = None,
     ])
 
 
+def execute_project_automation(user_input: str, target_dir: str | None = None) -> str:
+    project_dir, error = _project_dir_from_hint(target_dir)
+    if error:
+        return error
+
+    text = _normalize(user_input).lower()
+    manager = _detect_package_manager(project_dir, "", user_input)
+    commands: list[list[str]] = []
+    labels: list[str] = []
+
+    package_json = project_dir / "package.json"
+    package_data = _read_json(package_json) if package_json.exists() else {}
+    scripts = package_data.get("scripts", {})
+    has_artisan = (project_dir / "artisan").exists()
+    has_manage_py = (project_dir / "manage.py").exists()
+
+    wants_install = any(phrase in text for phrase in [
+        "install dependencies",
+        "install deps",
+        "setup dependencies",
+        "set up dependencies",
+        "restore dependencies",
+    ])
+    wants_build = "build" in text or "compile" in text
+    wants_test = "test" in text or "tests" in text
+    wants_migrate = "migrate" in text or "migration" in text
+
+    if wants_install:
+        if manager == "npm":
+            commands.append(["npm", "install"])
+            labels.append("npm install")
+        elif manager == "composer":
+            commands.append(["composer", "install"])
+            labels.append("composer install")
+        elif manager == "pip":
+            if (project_dir / "requirements.txt").exists():
+                commands.append([_venv_python(project_dir), "-m", "pip", "install", "-r", "requirements.txt"])
+                labels.append("pip install -r requirements.txt")
+            elif (project_dir / "pyproject.toml").exists():
+                commands.append([_venv_python(project_dir), "-m", "pip", "install", "-e", "."])
+                labels.append("pip install -e .")
+        elif manager == "cargo":
+            commands.append(["cargo", "fetch"])
+            labels.append("cargo fetch")
+        elif manager == "go":
+            commands.append(["go", "mod", "download"])
+            labels.append("go mod download")
+
+    if wants_migrate:
+        if has_artisan:
+            commands.append(["php", "artisan", "migrate", "--force"])
+            labels.append("php artisan migrate --force")
+        elif has_manage_py:
+            commands.append([_venv_python(project_dir), "manage.py", "migrate"])
+            labels.append("python manage.py migrate")
+
+    if wants_build:
+        if manager == "npm" and "build" in scripts:
+            commands.append(["npm", "run", "build"])
+            labels.append("npm run build")
+        elif manager == "cargo":
+            commands.append(["cargo", "build"])
+            labels.append("cargo build")
+        elif manager == "go":
+            commands.append(["go", "build", "./..."])
+            labels.append("go build ./...")
+
+    if wants_test:
+        if has_artisan:
+            commands.append(["php", "artisan", "test"])
+            labels.append("php artisan test")
+        elif has_manage_py and (project_dir / "pytest.ini").exists():
+            commands.append([_venv_python(project_dir), "-m", "pytest"])
+            labels.append("python -m pytest")
+        elif manager == "pip":
+            commands.append([_venv_python(project_dir), "-m", "pytest"])
+            labels.append("python -m pytest")
+        elif manager == "npm" and "test" in scripts:
+            commands.append(["npm", "test"])
+            labels.append("npm test")
+        elif manager == "cargo":
+            commands.append(["cargo", "test"])
+            labels.append("cargo test")
+        elif manager == "go":
+            commands.append(["go", "test", "./..."])
+            labels.append("go test ./...")
+
+    if not commands:
+        return (
+            "PROJECT AUTOMATION NOT SUPPORTED YET\n"
+            f"Project: {project_dir}\n"
+            "I could not map this request to a safe executable project action."
+        )
+
+    outputs: list[str] = []
+    for command, label in zip(commands, labels):
+        ok, output = _run(command, cwd=project_dir, timeout=3600)
+        outputs.append(f"$ {label}\n{output}")
+        if not ok:
+            return (
+                "PROJECT AUTOMATION FAILED\n"
+                f"Project: {project_dir}\n"
+                f"Manager: {manager or 'unknown'}\n"
+                f"Failed command: {label}\n\n"
+                f"{output}"
+            )
+
+    set_current_project(str(project_dir))
+    return "\n".join([
+        "PROJECT AUTOMATION COMPLETE",
+        f"Project: {project_dir}",
+        f"Manager: {manager or 'unknown'}",
+        "",
+        "Commands executed:",
+        *[f"- {label}" for label in labels],
+        "",
+        *outputs,
+    ])
+
+
 def check_laravel_page_status(page_name: str, target_dir: str | None = None) -> str:
     project_dir, error = _project_dir_from_hint(target_dir)
     if error:
@@ -888,6 +1008,67 @@ def build_marketing_footer(target_dir: str | None = None, company_name: str = "C
     return result.replace("LARAVEL WEBSITE BUILD COMPLETE", "LARAVEL FOOTER UPGRADE COMPLETE", 1)
 
 
+def complete_laravel_content_platform(
+    target_dir: str | None = None,
+    company_name: str = "Center for Systematic Learning",
+) -> str:
+    project_dir, error = _project_dir_from_hint(target_dir)
+    if error:
+        return error
+
+    required_markers = [
+        project_dir / "app" / "Http" / "Controllers" / "Admin" / "DashboardController.php",
+        project_dir / "app" / "Models" / "BlogPost.php",
+        project_dir / "database" / "seeders" / "DatabaseSeeder.php",
+        project_dir / "resources" / "views" / "admin" / "dashboard.blade.php",
+        project_dir / "resources" / "views" / "pages" / "blogs" / "index.blade.php",
+    ]
+
+    missing = [str(marker.relative_to(project_dir)) for marker in required_markers if not marker.exists()]
+    if missing:
+        return "LARAVEL CONTENT PLATFORM INCOMPLETE\nMissing files:\n- " + "\n- ".join(missing)
+
+    commands_run: list[str] = []
+
+    if (project_dir / "artisan").exists():
+        ok, output = _run(["php", "artisan", "migrate", "--force"], cwd=project_dir, timeout=1800)
+        commands_run.append("php artisan migrate --force")
+        if not ok:
+            return f"LARAVEL CONTENT PLATFORM PARTIALLY COMPLETE\nProject: {project_dir}\n\n{output}"
+
+        ok, seed_output = _run(["php", "artisan", "db:seed", "--force"], cwd=project_dir, timeout=1800)
+        commands_run.append("php artisan db:seed --force")
+        if not ok:
+            return f"LARAVEL CONTENT PLATFORM PARTIALLY COMPLETE\nProject: {project_dir}\n\n{seed_output}"
+
+    build_output = "Build skipped because no frontend build step was detected."
+    if (project_dir / "package.json").exists():
+        ok, build_output = _run(["npm", "run", "build"], cwd=project_dir, timeout=1800)
+        commands_run.append("npm run build")
+        if not ok:
+            return f"LARAVEL CONTENT PLATFORM PARTIALLY COMPLETE\nProject: {project_dir}\n\n{build_output}"
+
+    set_current_project(str(project_dir))
+    return "\n".join([
+        "LARAVEL CONTENT PLATFORM COMPLETE",
+        f"Project: {project_dir}",
+        f"Company: {company_name}",
+        "",
+        "Included features:",
+        "- Public marketing site pages",
+        "- Admin login flow",
+        "- Sidebar-style admin dashboard",
+        "- Dynamic blog listing and detail pages",
+        "- Five seeded sample blog posts",
+        "- Seeded admin account: janonemersion@hotmail.com",
+        "",
+        "Commands executed:",
+        *[f"- {command}" for command in commands_run],
+        "",
+        build_output,
+    ])
+
+
 def infer_developer_setup_action(user_input: str, chat_context: str | None = None) -> dict:
     text = _normalize(user_input).lower()
     context = _normalize(chat_context or "").lower()
@@ -914,6 +1095,11 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
         combined,
         flags=re.I | re.S,
     )
+    full_platform_match = re.search(
+        r"\b(auth pages?|admin login|dashboard|dynamic blog|sample blogs?|seed(?:er|ed)? admin)\b",
+        combined,
+        flags=re.I | re.S,
+    )
     status_match = re.search(
         r"(?:did you create|did you build|is there|check)\s+(?:the\s+)?(home|about|media|blog|blogs|contact(?:\s+us)?|footer)",
         combined,
@@ -928,6 +1114,11 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
         r"(?:install|add|require)\s+([@a-z0-9_.-]+/[a-z0-9_.-]+|@[a-z0-9_.-]+/[a-z0-9_.-]+|[a-z0-9_.-]+)",
         text,
         flags=re.I,
+    )
+    automation_match = re.search(
+        r"\b(install dependencies|install deps|setup dependencies|set up dependencies|restore dependencies|run tests?|build(?: the)? project|compile(?: the)? project|migrate(?: the)? database|run migrations?)\b",
+        combined,
+        flags=re.I | re.S,
     )
     explicit_path_match = re.search(
         r"(/var/www/[a-zA-Z0-9._-]+|~/[a-zA-Z0-9_./-]+)",
@@ -955,6 +1146,13 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
         folder_name = next((group for group in folder_name_match.groups() if group), None)
         if folder_name:
             target_dir = f"/var/www/{folder_name}"
+
+    if (full_platform_match or (laravel_match and (website_build_match or page_bundle_match))) and (current_project or target_dir):
+        return {
+            "action": "complete_laravel_platform",
+            "target_dir": target_dir or (str(current_project) if current_project else None),
+            "company_name": company_name or "Center for Systematic Learning",
+        }
 
     if laravel_match and target_dir:
         return {
@@ -995,6 +1193,12 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
             "target_dir": target_dir or (str(current_project) if current_project else None),
             "company_name": company_name or "Center for Systematic Learning",
             "pages": ["home", "about", "media", "blogs", "contact-us"],
+        }
+
+    if automation_match and (current_project or target_dir):
+        return {
+            "action": "project_automation",
+            "target_dir": target_dir or (str(current_project) if current_project else None),
         }
 
     if dependency_match:
