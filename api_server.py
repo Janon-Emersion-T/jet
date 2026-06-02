@@ -59,6 +59,7 @@ from core.models.model_router import get_model_with_fallback
 from core.autonomous_learning import (
     ensure_autonomous_learning_worker,
     get_autonomous_learning_overview,
+    get_learning_catalog,
     autonomous_learning_status,
     enable_autonomous_learning,
     disable_autonomous_learning,
@@ -100,7 +101,11 @@ class CommandRequest(BaseModel):
 
 
 class ManualLearningRequest(BaseModel):
-    task_id: str
+    task_id: Optional[str] = None
+    domain: Optional[str] = None
+    topic: Optional[str] = None
+    kind: Optional[str] = "learn"
+    stage: Optional[str] = "Manual Selection"
 
 
 class ProjectRequest(BaseModel):
@@ -206,6 +211,15 @@ def learning_overview(limit: int = Query(default=12, ge=1, le=24)):
     return get_autonomous_learning_overview(limit=limit)
 
 
+@app.get("/learning/catalog")
+def learning_catalog(
+    domain: str | None = Query(default=None),
+    query: str | None = Query(default=None),
+    limit: int = Query(default=120, ge=1, le=240),
+):
+    return get_learning_catalog(domain=domain, query=query, limit=limit)
+
+
 @app.post("/learning/start")
 def learning_start():
     return {
@@ -241,7 +255,13 @@ def learning_burst(max_cycles: int = 4):
 
 @app.post("/learning/manual-run")
 def learning_manual_run(request: ManualLearningRequest):
-    return run_manual_learning_task(request.task_id)
+    return run_manual_learning_task(
+        request.task_id,
+        domain=request.domain,
+        topic=request.topic,
+        kind=request.kind or "learn",
+        stage=request.stage or "Manual Selection",
+    )
 
 
 @app.post("/command")

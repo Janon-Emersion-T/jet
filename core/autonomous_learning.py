@@ -220,6 +220,51 @@ def _catalog_topics_for_domain(domain: str) -> list[dict]:
     return []
 
 
+def _catalog_entry(domain: str, topic: dict) -> dict:
+    source_count = len(topic.get("sources", []) or [])
+    aliases = [alias for alias in topic.get("aliases", []) or [] if alias]
+    category = topic.get("category") or topic.get("track") or "general"
+
+    return {
+        "id": f"{domain}:{_normalize(topic.get('topic', ''))}",
+        "domain": domain,
+        "topic": topic.get("topic", ""),
+        "category": category,
+        "aliases": aliases,
+        "tags": list(dict.fromkeys([domain, *topic.get("tags", []), category])),
+        "source_count": source_count,
+        "proficiency_target": topic.get("proficiency_target", DOMAIN_PROFILES.get(domain, {}).get("proficiency_target")),
+        "summary": f"{topic.get('topic', '')} · {category.replace('-', ' ')}",
+    }
+
+
+def get_learning_catalog(domain: str | None = None, query: str | None = None, limit: int = 120) -> dict:
+    domains = [domain] if domain in {"programming", "medicine"} else ["programming", "medicine"]
+    needle = _normalize(query or "")
+    items: list[dict] = []
+
+    for item_domain in domains:
+        for topic in _catalog_topics_for_domain(item_domain):
+            entry = _catalog_entry(item_domain, topic)
+            haystack = " ".join([
+                entry["topic"],
+                entry["category"],
+                " ".join(entry["aliases"]),
+                " ".join(entry["tags"]),
+            ])
+            if needle and needle not in _normalize(haystack):
+                continue
+            items.append(entry)
+
+    items.sort(key=lambda entry: (entry["domain"], entry["category"], entry["topic"]))
+    return {
+        "domain": domain or "all",
+        "query": query or "",
+        "count": len(items),
+        "topics": items[: max(1, min(int(limit or 120), 240))],
+    }
+
+
 def _resolve_topic_config(domain: str, topic_name: str) -> dict | None:
     normalized = _normalize(topic_name)
     for topic in _catalog_topics_for_domain(domain):
@@ -300,6 +345,10 @@ def _find_task_by_id(state: dict, task_id: str) -> dict | None:
         if task.get("id") == task_id:
             return task
     return None
+
+
+def _topic_is_queued(state: dict, domain: str, topic: str, kind: str = "learn") -> bool:
+    return _has_task(state, domain, kind, metadata=None, topic=topic)
 
 
 def _recent_completed_topics(state: dict, domain: str, limit: int = 3) -> list[str]:
@@ -574,6 +623,12 @@ def _run_task(task: dict) -> dict:
     raise RuntimeError(f"Unknown learning task kind: {task['kind']}")
 
 
+def _create_manual_learning_task(domain: str, topic: str, kind: str = "learn", stage: str = "Manual Selection") -> dict:
+    normalized_kind = (kind or "learn").strip() or "learn"
+    normalized_stage = (stage or "Manual Selection").strip() or "Manual Selection"
+    return _create_task(domain, topic, normalized_kind, normalized_stage, {"manual": True})
+
+
 def _finalize_task_execution(task: dict, success: bool, result: dict, error_text: str | None = None) -> None:
     with _WORKER_LOCK:
         state = _load_state()
@@ -828,16 +883,56 @@ def run_autonomous_learning_cycle() -> dict | None:
     return result
 
 
-def run_manual_learning_task(task_id: str) -> dict:
+def run_manual_learning_task(
+    task_id: str | None = None,
+    *,
+    domain: str | None = None,
+    topic: str | None = None,
+    kind: str = "learn",
+    stage: str = "Manual Selection",
+) -> dict:
     clean_task_id = (task_id or "").strip()
-    if not clean_task_id:
-        return {"ok": False, "error": "Task id is required."}
+    manual_domain = (domain or "").strip()
+    manual_topic = (topic or "").strip()
+
+    if not clean_task_id and (not manual_domain or not manual_topic):
+        return {"ok": False, "error": "Select a queued topic or provide a domain and topic."}
 
     with _WORKER_LOCK:
         state = _load_state()
-        task = _find_task_by_id(state, clean_task_id)
-        if task is None:
-            return {"ok": False, "error": "Selected topic is no longer in the queue."}
+
+        if state.get("enabled", True):
+            return {"ok": False, "error": "Pause learning before using manual learning."}
+
+        task = None
+
+        if clean_task_id:
+            task = _find_task_by_id(state, clean_task_id)
+            if task is None:
+                return {"ok": False, "error": "Selected topic is no longer in the queue."}
+        else:
+            if manual_domain not in {"programming", "medicine"}:
+                return {"ok": False, "error": "Please choose a valid learning domain."}
+
+            config = _resolve_topic_config(manual_domain, manual_topic)
+            if config is None:
+                return {"ok": False, "error": "That topic is not in the learning catalog."}
+
+            existing = next(
+                (
+                    item
+                    for item in state.get("schedule", [])
+                    if item.get("domain") == manual_domain
+                    and _normalize(item.get("topic", "")) == _normalize(manual_topic)
+                    and item.get("kind") == (kind or "learn")
+                    and item.get("status") in {"pending", "in_progress"}
+                ),
+                None,
+            )
+            task = existing or _create_manual_learning_task(manual_domain, config.get("topic", manual_topic), kind=kind, stage=stage)
+            if existing is None:
+                state["schedule"].insert(0, task)
+
         if task.get("status") == "completed":
             return {"ok": False, "error": "Selected topic has already been completed."}
         if task.get("status") == "in_progress":
