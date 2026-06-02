@@ -1,0 +1,108 @@
+{
+  "updated_at": "2026-06-02T22:36:25Z",
+  "topic": "PureScript",
+  "sources": {
+    "https://www.haskell.org/documentation/": {
+      "name": "Haskell Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "e6d1639b42197bf9a6ba76d1ec00eeb474a95af6b885389bd5d2ea056fb4dd8c",
+      "last_learned_at": "2026-06-02T22:36:03Z",
+      "chunks_saved": 3,
+      "title": "Documentation"
+    },
+    "https://hexdocs.pm/elixir/introduction.html": {
+      "name": "Elixir Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "c4af26786264bdb7b66cc2fefa9cead5aa7c5ab164dc84863498bc3e28951427",
+      "last_learned_at": "2026-06-02T22:36:05Z",
+      "chunks_saved": 2,
+      "title": "Introduction â Elixir v1.19.5"
+    },
+    "https://www.erlang.org/docs": {
+      "name": "Erlang Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "66005ec3d7f7af77906ba1b8650e4c77fe3171199fbc85f1c1bbb3ae31569336",
+      "last_learned_at": "2026-06-02T22:36:06Z",
+      "chunks_saved": 2,
+      "title": "Documentation - Erlang/OTP"
+    },
+    "https://learn.microsoft.com/en-us/dotnet/fsharp/": {
+      "name": "F# Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "1fde703eb13cc5f3c8db8fd5249629fd51909b1a12c5f101f84c36a057e8fe68",
+      "last_learned_at": "2026-06-02T22:36:08Z",
+      "chunks_saved": 1,
+      "title": "F# docs - get started, tutorials, reference. - .NET | Microsoft Learn"
+    },
+    "https://ocaml.org/docs": {
+      "name": "OCaml Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "fd6694f0f5f59746f4daebd230d4e66dbfde396bf5ed34b41cfd3e82b56389e1",
+      "last_learned_at": "2026-06-02T22:36:10Z",
+      "chunks_saved": 5,
+      "title": "Learn OCaml"
+    },
+    "https://clojure.org/guides/getting_started": {
+      "name": "Clojure Guides",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "0f30ebef0734f81ba0f74a6981f2acd748796bcb50c0331d18d778f014c2a3bc",
+      "last_learned_at": "2026-06-02T22:36:12Z",
+      "chunks_saved": 2,
+      "title": "Clojure - Getting Started"
+    },
+    "https://guide.elm-lang.org/": {
+      "name": "Elm Guide",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "6250322d29668e8389478607b9a4c57c09642a083131275343e84ca456b4d0f5",
+      "last_learned_at": "2026-06-02T22:36:13Z",
+      "chunks_saved": 2,
+      "title": "Introduction · An Introduction to Elm"
+    },
+    "https://html.spec.whatwg.org/multipage/": {
+      "name": "WHATWG HTML Living Standard",
+      "type": "official-standard",
+      "priority": 10,
+      "hash": "5bc64452bfaf8a765e9c152a95b925f9efbf4c7db1c5f1cae3e0657c7330245e",
+      "last_learned_at": "2026-06-02T22:36:17Z",
+      "chunks_saved": 3,
+      "title": "HTML Standard"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference": {
+      "name": "MDN CSS Reference",
+      "type": "developer-reference",
+      "priority": 9,
+      "hash": "9f351be6bf4a945e6689b7ee4d77a5b03e296db21135058297db3c1f5f657603",
+      "last_learned_at": "2026-06-02T22:36:19Z",
+      "chunks_saved": 7,
+      "title": "CSS reference - CSS | MDN"
+    },
+    "https://react.dev/learn": {
+      "name": "React Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "b8d6cc8df2c9c188cc6d75321fecfb17619bdbb7aa73a7126272863b051527cb",
+      "last_learned_at": "2026-06-02T22:36:21Z",
+      "chunks_saved": 9,
+      "title": "Quick Start – React"
+    },
+    "https://web.dev/": {
+      "name": "web.dev",
+      "type": "practical-guide",
+      "priority": 8,
+      "hash": "4cc4352b123207196867e83880c1265f3b2c543ead5e4f67316c3752a7a4129e",
+      "last_learned_at": "2026-06-02T22:36:24Z",
+      "chunks_saved": 5,
+      "title": "web.dev"
+    }
+  },
+  "category": "programming-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}
