@@ -34,6 +34,7 @@ storage/events/
 storage/current_location.json
 storage/nlp/*
 storage/vector_memory/*
+data/programming_knowledge_manifests/*.json
 
 # Jarvis generated image runtime files
 storage/generated_images/
@@ -135,4 +136,3 @@ engines/ComfyUI/temp/
 *.bin
 *.gguf
 models/image/checkpoints/
-

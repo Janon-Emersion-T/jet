@@ -1,0 +1,99 @@
+{
+  "updated_at": "2026-06-02T22:34:17Z",
+  "topic": "Tcl",
+  "sources": {
+    "https://www.gnu.org/software/bash/manual/": {
+      "name": "GNU Bash Manual",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "a415b8cef84742cef655d317a5e3479b98b5ad7174e4bde010fbb2d3acfe75da",
+      "last_learned_at": "2026-06-02T22:33:52Z",
+      "chunks_saved": 1,
+      "title": "GNU Bash manual - GNU Project - Free Software Foundation"
+    },
+    "https://learn.microsoft.com/en-us/powershell/": {
+      "name": "PowerShell Documentation",
+      "type": "official-documentation",
+      "priority": 9,
+      "hash": "704aca22a41c624fc25e05c0ead4bfa6c3e3906c0c9e75d708ae8bebd9f8cf98",
+      "last_learned_at": "2026-06-02T22:33:54Z",
+      "chunks_saved": 2,
+      "title": "PowerShell Documentation - PowerShell | Microsoft Learn"
+    },
+    "https://zsh.sourceforge.io/Doc/": {
+      "name": "Zsh Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "6646c5a5f7a3f3beb9743f7a6da312f36d20bf25c9248f0b137619bf291ddc6e",
+      "last_learned_at": "2026-06-02T22:33:56Z",
+      "chunks_saved": 1,
+      "title": "ZSH - Documentation"
+    },
+    "https://fishshell.com/docs/current/": {
+      "name": "Fish Shell Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "3caf20ea97a67f3bbc49ecc88c4abe626e20ea3bfacc0e905f49e282e5c369d0",
+      "last_learned_at": "2026-06-02T22:33:58Z",
+      "chunks_saved": 5,
+      "title": "Introduction — fish-shell 4.7.1 documentation"
+    },
+    "https://www.tcl.tk/doc/": {
+      "name": "Tcl Documentation",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "cf55c8383362059fbb54aac9c03c0f0706f392f59ae994c00c6b1c716ec503a5",
+      "last_learned_at": "2026-06-02T22:34:02Z",
+      "chunks_saved": 2,
+      "title": "Tcl/Tk Doc­u­men­ta­tion"
+    },
+    "https://www.gnu.org/software/gawk/manual/": {
+      "name": "GNU Awk Manual",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "b08e5a3b99f9c1908a59741f322a2ef08098c53f0abd01bfbb65942798838125",
+      "last_learned_at": "2026-06-02T22:34:05Z",
+      "chunks_saved": 1,
+      "title": "Gawk: Effective AWK Programming - GNU Project - Free Software Foundation"
+    },
+    "https://www.gnu.org/software/sed/manual/": {
+      "name": "GNU Sed Manual",
+      "type": "official-documentation",
+      "priority": 8,
+      "hash": "f5da90e1c0415d001990b4ae0e39bb917466d1b4d6b198ca65008127d90bdb63",
+      "last_learned_at": "2026-06-02T22:34:08Z",
+      "chunks_saved": 1,
+      "title": "GNU sed - GNU Sed: a stream editor - GNU Project - Free Software Foundation"
+    },
+    "https://google.github.io/eng-practices/": {
+      "name": "Google Engineering Practices Documentation",
+      "type": "engineering-guide",
+      "priority": 9,
+      "hash": "9df646a0e84eef9c7c8e4e5d534e374be1f1cfdfc25cbce6030549c22f716f8c",
+      "last_learned_at": "2026-06-02T22:34:09Z",
+      "chunks_saved": 1,
+      "title": "Google Engineering Practices Documentation | eng-practices"
+    },
+    "https://www.atlassian.com/software": {
+      "name": "Atlassian Software Development Guides",
+      "type": "practical-guide",
+      "priority": 7,
+      "hash": "1b84ddd43555b7992e461841353050631dee84429f28101ba7c87e30cb715cbe",
+      "last_learned_at": "2026-06-02T22:34:13Z",
+      "chunks_saved": 13,
+      "title": "Products | Atlassian"
+    },
+    "https://martinfowler.com/": {
+      "name": "Martin Fowler",
+      "type": "architecture-guide",
+      "priority": 8,
+      "hash": "323303d19fd536af4b44ee90e83fa97aac26b7c5c370b49d1a314e5c55cc2938",
+      "last_learned_at": "2026-06-02T22:34:16Z",
+      "chunks_saved": 8,
+      "title": "martinfowler.com"
+    }
+  },
+  "category": "shell-language",
+  "version": "1.0.0",
+  "proficiency_target": "senior-software-engineer"
+}

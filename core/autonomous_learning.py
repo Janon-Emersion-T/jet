@@ -23,6 +23,8 @@ MEDICAL_CATALOG_FILE = Path("data/medical_learning_catalog.json")
 DEFAULT_CYCLE_INTERVAL_SECONDS = 180
 MAX_BURST_CYCLES = 4
 DISCOVERY_BATCH_SIZE = 2
+STALE_TASK_TIMEOUT_SECONDS = 15 * 60
+DOMAIN_PRIORITY = ["programming", "medicine"]
 
 DOMAIN_PROFILES = {
     "programming": {
@@ -66,9 +68,14 @@ DOMAIN_ROADMAPS = {
             ],
         },
         {
-            "name": "Production Systems",
+            "name": "Production Software",
             "topics": [
                 "system design and scalability",
+                "frontend architecture patterns",
+                "Master modern frontend architecture",
+                "backend architecture patterns",
+                "performance optimization",
+                "secure coding practices",
                 "web security fundamentals",
                 "Docker and containerization",
                 "CI/CD pipelines",
@@ -76,13 +83,45 @@ DOMAIN_ROADMAPS = {
             ],
         },
         {
-            "name": "Advanced Systems",
+            "name": "Advanced Software Systems",
             "topics": [
                 "distributed systems fundamentals",
                 "cloud architecture patterns",
                 "authentication and authorization systems",
                 "AI agent architectures",
                 "technical leadership",
+            ],
+        },
+        {
+            "name": "SEO Systems",
+            "topics": [
+                "SEO technical foundations",
+                "search engine crawling concepts",
+                "database indexing strategies",
+                "Build web crawling and indexing systems",
+                "Build SEO intelligence agents",
+                "Build AI-powered SEO ecosystems",
+            ],
+        },
+        {
+            "name": "Digital Marketing Systems",
+            "topics": [
+                "digital marketing systems",
+                "how to integrate AI with marketing systems",
+                "Build marketing intelligence agents",
+                "Build self-optimizing marketing ecosystems",
+                "Build autonomous marketing orchestration",
+            ],
+        },
+        {
+            "name": "Hardware and Embedded Systems",
+            "topics": [
+                "hardware interfacing basics",
+                "embedded systems basics",
+                "hardware acceleration systems",
+                "robotics software concepts",
+                "robotics integration systems",
+                "Advanced robotics engineering",
             ],
         },
     ],
@@ -163,8 +202,56 @@ def _normalize(text: str) -> str:
     return " ".join((text or "").lower().strip().split())
 
 
+def _timestamp_from_iso(value: str | None) -> float | None:
+    if not value:
+        return None
+
+    try:
+        normalized = value[:-1] + "+00:00" if value.endswith("Z") else value
+        return datetime.fromisoformat(normalized).timestamp()
+    except Exception:
+        return None
+
+
 def _slugify(text: str) -> str:
     return pkt._slugify(text)
+
+
+def _domain_priority(domain: str) -> int:
+    try:
+        return DOMAIN_PRIORITY.index(domain)
+    except ValueError:
+        return len(DOMAIN_PRIORITY)
+
+
+def _task_priority(task: dict) -> tuple:
+    kind_rank = {
+        "learn": 0,
+        "review": 1,
+        "synthesis": 2,
+    }.get(task.get("kind"), 9)
+    status_rank = {
+        "pending": 0,
+        "failed": 1,
+        "in_progress": 2,
+    }.get(task.get("status"), 9)
+    return (
+        _domain_priority(task.get("domain", "")),
+        kind_rank,
+        status_rank,
+        task.get("created_at") or "",
+        task.get("id") or "",
+    )
+
+
+def _next_pending_task(state: dict) -> dict | None:
+    pending = [
+        task for task in state.get("schedule", [])
+        if task.get("status") == "pending"
+    ]
+    if not pending:
+        return None
+    return sorted(pending, key=_task_priority)[0]
 
 
 def _default_state() -> dict:
@@ -173,7 +260,7 @@ def _default_state() -> dict:
         "started_at": _now_iso(),
         "last_cycle_at": None,
         "cycle_interval_seconds": DEFAULT_CYCLE_INTERVAL_SECONDS,
-        "active_domains": ["programming", "medicine"],
+        "active_domains": list(DOMAIN_PRIORITY),
         "schedule": [],
         "current_task_id": None,
         "completed_topics": {"programming": [], "medicine": []},
@@ -192,6 +279,10 @@ def _load_state() -> dict:
     state = _read_json(STATE_FILE, _default_state())
     merged = _default_state()
     merged.update(state)
+    merged["active_domains"] = [
+        domain for domain in DOMAIN_PRIORITY
+        if domain in set(state.get("active_domains", []))
+    ] or list(DOMAIN_PRIORITY)
     merged["completed_topics"] = {
         "programming": list(state.get("completed_topics", {}).get("programming", [])),
         "medicine": list(state.get("completed_topics", {}).get("medicine", [])),
@@ -201,6 +292,8 @@ def _load_state() -> dict:
         "medicine": int(state.get("domain_stage_index", {}).get("medicine", 0)),
     }
     merged["stats"].update(state.get("stats", {}))
+    if _recover_stale_tasks(merged):
+        _save_state(merged)
     return merged
 
 
@@ -218,6 +311,75 @@ def _catalog_topics_for_domain(domain: str) -> list[dict]:
     if domain == "medicine":
         return list(_medical_catalog().get("topics", []))
     return []
+
+
+def _catalog_entry(domain: str, topic: dict) -> dict:
+    source_count = len(topic.get("sources", []) or [])
+    aliases = [alias for alias in topic.get("aliases", []) or [] if alias]
+    category = topic.get("category") or topic.get("track") or "general"
+    track = topic.get("track") or topic.get("category") or "rest-of-world"
+    version_context = topic.get("version_context") or topic.get("version") or ""
+
+    return {
+        "id": f"{domain}:{_normalize(topic.get('topic', ''))}",
+        "domain": domain,
+        "topic": topic.get("topic", ""),
+        "category": category,
+        "track": track,
+        "version_context": version_context,
+        "version_policy": topic.get("version_policy", ""),
+        "aliases": aliases,
+        "tags": list(dict.fromkeys([domain, *topic.get("tags", []), category, track, version_context])),
+        "source_count": source_count,
+        "proficiency_target": topic.get("proficiency_target", DOMAIN_PROFILES.get(domain, {}).get("proficiency_target")),
+        "summary": " · ".join(filter(None, [
+            topic.get("topic", ""),
+            category.replace("-", " "),
+            version_context,
+        ])),
+    }
+
+
+def get_learning_catalog(domain: str | None = None, query: str | None = None, limit: int = 120) -> dict:
+    domains = [domain] if domain in {"programming", "medicine"} else ["programming", "medicine"]
+    needle = _normalize(query or "")
+    items: list[dict] = []
+
+    for item_domain in domains:
+        for topic in _catalog_topics_for_domain(item_domain):
+            entry = _catalog_entry(item_domain, topic)
+            haystack = " ".join([
+                entry["topic"],
+                entry["category"],
+                entry["track"],
+                entry["version_context"],
+                entry["version_policy"],
+                " ".join(entry["aliases"]),
+                " ".join(entry["tags"]),
+            ])
+            if needle and needle not in _normalize(haystack):
+                continue
+            items.append(entry)
+
+    items.sort(key=lambda entry: (
+        _domain_priority(entry.get("domain", "")),
+        {
+            "software-development": 0,
+            "seo": 1,
+            "digital-marketing": 2,
+            "computer-hardware": 3,
+            "rest-of-world": 4,
+        }.get(entry.get("track"), 4),
+        entry.get("category", ""),
+        0 if entry.get("version_context") else 1,
+        entry.get("topic", ""),
+    ))
+    return {
+        "domain": domain or "all",
+        "query": query or "",
+        "count": len(items),
+        "topics": items[: max(1, min(int(limit or 120), 240))],
+    }
 
 
 def _resolve_topic_config(domain: str, topic_name: str) -> dict | None:
@@ -289,10 +451,61 @@ def _has_task(state: dict, domain: str, kind: str, metadata: dict | None = None,
 
 
 def _pending_or_active(state: dict, domain: str) -> list[dict]:
+    _recover_stale_tasks(state)
     return [
         task for task in state.get("schedule", [])
         if task.get("domain") == domain and task.get("status") in {"pending", "in_progress"}
     ]
+
+
+def _find_task_by_id(state: dict, task_id: str) -> dict | None:
+    for task in state.get("schedule", []):
+        if task.get("id") == task_id:
+            return task
+    return None
+
+
+def _topic_is_queued(state: dict, domain: str, topic: str, kind: str = "learn") -> bool:
+    return _has_task(state, domain, kind, metadata=None, topic=topic)
+
+
+def _recover_stale_tasks(state: dict) -> bool:
+    now = time.time()
+    recovered: list[dict] = []
+
+    for task in state.get("schedule", []):
+        if task.get("status") != "in_progress":
+            continue
+
+        started_at = _timestamp_from_iso(task.get("started_at"))
+        if started_at is not None and (now - started_at) < STALE_TASK_TIMEOUT_SECONDS:
+            continue
+
+        task["status"] = "pending"
+        task["started_at"] = None
+        task["completed_at"] = None
+        task["recovered_at"] = _now_iso()
+        recovered.append(task)
+
+    if not recovered:
+        return False
+
+    if state.get("current_task_id") and not any(
+        task.get("id") == state.get("current_task_id") and task.get("status") == "in_progress"
+        for task in state.get("schedule", [])
+    ):
+        state["current_task_id"] = None
+
+    _append_jsonl(
+        LOG_FILE,
+        {
+            "type": "learning_task_recovered",
+            "count": len(recovered),
+            "task_ids": [task.get("id") for task in recovered],
+            "recovered_at": _now_iso(),
+        },
+    )
+    return True
 
 
 def _recent_completed_topics(state: dict, domain: str, limit: int = 3) -> list[str]:
@@ -390,7 +603,7 @@ def _expand_beyond_roadmap(state: dict, domain: str) -> bool:
 
 def _ensure_schedule(state: dict) -> bool:
     added = False
-    for domain in state.get("active_domains", []):
+    for domain in sorted(state.get("active_domains", []), key=_domain_priority):
         if _pending_or_active(state, domain):
             continue
         added = _advance_domain_schedule(state, domain) or added
@@ -408,6 +621,7 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
         "proficiency_target",
         DOMAIN_PROFILES.get(domain, {}).get("proficiency_target", "advanced-practitioner"),
     )
+    version_context = topic_config.get("version_context") or topic_config.get("version") or ""
     manifest_path = _manifest_path(domain, topic_name)
     manifest = _read_json(
         manifest_path,
@@ -443,6 +657,7 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
                     f"{topic_name.upper()} LEARNING SOURCE\n"
                     f"Domain: {domain}\n"
                     f"Learning target: {proficiency_target}\n"
+                    f"Version context: {version_context or 'version-agnostic'}\n"
                     f"Source name: {name}\n"
                     f"Source type: {source_type}\n"
                     f"URL: {url}\n"
@@ -454,11 +669,15 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
                 add_vector_memory(
                     memory_text,
                     tags=list(dict.fromkeys([
-                        domain,
-                        _slugify(topic_name),
-                        *topic_config.get("tags", []),
-                        source_type,
-                        proficiency_target,
+                        tag for tag in [
+                            domain,
+                            _slugify(topic_name),
+                            *topic_config.get("tags", []),
+                            _slugify(version_context) if version_context else None,
+                            source_type,
+                            proficiency_target,
+                        ]
+                        if tag
                     ])),
                     source=f"{domain}-autonomous-learning",
                     importance=priority,
@@ -483,6 +702,9 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
     manifest["topic"] = topic_name
     manifest["domain"] = domain
     manifest["proficiency_target"] = proficiency_target
+    manifest["version_context"] = version_context
+    if topic_config.get("version_policy"):
+        manifest["version_policy"] = topic_config.get("version_policy")
     manifest["sources"] = manifest_sources
     _write_json(manifest_path, manifest)
 
@@ -497,6 +719,7 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
         "memory_chunks_saved": total_chunks,
         "errors": errors,
         "manifest_path": str(manifest_path),
+        "version_context": version_context,
     }
     _append_jsonl(LOG_FILE, {"type": "generic_topic_learning", **result})
     return result
@@ -567,8 +790,73 @@ def _run_task(task: dict) -> dict:
     raise RuntimeError(f"Unknown learning task kind: {task['kind']}")
 
 
+def _create_manual_learning_task(domain: str, topic: str, kind: str = "learn", stage: str = "Manual Selection") -> dict:
+    normalized_kind = (kind or "learn").strip() or "learn"
+    normalized_stage = (stage or "Manual Selection").strip() or "Manual Selection"
+    return _create_task(domain, topic, normalized_kind, normalized_stage, {"manual": True})
+
+
+def _finalize_task_execution(task: dict, success: bool, result: dict, error_text: str | None = None) -> None:
+    with _WORKER_LOCK:
+        state = _load_state()
+        _recover_stale_tasks(state)
+        for item in state.get("schedule", []):
+            if item.get("id") != task["id"]:
+                continue
+            item["status"] = "completed" if success else "failed"
+            item["completed_at"] = _now_iso()
+            item["result"] = result
+            break
+
+        if success and task["kind"] == "learn":
+            completed = state["completed_topics"].setdefault(task["domain"], [])
+            if _normalize(task["topic"]) not in {_normalize(entry) for entry in completed}:
+                completed.append(task["topic"])
+                state["stats"]["topics_learned"] += 1
+
+            # Schedule a compact synthesis after each successful topic.
+            if not _has_task(
+                state,
+                task["domain"],
+                "synthesis",
+                metadata={"topics": [task["topic"]]},
+                topic=task["topic"],
+            ):
+                state["schedule"].append(
+                    _create_task(
+                        task["domain"],
+                        task["topic"],
+                        "synthesis",
+                        f"{task['stage']} Synthesis",
+                        {"topics": [task["topic"]]},
+                    )
+                )
+
+        if success and task["kind"] == "review":
+            state["stats"]["reviews_completed"] += 1
+
+        if success and task["kind"] == "synthesis":
+            state["stats"]["syntheses_completed"] += 1
+
+        if success:
+            state["stats"]["tasks_completed"] += 1
+        else:
+            state["stats"]["errors"] += 1
+            _append_jsonl(LOG_FILE, {
+                "type": "learning_task_error",
+                "task": task,
+                "error": error_text,
+                "completed_at": _now_iso(),
+            })
+
+        state["current_task_id"] = None
+        _ensure_schedule(state)
+        _save_state(state)
+
+
 def autonomous_learning_status() -> str:
     state = _load_state()
+    _recover_stale_tasks(state)
     if _ensure_schedule(state):
         _save_state(state)
     lines = [
@@ -581,7 +869,7 @@ def autonomous_learning_status() -> str:
         "",
         "Domain progress:",
     ]
-    for domain in state.get("active_domains", []):
+    for domain in sorted(state.get("active_domains", []), key=_domain_priority):
         completed = state.get("completed_topics", {}).get(domain, [])
         pending = len([task for task in state.get("schedule", []) if task.get("domain") == domain and task.get("status") == "pending"])
         lines.append(
@@ -631,10 +919,11 @@ def _recent_learning_events(limit: int = 12) -> list[dict]:
 
 def get_autonomous_learning_overview(limit: int = 12) -> dict:
     state = _load_state()
+    _recover_stale_tasks(state)
     _ensure_schedule(state)
     _save_state(state)
 
-    active_domains = list(state.get("active_domains", []))
+    active_domains = sorted(state.get("active_domains", []), key=_domain_priority)
     domain_summaries = []
 
     for domain in active_domains:
@@ -736,11 +1025,12 @@ def disable_autonomous_learning() -> str:
 def run_autonomous_learning_cycle() -> dict | None:
     with _WORKER_LOCK:
         state = _load_state()
+        _recover_stale_tasks(state)
         if not state.get("enabled", True):
             return None
 
         _ensure_schedule(state)
-        task = next((item for item in state.get("schedule", []) if item.get("status") == "pending"), None)
+        task = _next_pending_task(state)
         if task is None:
             _save_state(state)
             return None
@@ -759,63 +1049,100 @@ def run_autonomous_learning_cycle() -> dict | None:
         result = {"errors": [str(exc)]}
         success = False
         error_text = str(exc)
+    _finalize_task_execution(task, success, result, error_text=error_text)
+
+    return result
+
+
+def run_manual_learning_task(
+    task_id: str | None = None,
+    *,
+    domain: str | None = None,
+    topic: str | None = None,
+    kind: str = "learn",
+    stage: str = "Manual Selection",
+) -> dict:
+    clean_task_id = (task_id or "").strip()
+    manual_domain = (domain or "").strip()
+    manual_topic = (topic or "").strip()
+
+    if not clean_task_id and (not manual_domain or not manual_topic):
+        return {"ok": False, "error": "Select a queued topic or provide a domain and topic."}
 
     with _WORKER_LOCK:
         state = _load_state()
-        for item in state.get("schedule", []):
-            if item.get("id") != task["id"]:
-                continue
-            item["status"] = "completed" if success else "failed"
-            item["completed_at"] = _now_iso()
-            item["result"] = result
-            break
+        _recover_stale_tasks(state)
 
-        if success and task["kind"] == "learn":
-            completed = state["completed_topics"].setdefault(task["domain"], [])
-            if _normalize(task["topic"]) not in {_normalize(entry) for entry in completed}:
-                completed.append(task["topic"])
-                state["stats"]["topics_learned"] += 1
+        if state.get("enabled", True):
+            return {"ok": False, "error": "Pause learning before using manual learning."}
 
-            # Schedule a compact synthesis after each successful topic.
-            if not _has_task(
-                state,
-                task["domain"],
-                "synthesis",
-                metadata={"topics": [task["topic"]]},
-                topic=task["topic"],
-            ):
-                state["schedule"].append(
-                    _create_task(
-                        task["domain"],
-                        task["topic"],
-                        "synthesis",
-                        f"{task['stage']} Synthesis",
-                        {"topics": [task["topic"]]},
-                    )
-                )
+        task = None
 
-        if success and task["kind"] == "review":
-            state["stats"]["reviews_completed"] += 1
-
-        if success and task["kind"] == "synthesis":
-            state["stats"]["syntheses_completed"] += 1
-
-        if success:
-            state["stats"]["tasks_completed"] += 1
+        if clean_task_id:
+            task = _find_task_by_id(state, clean_task_id)
+            if task is None:
+                return {"ok": False, "error": "Selected topic is no longer in the queue."}
         else:
-            state["stats"]["errors"] += 1
-            _append_jsonl(LOG_FILE, {
-                "type": "learning_task_error",
-                "task": task,
-                "error": error_text,
-                "completed_at": _now_iso(),
-            })
+            if manual_domain not in {"programming", "medicine"}:
+                return {"ok": False, "error": "Please choose a valid learning domain."}
 
-        state["current_task_id"] = None
-        _ensure_schedule(state)
+            config = _resolve_topic_config(manual_domain, manual_topic)
+            if config is None:
+                return {"ok": False, "error": "That topic is not in the learning catalog."}
+
+            existing = next(
+                (
+                    item
+                    for item in state.get("schedule", [])
+                    if item.get("domain") == manual_domain
+                    and _normalize(item.get("topic", "")) == _normalize(manual_topic)
+                    and item.get("kind") == (kind or "learn")
+                    and item.get("status") in {"pending", "in_progress"}
+                ),
+                None,
+            )
+            task = existing or _create_manual_learning_task(manual_domain, config.get("topic", manual_topic), kind=kind, stage=stage)
+            if existing is None:
+                state["schedule"].insert(0, task)
+
+        if task.get("status") == "completed":
+            return {"ok": False, "error": "Selected topic has already been completed."}
+        if task.get("status") == "in_progress":
+            return {"ok": False, "error": "Selected topic is already in progress."}
+
+        task["status"] = "in_progress"
+        task["started_at"] = _now_iso()
+        state["current_task_id"] = task["id"]
+        state["last_cycle_at"] = _now_iso()
         _save_state(state)
 
-    return result
+    try:
+        result = _run_task(task)
+        success = True
+        error_text = None
+    except Exception as exc:
+        result = {"errors": [str(exc)]}
+        success = False
+        error_text = str(exc)
+
+    _finalize_task_execution(task, success, result, error_text=error_text)
+
+    overview = get_autonomous_learning_overview(limit=12)
+    return {
+        "ok": success,
+        "task": {
+            "id": task.get("id"),
+            "domain": task.get("domain"),
+            "topic": task.get("topic"),
+            "kind": task.get("kind"),
+            "stage": task.get("stage"),
+            "status": "completed" if success else "failed",
+        },
+        "result": result,
+        "error": error_text,
+        "overview": overview,
+        "status": autonomous_learning_status(),
+    }
 
 
 def _worker_loop() -> None:
@@ -836,6 +1163,7 @@ def _worker_loop() -> None:
             })
 
         state = _load_state()
+        _recover_stale_tasks(state)
         delay = int(state.get("cycle_interval_seconds", DEFAULT_CYCLE_INTERVAL_SECONDS))
         queue_depth = len(
             [
@@ -856,6 +1184,7 @@ def ensure_autonomous_learning_worker() -> None:
 
     with _WORKER_LOCK:
         state = _load_state()
+        _recover_stale_tasks(state)
         _ensure_schedule(state)
         _save_state(state)
 

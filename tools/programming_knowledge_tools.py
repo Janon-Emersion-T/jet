@@ -75,6 +75,88 @@ ALL_TOPICS_ALIASES = {
     "all",
 }
 
+CURRICULUM_TRACK_PRIORITY = {
+    "software-development": 0,
+    "seo": 1,
+    "digital-marketing": 2,
+    "computer-hardware": 3,
+    "rest-of-world": 4,
+}
+
+SOFTWARE_DEVELOPMENT_KEYWORDS = (
+    "software",
+    "architecture",
+    "frontend",
+    "backend",
+    "api",
+    "testing",
+    "devops",
+    "deployment",
+    "security",
+    "database",
+    "version control",
+    "programming",
+    "framework",
+    "runtime",
+    "react",
+    "node",
+    "php",
+    "laravel",
+    "python",
+    "javascript",
+    "typescript",
+    "css",
+    "html",
+    "system design",
+    "distributed systems",
+    "performance optimization",
+    "refactoring",
+    "clean code",
+)
+
+SEO_KEYWORDS = (
+    "seo",
+    "search engine",
+    "crawl",
+    "indexing",
+    "structured data",
+    "schema",
+    "canonical",
+    "robots",
+    "sitemap",
+    "serp",
+    "technical seo",
+)
+
+DIGITAL_MARKETING_KEYWORDS = (
+    "marketing",
+    "campaign",
+    "conversion",
+    "brand",
+    "growth",
+    "analytics",
+    "ads",
+    "advertising",
+    "attribution",
+    "social media",
+    "email marketing",
+    "lead generation",
+)
+
+COMPUTER_HARDWARE_KEYWORDS = (
+    "hardware",
+    "electronics",
+    "embedded",
+    "iot",
+    "robotics",
+    "microcontroller",
+    "firmware",
+    "cpu",
+    "gpu",
+    "memory hierarchy",
+    "circuits",
+)
+
 SOURCE_GROUPS = {
     "computer-foundations": [
         {"name": "Nand2Tetris", "url": "https://www.nand2tetris.org/", "type": "foundational-course", "priority": 9},
@@ -481,6 +563,57 @@ def _infer_category(topic_name: str) -> str:
     return groups[0] if groups else "general-learning"
 
 
+def _infer_track(topic_name: str, category: str | None = None, tags: list[str] | None = None) -> str:
+    text = _normalize(topic_name)
+    tag_text = " ".join(_normalize(tag) for tag in (tags or []))
+    haystack = f"{text} {tag_text}"
+    category = _normalize(category or "")
+
+    if any(keyword in haystack for keyword in COMPUTER_HARDWARE_KEYWORDS):
+        return "computer-hardware"
+
+    if any(keyword in haystack for keyword in SEO_KEYWORDS):
+        return "seo"
+
+    if any(keyword in haystack for keyword in DIGITAL_MARKETING_KEYWORDS):
+        return "digital-marketing"
+
+    if category in {
+        "frontend",
+        "framework",
+        "runtime",
+        "programming-language",
+        "backend-api",
+        "architecture-systems",
+        "databases-data",
+        "security-fundamentals",
+        "devops-cloud",
+        "operating-systems",
+        "git-collaboration",
+        "ai-ml",
+        "mobile-platforms",
+        "software-engineering",
+    }:
+        return "software-development"
+
+    if any(keyword in haystack for keyword in SOFTWARE_DEVELOPMENT_KEYWORDS):
+        return "software-development"
+
+    return "rest-of-world"
+
+
+def _topic_sort_key(topic: dict) -> tuple:
+    track = topic.get("track") or _infer_track(topic.get("topic", ""), topic.get("category"), topic.get("tags", []))
+    category = topic.get("category", "general-learning")
+    version_context = topic.get("version_context") or ""
+    return (
+        CURRICULUM_TRACK_PRIORITY.get(track, CURRICULUM_TRACK_PRIORITY["rest-of-world"]),
+        0 if version_context else 1,
+        category,
+        _normalize(topic.get("topic", "")),
+    )
+
+
 def _expand_topic_entry(topic_entry) -> dict:
     if isinstance(topic_entry, str):
         topic_name = topic_entry.strip()
@@ -500,6 +633,7 @@ def _expand_topic_entry(topic_entry) -> dict:
             "topic": topic_name,
             "aliases": [],
             "category": _infer_category(topic_name),
+            "track": _infer_track(topic_name, _infer_category(topic_name), []),
             "tags": [_slugify(topic_name), "autonomous-learning"],
             "proficiency_target": "advanced-practitioner",
             "sources": deduped,
@@ -526,12 +660,22 @@ def _expand_topic_entry(topic_entry) -> dict:
     if not topic.get("category"):
         topic["category"] = _infer_category(topic.get("topic", ""))
 
+    topic["track"] = topic.get("track") or _infer_track(topic.get("topic", ""), topic.get("category"), topic.get("tags", []))
+
     if not topic.get("proficiency_target"):
         topic["proficiency_target"] = "advanced-practitioner"
 
     if not topic.get("tags"):
         base_tag = "senior-engineer-curriculum" if topic["proficiency_target"] == "senior-software-engineer" else "autonomous-learning"
         topic["tags"] = [_slugify(topic.get("topic", "")), base_tag]
+
+    if topic.get("topic", "").strip().lower() == "laravel" and not topic.get("version_context"):
+        topic["version_context"] = "Laravel 12.x"
+        topic.setdefault("version_policy", "Always match the project major version and use the versioned official documentation.")
+        topic.setdefault("aliases", [])
+        for alias in ["laravel 12", "laravel 12.x"]:
+            if alias not in topic["aliases"]:
+                topic["aliases"].append(alias)
 
     return topic
 
@@ -555,7 +699,8 @@ def _load_catalog() -> dict:
             ordered_keys.append(key)
         deduped_by_topic[key] = topic
 
-    return {"topics": [deduped_by_topic[key] for key in ordered_keys]}
+    sorted_topics = sorted((deduped_by_topic[key] for key in ordered_keys), key=_topic_sort_key)
+    return {"topics": sorted_topics}
 
 
 def _topic_map() -> Dict[str, dict]:

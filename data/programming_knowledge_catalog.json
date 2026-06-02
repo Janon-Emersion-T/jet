@@ -233,19 +233,22 @@
     },
     {
       "topic": "laravel",
-      "aliases": [],
+      "aliases": ["laravel 12", "laravel 12.x"],
       "category": "framework",
-      "tags": ["laravel", "php", "backend", "framework"],
+      "track": "software-development",
+      "version_context": "Laravel 12.x",
+      "version_policy": "Match the project major version and always prefer the versioned official documentation.",
+      "tags": ["laravel", "php", "backend", "framework", "version-aware", "laravel-12"],
       "sources": [
         {
-          "name": "Laravel Documentation",
-          "url": "https://laravel.com/docs",
+          "name": "Laravel 12 Documentation",
+          "url": "https://laravel.com/docs/12.x",
           "type": "official-documentation",
           "priority": 10
         },
         {
-          "name": "Laravel Starter Kits",
-          "url": "https://laravel.com/docs/starter-kits",
+          "name": "Laravel 12 Starter Kits",
+          "url": "https://laravel.com/docs/12.x/starter-kits",
           "type": "official-guide",
           "priority": 8
         }
