@@ -4,11 +4,11 @@ from pathlib import Path
 CONFIG_PATH = Path("storage/model_settings.json")
 
 DEFAULT_SETTINGS = {
-    "general_model": "llama3.2",
-    "coding_model": "qwen2.5-coder",
-    "fast_model": "llama3.2",
+    "general_model": "qwen2.5:7b",
+    "coding_model": "qwen2.5-coder:7b",
+    "fast_model": "qwen3.5:4b",
     "long_context_model": "llama3.1",
-    "fallback_model": "llama3.2",
+    "fallback_model": "mistral:7b",
     "temperature": 0.3,
     "max_tokens": 4096,
 }
@@ -28,7 +28,11 @@ def load_model_settings():
         return ensure_model_settings()
 
     with CONFIG_PATH.open("r", encoding="utf-8") as file:
-        return json.load(file)
+        loaded = json.load(file)
+
+    merged = dict(DEFAULT_SETTINGS)
+    merged.update(loaded)
+    return merged
 
 
 def save_model_settings(settings: dict):

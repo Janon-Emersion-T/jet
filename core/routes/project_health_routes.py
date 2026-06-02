@@ -50,4 +50,22 @@ def handle_project_health_routes(user_input: str, text: str, clean_text: str):
     if handler:
         return handler()
 
+    natural_aliases = {
+        "project health": project_health_score,
+        "health score": project_health_score,
+        "check project health": project_health_score,
+        "check the project health": project_health_score,
+        "project health check": project_health_score,
+        "project todo": project_todo_scanner,
+        "scan project todos": project_todo_scanner,
+        "scan project for todos": project_todo_scanner,
+        "code smells": code_smell_detector,
+        "find code smells": code_smell_detector,
+        "check migration status": migration_status_checker,
+    }
+
+    for phrase, mapped_handler in natural_aliases.items():
+        if phrase in text:
+            return mapped_handler()
+
     return None

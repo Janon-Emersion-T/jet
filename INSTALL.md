@@ -53,6 +53,12 @@ Or force a specific profile during upgrade:
 ./scripts/upgrade_jarvis.sh --full
 ```
 
+If you have made local code changes and want to rebuild the installed JARVIS from the current repository state without pulling from remote, use:
+
+```bash
+./scripts/upgrade_jarvis.sh --local
+```
+
 What it does:
 
 - checks that the git worktree is clean

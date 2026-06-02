@@ -6,6 +6,7 @@ from core.nlp.file_awareness import FileAwarenessResult, understand_file_command
 from core.nlp.intent_memory import expand_personal_shortcut, remember_intent
 from core.nlp.knowledge_context import KnowledgeContext, build_knowledge_context
 from core.nlp_engine import NLPResult, analyze_command
+from core.system_modes import get_system_mode_state
 from core.nlp.production_config import load_nlp_config
 from core.nlp.quality_services import confidence_dashboard
 from core.nlp.runtime_services import (
@@ -50,8 +51,37 @@ def orchestrate_command(user_input: str, audit: bool = True, remember: bool = Tr
     expanded = expand_personal_shortcut(user_input) if config["memory_enabled"] else user_input
     cached = semantic_cache_get(expanded) if cache and config["semantic_cache_enabled"] else None
     base: NLPResult = analyze_command(expanded)
+
+    # If the system is in voice mode, prefer a slightly lower confidence
+    # threshold and handle simple voice-specific intents like dictation.
+    try:
+        state = get_system_mode_state()
+    except Exception:
+        state = {"voice_mode": False}
+
+    voice_mode_active = bool(state.get("voice_mode"))
+
+    if voice_mode_active and config.get("features", {}).get("voice_understanding", False):
+        try:
+            from core.nlp.voice_understanding import parse_voice_intent
+
+            voice = parse_voice_intent(expanded)
+
+            # If the user was dictating, re-run analysis on the dictated text.
+            if getattr(voice, "dictation", None):
+                expanded = voice.dictation
+                base = analyze_command(expanded)
+        except Exception:
+            # Non-fatal: fall back to normal processing
+            pass
     fallback_intent = keyword_fallback(base.clean_text)
-    intent = base.intent if base.confidence >= config["confidence_threshold"] else fallback_intent or base.intent
+
+    # Adjust confidence threshold for voice mode to be more permissive.
+    threshold = config.get("confidence_threshold", 0.35)
+    if voice_mode_active:
+        threshold = min(0.25, threshold)
+
+    intent = base.intent if base.confidence >= threshold else fallback_intent or base.intent
     files = understand_file_command(expanded, base.entities)
     targets = resolve_targets(expanded, base.entities)
     if files.targets and files.action != "none":

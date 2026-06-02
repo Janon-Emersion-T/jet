@@ -436,6 +436,7 @@ function App() {
             routeInput={routeInput}
             setRouteInput={setRouteInput}
             previewRoute={previewRoute}
+            loadOllamaModels={loadOllamaModels}
           />
         )}
 

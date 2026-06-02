@@ -4,15 +4,22 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 FRONTEND_DIR="${ROOT_DIR}/frontend"
-VENV_PYTHON="${ROOT_DIR}/.venv/bin/python"
 ELECTRON_BIN="${FRONTEND_DIR}/node_modules/.bin/electron"
 API_HOST="127.0.0.1"
 LOG_DIR="${ROOT_DIR}/storage/logs"
 
 mkdir -p "${LOG_DIR}"
 
+if [[ -x "${ROOT_DIR}/.venv/bin/python" ]]; then
+  VENV_PYTHON="${ROOT_DIR}/.venv/bin/python"
+elif [[ -x "${ROOT_DIR}/venv/bin/python" ]]; then
+  VENV_PYTHON="${ROOT_DIR}/venv/bin/python"
+else
+  VENV_PYTHON=""
+fi
+
 if [[ ! -x "${VENV_PYTHON}" ]]; then
-  echo "JARVIS Python virtual environment not found at ${VENV_PYTHON}" >&2
+  echo "JARVIS Python virtual environment not found at ${ROOT_DIR}/.venv/bin/python or ${ROOT_DIR}/venv/bin/python" >&2
   echo "Run scripts/install_jarvis.sh first." >&2
   exit 1
 fi

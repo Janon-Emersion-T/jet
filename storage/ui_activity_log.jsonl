@@ -1,0 +1,8 @@
+{"time": "2026-06-02T03:01:43", "event_type": "panel_command", "payload": {"command": "coding session summary", "source": "logs-panel"}}
+{"time": "2026-06-02T03:01:56", "event_type": "chat_command", "payload": {"message": "deep check jarvis", "chat_id": "d1776642-b7fd-4a55-946e-68bc58054f13"}}
+{"time": "2026-06-02T03:02:07", "event_type": "chat_command", "payload": {"message": "what can you do?", "chat_id": "d1776642-b7fd-4a55-946e-68bc58054f13"}}
+{"time": "2026-06-02T03:02:35", "event_type": "chat_command", "payload": {"message": "What is your age now", "chat_id": "d1776642-b7fd-4a55-946e-68bc58054f13"}}
+{"time": "2026-06-02T17:31:05", "event_type": "chat_command", "payload": {"message": "hi", "chat_id": "d1776642-b7fd-4a55-946e-68bc58054f13"}}
+{"time": "2026-06-02T17:31:41", "event_type": "chat_command", "payload": {"message": "learn html", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}
+{"time": "2026-06-02T17:32:10", "event_type": "chat_command", "payload": {"message": "tell me all you know about html", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}
+{"time": "2026-06-02T17:33:01", "event_type": "chat_command", "payload": {"message": "what is your current level of Natural language processing", "chat_id": "0103b460-74d1-42f8-83b6-0ddcf428b14e"}}

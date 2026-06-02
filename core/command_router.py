@@ -1,7 +1,10 @@
-from core.ai_fallback import handle_ai_fallback
 from core.nlp.unified_orchestrator import orchestrate_command
 from core.routing.dispatcher import dispatch_to_module
 from core.routes.nlp_test_routes import handle_nlp_test_routes
+from core.conversational import handle_conversational_fallback
+from core.assistant_intent import plan_assistant_action
+from core.clarify import ask_for_clarification
+from core.system_modes import get_system_mode_state
 
 
 def _format_blocked_response(nlp) -> str:
@@ -79,7 +82,12 @@ def _guard_unconnected_external_tools(raw_text: str) -> str | None:
 
     return None
 
-def route_command(user_input: str, chat_context: str | None = None) -> str:
+def route_command(
+    user_input: str,
+    chat_context: str | None = None,
+    allow_clarify: bool = True,
+    allow_assistant_plan: bool = True,
+) -> str:
     raw_text = (user_input or "").strip()
 
     if not raw_text:
@@ -138,10 +146,64 @@ def route_command(user_input: str, chat_context: str | None = None) -> str:
     nlp_confidence = getattr(nlp, "confidence", 0.0)
     route_confidence = decision.confidence if decision else 0.0
 
+    if allow_assistant_plan:
+        plan = plan_assistant_action(user_input, chat_context)
+
+        if (
+            plan.mode == "command"
+            and plan.command
+            and plan.confidence >= 0.55
+            and plan.command.lower() != raw_text.lower()
+        ):
+            return route_command(
+                plan.command,
+                chat_context=chat_context,
+                allow_clarify=allow_clarify,
+                allow_assistant_plan=False,
+            )
+
+        if plan.mode in {"answer", "clarify"} and plan.answer and plan.confidence >= 0.55:
+            return plan.answer
+
+    # If both NLP and routing are low-confidence, try clarification first (if allowed).
+    try:
+        state = get_system_mode_state()
+    except Exception:
+        state = {"voice_mode": False}
+
+    voice_mode_active = bool(state.get("voice_mode"))
+
     if nlp_confidence < 0.35 and route_confidence < 0.35:
-        return handle_ai_fallback(
+        if allow_clarify:
+            question = ask_for_clarification(user_input, nlp, decision, chat_context)
+
+            if voice_mode_active:
+                try:
+                    from voice.text_to_speech import speak
+                    from voice.speech_to_text import listen
+
+                    speak(question)
+                    follow = listen()
+                    if follow:
+                        combined = f"{user_input} CLARIFY: {follow}"
+                        return route_command(
+                            combined,
+                            chat_context,
+                            allow_clarify=False,
+                            allow_assistant_plan=allow_assistant_plan,
+                        )
+                    else:
+                        return question
+                except Exception:
+                    return question
+            else:
+                return question
+
+    # If clarification not enabled or already attempted, fall back to conversational LLM.
+    if nlp_confidence < 0.35 and route_confidence < 0.35:
+        return handle_conversational_fallback(
             _format_low_confidence_fallback(user_input, nlp, decision, chat_context),
             chat_context=chat_context,
         )
 
-    return handle_ai_fallback(user_input, chat_context=chat_context)
+    return handle_conversational_fallback(user_input, chat_context=chat_context)

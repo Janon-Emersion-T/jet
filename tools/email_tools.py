@@ -1,7 +1,12 @@
 import os
 import smtplib
 from email.message import EmailMessage
-from dotenv import load_dotenv
+
+try:
+    from dotenv import load_dotenv
+except ImportError:  # pragma: no cover - fallback for partial installs
+    def load_dotenv(*_args, **_kwargs):
+        return False
 
 load_dotenv()
 

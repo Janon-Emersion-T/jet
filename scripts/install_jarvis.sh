@@ -4,7 +4,6 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 FRONTEND_DIR="${ROOT_DIR}/frontend"
-VENV_DIR="${ROOT_DIR}/.venv"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 APP_DIR="${HOME}/.local/share/applications"
 BIN_DIR="${HOME}/.local/bin"
@@ -55,7 +54,12 @@ mkdir -p "${APP_DIR}" "${BIN_DIR}" "${STATE_DIR}"
 
 cd "${ROOT_DIR}"
 
-if [[ ! -d "${VENV_DIR}" ]]; then
+if [[ -d "${ROOT_DIR}/.venv" ]]; then
+  VENV_DIR="${ROOT_DIR}/.venv"
+elif [[ -d "${ROOT_DIR}/venv" ]]; then
+  VENV_DIR="${ROOT_DIR}/venv"
+else
+  VENV_DIR="${ROOT_DIR}/.venv"
   "${PYTHON_BIN}" -m venv "${VENV_DIR}"
 fi
 

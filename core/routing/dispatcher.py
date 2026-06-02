@@ -2,12 +2,15 @@ from core.routing.route_registry import get_route_modules
 from core.routing.nlp_route_selector import select_route
 from core.agents.agent_registry import resolve_agent, format_agent_response
 
+MIN_MODULE_CONFIDENCE = 0.60
+FORCED_MODULE_ERROR_CONFIDENCE = 0.80
+
 
 def dispatch_to_module(user_input: str, nlp):
     modules = get_route_modules()
     decision = select_route(user_input, nlp, modules)
 
-    if decision.module is None:
+    if decision.module is None or decision.confidence < MIN_MODULE_CONFIDENCE:
         return None, decision
 
     text = getattr(nlp, "normalized_text", user_input)
@@ -37,10 +40,9 @@ def dispatch_to_module(user_input: str, nlp):
     if response is not None:
         return format_agent_response(selected_agent, response), decision
 
-    # Important:
-    # If the route selector confidently selected a specialist module,
-    # do not silently fall back and hallucinate a generic answer.
-    if decision.confidence >= 0.45:
+    # If the selected module did not actually handle the request, allow
+    # the conversational fallback to answer unless the route was extremely strong.
+    if decision.confidence >= FORCED_MODULE_ERROR_CONFIDENCE:
         return (
             f"[{selected_agent.name} | {selected_agent.title}]\n"
             f"ROUTE SELECTED BUT ACTION NOT HANDLED\n"
