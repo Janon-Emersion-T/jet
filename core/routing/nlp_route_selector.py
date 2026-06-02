@@ -105,8 +105,30 @@ def _build_text_candidates(user_input: str, nlp) -> List[str]:
 
 def _specialist_boost(user_input: str, module: RouteModule) -> float:
     text = _normalize(user_input)
+    build_signals = [
+        "laravel",
+        "blade",
+        "tailwind",
+        "alpine",
+        "vite",
+        "composer",
+        "artisan",
+        "migration",
+        "controller",
+        "model",
+        "view",
+        "readme",
+        "scaffold",
+        "web application",
+        "web app",
+        "project",
+        "/var/www",
+    ]
 
     if module.name == "html_knowledge":
+        if any(signal in text for signal in build_signals):
+            return 0.0
+
         html_signals = [
             "html",
             "doctype",
@@ -207,6 +229,27 @@ def _specialist_boost(user_input: str, module: RouteModule) -> float:
 
         if any(signal in text for signal in execution_signals):
             return 0.35
+
+    if module.name == "web_development":
+        web_dev_signals = [
+            "laravel",
+            "blade",
+            "tailwind",
+            "alpine",
+            "vite",
+            "web application",
+            "web app",
+            "build",
+            "create",
+            "generate",
+            "scaffold",
+            "dashboard",
+            "project",
+            "/var/www",
+        ]
+
+        if any(signal in text for signal in web_dev_signals):
+            return 0.40
 
     return 0.0
 

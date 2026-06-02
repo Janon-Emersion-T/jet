@@ -6,6 +6,8 @@ from unittest.mock import patch
 
 from core.nlp import route_resolver
 from core.patches.proposal_manager import ProposalManager
+from core.routing.nlp_route_selector import select_route
+from core.routing.route_registry import get_route_modules
 from core.routes.web_development_routes import handle_web_development_routes
 from tools.safe_execution_tools import request_shell_command
 from tools.web_development_tools import build_web_development_plan, format_web_development_plan
@@ -66,6 +68,68 @@ class WebDevelopmentToolTests(unittest.TestCase):
             route_resolver.resolve_route_hint("project_analysis", "blade tailwind alpine vite", {}),
             "web_development",
         )
+
+    def test_route_selector_prefers_web_development_for_build_prompts(self):
+        nlp = type(
+            "NLP",
+            (),
+            {
+                "normalized_text": "create laravel web application in /var/www/testjarvis",
+                "clean_text": "create laravel web application in varwwwtestjarvis",
+                "canonical_command": None,
+                "intent": "web_development",
+                "domain": type("Domain", (), {"domain": "development"})(),
+            },
+        )()
+
+        decision = select_route(
+            "Create a Laravel web application in /var/www/testJarvis",
+            nlp,
+            get_route_modules(),
+        )
+
+        self.assertIsNotNone(decision.module)
+        self.assertEqual(decision.module.name, "web_development")
+
+    def test_route_selector_keeps_meta_tag_questions_in_html_knowledge(self):
+        nlp = type(
+            "NLP",
+            (),
+            {
+                "normalized_text": "explain the meta tag",
+                "clean_text": "explain the meta tag",
+                "canonical_command": None,
+                "intent": "general_chat",
+                "domain": type("Domain", (), {"domain": "frontend"})(),
+            },
+        )()
+
+        decision = select_route("Explain the meta tag", nlp, get_route_modules())
+
+        self.assertIsNotNone(decision.module)
+        self.assertEqual(decision.module.name, "html_knowledge")
+
+    def test_route_selector_ignores_html_route_for_meta_in_build_prompt(self):
+        nlp = type(
+            "NLP",
+            (),
+            {
+                "normalized_text": "create laravel web application with meta tags in /var/www/testjarvis",
+                "clean_text": "create laravel web application with meta tags in varwwwtestjarvis",
+                "canonical_command": None,
+                "intent": "web_development",
+                "domain": type("Domain", (), {"domain": "development"})(),
+            },
+        )()
+
+        decision = select_route(
+            "Create a Laravel web application with meta tags in /var/www/testJarvis",
+            nlp,
+            get_route_modules(),
+        )
+
+        self.assertIsNotNone(decision.module)
+        self.assertEqual(decision.module.name, "web_development")
 
     def test_web_development_route_returns_plan_or_execution(self):
         with patch("core.routes.web_development_routes.build_web_development_plan") as plan_mock:
