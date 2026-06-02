@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-06-02T13:07:37Z",
+  "topic": "Medical Terminology and Communication",
+  "domain": "medicine",
+  "sources": {
+    "https://medlineplus.gov/medicalwords.html": {
+      "name": "MedlinePlus Medical Words Tutorial",
+      "type": "patient-education-reference",
+      "priority": 8,
+      "hash": "7f4db04dc24a1930fcacaae067832b8dbf71d9c6b4bf0c31f9e9072c464781af",
+      "last_learned_at": "2026-06-02T13:07:35Z",
+      "chunks_saved": 2,
+      "title": "MedlinePlus: Understanding Medical Words Tutorial"
+    }
+  },
+  "proficiency_target": "doctor-level-reference"
+}

@@ -4220,5 +4220,143 @@
         "created_at": "2026-06-02T18:23:13",
         "updated_at": null,
         "active": true
+    },
+    {
+        "id": "a406fd5973d82501",
+        "text": "LOGIC AND PROBLEM SOLVING LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: Khan Academy Computing\nSource type: practical-course\nURL: https://www.khanacademy.org/computing\nPage title: Khan Academy\nHeadings: \nChunk: 1/1\n\nKhan Academy",
+        "tags": [
+            "programming",
+            "logic_and_problem_solving",
+            "autonomous-learning",
+            "practical-course",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 8,
+        "created_at": "2026-06-02T18:31:24",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "eab7715a8fa20758",
+        "text": "LOGIC AND PROBLEM SOLVING LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: MIT OpenCourseWare Electrical Engineering and Computer Science\nSource type: university-course\nURL: https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/\nPage title: Search | MIT OpenCourseWare | Free Online Course Materials\nHeadings: You are leaving MIT OpenCourseWare\nChunk: 1/1\n\nSearch | MIT OpenCourseWare | Free Online Course Materials Help shape the next 25 years of MIT OpenCourseWare. Learn more about our crowdfunding campaign now. close menu Give Now About OCW Help & Faqs Contact Us GIVE NOW about ocw help & faqs contact us You are leaving MIT OpenCourseWare close Please be advised that external sites may have terms and conditions, including license rights, that differ from ours. MIT OCW is not responsible for any content on third party sites, nor does a link suggest an endorsement of those sites and/or their content. Stay Here Continue",
+        "tags": [
+            "programming",
+            "logic_and_problem_solving",
+            "autonomous-learning",
+            "university-course",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 8,
+        "created_at": "2026-06-02T18:31:25",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "ba68f49eb4db1bc5",
+        "text": "HUMAN ANATOMY AND PHYSIOLOGY LEARNING SOURCE\nDomain: medicine\nLearning target: doctor-level-reference\nSource name: MedlinePlus Anatomy\nSource type: clinical-reference\nURL: https://medlineplus.gov/anatomy.html\nPage title: Anatomy | MedlinePlus\nHeadings: Anatomy | Basics | Learn More | See, Play and Learn | Research | Resources | For You | Summary | Start Here | Related Issues | Specifics | Images | Videos and Tutorials | Journal Articles References and abstracts from MEDLINE/PubMed (National Library of Medicine) | Reference Desk | Children | Teenagers | Women | Topic Image | Disclaimers\nChunk: 1/4\n\nAnatomy | MedlinePlus Skip navigation An official website of the United States government Here\u00e2\u0080\u0099s how you know Here\u00e2\u0080\u0099s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( ) or https:// means you\u00e2\u0080\u0099ve safely connected to the .gov website. Share sensitive information only on official, secure websites. National Library of Medicine Menu Health Topics Drugs & Supplements Genetics Medical Tests Medical Encyclopedia About MedlinePlus Search Search MedlinePlus GO About MedlinePlus What's New Site Map Customer Support Health Topics Drugs & Supplements Genetics Medical Tests Medical Encyclopedia Espa\u00c3\u00b1ol You Are Here: Home \u2192 Health Topics \u2192 Anatomy URL of this page: https://medlineplus.gov/anatomy.html Anatomy On this page Basics Summary Start Here Learn More Related Issues Specifics See, Play and Learn Images Videos and Tutorials Research Journal Articles Resources Reference Desk For You Children Teenagers Women Summary Anatomy is the science that studies the structure of the body. On this page, you'll find links to descriptions and pictures of the human body's parts and organ systems from head to toe.",
+        "tags": [
+            "medicine",
+            "human_anatomy_and_physiology",
+            "anatomy",
+            "physiology",
+            "foundation",
+            "clinical-reference",
+            "doctor-level-reference"
+        ],
+        "source": "medicine-autonomous-learning",
+        "importance": 9,
+        "created_at": "2026-06-02T18:34:27",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "889859ab7261af8e",
+        "text": "HUMAN ANATOMY AND PHYSIOLOGY LEARNING SOURCE\nDomain: medicine\nLearning target: doctor-level-reference\nSource name: MedlinePlus Anatomy\nSource type: clinical-reference\nURL: https://medlineplus.gov/anatomy.html\nPage title: Anatomy | MedlinePlus\nHeadings: Anatomy | Basics | Learn More | See, Play and Learn | Research | Resources | For You | Summary | Start Here | Related Issues | Specifics | Images | Videos and Tutorials | Journal Articles References and abstracts from MEDLINE/PubMed (National Library of Medicine) | Reference Desk | Children | Teenagers | Women | Topic Image | Disclaimers\nChunk: 2/4\n\nStart Here Introduction to the Human Body (National Cancer Institute) Related Issues Brain Basics: The Life and Death of a Neuron (National Institute of Neurological Disorders and Stroke) Specifics Biological Pathways (National Human Genome Research Institute) Also in Spanish Brain (National Cancer Institute) Cell Structure (National Cancer Institute) Chromosomes (National Human Genome Research Institute) Also in Spanish Classification & Structure of Blood Vessels (National Cancer Institute) Endocrine System (Nemours Foundation) Also in Spanish Hair, Skin, and Nails (Nemours Foundation) Also in Spanish How the Heart Works (National Heart, Lung, and Blood Institute) Also in Spanish How the Lungs Work (National Heart, Lung, and Blood Institute) Also in Spanish How Your Body Controls Breathing (National Heart, Lung, and Blood Institute) Also in Spanish Introduction to the Lymphatic System (National Cancer Institute) Larynx & Trachea (National Cancer Institute) Layers of the Skin (National Cancer Institute) Lymph Nodes (National Cancer Institute) Mouth (National Cancer Institute) Mouth and Teeth (For Parents) (Nemours Foundation) Also in Spanish Muscles of the Head and Neck (National Cancer Institute) Muscles of the Lower Extremity (National Cancer Institute) Muscles of the Trunk (National Cancer Institute) Muscles of the Upper Extremity (National Cancer Institute) Nose, Nasal Cavities & Paranasal Sinuses (National Cancer Institute) Overview of the Immune System (National Institute of Allergy and Infectious Diseases) Pancreas Basics (Johns Hopkins University, Department of Pathology) Pharynx (National Cancer Institute) Pineal and Pituitary Glands (National Cancer Institute) Regions of the Digestive System (National Cancer Institute) Small & Large Intestine (National Cancer Institute) Spleen (National Cancer Institute) Stomach (National Cancer Institute) Structure of the Heart (National Cancer Institute) Thymus (National Cancer Institute) Tonsils (National Cancer Institute) Urinary Bladder (National Cancer Institute) Your Digestive System and How It Works (National Institute of Diabetes and Digestive and Kidney Diseases) Also in Spanish Your Kidneys and How They Work (National Institute of Diabetes and Digestive and Kidney Diseases) Also in Spanish Images Appendicular Skeleton (National Cancer Institute) Axial Skeleton (National Cancer Institute) Components of the Urinary System (National Cancer Institute) How the Eyes Work (National Eye Institute) Also in Spanish Reproductive System: Female Anatomy (National Cancer Institute) Videos and Tutorials Anatomy Videos (National Library of Medicine) Also in Spanish Journal Articles References and abstracts from MEDLINE/PubMed (National Library of Medicine) Article: Immersive virtual reality-assisted anatomy training improves endotracheal intubation performance in simulation:...",
+        "tags": [
+            "medicine",
+            "human_anatomy_and_physiology",
+            "anatomy",
+            "physiology",
+            "foundation",
+            "clinical-reference",
+            "doctor-level-reference"
+        ],
+        "source": "medicine-autonomous-learning",
+        "importance": 9,
+        "created_at": "2026-06-02T18:34:27",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "ef8ed57e3eb9ccfc",
+        "text": "HUMAN ANATOMY AND PHYSIOLOGY LEARNING SOURCE\nDomain: medicine\nLearning target: doctor-level-reference\nSource name: MedlinePlus Anatomy\nSource type: clinical-reference\nURL: https://medlineplus.gov/anatomy.html\nPage title: Anatomy | MedlinePlus\nHeadings: Anatomy | Basics | Learn More | See, Play and Learn | Research | Resources | For You | Summary | Start Here | Related Issues | Specifics | Images | Videos and Tutorials | Journal Articles References and abstracts from MEDLINE/PubMed (National Library of Medicine) | Reference Desk | Children | Teenagers | Women | Topic Image | Disclaimers\nChunk: 3/4\n\nArticle: The use of learning assistants to facilitate student engagement and learning:... Article: The role of video and reflection interventions in supporting first-year medical... Anatomy -- see more articles Reference Desk Female Reproductive System (National Cancer Institute) Children About the Eye (National Eye Institute) Ears (Nemours Foundation) Also in Spanish Get Excited about the Brain! (National Institute of Mental Health) - PDF Also in Spanish Your Bones (Nemours Foundation) Also in Spanish Your Digestive System (Nemours Foundation) Also in Spanish Your Ears (For Kids) (Nemours Foundation) Also in Spanish Your Eyes (Nemours Foundation) Also in Spanish Your Kidneys (Nemours Foundation) Also in Spanish Your Lungs and Respiratory System (Nemours Foundation) Also in Spanish Your Muscles (Nemours Foundation) Also in Spanish Your Nails (Nemours Foundation) Also in Spanish Your Nose (Nemours Foundation) Also in Spanish Your Skin (Nemours Foundation) Also in Spanish Your Teeth (Nemours Foundation) Also in Spanish Your Tongue (Nemours Foundation) Also in Spanish Teenagers About the Body Basics Library (Nemours Foundation) Also in Spanish All About Your Brain & Nervous System (Nemours Foundation) Also in Spanish Blood (Nemours Foundation) Also in Spanish Female Reproductive System (For Teens) (Nemours Foundation) Also in Spanish Male Reproductive System (Nemours Foundation) Also in Spanish The Immune System (Nemours Foundation) Also in Spanish Women Female Reproductive System (Nemours Foundation) Also in Spanish Topic Image Disclaimers MedlinePlus links to health information from the National Institutes of Health and other federal government agencies. MedlinePlus also links to health information from non-government Web sites.",
+        "tags": [
+            "medicine",
+            "human_anatomy_and_physiology",
+            "anatomy",
+            "physiology",
+            "foundation",
+            "clinical-reference",
+            "doctor-level-reference"
+        ],
+        "source": "medicine-autonomous-learning",
+        "importance": 9,
+        "created_at": "2026-06-02T18:34:27",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "e8f5c972a0f3295c",
+        "text": "HUMAN ANATOMY AND PHYSIOLOGY LEARNING SOURCE\nDomain: medicine\nLearning target: doctor-level-reference\nSource name: MedlinePlus Anatomy\nSource type: clinical-reference\nURL: https://medlineplus.gov/anatomy.html\nPage title: Anatomy | MedlinePlus\nHeadings: Anatomy | Basics | Learn More | See, Play and Learn | Research | Resources | For You | Summary | Start Here | Related Issues | Specifics | Images | Videos and Tutorials | Journal Articles References and abstracts from MEDLINE/PubMed (National Library of Medicine) | Reference Desk | Children | Teenagers | Women | Topic Image | Disclaimers\nChunk: 4/4\n\nSee our disclaimer about external links and our quality guidelines . The information on this site should not be used as a substitute for professional medical care or advice. Contact a health care provider if you have questions about your health. Learn how to cite this page About MedlinePlus What's New Site Map Customer Support Subscribe to RSS Connect with NLM NLM Web Policies Copyright Accessibility Guidelines for Links Viewers & Players HHS Vulnerability Disclosure MedlinePlus Connect for EHRs For Developers National Library of Medicine 8600 Rockville Pike, Bethesda, MD 20894 U.S. Department of Health and Human Services National Institutes of Health Last updated March 17, 2025",
+        "tags": [
+            "medicine",
+            "human_anatomy_and_physiology",
+            "anatomy",
+            "physiology",
+            "foundation",
+            "clinical-reference",
+            "doctor-level-reference"
+        ],
+        "source": "medicine-autonomous-learning",
+        "importance": 9,
+        "created_at": "2026-06-02T18:34:27",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "316db12c2f0d7264",
+        "text": "MEDICAL TERMINOLOGY AND COMMUNICATION LEARNING SOURCE\nDomain: medicine\nLearning target: doctor-level-reference\nSource name: MedlinePlus Medical Words Tutorial\nSource type: patient-education-reference\nURL: https://medlineplus.gov/medicalwords.html\nPage title: MedlinePlus: Understanding Medical Words Tutorial\nHeadings: Understanding Medical Words Tutorial from the National Library of Medicine\nChunk: 1/2\n\nMedlinePlus: Understanding Medical Words Tutorial Skip navigation An official website of the United States government Here\u00e2\u0080\u0099s how you know Here\u00e2\u0080\u0099s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( ) or https:// means you\u00e2\u0080\u0099ve safely connected to the .gov website. Share sensitive information only on official, secure websites. National Library of Medicine Menu Health Topics Drugs & Supplements Genetics Medical Tests Medical Encyclopedia About MedlinePlus Search Search MedlinePlus GO About MedlinePlus What's New Site Map Customer Support Health Topics Drugs & Supplements Genetics Medical Tests Medical Encyclopedia You Are Here: Home \u2192 Understanding Medical Words Tutorial URL of this page: https://medlineplus.gov/medwords/medicalwords.html Understanding Medical Words Tutorial from the National Library of Medicine This tutorial teaches you about medical words. You'll learn how parts of medical words are put together. You'll also find quizzes to check what you've learned. You can use this tutorial on our website or download Understanding Medical Words Tutorial (PDF, 1.3 MB) . What's in this for me? Find out why you and your doctor sometimes are speaking different languages. Learn how to put together parts of medical words. See what you've learned by taking short quizzes. Learn more with links to lists of word parts and abbreviations. Download the materials mentioned above for this tutorial.",
+        "tags": [
+            "medicine",
+            "medical_terminology_and_communication",
+            "terminology",
+            "communication",
+            "patient-education-reference",
+            "doctor-level-reference"
+        ],
+        "source": "medicine-autonomous-learning",
+        "importance": 8,
+        "created_at": "2026-06-02T18:37:35",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "23179f3276a8e55a",
+        "text": "MEDICAL TERMINOLOGY AND COMMUNICATION LEARNING SOURCE\nDomain: medicine\nLearning target: doctor-level-reference\nSource name: MedlinePlus Medical Words Tutorial\nSource type: patient-education-reference\nURL: https://medlineplus.gov/medicalwords.html\nPage title: MedlinePlus: Understanding Medical Words Tutorial\nHeadings: Understanding Medical Words Tutorial from the National Library of Medicine\nChunk: 2/2\n\nAbout MedlinePlus What's New Site Map Customer Support Subscribe to RSS Connect with NLM NLM Web Policies Copyright Accessibility Guidelines for Links Viewers & Players HHS Vulnerability Disclosure MedlinePlus Connect for EHRs For Developers National Library of Medicine 8600 Rockville Pike, Bethesda, MD 20894 U.S. Department of Health and Human Services National Institutes of Health Last updated March 6, 2020",
+        "tags": [
+            "medicine",
+            "medical_terminology_and_communication",
+            "terminology",
+            "communication",
+            "patient-education-reference",
+            "doctor-level-reference"
+        ],
+        "source": "medicine-autonomous-learning",
+        "importance": 8,
+        "created_at": "2026-06-02T18:37:35",
+        "updated_at": null,
+        "active": true
     }
 ]

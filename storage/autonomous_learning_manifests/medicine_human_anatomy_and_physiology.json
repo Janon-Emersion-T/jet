@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-06-02T13:04:33Z",
+  "topic": "Human Anatomy and Physiology",
+  "domain": "medicine",
+  "sources": {
+    "https://medlineplus.gov/anatomy.html": {
+      "name": "MedlinePlus Anatomy",
+      "type": "clinical-reference",
+      "priority": 9,
+      "hash": "3429545f908c63315c342cb84ec40c08fe1cf5b547e2278dd332cd88817823e1",
+      "last_learned_at": "2026-06-02T13:04:27Z",
+      "chunks_saved": 4,
+      "title": "Anatomy | MedlinePlus"
+    }
+  },
+  "proficiency_target": "doctor-level-reference"
+}

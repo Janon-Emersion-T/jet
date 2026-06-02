@@ -1,6 +1,6 @@
 from core.routing.route_registry import get_route_modules
 from core.routing.nlp_route_selector import select_route
-from core.agents.agent_registry import resolve_agent, format_agent_response
+from core.agents.agent_registry import resolve_agent, suggest_collaborators, format_agent_response
 
 MIN_MODULE_CONFIDENCE = 0.60
 FORCED_MODULE_ERROR_CONFIDENCE = 0.80
@@ -30,6 +30,13 @@ def dispatch_to_module(user_input: str, nlp):
     decision.metadata["agent_title"] = selected_agent.title
     decision.metadata["agent_department"] = selected_agent.department
 
+    collaborators = suggest_collaborators(
+        selected_agent,
+        text=user_input,
+    )
+    decision.metadata["collaborator_keys"] = [agent.key for agent in collaborators]
+    decision.metadata["collaborator_names"] = [agent.name for agent in collaborators]
+
     handler = decision.module.handler
 
     if decision.module.requires_intent_arg:
@@ -38,7 +45,7 @@ def dispatch_to_module(user_input: str, nlp):
         response = handler(user_input, text, clean_text)
 
     if response is not None:
-        return format_agent_response(selected_agent, response), decision
+        return format_agent_response(selected_agent, response, collaborators=collaborators), decision
 
     # If the selected module did not actually handle the request, allow
     # the conversational fallback to answer unless the route was extremely strong.

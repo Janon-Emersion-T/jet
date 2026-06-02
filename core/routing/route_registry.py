@@ -603,16 +603,23 @@ ROUTE_MODULES = [
             "scaffold website",
             "set up laravel",
             "setup laravel",
+            "install tailwind",
+            "setup tailwind",
+            "configure tailwind",
+            "npm install",
+            "frontend dependencies",
             "/var/www",
         ],
         intents=["development", "execution", "project_setup", "command"],
         canonical_commands=[
             "install laravel project",
+            "install tailwind",
         ],
         examples=[
             "create /var/www/csl and install laravel",
             "install laravel in /var/www/csl",
             "set up a laravel project in /var/www/csl",
+            "install tailwind in the same project",
         ],
     ),
 

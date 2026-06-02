@@ -39,7 +39,7 @@ AGENTS: Dict[str, AgentProfile] = {
         universe="Marvel",
         department="architecture",
         objective="Designs applications, product architecture, technical strategy, and advanced builds.",
-        route_names=["project_analyzer", "framework", "advanced_laravel", "architecture_quality"],
+        route_names=["project_analyzer", "framework", "advanced_laravel", "architecture_quality", "developer_setup"],
         domains=["development", "project"],
         intents=["project_analysis", "framework", "laravel"],
         keywords=["architecture", "system design", "project", "application", "build app", "software"],
@@ -67,7 +67,7 @@ AGENTS: Dict[str, AgentProfile] = {
         universe="Marvel",
         department="frontend",
         objective="Builds UI, frontend components, HTML, CSS, Tailwind, React, responsive layouts, and user interfaces.",
-        route_names=["html_knowledge", "css_knowledge", "frontend_platform", "frontend_quality"],
+        route_names=["html_knowledge", "css_knowledge", "frontend_platform", "frontend_quality", "developer_setup"],
         domains=["frontend"],
         intents=["frontend", "html_knowledge", "css_knowledge", "frontend_html", "frontend_css"],
         keywords=["html", "css", "tailwind", "react", "frontend", "ui", "component", "responsive"],
@@ -93,7 +93,7 @@ AGENTS: Dict[str, AgentProfile] = {
         universe="Marvel",
         department="devops",
         objective="Handles servers, hosting, deployment, DNS, Linux administration, Docker, and uptime.",
-        route_names=["dev_ops", "deployment_docs", "hosting_dns", "linux_admin", "live_environment"],
+        route_names=["dev_ops", "deployment_docs", "hosting_dns", "linux_admin", "live_environment", "developer_setup"],
         domains=["devops", "system"],
         intents=["dev_ops", "deployment", "hosting", "linux"],
         keywords=["server", "deploy", "hosting", "dns", "linux", "nginx", "apache", "docker", "ssl"],
@@ -253,7 +253,7 @@ AGENTS: Dict[str, AgentProfile] = {
         universe="Marvel",
         department="tools",
         objective="Builds utilities, scripts, integrations, scrapers, automation tools, and quick technical solutions.",
-        route_names=["integration", "execution", "patch"],
+        route_names=["integration", "execution", "patch", "developer_setup"],
         domains=["development", "system"],
         intents=["integration", "execution", "patch"],
         keywords=["tool", "script", "automation", "utility", "command", "terminal"],
@@ -388,11 +388,26 @@ def resolve_agent(
     intent = (intent or "").strip().lower()
     text = (text or "").strip().lower()
 
-    # 1. Exact route match is strongest.
+    # 1. Exact route match is strongest, but if multiple agents own the same
+    # route, use request keywords to choose the best specialist.
     if route_name:
-        for agent in AGENTS.values():
-            if route_name in [name.lower() for name in agent.route_names]:
-                return agent
+        exact_route_agents = [
+            agent for agent in AGENTS.values()
+            if route_name in [name.lower() for name in agent.route_names]
+        ]
+        if len(exact_route_agents) == 1:
+            return exact_route_agents[0]
+        if len(exact_route_agents) > 1 and text:
+            best_agent = None
+            best_score = 0
+            for agent in exact_route_agents:
+                score = sum(1 for keyword in agent.keywords if keyword.lower() in text)
+                if score > best_score:
+                    best_score = score
+                    best_agent = agent
+            if best_agent and best_score > 0:
+                return best_agent
+            return exact_route_agents[0]
 
     # 2. Intent match.
     if intent:
@@ -424,15 +439,45 @@ def resolve_agent(
     return AGENTS[DEFAULT_AGENT_KEY]
 
 
+def suggest_collaborators(
+    primary_agent: AgentProfile,
+    *,
+    text: Optional[str] = None,
+    limit: int = 2,
+) -> List[AgentProfile]:
+    text = (text or "").strip().lower()
+    if not text:
+        return []
+
+    scored: List[tuple[int, AgentProfile]] = []
+    for agent in AGENTS.values():
+        if agent.key == primary_agent.key:
+            continue
+        score = sum(1 for keyword in agent.keywords if keyword.lower() in text)
+        if score > 0:
+            scored.append((score, agent))
+
+    scored.sort(key=lambda item: item[0], reverse=True)
+    return [agent for _, agent in scored[:limit]]
+
+
 def format_agent_intro(agent: AgentProfile) -> str:
     return f"{agent.name} — {agent.title}"
 
 
-def format_agent_response(agent: AgentProfile, response: str) -> str:
+def format_agent_response(
+    agent: AgentProfile,
+    response: str,
+    collaborators: Optional[List[AgentProfile]] = None,
+) -> str:
     if not response:
         return response
 
-    header = f"[{agent.name} | {agent.title}]"
+    collaborator_text = ""
+    if collaborators:
+        collaborator_text = " | with " + ", ".join(item.name for item in collaborators)
+
+    header = f"[{agent.name} | {agent.title}{collaborator_text}]"
 
     if response.startswith("["):
         return response

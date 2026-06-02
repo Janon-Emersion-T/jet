@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-06-02T13:01:26Z",
+  "topic": "Logic and Problem Solving",
+  "domain": "programming",
+  "sources": {
+    "https://www.khanacademy.org/computing": {
+      "name": "Khan Academy Computing",
+      "type": "practical-course",
+      "priority": 8,
+      "hash": "5c11a47a040d1ef76b2ad4b9d69845cb4bfc3e62b1888d8081bc66e0f77e5184",
+      "last_learned_at": "2026-06-02T13:01:24Z",
+      "chunks_saved": 1,
+      "title": "Khan Academy"
+    },
+    "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/": {
+      "name": "MIT OpenCourseWare Electrical Engineering and Computer Science",
+      "type": "university-course",
+      "priority": 8,
+      "hash": "a67f2cb66bdaa489bd5a05ba91ad16c9b0bdd560d979d48ab76a73aecb3931de",
+      "last_learned_at": "2026-06-02T13:01:25Z",
+      "chunks_saved": 1,
+      "title": "Search | MIT OpenCourseWare | Free Online Course Materials"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}

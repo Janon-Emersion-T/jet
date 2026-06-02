@@ -1,9 +1,10 @@
 import re
 import shutil
 import subprocess
+import json
 from pathlib import Path
 
-from tools.project_context_tools import set_current_project
+from tools.project_context_tools import set_current_project, get_current_project_path
 
 MAX_OUTPUT = 12000
 SAFE_BASE_DIRS = [
@@ -110,13 +111,140 @@ def install_laravel_project(target_dir: str, company_name: str | None = None) ->
     return "\n".join(lines)
 
 
+def _project_dir_from_hint(target_dir: str | None = None) -> tuple[Path | None, str | None]:
+    if target_dir:
+        path = Path(target_dir).expanduser().resolve()
+    else:
+        current = get_current_project_path()
+        if not current:
+            return None, "No current project selected. Use a path or set the project context first."
+        path = Path(current).resolve()
+
+    if not path.exists() or not path.is_dir():
+        return None, "Project directory not found."
+
+    if not _inside_safe_base(path):
+        allowed = ", ".join(str(item) for item in SAFE_BASE_DIRS)
+        return None, f"Blocked project path. Allowed base folders: {allowed}"
+
+    return path, None
+
+
+def _read_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def install_tailwind_for_project(target_dir: str | None = None) -> str:
+    project_dir, error = _project_dir_from_hint(target_dir)
+    if error:
+        return error
+
+    package_json = project_dir / "package.json"
+    if not package_json.exists():
+        return "package.json not found in the target project."
+
+    data = _read_json(package_json)
+    dev_dependencies = data.get("devDependencies", {})
+    dependencies = data.get("dependencies", {})
+    all_dependencies = {**dependencies, **dev_dependencies}
+
+    already_has_tailwind = "tailwindcss" in all_dependencies
+    already_has_vite_plugin = "@tailwindcss/vite" in all_dependencies
+
+    vite_config = project_dir / "vite.config.js"
+    app_css = project_dir / "resources" / "css" / "app.css"
+    node_modules = project_dir / "node_modules"
+
+    commands_run: list[str] = []
+
+    if not already_has_tailwind or not already_has_vite_plugin:
+        ok, output = _run(
+            ["npm", "install", "-D", "tailwindcss", "@tailwindcss/vite"],
+            cwd=project_dir,
+            timeout=1800,
+        )
+        commands_run.append("npm install -D tailwindcss @tailwindcss/vite")
+        if not ok:
+            return (
+                "TAILWIND INSTALL FAILED\n"
+                f"Project: {project_dir}\n\n"
+                f"{output}"
+            )
+
+    elif not node_modules.exists():
+        ok, output = _run(["npm", "install"], cwd=project_dir, timeout=1800)
+        commands_run.append("npm install")
+        if not ok:
+            return (
+                "PROJECT DEPENDENCY INSTALL FAILED\n"
+                f"Project: {project_dir}\n\n"
+                f"{output}"
+            )
+
+    notes: list[str] = []
+
+    if vite_config.exists():
+        vite_content = vite_config.read_text(encoding="utf-8", errors="replace")
+        if "@tailwindcss/vite" in vite_content and "tailwindcss()" in vite_content:
+            notes.append("Vite Tailwind plugin already configured.")
+        else:
+            notes.append("Tailwind package installed, but vite.config.js still needs Tailwind plugin wiring.")
+    else:
+        notes.append("vite.config.js not found. Tailwind install completed without Vite wiring.")
+
+    if app_css.exists():
+        css_content = app_css.read_text(encoding="utf-8", errors="replace")
+        if "@import 'tailwindcss';" in css_content or '@import "tailwindcss";' in css_content:
+            notes.append("App CSS already imports Tailwind.")
+        else:
+            app_css.write_text("@import 'tailwindcss';\n\n" + css_content, encoding="utf-8")
+            notes.append("Added Tailwind import to resources/css/app.css.")
+    else:
+        notes.append("resources/css/app.css not found.")
+
+    ok, build_output = _run(["npm", "run", "build"], cwd=project_dir, timeout=1800)
+    commands_run.append("npm run build")
+    if not ok:
+        return (
+            "TAILWIND SETUP PARTIALLY COMPLETE\n"
+            f"Project: {project_dir}\n"
+            + ("\n".join(f"- {note}" for note in notes) if notes else "")
+            + "\n\nBuild verification failed:\n"
+            + build_output
+        )
+
+    set_current_project(str(project_dir))
+
+    lines = [
+        "TAILWIND SETUP COMPLETE",
+        f"Project: {project_dir}",
+        f"Tailwind dependency present: {'YES' if already_has_tailwind else 'ADDED'}",
+        f"Tailwind Vite plugin present: {'YES' if already_has_vite_plugin else 'ADDED'}",
+        "",
+        "Checks:",
+    ]
+    lines.extend(f"- {note}" for note in notes)
+    lines.append("")
+    lines.append("Commands executed:")
+    lines.extend(f"- {command}" for command in commands_run)
+    lines.append("")
+    lines.append(build_output)
+    return "\n".join(lines)
+
+
 def infer_developer_setup_action(user_input: str, chat_context: str | None = None) -> dict:
     text = _normalize(user_input).lower()
     context = _normalize(chat_context or "").lower()
     combined = f"{text}\n{context}"
+    current_project = get_current_project_path()
 
     laravel_match = re.search(
         r"(?:install|create|setup|set up|make).{0,40}\blaravel\b",
+        combined,
+        flags=re.I | re.S,
+    )
+    tailwind_match = re.search(
+        r"(?:install|setup|set up|configure|add).{0,40}\btailwind\b",
         combined,
         flags=re.I | re.S,
     )
@@ -153,5 +281,17 @@ def infer_developer_setup_action(user_input: str, chat_context: str | None = Non
             "target_dir": target_dir,
             "company_name": company_name,
         }
+
+    if tailwind_match:
+        if target_dir:
+            return {
+                "action": "install_tailwind",
+                "target_dir": target_dir,
+            }
+        if "same project" in combined or "current project" in combined or current_project:
+            return {
+                "action": "install_tailwind",
+                "target_dir": str(current_project) if current_project else None,
+            }
 
     return {"action": "unknown"}
