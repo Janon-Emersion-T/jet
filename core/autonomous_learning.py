@@ -68,9 +68,14 @@ DOMAIN_ROADMAPS = {
             ],
         },
         {
-            "name": "Production Systems",
+            "name": "Production Software",
             "topics": [
                 "system design and scalability",
+                "frontend architecture patterns",
+                "Master modern frontend architecture",
+                "backend architecture patterns",
+                "performance optimization",
+                "secure coding practices",
                 "web security fundamentals",
                 "Docker and containerization",
                 "CI/CD pipelines",
@@ -78,13 +83,45 @@ DOMAIN_ROADMAPS = {
             ],
         },
         {
-            "name": "Advanced Systems",
+            "name": "Advanced Software Systems",
             "topics": [
                 "distributed systems fundamentals",
                 "cloud architecture patterns",
                 "authentication and authorization systems",
                 "AI agent architectures",
                 "technical leadership",
+            ],
+        },
+        {
+            "name": "SEO Systems",
+            "topics": [
+                "SEO technical foundations",
+                "search engine crawling concepts",
+                "database indexing strategies",
+                "Build web crawling and indexing systems",
+                "Build SEO intelligence agents",
+                "Build AI-powered SEO ecosystems",
+            ],
+        },
+        {
+            "name": "Digital Marketing Systems",
+            "topics": [
+                "digital marketing systems",
+                "how to integrate AI with marketing systems",
+                "Build marketing intelligence agents",
+                "Build self-optimizing marketing ecosystems",
+                "Build autonomous marketing orchestration",
+            ],
+        },
+        {
+            "name": "Hardware and Embedded Systems",
+            "topics": [
+                "hardware interfacing basics",
+                "embedded systems basics",
+                "hardware acceleration systems",
+                "robotics software concepts",
+                "robotics integration systems",
+                "Advanced robotics engineering",
             ],
         },
     ],
@@ -280,17 +317,26 @@ def _catalog_entry(domain: str, topic: dict) -> dict:
     source_count = len(topic.get("sources", []) or [])
     aliases = [alias for alias in topic.get("aliases", []) or [] if alias]
     category = topic.get("category") or topic.get("track") or "general"
+    track = topic.get("track") or topic.get("category") or "rest-of-world"
+    version_context = topic.get("version_context") or topic.get("version") or ""
 
     return {
         "id": f"{domain}:{_normalize(topic.get('topic', ''))}",
         "domain": domain,
         "topic": topic.get("topic", ""),
         "category": category,
+        "track": track,
+        "version_context": version_context,
+        "version_policy": topic.get("version_policy", ""),
         "aliases": aliases,
-        "tags": list(dict.fromkeys([domain, *topic.get("tags", []), category])),
+        "tags": list(dict.fromkeys([domain, *topic.get("tags", []), category, track, version_context])),
         "source_count": source_count,
         "proficiency_target": topic.get("proficiency_target", DOMAIN_PROFILES.get(domain, {}).get("proficiency_target")),
-        "summary": f"{topic.get('topic', '')} · {category.replace('-', ' ')}",
+        "summary": " · ".join(filter(None, [
+            topic.get("topic", ""),
+            category.replace("-", " "),
+            version_context,
+        ])),
     }
 
 
@@ -305,6 +351,9 @@ def get_learning_catalog(domain: str | None = None, query: str | None = None, li
             haystack = " ".join([
                 entry["topic"],
                 entry["category"],
+                entry["track"],
+                entry["version_context"],
+                entry["version_policy"],
                 " ".join(entry["aliases"]),
                 " ".join(entry["tags"]),
             ])
@@ -312,7 +361,19 @@ def get_learning_catalog(domain: str | None = None, query: str | None = None, li
                 continue
             items.append(entry)
 
-    items.sort(key=lambda entry: (entry["domain"], entry["category"], entry["topic"]))
+    items.sort(key=lambda entry: (
+        _domain_priority(entry.get("domain", "")),
+        {
+            "software-development": 0,
+            "seo": 1,
+            "digital-marketing": 2,
+            "computer-hardware": 3,
+            "rest-of-world": 4,
+        }.get(entry.get("track"), 4),
+        entry.get("category", ""),
+        0 if entry.get("version_context") else 1,
+        entry.get("topic", ""),
+    ))
     return {
         "domain": domain or "all",
         "query": query or "",
@@ -560,6 +621,7 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
         "proficiency_target",
         DOMAIN_PROFILES.get(domain, {}).get("proficiency_target", "advanced-practitioner"),
     )
+    version_context = topic_config.get("version_context") or topic_config.get("version") or ""
     manifest_path = _manifest_path(domain, topic_name)
     manifest = _read_json(
         manifest_path,
@@ -595,6 +657,7 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
                     f"{topic_name.upper()} LEARNING SOURCE\n"
                     f"Domain: {domain}\n"
                     f"Learning target: {proficiency_target}\n"
+                    f"Version context: {version_context or 'version-agnostic'}\n"
                     f"Source name: {name}\n"
                     f"Source type: {source_type}\n"
                     f"URL: {url}\n"
@@ -606,11 +669,15 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
                 add_vector_memory(
                     memory_text,
                     tags=list(dict.fromkeys([
-                        domain,
-                        _slugify(topic_name),
-                        *topic_config.get("tags", []),
-                        source_type,
-                        proficiency_target,
+                        tag for tag in [
+                            domain,
+                            _slugify(topic_name),
+                            *topic_config.get("tags", []),
+                            _slugify(version_context) if version_context else None,
+                            source_type,
+                            proficiency_target,
+                        ]
+                        if tag
                     ])),
                     source=f"{domain}-autonomous-learning",
                     importance=priority,
@@ -635,6 +702,9 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
     manifest["topic"] = topic_name
     manifest["domain"] = domain
     manifest["proficiency_target"] = proficiency_target
+    manifest["version_context"] = version_context
+    if topic_config.get("version_policy"):
+        manifest["version_policy"] = topic_config.get("version_policy")
     manifest["sources"] = manifest_sources
     _write_json(manifest_path, manifest)
 
@@ -649,6 +719,7 @@ def _generic_learn_topic(topic_config: dict, trigger: str = "autonomous-backgrou
         "memory_chunks_saved": total_chunks,
         "errors": errors,
         "manifest_path": str(manifest_path),
+        "version_context": version_context,
     }
     _append_jsonl(LOG_FILE, {"type": "generic_topic_learning", **result})
     return result

@@ -82,11 +82,12 @@ function summarizeManualResult(result) {
     lines.push(payload.summary);
   } else {
     const details = [];
-    if (payload.topic) details.push(`Topic: ${payload.topic}`);
-    if (payload.sources_updated != null) details.push(`Sources updated: ${payload.sources_updated}`);
-    if (payload.sources_skipped != null) details.push(`Sources skipped: ${payload.sources_skipped}`);
-    if (payload.memory_chunks_saved != null) details.push(`Memory chunks saved: ${payload.memory_chunks_saved}`);
-    if (payload.errors && payload.errors.length > 0) details.push(`Errors: ${payload.errors.join(" | ")}`);
+  if (payload.topic) details.push(`Topic: ${payload.topic}`);
+  if (payload.sources_updated != null) details.push(`Sources updated: ${payload.sources_updated}`);
+  if (payload.sources_skipped != null) details.push(`Sources skipped: ${payload.sources_skipped}`);
+  if (payload.memory_chunks_saved != null) details.push(`Memory chunks saved: ${payload.memory_chunks_saved}`);
+  if (payload.version_context) details.push(`Version context: ${payload.version_context}`);
+  if (payload.errors && payload.errors.length > 0) details.push(`Errors: ${payload.errors.join(" | ")}`);
     if (details.length > 0) {
       lines.push(details.join("\n"));
     } else {
@@ -160,7 +161,7 @@ export default function LearningPanel() {
   const [catalogQuery, setCatalogQuery] = useState("");
   const [catalogDomain, setCatalogDomain] = useState("all");
   const [selectedCatalogId, setSelectedCatalogId] = useState("");
-  const [command, setCommand] = useState("learn laravel");
+  const [command, setCommand] = useState("learn laravel 12");
   const [response, setResponse] = useState("");
   const [busy, setBusy] = useState(false);
   const [autoAdvancing, setAutoAdvancing] = useState(false);
@@ -197,6 +198,9 @@ export default function LearningPanel() {
       const haystack = normalizeText([
         item.topic,
         item.category,
+        item.track,
+        item.version_context,
+        item.version_policy,
         ...(item.aliases || []),
         ...(item.tags || []),
       ].join(" "));
@@ -617,8 +621,8 @@ export default function LearningPanel() {
                   </div>
                   <p>{formatCatalogSubtitle(item)}</p>
                   <div className="learning-atlas-item-foot">
-                    <span>{(item.aliases || []).slice(0, 3).join(" · ") || "No aliases"}</span>
-                    <span>{item.source_count} sources</span>
+                    <span>{item.track || item.category || "general"}</span>
+                    <span>{item.version_context || `${item.source_count} sources`}</span>
                   </div>
                 </button>
               ))}
@@ -681,16 +685,24 @@ export default function LearningPanel() {
                     <strong>{selectedCatalogItem?.category || "—"}</strong>
                   </div>
                   <div className="learning-focus-stat">
+                    <span>Track</span>
+                    <strong>{selectedCatalogItem?.track || "—"}</strong>
+                  </div>
+                  <div className="learning-focus-stat">
+                    <span>Version</span>
+                    <strong>{selectedCatalogItem?.version_context || "Version agnostic"}</strong>
+                  </div>
+                  <div className="learning-focus-stat">
                     <span>Sources</span>
                     <strong>{selectedCatalogItem?.source_count ?? 0}</strong>
                   </div>
                   <div className="learning-focus-stat">
-                    <span>Aliases</span>
-                    <strong>{selectedCatalogItem?.aliases?.length ?? 0}</strong>
-                  </div>
-                  <div className="learning-focus-stat">
                     <span>Target</span>
                     <strong>{selectedCatalogItem?.proficiency_target || "—"}</strong>
+                  </div>
+                  <div className="learning-focus-stat">
+                    <span>Aliases</span>
+                    <strong>{selectedCatalogItem?.aliases?.length ?? 0}</strong>
                   </div>
                 </div>
 
