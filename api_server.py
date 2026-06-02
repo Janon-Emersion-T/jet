@@ -32,17 +32,18 @@ from core.channels.whatsapp_web import (
 )
 
 from core.memory import init_memory, save_memory
-from core.memory import list_facts_data, list_recent_memories
+from core.memory import get_memory_overview, list_facts_data, list_recent_memories
 from core.command_router import route_command
 from core.capabilities import list_capabilities
 from core.memory_search import list_facts, search_memory
-from core.activity_log import log_activity, list_recent_activity
+from core.activity_log import log_activity, list_recent_activity, summarize_activity
 from core.system_modes import get_system_mode_state, set_voice_mode
 from voice.offline_voice_mode import start_offline_voice_mode
 from voice.voice_state import VOICE_STATE
 from core.project_diagnostics import interpret_project_diagnostics
 from core.code_reviewer import review_code_file
 from tools.system_tools import read_project_file
+from core.tool_registry import get_tool_registry
 
 from tools.weather_location_tools import (
     save_current_location,
@@ -199,6 +200,11 @@ def memory_recent(limit: int = 20):
     }
 
 
+@app.get("/memory/overview")
+def memory_overview(limit: int = Query(default=12, ge=1, le=24)):
+    return get_memory_overview(limit=limit)
+
+
 @app.get("/learning/status")
 def learning_status():
     return {
@@ -281,6 +287,11 @@ def activity(limit: int = 50):
     return {
         "entries": list_recent_activity(limit=limit)
     }
+
+
+@app.get("/activity/summary")
+def activity_summary(limit: int = Query(default=120, ge=1, le=240)):
+    return summarize_activity(limit=limit)
 
 
 def _start_voice_mode_thread():
@@ -375,6 +386,11 @@ def location_current():
 @app.post("/location/detect-ip")
 def location_detect_ip():
     return detect_location_by_ip()
+
+
+@app.get("/tools/registry")
+def tools_registry():
+    return get_tool_registry()
 
 
 @app.get("/models/settings")

@@ -3,6 +3,11 @@ import json
 from datetime import datetime
 from pathlib import Path
 
+from core.vector_memory.vector_store import (
+    get_vector_memory_summary,
+    list_vector_memory_data,
+)
+
 DB_PATH = "storage/memory.db"
 
 Path("storage").mkdir(parents=True, exist_ok=True)
@@ -130,3 +135,35 @@ def list_recent_memories(limit: int = 20):
         }
         for row in rows
     ]
+
+
+def get_memory_overview(limit: int = 12):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM memory")
+    memory_count = cursor.fetchone()[0] or 0
+
+    cursor.execute("SELECT COUNT(*) FROM facts")
+    fact_count = cursor.fetchone()[0] or 0
+
+    conn.close()
+
+    recent_facts = list_facts_data(limit=limit)
+    recent_memories = list_recent_memories(limit=limit)
+    vector_summary = get_vector_memory_summary()
+    vector_memories = list_vector_memory_data(limit=limit)
+
+    return {
+        "stats": {
+            "facts": fact_count,
+            "memories": memory_count,
+            "vector_memories": vector_summary.get("active", 0),
+            "semantic_index": vector_summary.get("total", 0),
+        },
+        "recent_facts": recent_facts,
+        "recent_memories": recent_memories,
+        "vector_summary": vector_summary,
+        "vector_memories": vector_memories,
+        "has_vector_index": bool(vector_summary.get("total")),
+    }

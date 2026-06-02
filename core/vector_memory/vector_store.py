@@ -158,6 +158,49 @@ def list_vector_memories(limit: int = 20):
     return "\n".join(lines)
 
 
+def list_vector_memory_data(limit: int = 20):
+    meta = [item for item in _load_meta() if item.get("active", True)]
+    meta = sorted(
+        meta,
+        key=lambda item: (
+            -int(item.get("importance", 0) or 0),
+            item.get("created_at", ""),
+        ),
+    )
+    return meta[:limit]
+
+
+def get_vector_memory_summary():
+    meta = _load_meta()
+    active = [item for item in meta if item.get("active", True)]
+
+    source_counts = {}
+    tag_counts = {}
+
+    for item in active:
+        source = item.get("source", "unknown")
+        source_counts[source] = source_counts.get(source, 0) + 1
+
+        for tag in item.get("tags", []):
+            tag_counts[tag] = tag_counts.get(tag, 0) + 1
+
+    top_tags = sorted(
+        tag_counts.items(),
+        key=lambda item: (-item[1], item[0]),
+    )[:8]
+
+    return {
+        "total": len(meta),
+        "active": len(active),
+        "inactive": len(meta) - len(active),
+        "source_counts": dict(sorted(source_counts.items(), key=lambda item: (-item[1], item[0]))),
+        "top_tags": [
+            {"tag": tag, "count": count}
+            for tag, count in top_tags
+        ],
+    }
+
+
 def cleanup_low_importance(threshold: int = 2):
     meta = _load_meta()
     changed = 0

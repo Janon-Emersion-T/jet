@@ -1,4 +1,5 @@
 import json
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
@@ -36,3 +37,18 @@ def list_recent_activity(limit: int = 50):
         except Exception:
             continue
     return entries
+
+
+def summarize_activity(limit: int = 120):
+    entries = list_recent_activity(limit=limit)
+    counts = Counter(entry.get("event_type", "unknown") for entry in entries)
+
+    return {
+        "total": len(entries),
+        "event_counts": [
+            {"event_type": event_type, "count": count}
+            for event_type, count in counts.most_common()
+        ],
+        "latest": entries[0] if entries else None,
+        "recent": entries[:12],
+    }
