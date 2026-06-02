@@ -7611,5 +7611,245 @@
         "created_at": "2026-06-02T21:20:48",
         "updated_at": null,
         "active": true
+    },
+    {
+        "id": "6af8bbdcfc39549d",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Developer Guide\nSource type: security-guide\nURL: https://devguide.owasp.org/\nPage title: Introduction - OWASP Developer Guide\nHeadings: Introduction\nChunk: 1/4\n\nIntroduction - OWASP Developer Guide Skip to content OWASP Developer Guide Introduction Initializing search OWASP/DevGuide Developer Guide Gu\u00eda del Desarrollador \u0631\u0627\u0647\u0646\u0645\u0627\u06cc \u0641\u0627\u0631\u0633\u06cc Guia de Desenvolvimento Get involved OWASP Developer Guide OWASP/DevGuide Developer Guide Developer Guide Introduction Introduction Table of contents Audience What is the Developer Guide?",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-guide",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:50",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "dabda0bc4e03b3f5",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Developer Guide\nSource type: security-guide\nURL: https://devguide.owasp.org/\nPage title: Introduction - OWASP Developer Guide\nHeadings: Introduction\nChunk: 2/4\n\nA bit of history Foundations Foundations Overview Security fundamentals Secure development and integration Principles of security Principles of cryptography OWASP Top 10 Requirements Requirements Overview Requirements in practice Risk profile OpenCRE SecurityRAT ASVS MAS SKF Design Design Overview Threat modeling Threat modeling Overview Threat modeling pytm Threat Dragon Cornucopia LINDDUN GO Threat Model Library Threat modeling in practice Web application checklist Web application checklist Overview Secure by Default Leverage Security Frameworks and Libraries Secure Database Access Encode and Escape Data Validate All Inputs Implement Digital Identity Enforce Access Controls Protect Data Everywhere Implement Security Logging and Monitoring Handle all Errors and Exceptions MAS checklist Implementation Implementation Overview Documentation Documentation Overview Top 10 Proactive Controls Go Secure Coding Practices Cheatsheet Series Dependencies Dependencies Overview Dependency-Check Dependency-Track CycloneDX Secure Libraries Secure Libraries Overview ESAPI CSRFGuard OSHP Java Encoding and Sanitization MASWE Verification Verification Overview Guides Guides Overview WSTG MASTG ASVS Tools Tools Overview DAST tools Amass OWTF Nettacker OSHP verification Frameworks Frameworks Overview secureCodeBox Vulnerability management Vulnerability management Overview DefectDojo Training and Education Training and Education Overview Vulnerable Applications Vulnerable Applications Overview Juice Shop WebGoat PyGoat Security Shepherd Secure Coding Dojo SKF SamuraiWTF OWASP Top 10 Mobile Top 10 API Top 10 WrongSecrets OWASP Snakes and Ladders Culture building and Process maturing Culture building and Process maturing Overview Security Culture Security Champions Security Champions Overview Security champions program Security Champions Guide Security Champions Playbook SAMM ASVS MAS Operations Operations Overview DevSecOps Guideline Coraza WAF ModSecurity WAF OWASP CRS Metrics Metrics Overview Security gap analysis Security gap analysis Overview Guides Guides Overview SAMM ASVS MAS BLT Gu\u00eda del Desarrollador Gu\u00eda del Desarrollador Introducci\u00f3n Fundamentos Fundamentos Descripci\u00f3n Fundamentos de seguridad Desarrollo e integraci\u00f3n segura Principios de seguridad Principios de criptograf\u00eda OWASP Top 10 Requisitos Requisitos Descripci\u00f3n Requisitos en la pr\u00e1ctica Perfil de riesgo OpenCRE SecurityRAT ASVS MAS SKF Dise\u00f1o Dise\u00f1o Descripci\u00f3n Modelado de amenazas Modelado de amenazas Descripci\u00f3n Modelado de amenazas en la pr\u00e1ctica pytm Threat Dragon Cornucopia LINDDUN GO Threat Modeling toolkit Lista de verificaci\u00f3n para aplicaciones web Lista de verificaci\u00f3n para aplicaciones web Descripci\u00f3n Definir Requisitos de Seguridad Aprovechar Marcos y Bibliotecas de Seguridad Acceso Seguro a Bases de Datos Codificar y Escapar Datos Validar Todas las Entradas Implementar Identidad Digital Aplicar Controles de Acceso Proteger Datos en Todas Partes Implementar Registro y Monitoreo de Seguridad Manejar todos los Errores y Excepciones Lista de verificaci\u00f3n MAS Implementaci\u00f3n Implementaci\u00f3n Descripci\u00f3n Documentation Documentation Descripci\u00f3n Top 10 Proactive Controls Go Secure Coding Practices Cheatsheet Series Dependencias Dependencias Descripci\u00f3n Dependency-Check Dependency-Track CycloneDX Bibliotecas seguras Bibliotecas seguras Descripci\u00f3n ESAPI CSRFGuard OSHP MASWE Verificaci\u00f3n Verificaci\u00f3n Descripci\u00f3n Gu\u00edas Gu\u00edas Descripci\u00f3n WSTG MASTG ASVS Herramientas Herramientas Descripci\u00f3n DAST tools Amass OWTF Nettacker OSHP verification Marcos de verificaci\u00f3n Marcos de verificaci\u00f3n Descripci\u00f3n secureCodeBox Gesti\u00f3n de vulnerabilidades Gesti\u00f3n de vulnerabilidades Descripci\u00f3n DefectDojo \u0631\u0627\u0647\u0646\u0645\u0627\u06cc \u0641\u0627\u0631\u0633\u06cc \u0631\u0627\u0647\u0646\u0645\u0627\u06cc \u0641\u0627\u0631\u0633\u06cc Introduction Foundations Foundations Overview Security fundamentals Secure development and integration Principles of security Principles of cryptography OWASP Top 10 Guia de Desenvolvimento Guia de Desenvolvimento Introdu\u00e7\u00e3o Fundamentos Fundamentos Introdu\u00e7\u00e3o Fundamentos de seguran\u00e7a OWASP Top Dez Get involved Get involved Providing content Code of Conduct License Table of contents Audience What is the Developer Guide?",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-guide",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:50",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "60d26992798ce626",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Developer Guide\nSource type: security-guide\nURL: https://devguide.owasp.org/\nPage title: Introduction - OWASP Developer Guide\nHeadings: Introduction\nChunk: 3/4\n\nA bit of history Introduction Welcome to the OWASP Development Guide. The Open Worldwide Application Security Project ( OWASP ) is a nonprofit foundation that works to improve the security of software. It is an open community dedicated to enabling organizations to conceive, develop, acquire, operate, and maintain applications that can be trusted. The purpose of this Developer Guide is to provide an introduction to security concepts and a handy reference for application / system developers. Generally it describes security practices using the advice given in the OWASP Software Assurance Maturity Model ( SAMM ) and describes the OWASP projects referenced in the OWASP Application Security Wayfinder project. This guide does not seek to replicate the many excellent sources on specific security topics; it rarely tries to go into detail on a subject and instead provides links for greater depth on these security topics. Instead the content of the Developer Guide aims to be accessible, introducing practical security concepts and providing just enough detail to get developers started on various OWASP tools and documents. All of the OWASP projects and tools described in this guide are free to download and use. All OWASP projects are open source; please do get involved if you are interested in improving application security. Audience Developers should use this OWASP Developer Guide to help write applications that are more secure. The guide has been written by the security community to help software developers write solid, safe and secure applications. Most of the contributors to this guide are also software developers as well as security engineers, and this helps to keep the focus developer-centric.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-guide",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:50",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "afdccb98b9cc9e6c",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Developer Guide\nSource type: security-guide\nURL: https://devguide.owasp.org/\nPage title: Introduction - OWASP Developer Guide\nHeadings: Introduction\nChunk: 4/4\n\nIf you are in a hurry and want information on a specific subject then try the OpenCRE chat LLM for immediate answers. What is the Developer Guide? You can think of this guide as a cross-reference source to the many tools and documents that OWASP provides for developers. Or you can regard the purpose of this guide as answering the question: \u201cI am a developer and I need a reference guide to navigate the numerous security tools and security activities that I know I should be doing.\" Or think of it as a collection of articles that introduce developers to the wide domain of application security. Or you can regard this guide as a companion document to the OWASP Integration Standards project: the Application Security Wayfinder maps out the many tools, projects and documents within OWASP and the Developer Guide provides some 'wordy' context for this. A bit of history Along with the OWASP Top Ten, the Developer Guide is one of the original resources published soon after the OWASP foundation was formed in 2001. The latest 4.x versions of the guide have been revised extensively to bring it up to date. Version 1.0 of the Developer Guide was released in 2002 under the title 'A Guide to Building Secure Web Applications and Web Services'. There were various subsequent releases culminating in version 2.0 in 2005. After that there was an attempt to bring the Developer Guide to a version 3.0 but this was never released. The OWASP Developer Guide is a community effort; if there is something that needs changing then submit an issue or  . Licensed under the Creative Commons Attribution Share Alike 4.0 International license . Made with Material for MkDocs",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-guide",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:50",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "503e1bd959df76fd",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 1/11\n\nOWASP Top Ten Web Application Security Risks | OWASP Foundation Store Donate Join This website uses cookies to analyze our traffic and only share that information with our analytics partners. Accept x Store Donate Join Main Translation Efforts Sponsors Data 2025 OWASP Top Ten Web Application Security Risks The most current released version is the OWASP Top Ten 2025 . Previous versions are available at OWASP Top Ten 2021 and OWASP Top 10 2017 (PDF) . Older versiona are available in the Github repo . The OWASP Top 10 is a standard awareness document for developers and web application security. It represents a broad consensus about the most critical security risks to web applications. Globally recognized by developers as the first step towards more secure coding. Companies should adopt this document and start the process of ensuring that their web applications minimize these risks. Using the OWASP Top 10 is perhaps the most effective first step towards changing the software development culture within your organization into one that produces more secure code. Translation Efforts Efforts have been made in numerous languages to translate the OWASP Top 10 - 2025. If you are interested in helping, please contact the members of the team for the language you are interested in contributing to, or if you don\u2019t see your language listed (neither here nor at github ), please email [email protected] to let us know that you want to help and we\u2019ll form a volunteer group for your language. Top10:2025 Completed Translations: Translations in progress - check back soon!",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "b04f79bafa6f2069",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 2/11\n\nHistoric: Top10:2021 Completed Translations: ar - \u0627\u0644\u0639\u0631\u0628\u064a\u0629 es - Espa\u00f1ol fr - Fran\u00e7ais id - Indonesian it - Italiano ja - \u65e5\u672c\u8a9e] pt_BR - Portugu\u00eas (Brasil) zh_CN - \u7b80\u4f53\u4e2d\u6587 zh_TW - \u7e41\u9ad4\u4e2d\u6587 Top10:2017 Completed Translations: Chinese: OWASP Top 10-2017 - \u4e2d\u6587\u7248\uff08PDF) \u9879\u76ee\u7ec4\u957f\uff1a \u738b\u9889 \uff08 [email protected] \uff09 \u7ffb\u8bd1\u4eba\u5458\uff1a\u9648\u4eae\u3001\u738b\u539a\u594e\u3001\u738b\u9889\u3001\u738b\u6587\u541b\u3001\u738b\u6653\u98de\u3001\u5434\u6960\u3001\u5f90\u745e\u795d\u3001\u590f\u5929\u6cfd\u3001\u6768\u7490\u3001\u5f20\u5251\u949f\u3001\u8d75\u5b66\u6587\uff08\u6392\u540d\u4e0d\u5206\u5148\u540e\uff0c\u6309\u59d3\u6c0f\u62fc\u97f3\u6392\u5217\uff09 \u5ba1\u67e5\u4eba\u5458\uff1aRip\u3001\u5305\u60a6\u5fe0\u3001\u674e\u65ed\u52e4\u3001\u6768\u5929\u8bc6\u3001\u5f20\u5bb6\u94f6\uff08\u6392\u540d\u4e0d\u5206\u5148\u540e\uff0c\u6309\u59d3\u6c0f\u62fc\u97f3\u6392\u5217\uff09 \u6c47\u7f16\u4eba\u5458\uff1a\u8d75\u5b66\u6587 French: OWASP Top 10 2017 in French (Git/Markdown) German: OWASP Top 10 2017 in German V1.0 (Pdf) (web pages) compiled by Christian Dresen, Alexios Fakos, Louisa Frick, Torsten Gigler, Tobias Glemser, Dr. Frank Gut, Dr. Ingo Hanke, Dr. Thomas Herzog, Dr. Markus Koegel, Sebastian Klipper, Jens Liebau, Ralf Reinhardt, Martin Riedel, Michael Schaefer Hebrew: OWASP Top 10-2017 - Hebrew (PDF) (PPTX) translated by Eyal Estrin (Twitter: @eyalestrin) and Omer Levi Hevroni (Twitter: @omerlh). Japanese: OWASP Top 10-2017 - \u65e5\u672c\u8a9e\u7248 (PDF) translated and reviewed by Akitsugu ITO, Albert Hsieh, Chie TAZAWA, Hideko IGARASHI, Hiroshi TOKUMARU, Naoto KATSUMI, Riotaro OKADA, Robert DRACEA, Satoru TAKAHASHI, Sen UENO, Shoichi NAKATA, Takanori NAKANOWATARI ,Takanori ANDO, Tomohiro SANAE. Korean: OWASP Top 10-2017 - \ud55c\uae00 (PDF) (PPTX) \ubc88\uc5ed \ud504\ub85c\uc81d\ud2b8 \uad00\ub9ac \ubc0f \uac10\uc218 : \ubc15\ud615\uadfc(Hyungkeun Park) / \uac10\uc218(\u3131\u3134\u3137\uc21c) : \uac15\uc6a9\uc11d(YongSeok Kang), \ubc15\ucc3d\ub834(Park Changryum), \uc870\ubbfc\uc7ac(Johnny Cho) / \ud3b8\uc9d1 \ubc0f \uac10\uc218 : \uc2e0\uc0c1\uc6d0(Shin Sangwon) / \ubc88\uc5ed(\u3131\u3134\u3137\uc21c) : \uae40\uc601\ud558(Youngha Kim), \ubc15\uc0c1\uc601(Sangyoung Park), \uc774\ubbfc\uc6b1(MinWook Lee), \uc815\ucd08\uc544(JUNG CHOAH), \uc870\uad11\ub82c(CHO KWANG YULL), \ucd5c\ud55c\ub3d9(Handong Choi) Portuguese: OWASP Top 10 2017 - Portuguese (PDF) (ODP) translated by Anabela Nogueira, Carlos Serr\u00e3o, Guillaume Lopes, Jo\u00e3o Pinto, Jo\u00e3o Samouco, Kembolle A. Oliveira, Paulo A. Silva, Ricardo Mourato, Rui Silva, S\u00e9rgio Domingues, Tiago Reis, V\u00edtor Magano.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "d84c3748681f653f",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 3/11\n\nRussian: OWASP Top 10-2017 - \u043d\u0430 \u0440\u0443\u0441\u0441\u043a\u043e\u043c \u044f\u0437\u044b\u043a\u0435 (PDF) translated and reviewed by JZDLin ( @JZDLin ), Oleksii Skachkov ( @hamster4n ), Ivan Kochurkin ( @KvanTTT ) and Taras Ivashchenko Spanish: OWASP Top 10-2017 - Espa\u00f1ol (PDF) Gerardo Canedo \uff08 [email protected] - [Twitter: @GerardoMCanedo]) Cristian Borghello \uff08 [email protected] - [Twitter: @seguinfo]) Top10:2017 Release Candidate Translation Teams: Azerbaijanian: Rashad Aliyev ( [email protected] ) Chinese RC2:Rip\u3001\u5305\u60a6\u5fe0\u3001\u674e\u65ed\u52e4\u3001\u738b\u9889\u3001\u738b\u539a\u594e\u3001\u5434\u6960\u3001\u5f90\u745e\u795d\u3001\u590f\u5929\u6cfd\u3001\u5f20\u5bb6\u94f6\u3001\u5f20\u5251\u949f\u3001\u8d75\u5b66\u6587(\u6392\u540d\u4e0d\u5206\u5148\u540e\uff0c\u6309\u59d3\u6c0f\u62fc\u97f3\u6392\u5217) OWASP Top10 2017 RC2 - Chinese PDF French: Ludovic Petit: [email protected] , S\u00e9bastien Gioria: [email protected] . Others to be listed. Top10:2013 Completed Translations: Arabic: OWASP Top 10 2013 - Arabic PDF Translated by: Mohannad Shahat: [email protected] , Fahad: @SecurityArk, Abdulellah Alsaheel: [email protected] , Khalifa Alshamsi: [email protected] and Sabri(KING SABRI): [email protected] , Mohammed Aldossary: [email protected] Chinese 2013\uff1a\u4e2d\u6587\u72482013 OWASP Top 10 2013 - Chinese (PDF) . \u9879\u76ee\u7ec4\u957f\uff1a Rip\u3001\u738b\u9889\uff0c \u53c2\u4e0e\u4eba\u5458\uff1a \u9648\u4eae\u3001 \u987e\u5e86\u6797\u3001 \u80e1\u6653\u658c\u3001 \u674e\u5efa\u8499\u3001 \u738b\u6587\u541b\u3001 \u6768\u5929\u8bc6\u3001 \u5f20\u5728\u5cf0 Czech 2013: OWASP Top 10 2013 - Czech (PDF) OWASP Top 10 2013 - Czech (PPTX) CSIRT.CZ - CZ.NIC, z.s.p.o.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "af510cac825db511",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 4/11\n\n(.cz domain registry): Petr Zavodsky: [email protected] , Vaclav Klimes, Zuzana Duracinska, Michal Prokop, Edvard Rejthar, Pavel Basta French 2013: OWASP Top 10 2013 - French PDF Ludovic Petit: [email protected] , S\u00e9bastien Gioria: [email protected] , Erwan Abgrall: [email protected] , Benjamin Avet: [email protected] , Jocelyn Aubert: [email protected] , Damien Azambour: [email protected] , Aline Barthelemy: [email protected] , Moulay Abdsamad Belghiti: [email protected] , Gregory Blanc: [email protected] , Cl\u00e9ment Capel: [email protected] , Etienne Capgras: [email protected] , Julien Cayssol: [email protected] , Antonio Fontes: [email protected] , Ely de Travieso: [email protected] , Nicolas Gr\u00e9goire: [email protected] , Val\u00e9rie Lasserre: [email protected] , Antoine Laureau: [email protected] , Guillaume Lopes: [email protected] , Gilles Morain: [email protected] , Christophe Pekar: [email protected] , Olivier Perret: [email protected] , Michel Prunet: [email protected] , Olivier Revollat: [email protected] , Aymeric Tabourin: [email protected] German 2013: OWASP Top 10 2013 - German PDF [email protected] which is Frank D\u00f6litzscher, Torsten Gigler, Tobias Glemser, Dr. Ingo Hanke, Thomas Herzog, Kai Jendrian , Ralf Reinhardt , Michael Sch\u00e4fer Hebrew 2013: OWASP Top 10 2013 - Hebrew PDF Translated by: Or Katz, Eyal Estrin, Oran Yitzhak, Dan Peled, Shay Sivan.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "ab1fb2fe41bd0ff4",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 5/11\n\nItalian 2013: OWASP Top 10 2013 - Italian PDF Translated by: Michele Saporito: [email protected] , Paolo Perego: [email protected] , Matteo Meucci: [email protected] , Sara Gallo: [email protected] , Alessandro Guido: [email protected] , Mirko Guido Spezie: [email protected] , Giuseppe Di Cesare: [email protected] , Paco Schiaffella: [email protected] , Gianluca Grasso: [email protected] , Alessio D\u2019Ospina: [email protected] , Loredana Mancini: [email protected] , Alessio Petracca: [email protected] , Giuseppe Trotta: [email protected] , Simone Onofri: [email protected] , Francesco Cossu: [email protected] , Marco Lancini: [email protected] , Stefano Zanero: [email protected] , Giovanni Schmid: [email protected] , Igor Falcomata\u2019: [email protected] Japanese 2013: OWASP Top 10 2013 - Japanese PDF Translated by: Chia-Lung Hsieh: ryusuke.tw(at)gmail.com, Reviewed by: Hiroshi Tokumaru, Takanori Nakanowatari Korean 2013: OWASP Top 10 2013 - Korean PDF (\uc774\ub984\uac00\ub098\ub2e4\uc21c) \uae40\ubcd1\ud6a8: [email protected] , \uae40\uc9c0\uc6d0: [email protected] , \uae40\ud6a8\uadfc: [email protected] , \ubc15\uc815\ud6c8: [email protected] , \uc131\uc601\ubaa8: [email protected] , \uc131\uc724\uae30: [email protected] , \uc1a1\ubcf4\uc601: [email protected] , \uc1a1\ucc3d\uae30: [email protected] , \uc720\uc815\ud638: [email protected] , \uc7a5\uc0c1\ubbfc: [email protected] , \uc804\uc601\uc7ac: [email protected] , \uc815\uac00\ub78c: [email protected] , \uc815\ud64d\uc21c: [email protected] , \uc870\ubbfc\uc7ac: [email protected] ,\ud5c8\uc131\ubb34: [email protected] Brazilian Portuguese 2013: OWASP Top 10 2013 - Brazilian Portuguese PDF Translated by: Carlos Serr\u00e3o, Marcio Machry, \u00cdcaro Evangelista de Torres, Carlo Marcelo Revoredo da Silva, Luiz Vieira, Suely Ramalho de Mello, Jorge Ol\u00edmpia, Daniel Quint\u00e3o, Mauro Risonho de Paula Assump\u00e7\u00e3o, Marcelo Lopes, Caio Dias, Rodrigo Gularte Spanish 2013: OWASP Top 10 2013 - Spanish PDF Gerardo Canedo: [email protected] , Jorge Correa: [email protected] , Fabien Spychiger: [email protected] , Alberto Hill: [email protected] , Johnatan Stanley: [email protected] , Maximiliano Alonzo: [email protected] , Mateo Martinez: [email protected] , David Montero: [email protected] , Rodrigo Martinez: [email protected] , Guillermo Skrilec: [email protected] , Felipe Zipitria: [email protected] , Fabien Spychiger: [email protected] , Rafael Gil: [email protected] , Christian Lopez: [email protected] , jonathan fernandez [email protected] , Paola Rodriguez: [email protected] , Hector Aguirre: [email protected] , Roger Carhuatocto: [email protected] , Juan Carlos Calderon: [email protected] , Marc Rivero L\u00f3pez: [email protected] , Carlos Allendes: [email protected] , [email protected] : [email protected] , Manuel Ram\u00edrez: [email protected] , Marco Miranda: [email protected] , Mauricio D.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "d715f4afbdbb46df",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 6/11\n\nPapaleo Mayada: [email protected] , Felipe Sanchez: [email protected] , Juan Manuel Bahamonde: [email protected] , Adri\u00e0 Massanet: [email protected] , Jorge Correa: [email protected] , Ramiro Pulgar: [email protected] , German Alonso Su\u00e1rez Guerrero: [email protected] , Jose A. Guasch: [email protected] , Edgar Salazar: [email protected] Ukrainian 2013: OWASP Top 10 2013 - Ukrainian PDF Kateryna Ovechenko, Yuriy Fedko, Gleb Paharenko, Yevgeniya Maskayeva, Sergiy Shabashkevich, Bohdan Serednytsky 2010 Completed Translations: Korean 2010: OWASP Top 10 2010 - Korean PDF Hyungkeun Park, ( [email protected] ) Spanish 2010: OWASP Top 10 2010 - Spanish PDF Daniel Cabezas Molina, Edgar Sanchez, Juan Carlos Calderon, Jose Antonio Guasch, Paulo Coronado, Rodrigo Marcos, Vicente Aguilera French 2010: OWASP Top 10 2010 - French PDF [email protected] , [email protected] , [email protected] , [email protected] , [email protected] , [email protected] , [email protected] German 2010: OWASP Top 10 2010 - German PDF [email protected] which is Frank D\u00f6litzscher, Tobias Glemser, Dr. Ingo Hanke, Kai Jendrian , Ralf Reinhardt , Michael Sch\u00e4fer Indonesian 2010: OWASP Top 10 2010 - Indonesian PDF Tedi Heriyanto (coordinator), Lathifah Arief, Tri A Sundara, Zaki Akhmad Italian 2010: OWASP Top 10 2010 - Italian PDF Simone Onofri, Paolo Perego, Massimo Biagiotti, Edoardo Viscosi, Salvatore Fiorillo, Roberto Battistoni, Loredana Mancini, Michele Nesta, Paco Schiaffella, Lucilla Mancini, Gerardo Di Giacomo, Valentino Squilloni Japanese 2010: OWASP Top 10 2010 - Japanese PDF [email protected] , Dr.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "17376983d1d6083c",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 7/11\n\nMasayuki Hisada, Yoshimasa Kawamoto, Ryusuke Sakamoto, Keisuke Seki, Shin Umemoto, Takashi Arima Chinese 2010: OWASP Top 10 2010 - Chinese PDF \u611f\u8c22\u4ee5\u4e0b\u4e3a\u4e2d\u6587\u7248\u672c\u505a\u51fa\u8d21\u732e\u7684\u7ffb\u8bd1\u4eba\u5458\u548c\u5ba1\u6838\u4eba\u5458: Rip Torn, \u949f\u536b\u6797, \u9ad8\u96ef, \u738b\u9889, \u4e8e\u632f\u4e1c Vietnamese 2010: OWASP Top 10 2010 - Vietnamese PDF Translation lead by Cecil Su - Translation Team: Dang Hoang Vu, Nguyen Ba Tien, Nguyen Tang Hung, Luong Dieu Phuong, Huynh Thien Tam Hebrew 2010: OWASP Top 10 Hebrew Project \u2013 OWASP Top 10 2010 - Hebrew PDF . Lead by Or Katz, see translation page for list of contributors. 2021 Project Sponsors The OWASP Top 10:2021 is sponsored by Secure Code Warrior. 2017 Project Sponsors The OWASP Top 10 - 2017 project was sponsored by Autodesk, and supported by the OWASP NoVA Chapter . 2003-2013 Project Sponsors Thanks to Aspect Security for sponsoring earlier versions. OWASP Top 10 2025 Data Analysis Plan Goals To collect the most comprehensive dataset related to identified application vulnerabilities to-date to enable analysis for the Top 10 and other future research as well. This data should come from a variety of sources; security vendors and consultancies, bug bounties, along with company/organizational contributions. Data will be normalized to allow for level comparison between Human assisted Tooling and Tooling assisted Humans. Analysis Infrastructure Plan to leverage the OWASP Azure Cloud Infrastructure to collect, analyze, and store the data contributed. Contributions We plan to support both known and pseudo-anonymous contributions. The preference is for contributions to be known; this immensely helps with the validation/quality/confidence of the data submitted. If the submitter prefers to have their data stored anonymously and even go as far as submitting the data anonymously, then it will have to be classified as \u201cunverified\u201d vs.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "cb8d16f8dd4855ed",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 8/11\n\n\u201cverified\u201d. Verified Data Contribution Scenario 1: The submitter is known and has agreed to be identified as a contributing party. Scenario 2: The submitter is known but would rather not be publicly identified. Scenario 3: The submitter is known but does not want it recorded in the dataset. Unverified Data Contribution Scenario 4: The submitter is anonymous. (Should we support?) The analysis of the data will be conducted with a careful distinction when the unverified data is part of the dataset that was analyzed. Contribution Process There are a few ways that data can be contributed: Email a CSV/Excel file with the dataset(s) to [email protected] Upload a CSV/Excel file to https://bit.ly/OWASPTop10Data Template examples can be found in GitHub: https://github.com/OWASP/Top10/tree/master/2025/Data Contribution Period We plan to accept contributions to the new Top 10 until July 31, 2025, for data dating from 2021 to 2024. Data Structure The following data elements are required or optional. The more information provided the more accurate our analysis can be. At a bare minimum, we need the time period, total number of applications tested in the dataset, and the list of CWEs and counts of how many applications contained that CWE. If at all possible, please provide the additional metadata, because that will greatly help us gain more insights into the current state of testing and vulnerabilities.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "f27c7719cbe83523",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 9/11\n\nMetadata Contributor Name (org or anon) Contributor Contact Email Time period (2024, 2023, 2022, 2021) Number of applications tested Type of testing (TaH, HaT, Tools) Primary Language (code) Geographic Region (Global, North America, EU, Asia, other) Primary Industry (Multiple, Financial, Industrial, Software, ??) Whether or not data contains retests or the same applications multiple times (T/F) CWE Data A list of CWEs w/ count of applications found to contain that CWE If at all possible, please provide core CWEs in the data, not CWE categories. This will help with the analysis, any normalization/aggregation done as a part of this analysis will be well documented. Note: If a contributor has two types of datasets, one from HaT and one from TaH sources, then it is recommended to submit them as two separate datasets. HaT = Human assisted Tools (higher volume/frequency, primarily from tooling) TaH = Tool assisted Human (lower volume/frequency, primarily from human testing) Survey Similarly to the Top Ten 2021, we plan to conduct a survey to identify up to two categories of the Top Ten that the community believes are important, but may not be reflected in the data yet. We plan to conduct the survey in early 2025, and will be utilizing Google forms in a similar manner as last time. The CWEs on the survey will come from current trending findings, CWEs that are outside the Top Ten in data, and other potential sources. Process At a high level, we plan to perform a level of data normalization; however, we will keep a version of the raw data contributed for future analysis. We will analyze the CWE distribution of the datasets and potentially reclassify some CWEs to consolidate them into larger buckets.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "e51d22dd45917b5e",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 10/11\n\nWe will carefully document all normalization actions taken so it is clear what has been done. We plan to calculate likelihood following the model we continued in 2021 to determine incidence rate instead of frequency to rate how likely a given app may contain at least one instance of a CWE. This means we aren\u2019t looking for the frequency rate (number of findings) in an app, rather, we are looking for the number of applications that had one or more instances of a CWE. We can calculate the incidence rate based on the total number of applications tested in the dataset compared to how many applications each CWE was found in. In addition, we will be developing base CWSS scores for the top 20-30 CWEs and include potential impact into the Top 10 weighting. Also, would like to explore additional insights that could be gleaned from the contributed dataset to see what else can be learned that could be of use to the security and development communities. Watch Star The OWASP \u00ae Foundation works to improve the security of software through its community-led open source software projects, hundreds of chapters worldwide, tens of thousands of members, and by hosting local and global conferences.",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
+    },
+    {
+        "id": "dad9864437f7bf4f",
+        "text": "WEB SECURITY FUNDAMENTALS LEARNING SOURCE\nDomain: programming\nLearning target: advanced-practitioner\nSource name: OWASP Top 10\nSource type: security-standard\nURL: https://owasp.org/www-project-top-ten/\nPage title: OWASP Top Ten Web Application Security Risks | OWASP Foundation\nHeadings: OWASP Top Ten Web Application Security Risks | Translation Efforts | Top10:2025 Completed Translations: | Historic: | Top10:2021 Completed Translations: | Top10:2017 Completed Translations: | Top10:2017 Release Candidate Translation Teams: | Top10:2013 Completed Translations: | 2010 Completed Translations: | 2021 Project Sponsors | 2017 Project Sponsors | 2003-2013 Project Sponsors | OWASP Top 10 2025 Data Analysis Plan | Goals | Analysis Infrastructure | Contributions | Verified Data Contribution | Unverified Data Contribution | Contribution Process | Contribution Period | Data Structure | Metadata | CWE Data | Survey | Process | Project Information | Downloads or Social Links | Social | Code Repository | Leaders | Upcoming OWASP Global Events | A selection of our Corporate Supporters\nChunk: 11/11\n\nProject Information \u2022 OWASP Top 10:2025 \u2022 Making of OWASP Top 10 Flagship Project Documentation Builder Defender \u2022 Previous Version (2021) \u2022 Previous Version (2017) Downloads or Social Links \u2022 OWASP Top 10 2017 \u2022 Other languages \u2192 tab \u2018Translation Efforts\u2019 Social Twitter Code Repository Github repo Leaders Andrew van der Stock Brian Glas Neil Smithline Tanya Janca Torsten Gigler Upcoming OWASP Global Events HOME PROJECTS CHAPTERS EVENTS ABOUT PRIVACY SITEMAP CONTACT Open Web Application Security Project, OWASP, Global AppSec, AppSec Days, AppSec California, SnowFROC, LASCON, and the OWASP logo are trademarks of the OWASP Foundation. Unless otherwise specified, all content on the site is Creative Commons Attribution-ShareAlike v4.0 and provided without warranty of service or accuracy. For more information, please refer to our General Disclaimer . OWASP does not endorse or recommend commercial products or services, allowing our community to remain vendor neutral with the collective wisdom of the best minds in software security worldwide. Copyright 2025, OWASP Foundation, Inc. A selection of our Corporate Supporters Become a corporate supporter",
+        "tags": [
+            "programming",
+            "web_security_fundamentals",
+            "autonomous-learning",
+            "security-standard",
+            "advanced-practitioner"
+        ],
+        "source": "programming-autonomous-learning",
+        "importance": 10,
+        "created_at": "2026-06-02T21:23:51",
+        "updated_at": null,
+        "active": true
     }
 ]

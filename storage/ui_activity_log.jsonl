@@ -41,3 +41,4 @@
 {"time": "2026-06-02T21:16:10", "event_type": "chat_command", "payload": {"message": "Can I know more about Janon Emersion T\nYou can go online to scrap information about Janon Emersion T", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
 {"time": "2026-06-02T21:16:45", "event_type": "chat_command", "payload": {"message": "Write a biography about Scarlett Johansan", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
 {"time": "2026-06-02T21:17:15", "event_type": "chat_command", "payload": {"message": "I want the biography in about 1000 words", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}
+{"time": "2026-06-02T21:25:21", "event_type": "chat_command", "payload": {"message": "Can you write a story\nsomething interesting", "chat_id": "c5453981-3e67-43bc-a27a-7d40dcb4a4bd"}}

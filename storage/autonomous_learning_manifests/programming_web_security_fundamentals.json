@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-06-02T15:53:53Z",
+  "topic": "web security fundamentals",
+  "domain": "programming",
+  "sources": {
+    "https://devguide.owasp.org/": {
+      "name": "OWASP Developer Guide",
+      "type": "security-guide",
+      "priority": 10,
+      "hash": "04c50d8d1ce246eb33b4a8d6988ce7b226fdd1b58eb78a305082fc2012d21557",
+      "last_learned_at": "2026-06-02T15:53:50Z",
+      "chunks_saved": 4,
+      "title": "Introduction - OWASP Developer Guide"
+    },
+    "https://owasp.org/www-project-top-ten/": {
+      "name": "OWASP Top 10",
+      "type": "security-standard",
+      "priority": 10,
+      "hash": "c57fa9fa31c7e86b4925758780fd51e9bb9013c285f16d638a93bc09d24cc20c",
+      "last_learned_at": "2026-06-02T15:53:51Z",
+      "chunks_saved": 11,
+      "title": "OWASP Top Ten Web Application Security Risks | OWASP Foundation"
+    }
+  },
+  "proficiency_target": "advanced-practitioner"
+}
