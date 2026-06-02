@@ -24,6 +24,7 @@ DEFAULT_CYCLE_INTERVAL_SECONDS = 180
 MAX_BURST_CYCLES = 4
 DISCOVERY_BATCH_SIZE = 2
 STALE_TASK_TIMEOUT_SECONDS = 15 * 60
+DOMAIN_PRIORITY = ["programming", "medicine"]
 
 DOMAIN_PROFILES = {
     "programming": {
@@ -179,13 +180,50 @@ def _slugify(text: str) -> str:
     return pkt._slugify(text)
 
 
+def _domain_priority(domain: str) -> int:
+    try:
+        return DOMAIN_PRIORITY.index(domain)
+    except ValueError:
+        return len(DOMAIN_PRIORITY)
+
+
+def _task_priority(task: dict) -> tuple:
+    kind_rank = {
+        "learn": 0,
+        "review": 1,
+        "synthesis": 2,
+    }.get(task.get("kind"), 9)
+    status_rank = {
+        "pending": 0,
+        "failed": 1,
+        "in_progress": 2,
+    }.get(task.get("status"), 9)
+    return (
+        _domain_priority(task.get("domain", "")),
+        kind_rank,
+        status_rank,
+        task.get("created_at") or "",
+        task.get("id") or "",
+    )
+
+
+def _next_pending_task(state: dict) -> dict | None:
+    pending = [
+        task for task in state.get("schedule", [])
+        if task.get("status") == "pending"
+    ]
+    if not pending:
+        return None
+    return sorted(pending, key=_task_priority)[0]
+
+
 def _default_state() -> dict:
     return {
         "enabled": True,
         "started_at": _now_iso(),
         "last_cycle_at": None,
         "cycle_interval_seconds": DEFAULT_CYCLE_INTERVAL_SECONDS,
-        "active_domains": ["programming", "medicine"],
+        "active_domains": list(DOMAIN_PRIORITY),
         "schedule": [],
         "current_task_id": None,
         "completed_topics": {"programming": [], "medicine": []},
@@ -204,6 +242,10 @@ def _load_state() -> dict:
     state = _read_json(STATE_FILE, _default_state())
     merged = _default_state()
     merged.update(state)
+    merged["active_domains"] = [
+        domain for domain in DOMAIN_PRIORITY
+        if domain in set(state.get("active_domains", []))
+    ] or list(DOMAIN_PRIORITY)
     merged["completed_topics"] = {
         "programming": list(state.get("completed_topics", {}).get("programming", [])),
         "medicine": list(state.get("completed_topics", {}).get("medicine", [])),
@@ -500,7 +542,7 @@ def _expand_beyond_roadmap(state: dict, domain: str) -> bool:
 
 def _ensure_schedule(state: dict) -> bool:
     added = False
-    for domain in state.get("active_domains", []):
+    for domain in sorted(state.get("active_domains", []), key=_domain_priority):
         if _pending_or_active(state, domain):
             continue
         added = _advance_domain_schedule(state, domain) or added
@@ -756,7 +798,7 @@ def autonomous_learning_status() -> str:
         "",
         "Domain progress:",
     ]
-    for domain in state.get("active_domains", []):
+    for domain in sorted(state.get("active_domains", []), key=_domain_priority):
         completed = state.get("completed_topics", {}).get(domain, [])
         pending = len([task for task in state.get("schedule", []) if task.get("domain") == domain and task.get("status") == "pending"])
         lines.append(
@@ -810,7 +852,7 @@ def get_autonomous_learning_overview(limit: int = 12) -> dict:
     _ensure_schedule(state)
     _save_state(state)
 
-    active_domains = list(state.get("active_domains", []))
+    active_domains = sorted(state.get("active_domains", []), key=_domain_priority)
     domain_summaries = []
 
     for domain in active_domains:
@@ -917,7 +959,7 @@ def run_autonomous_learning_cycle() -> dict | None:
             return None
 
         _ensure_schedule(state)
-        task = next((item for item in state.get("schedule", []) if item.get("status") == "pending"), None)
+        task = _next_pending_task(state)
         if task is None:
             _save_state(state)
             return None
