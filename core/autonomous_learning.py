@@ -19,6 +19,8 @@ STATE_FILE = STORAGE_DIR / "autonomous_learning_state.json"
 LOG_FILE = STORAGE_DIR / "autonomous_learning_log.jsonl"
 MANIFEST_DIR = STORAGE_DIR / "autonomous_learning_manifests"
 MEDICAL_CATALOG_FILE = Path("data/medical_learning_catalog.json")
+PROGRAMMING_LOG_FILE = STORAGE_DIR / "programming_learning_log.jsonl"
+PROGRAMMING_KNOWLEDGE_MANIFEST_DIR = Path("data/programming_knowledge_manifests")
 
 DEFAULT_CYCLE_INTERVAL_SECONDS = 180
 MAX_BURST_CYCLES = 4
@@ -330,6 +332,45 @@ def _recover_completed_topics() -> dict[str, list[str]]:
             continue
         seen[domain].add(normalized)
         recovered[domain].append(topic)
+
+    if PROGRAMMING_LOG_FILE.exists():
+        try:
+            for raw in PROGRAMMING_LOG_FILE.read_text(encoding="utf-8").splitlines():
+                if not raw.strip():
+                    continue
+                entry = json.loads(raw)
+                if not isinstance(entry, dict):
+                    continue
+                topic = entry.get("topic")
+                if not topic:
+                    continue
+                normalized = _normalize(topic)
+                if normalized in seen["programming"]:
+                    continue
+                seen["programming"].add(normalized)
+                recovered["programming"].append(topic)
+        except Exception:
+            pass
+
+    if PROGRAMMING_KNOWLEDGE_MANIFEST_DIR.exists():
+        manifest_items = []
+        for path in sorted(PROGRAMMING_KNOWLEDGE_MANIFEST_DIR.glob("*_knowledge_manifest.json")):
+            try:
+                manifest = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            topic = manifest.get("topic")
+            if not topic:
+                continue
+            updated_at = _timestamp_from_iso(manifest.get("updated_at")) or path.stat().st_mtime
+            manifest_items.append((updated_at, topic))
+
+        for _, topic in sorted(manifest_items, key=lambda item: (item[0], _normalize(item[1]))):
+            normalized = _normalize(topic)
+            if normalized in seen["programming"]:
+                continue
+            seen["programming"].add(normalized)
+            recovered["programming"].append(topic)
 
     return recovered
 

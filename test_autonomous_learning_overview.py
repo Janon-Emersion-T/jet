@@ -14,7 +14,10 @@ class AutonomousLearningOverviewTests(unittest.TestCase):
             state_file = root / "state.json"
             log_file = root / "log.jsonl"
             manifest_dir = root / "manifests"
+            programming_log_file = root / "programming_learning_log.jsonl"
+            programming_manifest_dir = root / "programming_manifests"
             manifest_dir.mkdir(parents=True, exist_ok=True)
+            programming_manifest_dir.mkdir(parents=True, exist_ok=True)
 
             state_file.write_text(
                 json.dumps(
@@ -57,6 +60,10 @@ class AutonomousLearningOverviewTests(unittest.TestCase):
                 autonomous_learning, "LOG_FILE", log_file
             ), patch.object(
                 autonomous_learning, "MANIFEST_DIR", manifest_dir
+            ), patch.object(
+                autonomous_learning, "PROGRAMMING_LOG_FILE", programming_log_file
+            ), patch.object(
+                autonomous_learning, "PROGRAMMING_KNOWLEDGE_MANIFEST_DIR", programming_manifest_dir
             ):
                 overview = autonomous_learning.get_autonomous_learning_overview(limit=4)
 
@@ -93,7 +100,10 @@ class AutonomousLearningOverviewTests(unittest.TestCase):
             state_file = root / "state.json"
             log_file = root / "log.jsonl"
             manifest_dir = root / "manifests"
+            programming_log_file = root / "programming_learning_log.jsonl"
+            programming_manifest_dir = root / "programming_manifests"
             manifest_dir.mkdir(parents=True, exist_ok=True)
+            programming_manifest_dir.mkdir(parents=True, exist_ok=True)
 
             state_file.write_text(
                 json.dumps(
@@ -169,17 +179,42 @@ class AutonomousLearningOverviewTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
+            programming_log_file.write_text(
+                json.dumps(
+                    {
+                        "topic": "Go",
+                        "started_at": "2026-06-03T03:00:00Z",
+                        "completed_at": "2026-06-03T03:10:00Z",
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (programming_manifest_dir / "rust_knowledge_manifest.json").write_text(
+                json.dumps(
+                    {
+                        "topic": "Rust",
+                        "updated_at": "2026-06-03T04:00:00Z",
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
 
             with patch.object(autonomous_learning, "STATE_FILE", state_file), patch.object(
                 autonomous_learning, "LOG_FILE", log_file
             ), patch.object(
                 autonomous_learning, "MANIFEST_DIR", manifest_dir
+            ), patch.object(
+                autonomous_learning, "PROGRAMMING_LOG_FILE", programming_log_file
+            ), patch.object(
+                autonomous_learning, "PROGRAMMING_KNOWLEDGE_MANIFEST_DIR", programming_manifest_dir
             ):
                 state = autonomous_learning._load_state()
 
-        self.assertEqual(state["completed_topics"]["programming"], ["Laravel", "Python"])
+        self.assertEqual(state["completed_topics"]["programming"], ["Laravel", "Python", "Go", "Rust"])
         self.assertEqual(state["completed_topics"]["medicine"], ["Cardiology"])
-        self.assertEqual(state["stats"]["topics_learned"], 3)
+        self.assertEqual(state["stats"]["topics_learned"], 5)
         self.assertEqual(state["schedule"][0]["status"], "completed")
 
 
