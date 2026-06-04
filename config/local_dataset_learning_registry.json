@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "datasets": [
+    {
+      "id": "hf_programming_subset",
+      "domain": "programming",
+      "topic": "Hugging Face programming corpus readiness analysis",
+      "path": "storage/huggingface_datasets/programming",
+      "kind": "dataset_review",
+      "description": "Analyze the local Hugging Face programming starter subset to understand language coverage, corpus size, and next data gaps."
+    },
+    {
+      "id": "hf_tamil_corpus",
+      "domain": "programming",
+      "topic": "Tamil local corpus readiness analysis",
+      "path": "storage/huggingface_datasets/tamil",
+      "kind": "dataset_review",
+      "description": "Analyze the local Tamil dataset for multilingual NLP readiness and downstream task opportunities."
+    },
+    {
+      "id": "local_model_catalog",
+      "domain": "programming",
+      "topic": "Local model catalog capability analysis",
+      "path": "config/local_ai_models.json",
+      "kind": "dataset_review",
+      "description": "Analyze the installed local model catalog to identify routing, hardware-fit, and future learning priorities."
+    }
+  ]
+}

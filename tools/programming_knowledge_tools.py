@@ -19,6 +19,7 @@ STORAGE_DIR = BASE_DIR / "storage"
 CATEGORY_FILE = DATA_DIR / "programming_knowledge_catalog.json"
 SENIOR_LANGUAGE_FILE = DATA_DIR / "senior_engineer_language_catalog.json"
 AUTONOMOUS_TOPICS_FILE = DATA_DIR / "autonomous_learning_topics.json"
+FRONTIER_TOPICS_FILE = DATA_DIR / "frontier_learning_topics.json"
 MANIFEST_DIR = DATA_DIR / "programming_knowledge_manifests"
 LOG_FILE = STORAGE_DIR / "programming_learning_log.jsonl"
 
@@ -223,6 +224,26 @@ SOURCE_GROUPS = {
         {"name": "Google Machine Learning Crash Course", "url": "https://developers.google.com/machine-learning/crash-course", "type": "official-course", "priority": 9},
         {"name": "PyTorch Tutorials", "url": "https://pytorch.org/tutorials/", "type": "official-documentation", "priority": 8},
         {"name": "Hugging Face Learn", "url": "https://huggingface.co/learn", "type": "official-learning-platform", "priority": 8},
+    ],
+    "llm-systems": [
+        {"name": "vLLM Documentation", "url": "https://docs.vllm.ai/", "type": "official-documentation", "priority": 9},
+        {"name": "Ray Serve Documentation", "url": "https://docs.ray.io/en/latest/serve/", "type": "official-documentation", "priority": 8},
+        {"name": "BentoML Documentation", "url": "https://docs.bentoml.org/", "type": "official-documentation", "priority": 8},
+    ],
+    "multilingual-nlp": [
+        {"name": "Hugging Face Learn NLP Course", "url": "https://huggingface.co/learn/nlp-course", "type": "official-learning-platform", "priority": 9},
+        {"name": "Sentence Transformers Documentation", "url": "https://www.sbert.net/", "type": "official-documentation", "priority": 8},
+        {"name": "spaCy Usage Guides", "url": "https://spacy.io/usage", "type": "official-documentation", "priority": 8},
+    ],
+    "mlops-observability": [
+        {"name": "MLflow Documentation", "url": "https://mlflow.org/docs/latest/index.html", "type": "official-documentation", "priority": 9},
+        {"name": "Weights & Biases Guides", "url": "https://docs.wandb.ai/guides", "type": "official-documentation", "priority": 8},
+        {"name": "OpenTelemetry Documentation", "url": "https://opentelemetry.io/docs/", "type": "official-documentation", "priority": 8},
+    ],
+    "data-engineering-ai": [
+        {"name": "Apache Arrow Documentation", "url": "https://arrow.apache.org/docs/", "type": "official-documentation", "priority": 8},
+        {"name": "DuckDB Documentation", "url": "https://duckdb.org/docs/", "type": "official-documentation", "priority": 8},
+        {"name": "Apache Spark Documentation", "url": "https://spark.apache.org/docs/latest/", "type": "official-documentation", "priority": 8},
     ],
     "mobile-platforms": [
         {"name": "Android Developers", "url": "https://developer.android.com/", "type": "official-documentation", "priority": 10},
@@ -684,10 +705,12 @@ def _load_catalog() -> dict:
     programming = _load_json(CATEGORY_FILE, {"topics": []})
     senior_languages = _load_json(SENIOR_LANGUAGE_FILE, {"topics": []})
     autonomous = _load_json(AUTONOMOUS_TOPICS_FILE, {"topics": []})
+    frontier = _load_json(FRONTIER_TOPICS_FILE, {"topics": []})
 
     topics = [_expand_topic_entry(topic) for topic in programming.get("topics", [])]
     topics.extend(_expand_topic_entry(topic) for topic in senior_languages.get("topics", []))
     topics.extend(_expand_topic_entry(topic) for topic in autonomous.get("topics", []))
+    topics.extend(_expand_topic_entry(topic) for topic in frontier.get("topics", []))
 
     deduped_by_topic: Dict[str, dict] = {}
     ordered_keys: List[str] = []

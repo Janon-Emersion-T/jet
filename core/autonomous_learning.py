@@ -21,6 +21,7 @@ MANIFEST_DIR = STORAGE_DIR / "autonomous_learning_manifests"
 MEDICAL_CATALOG_FILE = Path("data/medical_learning_catalog.json")
 PROGRAMMING_LOG_FILE = STORAGE_DIR / "programming_learning_log.jsonl"
 PROGRAMMING_KNOWLEDGE_MANIFEST_DIR = Path("data/programming_knowledge_manifests")
+DATASET_REGISTRY_FILE = Path("config/local_dataset_learning_registry.json")
 
 DEFAULT_CYCLE_INTERVAL_SECONDS = 180
 MAX_BURST_CYCLES = 4
@@ -229,8 +230,9 @@ def _domain_priority(domain: str) -> int:
 def _task_priority(task: dict) -> tuple:
     kind_rank = {
         "learn": 0,
-        "review": 1,
-        "synthesis": 2,
+        "dataset_review": 1,
+        "review": 2,
+        "synthesis": 3,
     }.get(task.get("kind"), 9)
     status_rank = {
         "pending": 0,
@@ -507,6 +509,10 @@ def _medical_catalog() -> dict:
     return _read_json(MEDICAL_CATALOG_FILE, {"topics": []})
 
 
+def _dataset_registry() -> dict:
+    return _read_json(DATASET_REGISTRY_FILE, {"datasets": []})
+
+
 def _catalog_topics_for_domain(domain: str) -> list[dict]:
     if domain == "programming":
         return list(pkt._load_catalog().get("topics", []))
@@ -631,6 +637,119 @@ def _create_task(domain: str, topic: str, kind: str, stage: str, metadata: dict 
         "completed_at": None,
         "metadata": metadata or {},
     }
+
+
+def _dataset_review_summary(path: Path) -> dict:
+    summary = {
+        "path": str(path),
+        "exists": path.exists(),
+        "type": "missing",
+        "file_count": 0,
+        "total_bytes": 0,
+        "samples": [],
+    }
+    if not path.exists():
+        return summary
+
+    if path.is_file():
+        files = [path]
+        summary["type"] = "file"
+    else:
+        files = sorted(item for item in path.rglob("*") if item.is_file() and not item.name.startswith("."))
+        summary["type"] = "directory"
+
+    summary["file_count"] = len(files)
+    summary["total_bytes"] = sum(item.stat().st_size for item in files)
+
+    for file in files[:8]:
+        item = {
+            "name": file.name,
+            "relative_path": str(file.relative_to(path.parent if path.is_file() else path)),
+            "size": file.stat().st_size,
+        }
+        suffix = file.suffix.lower()
+
+        try:
+            if suffix == ".json":
+                payload = json.loads(file.read_text(encoding="utf-8"))
+                if isinstance(payload, dict):
+                    item["keys"] = sorted(payload.keys())[:12]
+                elif isinstance(payload, list):
+                    item["records"] = len(payload)
+            elif suffix == ".jsonl":
+                count = 0
+                first_record = None
+                with file.open("r", encoding="utf-8") as handle:
+                    for raw in handle:
+                        if not raw.strip():
+                            continue
+                        count += 1
+                        if first_record is None:
+                            first_record = json.loads(raw)
+                item["records"] = count
+                if isinstance(first_record, dict):
+                    item["sample_keys"] = sorted(first_record.keys())[:10]
+                    if first_record.get("language"):
+                        item["language"] = first_record.get("language")
+            elif suffix == ".xlsx":
+                try:
+                    from openpyxl import load_workbook
+                except Exception:
+                    item["note"] = "openpyxl unavailable"
+                else:
+                    workbook = load_workbook(filename=file, read_only=True, data_only=True)
+                    item["sheets"] = workbook.sheetnames[:8]
+                    if workbook.sheetnames:
+                        sheet = workbook[workbook.sheetnames[0]]
+                        item["rows"] = max(0, int(sheet.max_row or 0))
+                        item["columns"] = max(0, int(sheet.max_column or 0))
+            elif suffix in {".md", ".txt"}:
+                item["preview"] = file.read_text(encoding="utf-8", errors="ignore")[:240]
+        except Exception as exc:
+            item["error"] = str(exc)
+
+        summary["samples"].append(item)
+
+    return summary
+
+
+def _run_dataset_review_task(task: dict) -> dict:
+    metadata = task.get("metadata", {})
+    dataset_path = Path(metadata.get("path", ""))
+    description = metadata.get("description", "")
+    summary = _dataset_review_summary(dataset_path)
+    note = {
+        "topic": task.get("topic"),
+        "domain": task.get("domain"),
+        "description": description,
+        "summary": summary,
+        "completed_at": _now_iso(),
+    }
+    memory_text = (
+        f"LOCAL DATASET REVIEW\n"
+        f"Topic: {task.get('topic')}\n"
+        f"Domain: {task.get('domain')}\n"
+        f"Description: {description}\n"
+        f"Dataset path: {summary['path']}\n"
+        f"Exists: {summary['exists']}\n"
+        f"Type: {summary['type']}\n"
+        f"File count: {summary['file_count']}\n"
+        f"Total bytes: {summary['total_bytes']}\n\n"
+        f"{json.dumps(summary['samples'], indent=2, ensure_ascii=False)}"
+    )
+    add_vector_memory(
+        memory_text,
+        tags=[
+            task.get("domain", "programming"),
+            "dataset-review",
+            pkt._slugify(task.get("topic", "dataset-review")),
+        ],
+        source="local-dataset-review",
+        importance=8,
+    )
+    save_memory(f"dataset review {task.get('topic')}", json.dumps(note, ensure_ascii=False))
+    _append_jsonl(LOG_FILE, {"type": "dataset_review", **note})
+    return note
 
 
 def _task_signature(domain: str, kind: str, metadata: dict | None = None, topic: str | None = None) -> tuple:
@@ -775,6 +894,41 @@ def _expand_beyond_roadmap(state: dict, domain: str) -> bool:
             continue
         discovered.append(topic_name)
 
+    if discovered:
+        state["schedule"].extend(
+            _create_task(domain, topic, "learn", "Autonomous Expansion")
+            for topic in discovered[:DISCOVERY_BATCH_SIZE]
+        )
+        return True
+
+    dataset_tasks = []
+    for dataset in _dataset_registry().get("datasets", []):
+        if dataset.get("domain") != domain:
+            continue
+        topic_name = dataset.get("topic", "")
+        normalized = _normalize(topic_name)
+        if not topic_name or normalized in completed or normalized in scheduled:
+            continue
+        if not Path(dataset.get("path", "")).exists():
+            continue
+        dataset_tasks.append(
+            _create_task(
+                domain,
+                topic_name,
+                dataset.get("kind", "dataset_review"),
+                "Local Dataset Intelligence",
+                {
+                    "dataset_id": dataset.get("id"),
+                    "path": dataset.get("path"),
+                    "description": dataset.get("description", ""),
+                },
+            )
+        )
+
+    if dataset_tasks:
+        state["schedule"].extend(dataset_tasks[:DISCOVERY_BATCH_SIZE])
+        return True
+
     if not discovered:
         recent = _recent_completed_topics(state, domain, limit=4)
         if recent and not _has_task(
@@ -796,11 +950,7 @@ def _expand_beyond_roadmap(state: dict, domain: str) -> bool:
             return True
         return False
 
-    state["schedule"].extend(
-        _create_task(domain, topic, "learn", "Autonomous Expansion")
-        for topic in discovered[:DISCOVERY_BATCH_SIZE]
-    )
-    return True
+    return False
 
 
 def _ensure_schedule(state: dict) -> bool:
@@ -987,6 +1137,8 @@ def _run_reflection_task(task: dict) -> dict:
 def _run_task(task: dict) -> dict:
     if task["kind"] == "learn":
         return _learn_domain_topic(task["domain"], task["topic"])
+    if task["kind"] == "dataset_review":
+        return _run_dataset_review_task(task)
     if task["kind"] in {"review", "synthesis"}:
         return _run_reflection_task(task)
     raise RuntimeError(f"Unknown learning task kind: {task['kind']}")
@@ -1010,29 +1162,30 @@ def _finalize_task_execution(task: dict, success: bool, result: dict, error_text
             item["result"] = result
             break
 
-        if success and task["kind"] == "learn":
+        if success and task["kind"] in {"learn", "dataset_review"}:
             completed = state["completed_topics"].setdefault(task["domain"], [])
             if _normalize(task["topic"]) not in {_normalize(entry) for entry in completed}:
                 completed.append(task["topic"])
                 state["stats"]["topics_learned"] += 1
 
-            # Schedule a compact synthesis after each successful topic.
-            if not _has_task(
-                state,
-                task["domain"],
-                "synthesis",
-                metadata={"topics": [task["topic"]]},
-                topic=task["topic"],
-            ):
-                state["schedule"].append(
-                    _create_task(
-                        task["domain"],
-                        task["topic"],
-                        "synthesis",
-                        f"{task['stage']} Synthesis",
-                        {"topics": [task["topic"]]},
+            if task["kind"] == "learn":
+                # Schedule a compact synthesis after each successful topic.
+                if not _has_task(
+                    state,
+                    task["domain"],
+                    "synthesis",
+                    metadata={"topics": [task["topic"]]},
+                    topic=task["topic"],
+                ):
+                    state["schedule"].append(
+                        _create_task(
+                            task["domain"],
+                            task["topic"],
+                            "synthesis",
+                            f"{task['stage']} Synthesis",
+                            {"topics": [task["topic"]]},
+                        )
                     )
-                )
 
         if success and task["kind"] == "review":
             state["stats"]["reviews_completed"] += 1
