@@ -13,6 +13,8 @@ class AutonomousLearningOverviewTests(unittest.TestCase):
             root = Path(tmp)
             state_file = root / "state.json"
             log_file = root / "log.jsonl"
+            manifest_dir = root / "manifests"
+            manifest_dir.mkdir(parents=True, exist_ok=True)
 
             state_file.write_text(
                 json.dumps(
@@ -53,6 +55,8 @@ class AutonomousLearningOverviewTests(unittest.TestCase):
 
             with patch.object(autonomous_learning, "STATE_FILE", state_file), patch.object(
                 autonomous_learning, "LOG_FILE", log_file
+            ), patch.object(
+                autonomous_learning, "MANIFEST_DIR", manifest_dir
             ):
                 overview = autonomous_learning.get_autonomous_learning_overview(limit=4)
 
@@ -82,6 +86,101 @@ class AutonomousLearningOverviewTests(unittest.TestCase):
         self.assertEqual(overview_mock.call_count, 1)
         self.assertEqual(result["completed_cycles"], 2)
         self.assertEqual(result["status"], "burst-status")
+
+    def test_load_state_recovers_completed_topics_from_logs_and_manifests(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            state_file = root / "state.json"
+            log_file = root / "log.jsonl"
+            manifest_dir = root / "manifests"
+            manifest_dir.mkdir(parents=True, exist_ok=True)
+
+            state_file.write_text(
+                json.dumps(
+                    {
+                        "enabled": True,
+                        "started_at": "2026-06-03T00:00:00Z",
+                        "active_domains": ["programming", "medicine"],
+                        "schedule": [
+                            {
+                                "id": "task-1",
+                                "domain": "programming",
+                                "topic": "Laravel",
+                                "kind": "learn",
+                                "stage": "Manual",
+                                "status": "pending",
+                                "created_at": "2026-06-03T00:00:00Z",
+                                "started_at": None,
+                                "completed_at": None,
+                                "metadata": {},
+                            }
+                        ],
+                        "current_task_id": None,
+                        "completed_topics": {"programming": [], "medicine": []},
+                        "domain_stage_index": {"programming": 0, "medicine": 0},
+                        "stats": {
+                            "tasks_completed": 0,
+                            "topics_learned": 0,
+                            "reviews_completed": 0,
+                            "syntheses_completed": 0,
+                            "errors": 0,
+                        },
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+
+            log_file.write_text(
+                "\n".join(
+                    [
+                        json.dumps(
+                            {
+                                "type": "generic_topic_learning",
+                                "domain": "programming",
+                                "topic": "Laravel",
+                                "started_at": "2026-06-03T00:00:00Z",
+                                "completed_at": "2026-06-03T00:10:00Z",
+                            }
+                        ),
+                        json.dumps(
+                            {
+                                "type": "generic_topic_learning",
+                                "domain": "medicine",
+                                "topic": "Cardiology",
+                                "started_at": "2026-06-03T01:00:00Z",
+                                "completed_at": "2026-06-03T01:10:00Z",
+                            }
+                        ),
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            (manifest_dir / "programming_python.json").write_text(
+                json.dumps(
+                    {
+                        "domain": "programming",
+                        "topic": "Python",
+                        "updated_at": "2026-06-03T02:00:00Z",
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+
+            with patch.object(autonomous_learning, "STATE_FILE", state_file), patch.object(
+                autonomous_learning, "LOG_FILE", log_file
+            ), patch.object(
+                autonomous_learning, "MANIFEST_DIR", manifest_dir
+            ):
+                state = autonomous_learning._load_state()
+
+        self.assertEqual(state["completed_topics"]["programming"], ["Laravel", "Python"])
+        self.assertEqual(state["completed_topics"]["medicine"], ["Cardiology"])
+        self.assertEqual(state["stats"]["topics_learned"], 3)
+        self.assertEqual(state["schedule"][0]["status"], "completed")
 
 
 if __name__ == "__main__":

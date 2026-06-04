@@ -275,6 +275,154 @@ def _default_state() -> dict:
     }
 
 
+def _iter_log_entries() -> list[dict]:
+    if not LOG_FILE.exists():
+        return []
+
+    entries: list[dict] = []
+    try:
+        for raw in LOG_FILE.read_text(encoding="utf-8").splitlines():
+            if not raw.strip():
+                continue
+            entry = json.loads(raw)
+            if isinstance(entry, dict):
+                entries.append(entry)
+    except Exception:
+        return []
+    return entries
+
+
+def _recover_completed_topics() -> dict[str, list[str]]:
+    recovered: dict[str, list[str]] = {domain: [] for domain in DOMAIN_PRIORITY}
+    seen: dict[str, set[str]] = {domain: set() for domain in DOMAIN_PRIORITY}
+
+    for entry in _iter_log_entries():
+        if entry.get("type") != "generic_topic_learning":
+            continue
+        domain = entry.get("domain")
+        topic = entry.get("topic")
+        if domain not in recovered or not topic:
+            continue
+        normalized = _normalize(topic)
+        if normalized in seen[domain]:
+            continue
+        seen[domain].add(normalized)
+        recovered[domain].append(topic)
+
+    manifest_items: list[tuple[float, str, str]] = []
+    for path in sorted(MANIFEST_DIR.glob("*.json")):
+        try:
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+
+        domain = manifest.get("domain")
+        topic = manifest.get("topic")
+        if domain not in recovered or not topic:
+            continue
+
+        updated_at = _timestamp_from_iso(manifest.get("updated_at")) or path.stat().st_mtime
+        manifest_items.append((updated_at, domain, topic))
+
+    for _, domain, topic in sorted(manifest_items, key=lambda item: (item[0], item[1], _normalize(item[2]))):
+        normalized = _normalize(topic)
+        if normalized in seen[domain]:
+            continue
+        seen[domain].add(normalized)
+        recovered[domain].append(topic)
+
+    return recovered
+
+
+def _infer_domain_stage_index(domain: str, completed_topics: list[str]) -> int:
+    completed = {_normalize(topic) for topic in completed_topics}
+    roadmap = DOMAIN_ROADMAPS.get(domain, [])
+    known = _known_topic_names(domain)
+    stage_index = 0
+
+    for stage in roadmap:
+        stage_topics = [_normalize(topic) for topic in stage.get("topics", []) if _normalize(topic) in known]
+        if stage_topics and all(topic in completed for topic in stage_topics):
+            stage_index += 1
+            continue
+        break
+
+    return stage_index
+
+
+def _reconcile_state(state: dict) -> bool:
+    changed = False
+    recovered_topics = _recover_completed_topics()
+
+    for domain in DOMAIN_PRIORITY:
+        existing = list(state.get("completed_topics", {}).get(domain, []))
+        recovered = list(recovered_topics.get(domain, []))
+        merged = list(recovered)
+        merged_seen = {_normalize(topic) for topic in merged}
+        for topic in existing:
+            normalized = _normalize(topic)
+            if normalized not in merged_seen:
+                merged.append(topic)
+                merged_seen.add(normalized)
+
+        if len(merged) != len(existing) or any(_normalize(a) != _normalize(b) for a, b in zip(merged, existing)):
+            state["completed_topics"][domain] = merged
+            existing_seen = {_normalize(topic) for topic in merged}
+            changed = True
+        else:
+            existing_seen = {_normalize(topic) for topic in existing}
+
+        inferred_stage_index = _infer_domain_stage_index(domain, state["completed_topics"][domain])
+        if inferred_stage_index > int(state.get("domain_stage_index", {}).get(domain, 0)):
+            state["domain_stage_index"][domain] = inferred_stage_index
+            changed = True
+
+        for task in state.get("schedule", []):
+            if task.get("domain") != domain or task.get("kind") != "learn":
+                continue
+            if _normalize(task.get("topic", "")) not in existing_seen:
+                continue
+            if task.get("status") in {"pending", "failed", "in_progress"}:
+                task["status"] = "completed"
+                task["completed_at"] = task.get("completed_at") or _now_iso()
+                task["started_at"] = task.get("started_at") if task.get("started_at") else None
+                task["reconciled_at"] = _now_iso()
+                changed = True
+
+    total_completed_topics = sum(len(topics) for topics in state.get("completed_topics", {}).values())
+    if int(state["stats"].get("topics_learned", 0)) < total_completed_topics:
+        state["stats"]["topics_learned"] = total_completed_topics
+        changed = True
+
+    minimum_completed_tasks = (
+        int(state["stats"].get("topics_learned", 0))
+        + int(state["stats"].get("reviews_completed", 0))
+        + int(state["stats"].get("syntheses_completed", 0))
+    )
+    if int(state["stats"].get("tasks_completed", 0)) < minimum_completed_tasks:
+        state["stats"]["tasks_completed"] = minimum_completed_tasks
+        changed = True
+
+    if not state.get("started_at"):
+        timestamps = [
+            entry.get("started_at")
+            for entry in _iter_log_entries()
+            if entry.get("started_at")
+        ]
+        if timestamps:
+            state["started_at"] = sorted(timestamps)[0]
+            changed = True
+
+    if state.get("current_task_id") and not any(
+        task.get("id") == state.get("current_task_id") and task.get("status") == "in_progress"
+        for task in state.get("schedule", [])
+    ):
+        state["current_task_id"] = None
+        changed = True
+
+    return changed
+
+
 def _load_state() -> dict:
     state = _read_json(STATE_FILE, _default_state())
     merged = _default_state()
@@ -292,7 +440,20 @@ def _load_state() -> dict:
         "medicine": int(state.get("domain_stage_index", {}).get("medicine", 0)),
     }
     merged["stats"].update(state.get("stats", {}))
-    if _recover_stale_tasks(merged):
+    reconciled = _reconcile_state(merged)
+    if reconciled:
+        _append_jsonl(
+            LOG_FILE,
+            {
+                "type": "learning_state_reconciled",
+                "completed_topics": {
+                    domain: len(merged.get("completed_topics", {}).get(domain, []))
+                    for domain in DOMAIN_PRIORITY
+                },
+                "reconciled_at": _now_iso(),
+            },
+        )
+    if _recover_stale_tasks(merged) or reconciled:
         _save_state(merged)
     return merged
 
