@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "output_dir": "storage/huggingface_datasets",
+  "programming": {
+    "repo_id": "codeparrot/github-code-clean",
+    "repo_type": "dataset",
+    "mode": "dataset-server-rows",
+    "expected_language_count": 32,
+    "default_samples_per_language": 25,
+    "default_max_scan_rows": 120000,
+    "fallback_config": "all-all",
+    "fallback_split": "train",
+    "fallback_batch_size": 100,
+    "notes": "Builds a compact local starter subset across programming languages by sampling Hugging Face dataset-server rows, with an aggregate fallback scan to recover more languages without heavy full-shard downloads."
+  },
+  "tamil": {
+    "repo_id": "tharun-ravi/Tamil-Language-Text-Dataset",
+    "repo_type": "dataset",
+    "files": [
+      "DATA_Tensoic.xlsx"
+    ],
+    "extract_archive": false,
+    "notes": "Compact local Tamil text dataset for starter Tamil NLP support on this laptop."
+  }
+}

@@ -32,6 +32,8 @@ storage/task_queue.json
 storage/presentations/
 storage/events/
 storage/current_location.json
+storage/huggingface_datasets/
+storage/local_ai/
 storage/nlp/*
 storage/vector_memory/*
 data/programming_knowledge_manifests/*.json
