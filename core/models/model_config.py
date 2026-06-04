@@ -9,6 +9,7 @@ DEFAULT_SETTINGS = {
     "fast_model": "qwen3.5:4b",
     "long_context_model": "llama3.1",
     "fallback_model": "mistral:7b",
+    "ollama_keep_alive": "0s",
     "temperature": 0.3,
     "max_tokens": 4096,
 }

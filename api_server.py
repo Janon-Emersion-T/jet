@@ -52,6 +52,7 @@ from tools.weather_location_tools import (
 )
 
 from core.models.model_config import load_model_settings, save_model_settings
+from core.models.local_ai_stack import evaluate_catalog, install_target, prepare_user_services
 from core.models.ollama_manager import list_ollama_models, pull_ollama_model, test_ollama_model
 from core.models.model_router import detect_model_route, explain_model_route
 from core.models.prompt_templates import load_prompt_templates, save_prompt_templates
@@ -426,6 +427,24 @@ async def test_model(payload: dict):
         return {"ok": False, "error": "Model name is required."}
 
     return test_ollama_model(model)
+
+
+@app.get("/models/local/catalog")
+async def get_local_model_catalog():
+    return evaluate_catalog()
+
+
+@app.post("/models/local/install")
+async def install_local_model(payload: dict):
+    model_id = payload.get("model_id")
+    if not model_id:
+        return {"ok": False, "error": "model_id is required."}
+    return install_target(model_id)
+
+
+@app.post("/models/local/prepare")
+async def prepare_local_model_stack():
+    return prepare_user_services()
 
 
 @app.post("/models/route")

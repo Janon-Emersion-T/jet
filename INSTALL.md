@@ -15,10 +15,17 @@ Or install the full heavyweight AI stack:
 ./scripts/install_jarvis.sh --full
 ```
 
+Or install the local on-demand AI stack for Ollama, Diffusers, and ChromaDB:
+
+```bash
+./scripts/install_jarvis.sh --profile local-ai
+```
+
 What it does:
 
 - creates `.venv`
 - installs Python dependencies from `requirements-desktop.txt` by default
+- `local-ai` uses `requirements-local-ai.txt` and prepares local ChromaDB plus the resource guard
 - installs frontend dependencies with `npm ci`
 - builds the frontend with `npm run build`
 - creates a launcher at `~/.local/bin/jarvis`
@@ -50,6 +57,7 @@ Or force a specific profile during upgrade:
 
 ```bash
 ./scripts/upgrade_jarvis.sh --profile desktop
+./scripts/upgrade_jarvis.sh --profile local-ai
 ./scripts/upgrade_jarvis.sh --full
 ```
 
@@ -72,5 +80,7 @@ What it does:
 - The upgrader intentionally refuses to run on a dirty worktree to avoid overwriting local work.
 - The desktop launcher starts the API in the local virtualenv and then launches Electron against the built frontend.
 - The default `desktop` profile avoids large CUDA/ML dependencies so installs stay practical on normal machines.
+- The `local-ai` profile is tuned for machines like 16 GB RAM laptops that need local models to load only on demand.
 - The `full` profile uses `requirements.txt` and includes the heavier local AI/image/browser stack.
+- The local AI helper script is `scripts/manage_local_ai.py`. Use `status`, `install`, `run`, and `prepare` to manage the local-only model stack.
 - This is a Linux-first installer/upgrade path. Windows and macOS packaging can be added later if needed.

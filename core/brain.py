@@ -127,6 +127,7 @@ def ask_brain(
         "temperature": temperature if temperature is not None else settings.get("temperature", 0.3),
         "num_predict": max_tokens if max_tokens is not None else settings.get("max_tokens", 4096),
     }
+    keep_alive = settings.get("ollama_keep_alive", "0s")
 
     if not model_candidates:
         return "Brain error: No Ollama model is configured or available."
@@ -140,6 +141,7 @@ def ask_brain(
             "system": system,
             "stream": False,
             "options": options,
+            "keep_alive": keep_alive,
         }
 
         try:

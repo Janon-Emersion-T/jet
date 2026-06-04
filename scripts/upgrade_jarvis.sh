@@ -34,7 +34,7 @@ while [[ $# -gt 0 ]]; do
         shift
       else
         echo "Unknown option: $1" >&2
-        echo "Usage: $0 [branch] [--profile desktop|full] [--full] [--local]" >&2
+        echo "Usage: $0 [branch] [--profile desktop|local-ai|full] [--full] [--local]" >&2
         exit 1
       fi
       ;;
@@ -55,12 +55,15 @@ case "${INSTALL_PROFILE}" in
   desktop)
     REQUIREMENTS_FILE="requirements-desktop.txt"
     ;;
+  local-ai)
+    REQUIREMENTS_FILE="requirements-local-ai.txt"
+    ;;
   full)
     REQUIREMENTS_FILE="requirements.txt"
     ;;
   *)
     echo "Unsupported install profile: ${INSTALL_PROFILE}" >&2
-    echo "Supported profiles: desktop, full" >&2
+    echo "Supported profiles: desktop, local-ai, full" >&2
     exit 1
     ;;
 esac
@@ -95,6 +98,10 @@ fi
 
 "${VENV_DIR}/bin/python" -m pip install --upgrade pip setuptools wheel
 "${VENV_DIR}/bin/pip" install -r "${REQUIREMENTS_FILE}"
+
+if [[ "${INSTALL_PROFILE}" == "local-ai" || "${INSTALL_PROFILE}" == "full" ]]; then
+  "${VENV_DIR}/bin/python" "${ROOT_DIR}/scripts/manage_local_ai.py" prepare || true
+fi
 
 cd "${FRONTEND_DIR}"
 npm ci

@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "defaults": {
+    "prefer_gpu": true,
+    "release_gpu_after_run": true,
+    "max_parallel_jobs": 1
+  },
+  "models": [
+    {
+      "id": "gpt-oss-20b",
+      "display_name": "OpenAI gpt-oss 20B",
+      "backend": "ollama",
+      "runtime_model": "gpt-oss:20b",
+      "on_demand": true,
+      "local_only": true,
+      "kind": "llm",
+      "install_method": "ollama_pull",
+      "min_ram_gb": 16,
+      "recommended_vram_gb": 16,
+      "notes": "Runs locally through Ollama. On this laptop it will need CPU offload, so expect slower first-token latency."
+    },
+    {
+      "id": "google/gemma-4-12B-it",
+      "display_name": "Google Gemma 4 12B IT",
+      "backend": "ollama",
+      "runtime_model": "gemma4:e4b",
+      "on_demand": true,
+      "local_only": true,
+      "kind": "llm",
+      "install_method": "ollama_pull",
+      "min_ram_gb": 16,
+      "recommended_vram_gb": 6,
+      "notes": "Catalog keeps the requested Gemma 4 12B label, but the local runtime is mapped to Ollama's edge-friendly gemma4:e4b so it fits this 16 GB RAM / 6 GB VRAM laptop reliably."
+    },
+    {
+      "id": "openai/Shap-E",
+      "display_name": "OpenAI Shap-E",
+      "backend": "diffusers",
+      "runtime_model": "openai/shap-e",
+      "on_demand": true,
+      "local_only": true,
+      "kind": "3d",
+      "install_method": "huggingface_snapshot",
+      "min_ram_gb": 16,
+      "recommended_vram_gb": 6,
+      "notes": "Loads only while generating. Best used one job at a time on a 6 GB GPU."
+    },
+    {
+      "id": "openai/diffusers-ct_bedroom256",
+      "display_name": "OpenAI Consistency Model Bedroom 256",
+      "backend": "diffusers",
+      "runtime_model": "openai/diffusers-ct_bedroom256",
+      "on_demand": true,
+      "local_only": true,
+      "kind": "image",
+      "install_method": "huggingface_snapshot",
+      "min_ram_gb": 12,
+      "recommended_vram_gb": 4,
+      "notes": "Small unconditional image model. Safe fit for this GPU when run alone."
+    },
+    {
+      "id": "chromadb",
+      "display_name": "ChromaDB Local Service",
+      "backend": "chromadb",
+      "runtime_model": "chromadb",
+      "on_demand": true,
+      "local_only": true,
+      "kind": "vector-db",
+      "install_method": "python_package",
+      "min_ram_gb": 4,
+      "recommended_vram_gb": 0,
+      "notes": "Persistent local vector store on 127.0.0.1:8001 with data under storage/chroma."
+    }
+  ]
+}
