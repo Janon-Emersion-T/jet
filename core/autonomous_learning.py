@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import threading
 import time
 import uuid
@@ -14,14 +15,17 @@ from core.vector_memory.vector_store import add_vector_memory
 from tools import programming_knowledge_tools as pkt
 
 
-STORAGE_DIR = Path("storage")
+BASE_DIR = Path(__file__).resolve().parent.parent
+STORAGE_DIR = BASE_DIR / "storage"
+DATA_DIR = BASE_DIR / "data"
+CONFIG_DIR = BASE_DIR / "config"
 STATE_FILE = STORAGE_DIR / "autonomous_learning_state.json"
 LOG_FILE = STORAGE_DIR / "autonomous_learning_log.jsonl"
 MANIFEST_DIR = STORAGE_DIR / "autonomous_learning_manifests"
-MEDICAL_CATALOG_FILE = Path("data/medical_learning_catalog.json")
+MEDICAL_CATALOG_FILE = DATA_DIR / "medical_learning_catalog.json"
 PROGRAMMING_LOG_FILE = STORAGE_DIR / "programming_learning_log.jsonl"
-PROGRAMMING_KNOWLEDGE_MANIFEST_DIR = Path("data/programming_knowledge_manifests")
-DATASET_REGISTRY_FILE = Path("config/local_dataset_learning_registry.json")
+PROGRAMMING_KNOWLEDGE_MANIFEST_DIR = DATA_DIR / "programming_knowledge_manifests"
+DATASET_REGISTRY_FILE = CONFIG_DIR / "local_dataset_learning_registry.json"
 
 DEFAULT_CYCLE_INTERVAL_SECONDS = 180
 MAX_BURST_CYCLES = 4
@@ -192,7 +196,11 @@ def _read_json(path: Path, default: Any) -> Any:
 
 def _write_json(path: Path, data: Any) -> None:
     _ensure_dirs()
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(data, indent=2, ensure_ascii=False)
+    tmp_path = path.with_name(f".{path.name}.tmp")
+    tmp_path.write_text(payload, encoding="utf-8")
+    os.replace(tmp_path, path)
 
 
 def _append_jsonl(path: Path, entry: dict) -> None:
