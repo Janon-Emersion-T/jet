@@ -14,12 +14,25 @@ FRONTEND_DIR = BASE_DIR / "frontend"
 COMFYUI_DIR = BASE_DIR / "engines" / "ComfyUI"
 COMFYUI_VENV_PYTHON = COMFYUI_DIR / "venv" / "bin" / "python"
 IMAGE_OUTPUT_DIR = BASE_DIR / "storage" / "generated_images" / "outputs"
+FRONTEND_NODE_MODULES = FRONTEND_DIR / "node_modules"
+FRONTEND_PACKAGE_LOCK = FRONTEND_DIR / "package-lock.json"
 
 
 def reserve_local_port(host: str = "127.0.0.1") -> int:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.bind((host, 0))
         return sock.getsockname()[1]
+
+
+def wait_for_port(host: str, port: int, timeout: float = 10.0) -> bool:
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(1)
+            if sock.connect_ex((host, port)) == 0:
+                return True
+        time.sleep(0.2)
+    return False
 
 
 def terminate_process(process, name):
@@ -31,6 +44,26 @@ def terminate_process(process, name):
         except subprocess.TimeoutExpired:
             print(f"Force killing {name}...")
             process.kill()
+
+
+def ensure_frontend_dependencies():
+    concurrently_bin = FRONTEND_NODE_MODULES / ".bin" / "concurrently"
+    electron_bin = FRONTEND_NODE_MODULES / ".bin" / "electron"
+
+    if concurrently_bin.exists() and electron_bin.exists():
+        return
+
+    if not FRONTEND_PACKAGE_LOCK.exists():
+        raise RuntimeError(
+            f"Cannot install frontend dependencies automatically: missing {FRONTEND_PACKAGE_LOCK}"
+        )
+
+    print("Frontend dependencies missing. Running npm ci...")
+    subprocess.run(
+        ["npm", "ci"],
+        cwd=FRONTEND_DIR,
+        check=True,
+    )
 
 
 def start_local_image_engine():
@@ -109,13 +142,25 @@ def main():
             cwd=BASE_DIR,
         )
 
-        time.sleep(3)
+        if api_process.poll() is not None:
+            raise RuntimeError(
+                "JARVIS API failed to start. Ensure the active Python environment has uvicorn installed."
+            )
+
+        if not wait_for_port(api_host, api_port, timeout=10):
+            terminate_process(api_process, "JARVIS API")
+            raise RuntimeError(
+                f"JARVIS API did not become reachable on {api_url}. Check backend dependencies and startup logs."
+            )
+
         print(f"JARVIS API running on {api_url}")
 
         print("Launching Electron frontend...")
+        ensure_frontend_dependencies()
 
         frontend_env = os.environ.copy()
         frontend_env["JARVIS_API_URL"] = api_url
+        frontend_env.pop("ELECTRON_RUN_AS_NODE", None)
 
         frontend_process = subprocess.Popen(
             ["npm", "run", "app"],

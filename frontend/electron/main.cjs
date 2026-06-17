@@ -14,6 +14,9 @@ const fs = require("fs");
 let mainWindow;
 let tray;
 
+app.commandLine.appendSwitch("no-sandbox");
+app.commandLine.appendSwitch("disable-dev-shm-usage");
+
 const DEV_URL = "http://localhost:5173";
 const DIST_INDEX = path.join(__dirname, "../dist/index.html");
 

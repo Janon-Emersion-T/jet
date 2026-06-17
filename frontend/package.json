@@ -8,9 +8,10 @@
     "dev": "vite",
     "build": "vite build --base ./",
     "preview": "vite preview",
-    "electron": "electron --no-sandbox electron/main.cjs",
-    "desktop": "electron --no-sandbox .",
-    "app": "concurrently -k \"npm run dev\" \"npm run electron\""
+    "electron": "env -u ELECTRON_RUN_AS_NODE electron .",
+    "electron:dev": "wait-on tcp:5173 && npm run electron",
+    "desktop": "env -u ELECTRON_RUN_AS_NODE electron .",
+    "app": "concurrently -k \"npm run dev\" \"npm run electron:dev\""
   },
   "dependencies": {
     "lucide-react": "^1.16.0",
